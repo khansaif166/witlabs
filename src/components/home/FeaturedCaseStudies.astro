@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+
+const caseStudies = (await getCollection('case-studies', ({ data }) => !data.draft))
+  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 3);
+
+const industryBadgeClass: Record<string, string> = {
+  'Interior Design': 'bg-green-light text-green',
+  Manufacturing: 'bg-warm-light text-warm',
+  Education: 'bg-blue-100 text-blue-700',
+};
+---
+
+<section class="py-section bg-cream">
+  <div class="container">
+    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+      <div>
+        <p class="eyebrow reveal">REAL RESULTS</p>
+        <h2 class="reveal reveal-delay-1 mt-3 max-w-3xl text-display-md text-balance">
+          Real challenges. Smart solutions. Measurable results.
+        </h2>
+      </div>
+      <a class="reveal reveal-delay-2 text-green text-body-sm font-medium hover:text-ink" href="/case-studies/">
+        View All Case Studies →
+      </a>
+    </div>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      {caseStudies.map((study, index) => (
+        <article class:list={['card-base group overflow-hidden reveal', index > 0 && `reveal-delay-${Math.min(index, 3)}`]}>
+          <a class="block h-full" href={`/case-studies/${study.slug}/`} aria-label={`View ${study.data.client} case study`}>
+            <div class="relative">
+              <img
+                class="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                src={study.data.heroImage}
+                alt={study.data.heroImageAlt}
+                loading="lazy"
+              />
+              <span class:list={['absolute top-3 left-3 rounded-full px-3 py-1 text-caption font-semibold', industryBadgeClass[study.data.industry] ?? 'bg-cream text-ink']}>
+                {study.data.industry}
+              </span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-heading-md font-semibold text-ink">{study.data.client}</h3>
+              <p class="mt-3 text-body-sm text-muted mb-5">{study.data.challenge}</p>
+
+              <div class="grid grid-cols-3 gap-3 border-t border-border pt-4">
+                {study.data.results.slice(0, 3).map((result, resultIndex) => (
+                  <div>
+                    <p class:list={['text-2xl font-bold', resultIndex === 1 ? 'text-warm' : 'text-green']}>{result.value}</p>
+                    <p class="text-caption text-muted">{result.metric}</p>
+                  </div>
+                ))}
+              </div>
+
+              <p class="mt-6 text-green text-body-sm font-medium">View Case Study →</p>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div class="reveal mt-8 rounded-3xl bg-green p-8 text-white md:flex md:items-center md:justify-between md:gap-8">
+      <div>
+        <h3 class="text-heading-lg font-semibold">Your success could be next.</h3>
+        <p class="mt-2 text-white/75">Let's build your growth story together.</p>
+      </div>
+      <a class="mt-6 inline-flex rounded-full border border-white/40 px-6 py-3 text-body-sm font-medium text-white hover:bg-white hover:text-green md:mt-0" href="/contact/">
+        Let's Talk →
+      </a>
+    </div>
+  </div>
+</section>

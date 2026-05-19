@@ -1,0 +1,19 @@
+---
+interface Props {
+  href?: string;
+  class?: string;
+}
+
+const { href, class: className = '' } = Astro.props;
+const classes = `card-base p-6 ${className}`;
+---
+
+{href ? (
+  <a class={classes} href={href}>
+    <slot />
+  </a>
+) : (
+  <div class={classes}>
+    <slot />
+  </div>
+)}

@@ -1,0 +1,19 @@
+---
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  items: NavItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<details class="md:hidden">
+  <summary class="cursor-pointer list-none text-sm font-semibold text-ink">Menu</summary>
+  <nav class="absolute left-6 right-6 mt-4 grid gap-3 rounded-3xl border border-border bg-cream p-5 shadow-xl">
+    {items.map((item) => <a class="text-sm font-medium text-muted hover:text-green" href={item.href}>{item.label}</a>)}
+  </nav>
+</details>

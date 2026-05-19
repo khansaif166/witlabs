@@ -1,0 +1,41 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  seoTitle?: string;
+  eyebrow?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  publishDate?: string;
+  modifiedDate?: string;
+  noindex?: boolean;
+  type?: 'website' | 'article';
+  keywords?: string[];
+}
+
+const { title, seoTitle, eyebrow, description, canonical, ogImage, ogType, publishDate, modifiedDate, noindex, type, keywords } = Astro.props;
+const metaDescription = description ?? 'Digital growth agency helping Indian businesses build websites, rank on Google and grow online.';
+---
+
+<BaseLayout
+  title={seoTitle ?? title}
+  description={metaDescription}
+  canonical={canonical}
+  ogImage={ogImage}
+  ogType={ogType}
+  publishDate={publishDate}
+  modifiedDate={modifiedDate}
+  noindex={noindex}
+  type={type}
+  keywords={keywords}
+>
+  <section class="mx-auto max-w-6xl px-6 py-20">
+    {eyebrow && <p class="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-warm">{eyebrow}</p>}
+    <h1 class="max-w-3xl font-serif text-5xl leading-tight text-ink md:text-7xl">{title}</h1>
+    {description && <p class="mt-6 max-w-2xl text-lg leading-8 text-muted">{description}</p>}
+  </section>
+  <slot />
+</BaseLayout>

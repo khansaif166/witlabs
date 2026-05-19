@@ -1,0 +1,100 @@
+---
+const services = [
+  {
+    title: 'Website Design & Development',
+    description: 'Websites that turn visitors into phone calls and form submissions',
+    href: '/services/#website-design',
+    icon: 'layout',
+  },
+  {
+    title: 'SEO & Organic Growth',
+    description: 'Rank higher on Google so customers find you before competitors',
+    href: '/services/#seo',
+    icon: 'search',
+  },
+  {
+    title: 'Digital Marketing',
+    description: 'Campaigns that build brand awareness and generate qualified leads',
+    href: '/services/#digital-marketing',
+    icon: 'megaphone',
+  },
+  {
+    title: 'Performance Marketing',
+    description: 'ROI-focused ads on Google and Meta that pay for themselves',
+    href: '/services/#performance',
+    icon: 'chart',
+  },
+  {
+    title: 'App Development',
+    description: 'Custom mobile apps that make your business easier to use',
+    href: '/services/#app-development',
+    icon: 'app',
+  },
+  {
+    title: 'Branding & Identity',
+    description: 'A brand that makes your business instantly recognisable and trusted',
+    href: '/services/#branding',
+    icon: 'spark',
+  },
+  {
+    title: 'Automation',
+    description: 'Save 10+ hours a week by automating repetitive business tasks',
+    href: '/services/#automation',
+    icon: 'bolt',
+  },
+  {
+    title: 'AI Chatbots',
+    description: "24/7 lead capture and customer support — even when you're offline",
+    href: '/services/#chatbots',
+    icon: 'bot',
+  },
+];
+---
+
+<section aria-labelledby="services-heading" class="py-section bg-white">
+  <div class="container">
+    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+      <div>
+        <p class="eyebrow reveal">WHAT WE DO</p>
+        <h2 id="services-heading" class="reveal reveal-delay-1 text-display-md text-balance mt-3">
+          End-to-end digital solutions<br />for modern Indian businesses.
+        </h2>
+      </div>
+      <a class="reveal reveal-delay-2 text-green text-body-sm font-medium hover:text-ink" href="/services/">
+        View All Services →
+      </a>
+    </div>
+
+    <div class="mt-8 grid gap-8 md:grid-cols-[minmax(0,560px)_auto] md:items-end">
+      <p class="reveal text-body-md text-muted">
+        From your first website to complex automation systems — we cover every digital need your business has.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      {services.map((service, index) => (
+        <article class:list={['card-base group p-6 reveal', index > 0 && `reveal-delay-${Math.min(index, 4)}`]}>
+          <div class="w-10 h-10 rounded-xl bg-green-light flex items-center justify-center text-green">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              {service.icon === 'layout' && <path d="M4 5h16v14H4V5zm0 5h16M9 10v9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />}
+              {service.icon === 'search' && <path d="M11 18a7 7 0 110-14 7 7 0 010 14zm5-2l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />}
+              {service.icon === 'megaphone' && <path d="M4 13h3l9 4V7l-9 4H4v2zm3 0v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />}
+              {service.icon === 'chart' && <path d="M4 19V5m0 14h16M8 15l3-4 3 2 5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />}
+              {service.icon === 'app' && <path d="M8 3h8a2 2 0 012 2v14a2 2 0 01-2 2H8a2 2 0 01-2-2V5a2 2 0 012-2zm3 15h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />}
+              {service.icon === 'spark' && <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3zm7 12l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />}
+              {service.icon === 'bolt' && <path d="M13 2L5 14h6l-1 8 8-12h-6l1-8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />}
+              {service.icon === 'bot' && <path d="M8 9h8a4 4 0 014 4v4H4v-4a4 4 0 014-4zm4 0V5m-3 9h.01M15 14h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />}
+            </svg>
+          </div>
+          <div class="mt-5 mb-3">
+            <h3 class="text-heading-md font-semibold text-ink">{service.title}</h3>
+          </div>
+          <p class="text-body-sm text-muted">{service.description}</p>
+          <a class="mt-6 inline-flex text-green text-caption font-semibold opacity-0 translate-y-1 transition-all group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0" href={service.href}>
+            Learn more →
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

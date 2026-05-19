@@ -1,0 +1,13 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+
+export async function getStaticPaths() {
+  return [];
+}
+---
+
+<PageLayout title="Insight" eyebrow="Journal" description="This insight is not available yet." noindex={true}>
+  <section class="mx-auto max-w-3xl px-6 pb-20">
+    <p class="leading-7 text-muted">Insights will appear here once blog content is added.</p>
+  </section>
+</PageLayout>

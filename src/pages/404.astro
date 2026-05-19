@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="The page you're looking for doesn't exist or has been moved."
+  canonical="https://witlabs.in/404"
+  noindex={true}
+>
+  <section class="container flex min-h-[75vh] flex-col items-center justify-center py-32 text-center">
+    <p class="eyebrow">404</p>
+    <h1 class="mt-6 text-display-md text-ink">Page not found</h1>
+    <p class="mt-5 max-w-prose text-body-lg text-muted">
+      The page you're looking for doesn't exist or has been moved.
+    </p>
+
+    <form id="not-found-search" class="mt-8 flex w-full max-w-xl flex-col gap-3 rounded-2xl border border-border bg-white p-3 shadow-sm sm:flex-row" action="https://www.google.com/search" method="GET">
+      <label class="sr-only" for="site-search">Search WitLabs</label>
+      <input
+        id="site-search"
+        class="min-w-0 flex-1 rounded-xl border border-border px-4 py-3 text-body-sm outline-none focus:border-green focus:ring-1 focus:ring-green"
+        type="search"
+        name="q"
+        placeholder="Search WitLabs on Google"
+      />
+      <button class="rounded-xl bg-ink px-5 py-3 text-body-sm font-medium text-cream hover:bg-ink-light" type="submit">
+        Search
+      </button>
+    </form>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a class="rounded-full border border-border px-6 py-3.5 text-body-sm font-medium text-ink hover:bg-cream-dark" href="/">
+        ← Back to Home
+      </a>
+      <a class="rounded-full bg-green px-6 py-3.5 text-body-sm font-medium text-white hover:bg-green-dark" href="/contact/">
+        Contact Us →
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const notFoundSearch = document.getElementById('not-found-search');
+  const siteSearch = document.getElementById('site-search');
+
+  notFoundSearch?.addEventListener('submit', () => {
+    if (siteSearch instanceof HTMLInputElement) {
+      const query = siteSearch.value.trim();
+      siteSearch.value = query ? `site:witlabs.in ${query}` : 'site:witlabs.in';
+    }
+  });
+</script>

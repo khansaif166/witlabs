@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('insights', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 3);
+
+const placeholders = [
+  {
+    category: 'Web Design',
+    title: 'How to know if your business website is silently losing leads',
+    description: 'A practical checklist for spotting trust, speed, and conversion issues before they cost you more inquiries.',
+    author: 'WitLabs',
+    readTime: 5,
+  },
+  {
+    category: 'SEO',
+    title: 'Local SEO basics every Indian business should get right',
+    description: 'The simple search foundations that help nearby customers find and trust your business faster.',
+    author: 'WitLabs',
+    readTime: 6,
+  },
+  {
+    category: 'Automation',
+    title: 'Where small teams should start with business automation',
+    description: 'A focused guide to automating repetitive work without overcomplicating your operations.',
+    author: 'WitLabs',
+    readTime: 4,
+  },
+];
+
+const cards = posts.length > 0
+  ? posts.map((post) => ({
+    category: post.data.category,
+    title: post.data.title,
+    description: post.data.description,
+    author: post.data.author,
+    readTime: post.data.readTime,
+    href: `/insights/${post.slug}/`,
+    isPlaceholder: false,
+  }))
+  : placeholders.map((post) => ({ ...post, href: '/insights/', isPlaceholder: true }));
+---
+
+<section class="py-section bg-white">
+  <div class="container">
+    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+      <div>
+        <p class="eyebrow reveal">INSIGHTS & IDEAS</p>
+        <h2 class="reveal reveal-delay-1 mt-3 max-w-3xl text-display-md text-balance">
+          Knowledge that helps your business grow smarter.
+        </h2>
+      </div>
+      <a class="reveal reveal-delay-2 text-green text-body-sm font-medium hover:text-ink" href="/insights/">
+        View All Insights →
+      </a>
+    </div>
+
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      {cards.map((post, index) => (
+        <article class:list={['card-base p-6 reveal', index > 0 && `reveal-delay-${index}`]}>
+          <span class="inline-flex rounded-full bg-green-light px-3 py-1 text-caption font-semibold text-green">
+            {post.category}
+          </span>
+          <h3 class="mt-5 text-heading-md font-semibold text-ink line-clamp-2">{post.title}</h3>
+          <p class="mt-3 text-body-sm text-muted line-clamp-3">{post.description}</p>
+          <div class="mt-8 flex flex-wrap items-center gap-2 text-caption text-muted">
+            <span>{post.author}</span>
+            <span aria-hidden="true">·</span>
+            <span>{post.readTime} min read</span>
+            <a class="ml-auto font-semibold text-green hover:text-ink" href={post.href}>
+              {post.isPlaceholder ? 'Coming Soon →' : 'Read More →'}
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .line-clamp-2,
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-2 {
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    -webkit-line-clamp: 3;
+  }
+</style>

@@ -1,0 +1,100 @@
+---
+import SEOHead from '../components/shared/SEOHead.astro';
+import StructuredData from '../components/shared/StructuredData.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import WhatsAppButton from '../components/shared/WhatsAppButton.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  publishDate?: string;
+  modifiedDate?: string;
+  noindex?: boolean;
+  type?: 'website' | 'article';
+  keywords?: string[];
+  transparentHeader?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/og/default.jpg',
+  ogType,
+  publishDate,
+  modifiedDate,
+  noindex = false,
+  type = 'website',
+  keywords = [],
+  transparentHeader = false,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en-IN" class="grain">
+  <head>
+    <SEOHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      ogImage={ogImage}
+      ogType={ogType ?? type}
+      publishDate={publishDate}
+      modifiedDate={modifiedDate}
+      noindex={noindex}
+      keywords={keywords}
+    />
+    <StructuredData type="organization" />
+    <StructuredData type="localBusiness" />
+  </head>
+  <body class="min-h-screen flex flex-col bg-cream text-ink antialiased">
+    <Header transparent={transparentHeader} />
+    <main id="main-content" class="flex-1" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppButton />
+
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-green focus:text-white focus:rounded-lg focus:text-sm focus:font-medium"
+    >
+      Skip to main content
+    </a>
+
+    <script>
+      const reveals = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+        );
+        reveals.forEach((el) => observer.observe(el));
+      } else {
+        reveals.forEach((el) => el.classList.add('visible'));
+      }
+
+      const header = document.getElementById('site-header');
+      window.addEventListener('scroll', () => {
+        const current = window.scrollY;
+        if (current > 80) {
+          header?.classList.add('scrolled');
+        } else {
+          header?.classList.remove('scrolled');
+        }
+      }, { passive: true });
+    </script>
+  </body>
+</html>

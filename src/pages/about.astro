@@ -1,0 +1,17 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { pageSEO } from '../lib/seo';
+---
+
+<PageLayout
+  title="About WitLabs"
+  seoTitle={pageSEO.about.title}
+  eyebrow="Studio"
+  description={pageSEO.about.description}
+  canonical="https://witlabs.in/about"
+  keywords={pageSEO.about.keywords}
+>
+  <section class="mx-auto max-w-6xl px-6 pb-20">
+    <p class="max-w-2xl leading-7 text-muted">About page content will live here.</p>
+  </section>
+</PageLayout>

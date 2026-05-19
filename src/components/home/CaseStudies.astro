@@ -1,0 +1,23 @@
+---
+import SectionLabel from '../shared/SectionLabel.astro';
+import Button from '../shared/Button.astro';
+
+const studies = ['Al Khair Interiors', 'Impact Packaging', 'Kota Experts'];
+---
+
+<section class="bg-green-light py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <SectionLabel label="Case studies" />
+    <div class="grid gap-5 md:grid-cols-3">
+      {studies.map((study) => (
+        <article class="rounded-3xl bg-cream p-6">
+          <h2 class="font-serif text-3xl text-ink">{study}</h2>
+          <p class="mt-4 leading-7 text-muted">A starter case study card for project outcomes and story.</p>
+        </article>
+      ))}
+    </div>
+    <div class="mt-8">
+      <Button href="/case-studies" variant="secondary">Explore case studies</Button>
+    </div>
+  </div>
+</section>

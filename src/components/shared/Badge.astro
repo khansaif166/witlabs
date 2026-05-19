@@ -1,0 +1,12 @@
+---
+interface Props {
+  tone?: 'green' | 'warm';
+}
+
+const { tone = 'green' } = Astro.props;
+const classes = tone === 'green' ? 'bg-green-light text-green' : 'bg-warm-light text-warm';
+---
+
+<span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] ${classes}`}>
+  <slot />
+</span>

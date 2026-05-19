@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const web3FormsKey = import.meta.env.WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_KEY';
+const whatsappHref = 'https://wa.me/917984301015?text=Hi%20WitLabs%2C%20I%20visited%20your%20website%20and%20I%27d%20like%20to%20discuss%20a%20project.';
+const fieldClass = 'w-full border border-border rounded-xl px-4 py-3 text-body-sm bg-white focus:outline-none focus:border-green focus:ring-1 focus:ring-green transition-colors';
+const services = [
+  'Website Design',
+  'SEO & Growth',
+  'Digital Marketing',
+  'Performance Marketing',
+  'App Development',
+  'Branding & Identity',
+  'Automation',
+  'AI Chatbot',
+  "Not sure yet — let's discuss",
+];
+const budgets = ['Under ₹15,000', '₹15,000–₹30,000', '₹30,000–₹60,000', '₹60,000+', "Let's discuss"];
+
+const localBusinessContactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': 'https://witlabs.in/#business',
+  name: 'WitLabs',
+  url: 'https://witlabs.in/contact/',
+  telephone: '+91-7984301015',
+  email: 'hello@witlabs.in',
+  areaServed: { '@type': 'Country', name: 'India' },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+91-7984301015',
+      contactType: 'sales',
+      availableLanguage: ['English', 'Hindi'],
+      hoursAvailable: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        opens: '09:00',
+        closes: '19:00',
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Contact WitLabs — Book a Free Digital Strategy Call"
+  description="Book a free 20-minute strategy call with WitLabs. We'll audit your current digital presence and tell you exactly what will work. Call +91 7984301015 or WhatsApp us now."
+  canonical="https://witlabs.in/contact/"
+  keywords={['contact WitLabs', 'book digital strategy call', 'digital agency India contact']}
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(localBusinessContactSchema)} />
+
+  <section class="bg-cream pt-28">
+    <div class="container py-20">
+      <div class="max-w-3xl">
+        <p class="eyebrow">GET IN TOUCH</p>
+        <h1 class="mt-4 text-display-md text-ink text-balance">Let's talk about your business.</h1>
+        <p class="mt-6 text-body-lg text-muted">
+          Book a free 20-minute strategy call. No pitch — just honest advice about what will work for your business online.
+        </p>
+      </div>
+
+      <div class="mt-16 grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div>
+          <div class="space-y-4">
+            <a class="flex gap-4 rounded-2xl border border-border bg-white p-5 transition hover:border-green hover:shadow-lg hover:shadow-ink/5" href="tel:+917984301015">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-light text-green" aria-hidden="true">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none">
+                  <path d="M6.5 3.5l2 3-1.6 1.7c.7 1.4 1.7 2.4 3.1 3.1l1.7-1.6 3 2v3.1c0 .9-.7 1.6-1.6 1.6C7.8 16.4 3.6 12.2 3.6 6.9c0-.9.7-1.6 1.6-1.6h1.3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span>
+                <span class="block text-caption font-semibold uppercase tracking-widest text-muted">Call or WhatsApp</span>
+                <span class="mt-1 block text-body-md font-semibold text-ink">+91 7984301015</span>
+                <span class="mt-1 block text-body-sm text-muted">Mon–Sat, 9am–7pm IST</span>
+              </span>
+            </a>
+
+            <a class="flex gap-4 rounded-2xl border border-border bg-white p-5 transition hover:border-green hover:shadow-lg hover:shadow-ink/5" href="mailto:hello@witlabs.in">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-light text-green" aria-hidden="true">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none">
+                  <path d="M3 5h14v10H3V5zm1 1l6 5 6-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span>
+                <span class="block text-caption font-semibold uppercase tracking-widest text-muted">Email Us</span>
+                <span class="mt-1 block text-body-md font-semibold text-ink">hello@witlabs.in</span>
+                <span class="mt-1 block text-body-sm text-muted">We reply within 2 hours on working days</span>
+              </span>
+            </a>
+
+            <a class="flex gap-4 rounded-2xl bg-[#25D366] p-5 text-white transition hover:brightness-95" href={whatsappHref} target="_blank" rel="noreferrer">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15" aria-hidden="true">
+                <svg class="h-6 w-6" viewBox="0 0 32 32" fill="currentColor">
+                  <path d="M16.02 3.2A12.66 12.66 0 005.04 22.16L3.2 28.8l6.8-1.78A12.66 12.66 0 1016.02 3.2zm0 22.98c-2.1 0-4.04-.63-5.67-1.72l-.4-.26-4.03 1.06 1.08-3.9-.27-.41a10.3 10.3 0 1119.6-4.43 10.31 10.31 0 01-10.31 9.66zm5.65-7.72c-.31-.16-1.84-.91-2.13-1.01-.28-.11-.49-.16-.7.16-.2.31-.8 1-.98 1.2-.18.22-.36.24-.67.08-.31-.16-1.31-.48-2.5-1.54a9.32 9.32 0 01-1.72-2.14c-.18-.31-.02-.48.14-.64.14-.14.31-.36.47-.54.16-.18.2-.31.31-.52.1-.2.05-.39-.03-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.59c-.2 0-.54.08-.83.39-.28.31-1.08 1.06-1.08 2.58 0 1.52 1.11 2.99 1.27 3.2.16.2 2.18 3.32 5.28 4.66.74.32 1.31.51 1.76.65.74.23 1.41.2 1.94.12.59-.09 1.84-.75 2.1-1.48.26-.72.26-1.34.18-1.48-.08-.13-.28-.2-.59-.36z" />
+                </svg>
+              </span>
+              <span>
+                <span class="block text-body-md font-semibold">Chat on WhatsApp Now</span>
+                <span class="mt-1 block text-body-sm text-white/80">Usually replies in under 10 minutes</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="mt-10 rounded-2xl bg-cream-dark p-6">
+            <h3 class="text-heading-md font-semibold text-ink">What happens after you reach out?</h3>
+            <ol class="mt-5 space-y-4">
+              {[
+                'We review your business and current digital presence',
+                'We schedule a 20-minute call at your convenience',
+                'We share honest recommendations — no pressure, no pitch',
+                "If it's a fit, we send a clear proposal within 24 hours",
+              ].map((item, index) => (
+                <li class="flex gap-3 text-body-sm text-muted">
+                  <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-green text-caption font-semibold text-white">{index + 1}</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+
+        <div class="rounded-3xl border border-border bg-white p-6 shadow-xl shadow-ink/5 md:p-8">
+          <h2 class="text-heading-lg font-semibold text-ink">Send us a message</h2>
+
+          <form class="mt-6" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value={web3FormsKey} />
+            <input type="hidden" name="subject" value="New Project Inquiry — WitLabs Website" />
+            <input type="hidden" name="from_name" value="WitLabs Contact Form" />
+            <input type="hidden" name="redirect" value="https://witlabs.in/thank-you/" />
+            <input class="hidden" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+
+            <div class="grid gap-5 md:grid-cols-2">
+              <div class="form-group">
+                <label class="mb-2 block text-body-sm font-medium text-ink" for="name">Full Name</label>
+                <input id="name" class={fieldClass} type="text" name="name" autocomplete="name" required />
+              </div>
+              <div class="form-group">
+                <label class="mb-2 block text-body-sm font-medium text-ink" for="business_name">Business Name</label>
+                <input id="business_name" class={fieldClass} type="text" name="business_name" required />
+              </div>
+              <div class="form-group">
+                <label class="mb-2 block text-body-sm font-medium text-ink" for="phone">Phone Number</label>
+                <input id="phone" class={fieldClass} type="tel" name="phone" autocomplete="tel" required />
+              </div>
+              <div class="form-group">
+                <label class="mb-2 block text-body-sm font-medium text-ink" for="email">Email Address</label>
+                <input id="email" class={fieldClass} type="email" name="email" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="form-group mt-5">
+              <label class="mb-2 block text-body-sm font-medium text-ink" for="service_interested_in">Service Interested In</label>
+              <select id="service_interested_in" class={fieldClass} name="service_interested_in" required>
+                <option value="" disabled selected>Select a service</option>
+                {services.map((service) => <option value={service}>{service}</option>)}
+              </select>
+            </div>
+
+            <div class="form-group mt-5">
+              <label class="mb-2 block text-body-sm font-medium text-ink" for="message">Tell us about your project</label>
+              <textarea
+                id="message"
+                class={fieldClass}
+                name="message"
+                rows="4"
+                placeholder="Tell us about your business, what you need, and any specific goals or timeline you have in mind..."
+              ></textarea>
+            </div>
+
+            <div class="form-group mt-5">
+              <label class="mb-2 block text-body-sm font-medium text-ink" for="budget_range">Budget Range</label>
+              <select id="budget_range" class={fieldClass} name="budget_range">
+                <option value="" disabled selected>Select a budget range</option>
+                {budgets.map((budget) => <option value={budget}>{budget}</option>)}
+              </select>
+            </div>
+
+            <button class="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-ink py-4 text-body-md font-medium text-cream transition-colors hover:bg-ink-light" type="submit">
+              Send Message →
+            </button>
+          </form>
+
+          <p class="mt-4 text-center text-caption text-muted">
+            Your information is private and will never be shared with third parties.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

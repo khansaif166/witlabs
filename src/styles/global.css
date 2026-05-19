@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-green;
+  }
+
+  ::selection {
+    @apply bg-green text-white;
+  }
+
+  img {
+    @apply max-w-full;
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto max-w-site px-4 sm:px-6 lg:px-8;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grain::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .link-underline {
+    @apply relative;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size 0.3s ease;
+  }
+
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+
+  .eyebrow {
+    @apply text-label uppercase tracking-widest text-green inline-flex items-center gap-2;
+  }
+
+  .eyebrow::before {
+    content: '';
+    @apply block w-5 h-px bg-green;
+  }
+
+  .card-base {
+    @apply bg-white border border-border rounded-2xl;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .card-base:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 8px 32px rgba(26, 24, 20, 0.08);
+    border-color: rgba(45, 106, 79, 0.2);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 {
+    transition-delay: 0.1s;
+  }
+
+  .reveal-delay-2 {
+    transition-delay: 0.2s;
+  }
+
+  .reveal-delay-3 {
+    transition-delay: 0.3s;
+  }
+
+  .reveal-delay-4 {
+    transition-delay: 0.4s;
+  }
+}

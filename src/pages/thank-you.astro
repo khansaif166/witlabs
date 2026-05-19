@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const whatsappHref = 'https://wa.me/917984301015?text=Hi%20WitLabs%2C%20I%20submitted%20the%20contact%20form%20and%20would%20like%20to%20speak%20with%20you.';
+---
+
+<BaseLayout
+  title="Thank You"
+  description="Thank you for contacting WitLabs. We will be in touch within 2 hours."
+  canonical="https://witlabs.in/thank-you/"
+  noindex={true}
+>
+  <section class="container flex min-h-[75vh] flex-col items-center justify-center py-32 text-center">
+    <div class="flex h-20 w-20 items-center justify-center rounded-full bg-green text-white">
+      <svg class="h-10 w-10" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 12.5l4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+
+    <h1 class="mt-8 text-display-md text-ink text-balance">Message received. Thank you!</h1>
+    <p class="mt-5 max-w-2xl text-body-lg text-muted">
+      We'll review your inquiry and get back to you within 2 hours on working days. In the meantime, feel free to call or WhatsApp us directly.
+    </p>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a class="rounded-full bg-ink px-6 py-3.5 text-body-sm font-medium text-cream hover:bg-ink-light" href="tel:+917984301015">
+        Call +91 7984301015
+      </a>
+      <a class="rounded-full bg-[#25D366] px-6 py-3.5 text-body-sm font-medium text-white hover:brightness-95" href={whatsappHref} target="_blank" rel="noreferrer">
+        WhatsApp Us
+      </a>
+    </div>
+
+    <a class="mt-8 text-body-sm font-medium text-green hover:text-ink" href="/">← Back to Home</a>
+  </section>
+</BaseLayout>

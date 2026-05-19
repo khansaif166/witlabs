@@ -1,0 +1,25 @@
+---
+const logos = [
+  { name: 'Al Khair Interiors', className: 'font-serif italic text-lg' },
+  { name: 'Impact Packaging', className: 'font-sans font-medium tracking-wide' },
+  { name: 'Kota Experts', className: 'font-sans font-medium' },
+  { name: '[Business 4]', className: 'font-sans font-medium' },
+  { name: '[Business 5]', className: 'font-sans font-medium' },
+  { name: '[Business 6]', className: 'font-sans font-medium' },
+  { name: '[Business 7]', className: 'font-sans font-medium' },
+];
+const marqueeLogos = [...logos, ...logos];
+---
+
+<section class="border-y border-cream-dark bg-cream py-12">
+  <p class="text-center text-label text-muted mb-8">TRUSTED BY GROWING BUSINESSES</p>
+  <div class="overflow-hidden">
+    <div class="flex w-max items-center gap-16 animate-marquee hover:[animation-play-state:paused]">
+      {marqueeLogos.map((logo) => (
+        <span class:list={['whitespace-nowrap text-muted/50 hover:text-muted transition-colors', logo.className]}>
+          {logo.name}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>

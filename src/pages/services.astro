@@ -1,0 +1,17 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { pageSEO } from '../lib/seo';
+---
+
+<PageLayout
+  title="Services"
+  seoTitle={pageSEO.services.title}
+  eyebrow="What we do"
+  description={pageSEO.services.description}
+  canonical="https://witlabs.in/services"
+  keywords={pageSEO.services.keywords}
+>
+  <section class="mx-auto max-w-6xl px-6 pb-20">
+    <p class="max-w-2xl leading-7 text-muted">Service details will live here.</p>
+  </section>
+</PageLayout>

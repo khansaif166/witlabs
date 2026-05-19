@@ -1,0 +1,110 @@
+---
+interface Props {
+  type: 'organization' | 'localBusiness' | 'article' | 'breadcrumb';
+  data?: Record<string, unknown>;
+  items?: Array<{ name: string; url: string }>;
+}
+
+const { type, data = {}, items = [] } = Astro.props;
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://witlabs.in/#organization',
+  name: 'WitLabs',
+  url: 'https://witlabs.in',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://witlabs.in/images/logo.png',
+    width: 200,
+    height: 60,
+  },
+  description: 'WitLabs is a digital growth agency helping Indian businesses build websites, rank on Google and grow with digital marketing and automation.',
+  foundingDate: '2024',
+  founder: {
+    '@type': 'Person',
+    name: 'Saif Ali Khan',
+    jobTitle: 'Founder & Digital Strategist',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'IN',
+    addressRegion: 'India',
+  },
+  contactPoint: [{
+    '@type': 'ContactPoint',
+    telephone: '+91-7984301015',
+    contactType: 'sales',
+    availableLanguage: ['English', 'Hindi'],
+    contactOption: 'TollFree',
+  }],
+  sameAs: [
+    'https://www.instagram.com/witlabs',
+    'https://www.linkedin.com/company/witlabs',
+    'https://twitter.com/witlabs',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Digital Services',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website Design and Development' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Search Engine Optimization' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Digital Marketing' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Performance Marketing' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mobile App Development' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Chatbot Development' } },
+    ],
+  },
+};
+
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': 'https://witlabs.in/#business',
+  name: 'WitLabs',
+  image: 'https://witlabs.in/og/default.jpg',
+  url: 'https://witlabs.in',
+  telephone: '+91-7984301015',
+  email: 'hello@witlabs.in',
+  priceRange: '₹₹',
+  currenciesAccepted: 'INR',
+  paymentAccepted: 'Cash, Bank Transfer, UPI',
+  areaServed: {
+    '@type': 'Country',
+    name: 'India',
+  },
+  serviceArea: {
+    '@type': 'GeoCircle',
+    geoMidpoint: {
+      '@type': 'GeoCoordinates',
+      latitude: 20.5937,
+      longitude: 78.9629,
+    },
+    geoRadius: '3000000',
+  },
+};
+
+const schemas = {
+  organization,
+  localBusiness,
+  article: {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    ...data,
+  },
+  breadcrumb: {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  },
+};
+
+const schema = schemas[type];
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />

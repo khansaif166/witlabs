@@ -1,0 +1,109 @@
+---
+const services = [
+  { label: 'Website Design', href: '/services/#website-design' },
+  { label: 'App Development', href: '/services/#app-development' },
+  { label: 'SEO & Growth', href: '/services/#seo' },
+  { label: 'Digital Marketing', href: '/services/#digital-marketing' },
+  { label: 'Performance Marketing', href: '/services/#performance' },
+  { label: 'Branding & Identity', href: '/services/#branding' },
+  { label: 'Automation', href: '/services/#automation' },
+  { label: 'AI Chatbots', href: '/services/#chatbots' },
+];
+
+const companyLinks = [
+  { label: 'About Us', href: '/about/' },
+  { label: 'Case Studies', href: '/case-studies/' },
+  { label: 'Insights', href: '/insights/' },
+  { label: 'Our Process', href: '/about/#process' },
+  { label: 'Contact', href: '/contact/' },
+];
+
+const socialLinks = [
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/witlabs',
+    icon: '<path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 6.2A3.8 3.8 0 1012 15.8a3.8 3.8 0 000-7.6zm6.2-.7a1 1 0 10-2 0 1 1 0 002 0z" />',
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/company/witlabs',
+    icon: '<path d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1A4.2 4.2 0 0117.7 8.6c4 0 4.8 2.6 4.8 6V21h-4v-5.7c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V21h-4V9z" />',
+  },
+  {
+    label: 'Twitter',
+    href: 'https://twitter.com/witlabs',
+    icon: '<path d="M18.2 2.8h3.4l-7.5 8.6L23 21.2h-7l-5.5-6.4-6.3 6.4H.8l8-9.1L.3 2.8h7.2l5 5.8 5.7-5.8zm-1.2 16.7h1.9L6.5 4.4h-2l12.5 15.1z" />',
+  },
+];
+---
+
+<footer class="bg-ink pt-20 pb-8 text-cream/60">
+  <div class="container grid gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_0.8fr_1fr]">
+    <div class="space-y-5">
+      <a class="flex items-center gap-2.5 text-cream group" href="/" aria-label="WitLabs home">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M2 6L8 26L14 12L20 26L26 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="font-sans text-xl font-semibold tracking-tight transition-colors group-hover:text-white">WitLabs</span>
+      </a>
+      <p class="font-serif text-3xl leading-tight text-cream">Think smarter. Build better.</p>
+      <p class="max-w-sm text-body-sm">
+        Helping Indian businesses build, grow and scale with websites, SEO, digital marketing and smart automation.
+      </p>
+      <div class="flex items-center gap-3">
+        {socialLinks.map((social) => (
+          <a class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-cream transition-colors hover:bg-white/20 hover:text-white" href={social.href} aria-label={social.label} target="_blank" rel="noreferrer">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" set:html={social.icon} />
+          </a>
+        ))}
+      </div>
+      <p class="text-caption text-cream/30">Built with ❤️ in India</p>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-cream">Services</h3>
+      <ul class="mt-5 grid gap-3 text-body-sm">
+        {services.map((service) => (
+          <li><a class="transition-colors hover:text-cream" href={service.href}>{service.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-cream">Company</h3>
+      <ul class="mt-5 grid gap-3 text-body-sm">
+        {companyLinks.map((link) => (
+          <li><a class="transition-colors hover:text-cream" href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-cream">Let's Talk</h3>
+      <p class="mt-5 text-body-sm">Have a project in mind? Let's build something great.</p>
+      <div class="mt-5 grid gap-3 text-body-sm">
+        <a class="transition-colors hover:text-cream" href="tel:+917984301015">+91 7984301015</a>
+        <a class="transition-colors hover:text-cream" href="mailto:hello@witlabs.in">hello@witlabs.in</a>
+      </div>
+      <a
+        class="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-green px-5 py-3 text-body-sm font-semibold text-white transition-colors hover:bg-green-dark"
+        href="https://wa.me/917984301015?text=Hi%20WitLabs%2C%20I%20visited%20your%20website%20and%20I%27d%20like%20to%20discuss%20a%20project."
+        target="_blank"
+        rel="noreferrer"
+      >
+        Message on WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <div class="container mt-16 border-t border-white/10 pt-8">
+    <div class="flex flex-col gap-4 text-body-sm md:flex-row md:items-center md:justify-between">
+      <p>© 2024 WitLabs. All rights reserved.</p>
+      <div class="flex gap-5">
+        <a class="transition-colors hover:text-cream" href="/privacy-policy/">Privacy Policy</a>
+        <span aria-hidden="true">·</span>
+        <a class="transition-colors hover:text-cream" href="/terms-and-conditions/">Terms & Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>

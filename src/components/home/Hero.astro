@@ -1,0 +1,88 @@
+---
+const trustItems = ['50+ Projects Delivered', '3 Active Clients Growing', 'ROI-Focused Approach'];
+---
+
+<section class="bg-cream bg-[radial-gradient(ellipse_at_top_right,_rgba(45,106,79,0.06),_transparent_60%)] pt-32 pb-section">
+  <div class="container grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-center">
+    <div>
+      <p class="eyebrow reveal">DIGITAL GROWTH, ENGINEERED</p>
+
+      <h1 class="reveal reveal-delay-1 mt-6 text-display-xl font-sans text-ink text-balance">
+        We Build Digital Systems
+        <em class="mt-2 block font-serif italic text-warm">That Help Businesses Grow.</em>
+      </h1>
+
+      <div class="reveal reveal-delay-2 w-16 h-0.5 bg-warm mt-6 mb-8"></div>
+
+      <p class="reveal reveal-delay-2 text-body-lg text-muted max-w-[480px] text-balance">
+        WitLabs helps ambitious Indian businesses grow online with strategy, design, technology and marketing that deliver measurable results.
+      </p>
+
+      <div class="reveal reveal-delay-3 mt-10 flex gap-3 flex-wrap">
+        <a
+          href="/contact/"
+          class="inline-flex items-center gap-2 bg-ink text-cream px-6 py-3.5 rounded-full font-medium text-body-md hover:bg-ink-light transition-colors"
+        >
+          Book a Free Strategy Call →
+        </a>
+        <a
+          href="/services/"
+          class="inline-flex items-center gap-2 border border-border text-ink px-6 py-3.5 rounded-full font-medium text-body-sm hover:bg-cream-dark transition-colors"
+        >
+          Explore Services
+        </a>
+      </div>
+
+      <div class="reveal reveal-delay-4 mt-10 flex gap-6 flex-wrap">
+        {trustItems.map((item) => (
+          <span class="flex items-center gap-2 text-caption text-muted">
+            <svg class="h-4 w-4 rounded-full bg-green text-white" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 8.3l2.3 2.3L12 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-3 relative hidden md:block">
+      <svg class="absolute right-0 top-0 h-32 w-32 text-green opacity-20" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+        <path d="M24 84c38 3 62-18 70-60-36 7-61 29-70 60z" fill="currentColor" />
+        <path d="M36 75c17-14 33-25 52-36" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+      </svg>
+
+      <div class="relative overflow-hidden rounded-3xl border border-border bg-white p-3 shadow-2xl shadow-ink/10">
+        <img
+          class="aspect-[4/3] w-full rounded-[1.25rem] object-cover"
+          src="/images/mockup.png"
+          alt="WitLabs digital agency website design for Indian businesses"
+          loading="eager"
+        />
+      </div>
+
+      <div class="absolute -top-4 -right-4 md:top-6 md:-right-6 bg-white rounded-2xl shadow-xl border border-border p-4 flex items-center gap-3">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-light text-green" aria-hidden="true">
+          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none">
+            <path d="M4 13l4-4 3 3 5-7M16 5v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <div>
+          <p class="font-semibold text-ink">+128% Revenue Growth</p>
+          <p class="text-caption text-muted">for UrbanCo. in 6 months</p>
+        </div>
+      </div>
+
+      <div class="absolute -bottom-4 -left-4 md:bottom-6 md:-left-6 bg-white rounded-2xl shadow-xl border border-border p-4 flex items-center gap-3">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-light text-green" aria-hidden="true">
+          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none">
+            <path d="M7 9a3 3 0 100-6 3 3 0 000 6zM2 17a5 5 0 0110 0M14 9.5a2.5 2.5 0 100-5M13.5 12.5A4.5 4.5 0 0118 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+          </svg>
+        </span>
+        <div>
+          <p class="font-semibold text-ink">3.6K Leads Generated</p>
+          <p class="text-caption text-muted">across our client projects</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
