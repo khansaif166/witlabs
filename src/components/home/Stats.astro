@@ -1,25 +1,32 @@
 ---
 const stats = [
-  { value: '50+', target: '50', suffix: '+', label: 'Projects Delivered' },
-  { value: '3', target: '3', suffix: '', label: 'Clients Growing Now' },
-  { value: '100%', target: '100', suffix: '%', label: 'On-Time Delivery' },
-  { value: '4.9', target: '4.9', suffix: '', label: 'Client Satisfaction' },
+  { value: '50+', target: '50', suffix: '+', label: 'Projects Delivered', note: 'Sites, campaigns, systems' },
+  { value: '3', target: '3', suffix: '', label: 'Active Growth Clients', note: 'Hands-on monthly work' },
+  { value: '100%', target: '100', suffix: '%', label: 'On-Time Delivery', note: 'QA before launch' },
+  { value: '4.9', target: '4.9', suffix: '', label: 'Client Satisfaction', note: 'Practical communication' },
 ];
 ---
 
-<section id="home-stats" class="bg-green py-20 text-white">
-  <div class="container">
-    <div class="grid md:grid-cols-4">
+<section id="home-stats" class="stats-band bg-cream text-ink">
+  <div class="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+    <div class="reveal mb-10 flex flex-col gap-4 border-b border-border pb-8 md:flex-row md:items-end md:justify-between">
+      <h2 class="max-w-3xl text-[clamp(2rem,4vw,4.5rem)] font-semibold tracking-[-0.06em] leading-[0.98]">
+        Small numbers, real businesses, visible progress.
+      </h2>
+      <p class="max-w-md text-sm leading-6 text-muted">
+        The goal is not to look big. The goal is to make every project measurable, useful, and polished enough to trust.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-4">
       {stats.map((stat, index) => (
-        <div class:list={['reveal py-8 text-center md:px-8', index < stats.length - 1 && 'border-b border-white/15 md:border-b-0 md:border-r']}>
-          <p class="stat-number font-mono text-6xl font-bold text-white" data-target={stat.target} data-suffix={stat.suffix} data-value={stat.value}>0{stat.suffix}</p>
-          <p class="mt-2 text-sm uppercase tracking-wider text-white/60">{stat.label}</p>
+        <div class:list={['stat-card reveal', index > 0 && `delay-${index}`]}>
+          <p class="stat-number" data-target={stat.target} data-suffix={stat.suffix} data-value={stat.value}>0{stat.suffix}</p>
+          <p class="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-green">{stat.label}</p>
+          <p class="mt-2 text-sm text-muted">{stat.note}</p>
         </div>
       ))}
     </div>
-    <p class="mt-12 border-t border-white/10 pt-8 text-center text-sm text-white/50">
-      Every number above is a real business we helped grow.
-    </p>
   </div>
 </section>
 
@@ -29,7 +36,14 @@ const stats = [
     const nums = [...(section?.querySelectorAll('.stat-number') ?? [])];
     let done = false;
     const easeOutQuart = (x) => 1 - Math.pow(1 - x, 4);
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const run = (el) => {
+      if (reduced) {
+        el.textContent = el.dataset.value || el.textContent;
+        return;
+      }
+
       const target = Number(el.dataset.target || 0);
       const suffix = el.dataset.suffix || '';
       const decimal = (el.dataset.target || '').includes('.');
@@ -59,3 +73,40 @@ const stats = [
     }, { threshold: 0.35 }).observe(section);
   })();
 </script>
+
+<style>
+  .stats-band {
+    border-bottom: 1px solid rgba(28, 25, 23, 0.08);
+  }
+
+  .stat-card {
+    min-height: 250px;
+    border-bottom: 1px solid rgba(28, 25, 23, 0.08);
+    padding: 28px 0;
+  }
+
+  .stat-number {
+    font-family: "DM Mono", monospace;
+    font-size: clamp(4rem, 9vw, 8rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.08em;
+  }
+
+  @media (min-width: 1024px) {
+    .stat-card {
+      border-bottom: 0;
+      border-right: 1px solid rgba(28, 25, 23, 0.08);
+      padding: 36px 32px;
+    }
+
+    .stat-card:first-child {
+      padding-left: 0;
+    }
+
+    .stat-card:last-child {
+      border-right: 0;
+      padding-right: 0;
+    }
+  }
+</style>

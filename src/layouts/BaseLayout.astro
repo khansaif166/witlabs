@@ -68,7 +68,7 @@ const {
     </a>
 
     <script>
-      const reveals = document.querySelectorAll('.reveal');
+      const reveals = document.querySelectorAll('.reveal, .reveal-scale');
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver(
           (entries) => {
@@ -85,16 +85,6 @@ const {
       } else {
         reveals.forEach((el) => el.classList.add('visible'));
       }
-
-      const header = document.getElementById('site-header');
-      window.addEventListener('scroll', () => {
-        const current = window.scrollY;
-        if (current > 80) {
-          header?.classList.add('scrolled');
-        } else {
-          header?.classList.remove('scrolled');
-        }
-      }, { passive: true });
     </script>
   </body>
 </html>

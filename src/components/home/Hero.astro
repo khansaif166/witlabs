@@ -1,106 +1,160 @@
 ---
+const heroFrames = [
+  {
+    src: '/images/case-studies/al-khair-hero.jpg',
+    alt: 'Interior design website project by WitLabs',
+    label: 'Brand website',
+  },
+  {
+    src: '/images/case-studies/impact-packaging-hero.jpg',
+    alt: 'Manufacturing website project by WitLabs',
+    label: 'B2B growth',
+  },
+  {
+    src: '/images/case-studies/kota-experts-hero.jpg',
+    alt: 'Education website project by WitLabs',
+    label: 'Local SEO',
+  },
+];
 ---
 
-<section class="relative min-h-[100svh] overflow-hidden bg-ink px-4 pb-16 pt-28 text-cream sm:px-6 lg:px-8 lg:pt-32">
-  <div class="container relative grid min-h-[calc(100svh-9rem)] items-center gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,1fr)]">
-    <div class="relative z-10">
-      <div class="mb-12 flex items-center justify-between gap-6">
-        <span class="font-mono text-[11px] uppercase tracking-[0.25em] text-green-bright">Digital Growth Agency</span>
-        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/30">Est. 2024</span>
+<section id="homepage-hero" class="homepage-hero relative min-h-[100svh] overflow-hidden bg-ink text-white">
+  <div class="hero-media" aria-hidden="true">
+    {heroFrames.map((frame, index) => (
+      <div class:list={['hero-media__item', index === 0 && 'is-active']}>
+        <img src={frame.src} alt="" loading={index === 0 ? 'eager' : 'lazy'} />
       </div>
-
-      <h1 id="hero-heading" class="hero-heading font-serif italic text-[clamp(4.5rem,9vw,9rem)] leading-[0.92] text-cream">
-        <span class="hero-line block">We Build</span>
-        <span class="hero-line block">Digital</span>
-        <span class="hero-line hero-outline block">Systems</span>
-      </h1>
-
-      <p class="mt-6 text-[clamp(1.1rem,2.5vw,1.5rem)] font-medium text-cream/60">
-        That Help Businesses Grow.
-      </p>
-
-      <div class="mt-12 flex flex-col gap-4 sm:flex-row">
-        <a class="inline-flex items-center justify-center rounded-full bg-green px-7 py-3.5 text-[15px] font-medium text-white transition-colors duration-200 hover:bg-green-mid" href="/contact/">
-          Book a Free Strategy Call
-        </a>
-        <a class="inline-flex items-center justify-center rounded-full border border-cream/20 px-7 py-3.5 text-[15px] font-medium text-cream/70 transition-colors duration-200 hover:border-cream/50 hover:text-cream" href="/case-studies/">
-          See Our Work ↓
-        </a>
-      </div>
-
-      <div class="mt-16 flex flex-wrap gap-3 font-mono text-[11px] text-cream/35">
-        <span>50+ Projects</span><span>/</span><span>3 Growing Clients</span><span>/</span><span>ROI Focused</span>
-      </div>
-    </div>
-
-    <div class="relative hidden h-[620px] lg:block">
-      <div class="pointer-events-none absolute right-[-20px] top-1/2 -translate-y-1/2 select-none font-serif text-[clamp(300px,55vw,600px)] italic leading-none text-white/[0.025]" aria-hidden="true">W</div>
-
-      <div class="float-card float-one absolute left-0 top-14 w-[310px] rounded-[20px] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-[10px]">
-        <div class="flex items-center gap-2 font-mono text-[11px] text-cream/50">
-          <span class="h-2 w-2 animate-pulse rounded-full bg-green-bright"></span>
-          Active Project
-        </div>
-        <h2 class="mt-4 text-lg font-medium text-cream">Kota Experts</h2>
-        <div class="mt-5 h-1 overflow-hidden rounded-full bg-cream/10">
-          <span class="block h-full w-[73%] rounded-full bg-green"></span>
-        </div>
-        <p class="mt-3 font-mono text-[10px] text-cream/40">Website &amp; SEO — 73% complete</p>
-      </div>
-
-      <div class="float-card float-two absolute right-0 top-[245px] w-[280px] rounded-[20px] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-[10px]">
-        <p class="font-mono text-2xl font-bold text-green-bright">↑ 128%</p>
-        <p class="mt-2 text-sm text-cream/50">Organic traffic growth</p>
-        <p class="mt-1 font-mono text-[10px] text-cream/30">Al Khair Interiors · 3 months</p>
-      </div>
-
-      <div class="float-card float-three absolute bottom-16 left-8 w-[360px] rounded-[20px] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-[10px]">
-        <div class="grid grid-cols-3 gap-4">
-          {[
-            ['50+', 'Projects'],
-            ['3', 'Clients'],
-            ['100%', 'On Time'],
-          ].map(([value, label]) => (
-            <div>
-              <p class="font-mono text-xl font-bold text-cream">{value}</p>
-              <p class="mt-1 font-mono text-[10px] text-cream/40">{label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    ))}
+    <div class="hero-media__shade"></div>
+    <div class="hero-media__wash"></div>
   </div>
 
-  <div class="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center md:flex" aria-hidden="true">
-    <span class="relative h-10 w-px overflow-hidden bg-cream/20">
-      <span class="scroll-dot absolute left-1/2 top-0 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-green-bright"></span>
-    </span>
-    <span class="mt-2 font-mono text-[9px] tracking-[0.3em] text-cream/30">SCROLL</span>
+  <div class="container relative z-10 flex min-h-[100svh] flex-col justify-between pb-8 pt-[calc(var(--nav-height)+56px)] lg:pb-10 lg:pt-[calc(var(--nav-height)+96px)]">
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.55fr)] lg:items-end">
+      <div class="min-w-0">
+        <div class="reveal flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-white/58">
+          <span>Digital Growth Agency</span>
+          <span class="h-px w-8 bg-white/30" aria-hidden="true"></span>
+          <span>India</span>
+        </div>
+
+        <h1 id="hero-heading" class="mt-8 max-w-[980px] display-tight text-[clamp(4.8rem,13vw,12.5rem)] font-semibold text-white">
+          <span class="hero-line block">Build</span>
+          <span class="hero-line block">systems</span>
+          <span class="hero-line block text-white/45">that sell.</span>
+        </h1>
+
+        <div class="reveal reveal-delay-3 mt-8 w-full max-w-[calc(100vw-32px)] sm:max-w-2xl">
+          <p class="text-[clamp(1.1rem,2.2vw,1.55rem)] leading-[1.35] text-white/72">
+            WitLabs creates websites, SEO engines, marketing funnels, and automation systems for businesses that need more than a pretty homepage.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a class="premium-button premium-button-light" href="/contact/">Start a Project</a>
+            <a class="premium-button premium-button-outline text-white" href="/case-studies/">See Our Work <span class="ml-2">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-panel reveal reveal-delay-2 min-w-0 w-full max-w-[calc(100vw-32px)] lg:max-w-none">
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-white/45">Live signal</p>
+        <div class="mt-8 grid gap-6">
+          <div>
+            <p class="text-5xl font-semibold tracking-[-0.06em]">50+</p>
+            <p class="mt-2 text-sm text-white/55">projects delivered across websites, campaigns, and systems.</p>
+          </div>
+          <div class="h-px bg-white/15"></div>
+          <div>
+            <p class="text-5xl font-semibold tracking-[-0.06em]">100%</p>
+            <p class="mt-2 text-sm text-white/55">launch discipline, with QA and client approval before release.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="hero-bottom reveal reveal-delay-4">
+      <div class="hero-frame-label">
+        <span class="hero-frame-dot"></span>
+        <span id="hero-frame-label">{heroFrames[0].label}</span>
+      </div>
+      <div class="hidden items-center gap-3 text-white/45 md:flex" aria-hidden="true">
+        <span class="hero-scroll-line"><span></span></span>
+        <span class="font-mono text-[10px] uppercase tracking-[0.26em]">Scroll</span>
+      </div>
+    </div>
   </div>
 </section>
 
 <script is:inline>
   (() => {
     const heading = document.getElementById('hero-heading');
-    if (!heading) return;
-    const words = heading.querySelectorAll('.hero-line');
-    words.forEach((word, index) => {
-      word.style.transitionDelay = `${index * 0.08}s`;
-      requestAnimationFrame(() => word.classList.add('is-visible'));
+    const lines = heading ? [...heading.querySelectorAll('.hero-line')] : [];
+    const mediaItems = [...document.querySelectorAll('.hero-media__item')];
+    const label = document.getElementById('hero-frame-label');
+    const labels = ['Brand website', 'B2B growth', 'Local SEO'];
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = 0;
+
+    lines.forEach((line, index) => {
+      line.style.transitionDelay = `${index * 0.09 + 0.08}s`;
+      requestAnimationFrame(() => line.classList.add('is-visible'));
     });
+
+    if (reduced || mediaItems.length < 2) return;
+
+    window.setInterval(() => {
+      current = (current + 1) % mediaItems.length;
+      mediaItems.forEach((item, index) => item.classList.toggle('is-active', index === current));
+      if (label) label.textContent = labels[current] || labels[0];
+    }, 4200);
   })();
 </script>
 
 <style>
-  .hero-outline {
-    color: transparent;
-    -webkit-text-stroke: 1.5px #F6F3EE;
+  .hero-media,
+  .hero-media__item,
+  .hero-media__shade,
+  .hero-media__wash {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-media {
+    overflow: hidden;
+  }
+
+  .hero-media__item {
+    opacity: 0;
+    transition: opacity 1s var(--ease-out);
+  }
+
+  .hero-media__item.is-active {
+    opacity: 1;
+  }
+
+  .hero-media__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.9) contrast(1.04);
+    transform: scale(1.04);
+  }
+
+  .hero-media__shade {
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.52) 48%, rgba(0, 0, 0, 0.28) 100%),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0) 36%);
+    z-index: 1;
+  }
+
+  .hero-media__wash {
+    z-index: 2;
+    background: radial-gradient(circle at 85% 18%, rgba(74, 222, 128, 0.18), transparent 34%);
   }
 
   .hero-line {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(32px);
+    transition: opacity 0.75s var(--ease-premium), transform 0.95s var(--ease-premium);
   }
 
   .hero-line.is-visible {
@@ -108,19 +162,99 @@
     transform: translateY(0);
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+  .hero-panel {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    background: rgba(10, 10, 10, 0.48);
+    padding: 28px;
+    backdrop-filter: blur(18px);
   }
 
-  @keyframes scrollDot {
-    0% { transform: translate(-50%, 0); opacity: 0; }
-    20% { opacity: 1; }
-    100% { transform: translate(-50%, 34px); opacity: 0; }
+  .hero-bottom {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    padding-top: 20px;
   }
 
-  .float-one { animation: float 4s ease-in-out infinite; }
-  .float-two { animation: float 4s ease-in-out infinite 1.3s; }
-  .float-three { animation: float 4s ease-in-out infinite 2.6s; }
-  .scroll-dot { animation: scrollDot 1.7s ease-in-out infinite; }
+  .hero-frame-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .hero-frame-dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 999px;
+    background: #4ADE80;
+    box-shadow: 0 0 0 6px rgba(74, 222, 128, 0.14);
+  }
+
+  .hero-scroll-line {
+    position: relative;
+    display: block;
+    height: 44px;
+    width: 1px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .hero-scroll-line span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 12px;
+    width: 1px;
+    background: #4ADE80;
+    animation: heroScroll 1.8s var(--ease-standard) infinite;
+  }
+
+  @keyframes heroScroll {
+    0% {
+      transform: translateY(-12px);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(44px);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .homepage-hero .container {
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    .homepage-hero h1,
+    .homepage-hero p,
+    .hero-panel {
+      max-width: calc(100vw - 32px);
+    }
+
+    .homepage-hero h1 {
+      font-size: clamp(4rem, 18vw, 5.1rem);
+    }
+
+    .homepage-hero p,
+    .hero-panel p {
+      overflow-wrap: anywhere;
+    }
+
+    .hero-panel {
+      width: 100%;
+      padding: 22px;
+    }
+  }
 </style>

@@ -12,7 +12,7 @@ const testimonials = [
     name: 'Director',
     role: 'IMPACT PACKAGING',
     company: 'Manufacturing',
-    quote: 'Professional, reliable and focused on actual outcomes. WitLabs understood our B2B requirements without us having to explain everything ten times. Great team to work with.',
+    quote: 'Professional, reliable and focused on actual outcomes. WitLabs understood our B2B requirements without us having to explain everything ten times.',
   },
   {
     initials: 'KE',
@@ -24,31 +24,113 @@ const testimonials = [
 ];
 ---
 
-<section class="bg-cream-dark py-24">
-  <div class="container">
-    <div class="mb-10">
-      <p class="eyebrow reveal">Client Words</p>
-      <h2 class="reveal delay-1 mt-3 font-serif text-[clamp(2.2rem,4.5vw,4rem)] italic leading-[1.05] text-ink">
-        From the businesses<br />we've helped grow.
-      </h2>
+<section class="section-shell bg-cream-dark text-ink">
+  <div class="mx-auto max-w-[1440px]">
+    <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+      <div>
+        <p class="section-kicker reveal text-green">Trusted By Founders</p>
+        <h2 class="reveal reveal-delay-1 mt-4 display-tight text-[clamp(3.2rem,7vw,7rem)] font-semibold">
+          From businesses we helped grow.
+        </h2>
+      </div>
+      <p class="reveal reveal-delay-2 max-w-xl text-lg leading-8 text-ink-light lg:justify-self-end">
+        Testimonials are treated like proof, not decoration. Each one shows the kind of client, the context, and the practical outcome.
+      </p>
     </div>
 
-    <div>
+    <div class="testimonial-grid mt-12">
       {testimonials.map((item, index) => (
-        <figure class:list={['reveal grid gap-8 border-b border-border py-10 md:grid-cols-[200px_1fr] md:gap-10', index > 0 && `delay-${index}`]}>
-          <figcaption>
-            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-green-light font-semibold text-green">{item.initials}</div>
-            <p class="mt-3 font-medium text-ink">{item.name}</p>
-            <p class="mt-1 font-mono text-[11px] text-muted">{item.role}</p>
-            <span class="mt-3 inline-flex rounded-full border border-border bg-cream px-3 py-1.5 font-mono text-[10px] text-ink">{item.company}</span>
-          </figcaption>
+        <figure class:list={['testimonial-card reveal', index > 0 && `delay-${index}`]}>
           <blockquote>
-            <span class="block font-serif text-7xl leading-none text-ink/[0.08]" aria-hidden="true">"</span>
-            <p class="font-serif text-xl italic leading-[1.6] text-ink">{item.quote}</p>
-            <p class="mt-6 text-sm text-green" aria-label="5 out of 5 stars">★★★★★</p>
+            <span aria-hidden="true">“</span>
+            <p>{item.quote}</p>
           </blockquote>
+          <figcaption>
+            <div class="testimonial-avatar">{item.initials}</div>
+            <div>
+              <p>{item.name}</p>
+              <small>{item.role} / {item.company}</small>
+            </div>
+          </figcaption>
         </figure>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  .testimonial-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .testimonial-card {
+    display: flex;
+    min-height: 360px;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(28, 25, 23, 0.08);
+    border-radius: 8px;
+    background: #FFFFFF;
+    padding: clamp(24px, 4vw, 40px);
+    transition: transform 0.35s var(--ease-premium), box-shadow 0.35s var(--ease-premium);
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .testimonial-card blockquote > span {
+    display: block;
+    color: rgba(45, 106, 79, 0.2);
+    font-size: 90px;
+    line-height: 0.7;
+  }
+
+  .testimonial-card blockquote p {
+    margin-top: 22px;
+    color: #1C1917;
+    font-size: clamp(1.35rem, 2.4vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.18;
+  }
+
+  .testimonial-card figcaption {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .testimonial-avatar {
+    display: grid;
+    height: 46px;
+    width: 46px;
+    place-items: center;
+    border-radius: 999px;
+    background: #1C1917;
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+
+  .testimonial-card figcaption p {
+    font-weight: 700;
+  }
+
+  .testimonial-card figcaption small {
+    margin-top: 3px;
+    display: block;
+    color: #78716C;
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  @media (min-width: 900px) {
+    .testimonial-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

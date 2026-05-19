@@ -8,22 +8,26 @@ const pathname = Astro.url.pathname;
 
 const navLinks = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services/', hasDropdown: true },
-  { label: 'Case Studies', href: '/case-studies/' },
+  { label: 'Services', href: '/services/', menu: 'services' },
+  { label: 'Work', href: '/case-studies/', menu: 'work' },
   { label: 'About', href: '/about/' },
   { label: 'Insights', href: '/insights/' },
   { label: 'Contact', href: '/contact/' },
 ];
 
 const serviceLinks = [
-  { label: 'Website Design & Development', href: '/services/#website-design', icon: 'monitor' },
-  { label: 'SEO & Organic Growth', href: '/services/#seo', icon: 'trending-up' },
-  { label: 'Digital Marketing', href: '/services/#digital-marketing', icon: 'megaphone' },
-  { label: 'Performance Marketing', href: '/services/#performance', icon: 'target' },
-  { label: 'App Development', href: '/services/#app-development', icon: 'smartphone' },
-  { label: 'Branding & Identity', href: '/services/#branding', icon: 'layers' },
-  { label: 'Automation', href: '/services/#automation', icon: 'zap' },
-  { label: 'AI Chatbots', href: '/services/#chatbots', icon: 'bot' },
+  { label: 'Website Design', href: '/services/#website-design', desc: 'Conversion-first sites for service brands' },
+  { label: 'SEO & Organic Growth', href: '/services/#seo', desc: 'Rank where your customers search' },
+  { label: 'Digital Marketing', href: '/services/#digital-marketing', desc: 'Campaigns that create demand' },
+  { label: 'Performance Marketing', href: '/services/#performance', desc: 'Paid acquisition with sharper tracking' },
+  { label: 'App Development', href: '/services/#app-development', desc: 'Mobile tools for real workflows' },
+  { label: 'Automation & AI', href: '/services/#automation', desc: 'Systems that save founder hours' },
+];
+
+const workLinks = [
+  { label: 'Al Khair Interiors', href: '/case-studies/al-khair-interiors/', desc: 'Interior design website and local visibility' },
+  { label: 'Impact Packaging', href: '/case-studies/impact-packaging/', desc: 'B2B manufacturing presence and lead flow' },
+  { label: 'Kota Experts', href: '/case-studies/kota-experts/', desc: 'Education website and inquiry growth' },
 ];
 
 function isActive(href: string): boolean {
@@ -37,168 +41,507 @@ function isActive(href: string): boolean {
 <header
   id="site-header"
   class:list={[
-    'fixed top-0 left-0 right-0 z-50 transition-all duration-300 text-cream',
-    transparent
-      ? 'bg-transparent border-b border-transparent [&.scrolled]:bg-cream/95 [&.scrolled]:text-ink [&.scrolled]:border-border [&.scrolled]:backdrop-blur'
-      : 'bg-cream/95 text-ink border-b border-border backdrop-blur',
+    'fixed inset-x-0 top-0 z-50 text-cream',
+    transparent ? 'is-transparent' : 'is-solid',
   ]}
   aria-label="Site header"
 >
-  <nav class="container h-16 md:h-[72px] flex items-center justify-between" aria-label="Main navigation">
-    <a href="/" aria-label="WitLabs - Home" class="flex items-center gap-2.5 group shrink-0">
-      <span class="flex h-7 w-7 items-center justify-center border border-current/25 font-mono text-[11px] font-bold tracking-[-0.08em] text-current">
+  <nav class="site-nav mx-auto flex h-[var(--nav-height)] max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10" aria-label="Main navigation">
+    <a href="/" aria-label="WitLabs - Home" class="brand-mark group flex items-center gap-3">
+      <span class="brand-symbol grid h-8 w-8 place-items-center border border-current/30 font-mono text-[11px] font-bold tracking-[-0.08em]">
         WL
       </span>
-      <span class="font-sans font-semibold text-xl text-current tracking-tight transition-colors group-hover:text-green">
-        WitLabs
-      </span>
+      <span class="text-xl font-semibold tracking-[-0.04em] text-current">WitLabs</span>
     </a>
 
-    <ul class="hidden lg:flex items-center gap-1" role="list">
+    <ul class="hidden h-full items-center gap-8 lg:flex" role="list">
       {navLinks.map((link) => (
-        <li class={link.hasDropdown ? 'relative group' : ''}>
+        <li class="h-full">
           <a
             href={link.href}
             class:list={[
-              'relative flex items-center gap-1 px-3 py-2 text-body-sm font-medium rounded-lg transition-colors after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-[1.5px] after:rounded-full after:bg-green-bright after:transition-transform after:duration-200',
-              isActive(link.href)
-                ? 'text-green-bright [&_span]:text-green after:scale-x-100'
-                : 'text-current/60 hover:text-current hover:bg-current/5 after:scale-x-0',
+              'nav-link flex h-full items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em]',
+              isActive(link.href) ? 'is-active' : '',
             ]}
             aria-current={isActive(link.href) ? 'page' : undefined}
+            data-menu={link.menu}
           >
             {link.label}
-            {link.hasDropdown && (
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" class="opacity-50 transition-transform group-hover:rotate-180" aria-hidden="true">
-                <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" />
+            {link.menu && (
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="nav-caret" aria-hidden="true">
+                <path d="M2.5 4L6 7.5L9.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
               </svg>
             )}
           </a>
-
-          {link.hasDropdown && (
-            <div
-              class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0"
-              role="menu"
-              aria-label="Services submenu"
-            >
-              <div class="w-64 rounded-2xl border border-border bg-cream p-3 text-ink shadow-xl">
-                <p class="text-label uppercase text-muted px-3 py-2 mb-1">Our Services</p>
-                {serviceLinks.map((service) => (
-                  <a
-                    href={service.href}
-                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-body-sm text-ink-light hover:bg-green-light hover:text-green transition-colors"
-                    role="menuitem"
-                  >
-                    <span class="w-5 h-5 flex items-center justify-center text-green opacity-70" aria-hidden="true">→</span>
-                    {service.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
         </li>
       ))}
     </ul>
 
-    <div class="hidden lg:flex items-center gap-3">
-      <a href="tel:+917984301015" class="text-body-sm text-current/50 hover:text-current transition-colors font-mono">
+    <div class="hidden items-center gap-5 lg:flex">
+      <a href="tel:+917984301015" class="link-underline font-mono text-[11px] uppercase tracking-[0.12em] text-current/65 hover:text-current">
         +91 79843 01015
       </a>
-      <a
-        href="/contact/"
-        class="inline-flex items-center gap-1.5 border border-current/30 text-current text-sm font-medium px-5 py-2 rounded-full hover:bg-green hover:border-green hover:text-white transition-colors"
-      >
-        Book a Strategy Call
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
+      <a href="/contact/" class="premium-button premium-button-light px-5 py-3 text-[12px]">
+        Start a Project
       </a>
     </div>
 
     <button
       id="menu-toggle"
-      class="lg:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-current/10 transition-colors"
+      class="menu-toggle lg:hidden"
       type="button"
       aria-label="Open navigation menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
     >
-      <span class="w-5 h-px bg-current block transition-all" id="bar-1"></span>
-      <span class="w-5 h-px bg-current block transition-all" id="bar-2"></span>
-      <span class="w-3 h-px bg-current block transition-all" id="bar-3"></span>
+      <span></span>
+      <span></span>
     </button>
   </nav>
+
+  <div id="desktop-mega" class="desktop-mega hidden lg:flex" aria-hidden="true">
+    <div class="mega-panel" data-panel="services">
+      <div class="mega-links">
+        <p class="mega-eyebrow">What We Build</p>
+        <div class="mega-grid">
+          {serviceLinks.map((service) => (
+            <a href={service.href} class="mega-link">
+              <span>
+                <strong>{service.label}</strong>
+                <small>{service.desc}</small>
+              </span>
+              <span class="mega-arrow">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div class="mega-divider"></div>
+      <a href="/services/" class="mega-spotlight">
+        <span class="mega-eyebrow">Platform Style Delivery</span>
+        <strong>Websites, growth systems, automation, and AI tools handled under one roof.</strong>
+        <span class="arrow-link">Explore services <span class="arrow">→</span></span>
+      </a>
+    </div>
+
+    <div class="mega-panel" data-panel="work">
+      <div class="mega-links">
+        <p class="mega-eyebrow">Selected Work</p>
+        <div class="mega-grid">
+          {workLinks.map((work) => (
+            <a href={work.href} class="mega-link">
+              <span>
+                <strong>{work.label}</strong>
+                <small>{work.desc}</small>
+              </span>
+              <span class="mega-arrow">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div class="mega-divider"></div>
+      <a href="/case-studies/" class="mega-spotlight">
+        <span class="mega-eyebrow">Proof Over Promises</span>
+        <strong>See how practical design, SEO, and systems changed real businesses.</strong>
+        <span class="arrow-link">View case studies <span class="arrow">→</span></span>
+      </a>
+    </div>
+  </div>
 </header>
 
-<div
-  id="mobile-menu"
-  class="fixed inset-0 z-40 bg-cream flex flex-col pt-20 px-6 pb-8 translate-x-full transition-transform duration-300 lg:hidden"
-  aria-hidden="true"
->
-  <nav class="flex-1" aria-label="Mobile navigation">
-    <ul class="space-y-1" role="list">
-      {navLinks.map((link) => (
-        <li>
-          <a
-            href={link.href}
-            class="flex items-center justify-between py-4 text-3xl font-semibold text-ink hover:text-green border-b border-border transition-colors"
-          >
-            {link.label}
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path d="M4 10h12M12 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-            </svg>
+<div id="mobile-menu" class="mobile-menu lg:hidden" aria-hidden="true">
+  <nav class="flex flex-1 flex-col justify-between" aria-label="Mobile navigation">
+    <ul class="mobile-list" role="list">
+      {navLinks.map((link, index) => (
+        <li style={`--item-index:${index}`}>
+          <a href={link.href} class="mobile-link">
+            <span>{link.label}</span>
+            <span aria-hidden="true">→</span>
           </a>
         </li>
       ))}
     </ul>
-  </nav>
 
-  <div class="mt-8 space-y-3">
-    <p class="text-muted text-caption">Get in touch</p>
-    <a href="tel:+917984301015" class="block text-ink text-body-lg font-medium">+91 79843 01015</a>
-    <a
-      href="/contact/"
-      class="block w-full text-center bg-green text-white font-medium py-4 rounded-2xl text-body-md"
-    >
-      Book a Free Strategy Call
-    </a>
-  </div>
+    <div class="mobile-contact">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">Get in touch</p>
+      <a href="tel:+917984301015" class="mt-3 block text-2xl font-semibold text-white">+91 79843 01015</a>
+      <a href="/contact/" class="premium-button premium-button-light mt-6 w-full">Book a Strategy Call</a>
+    </div>
+  </nav>
 </div>
 
 <script is:inline>
-  const toggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-  const bar1 = document.getElementById('bar-1');
-  const bar2 = document.getElementById('bar-2');
-  const bar3 = document.getElementById('bar-3');
-  let isOpen = false;
+  (() => {
+    const header = document.getElementById('site-header');
+    const mega = document.getElementById('desktop-mega');
+    const menuLinks = [...document.querySelectorAll('[data-menu]')];
+    const panels = [...document.querySelectorAll('.mega-panel')];
+    const toggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let closeTimer;
+    let isOpen = false;
 
-  function setMenuState(open) {
-    isOpen = open;
-    menu?.classList.toggle('translate-x-full', !isOpen);
-    menu?.setAttribute('aria-hidden', String(!isOpen));
-    toggle?.setAttribute('aria-expanded', String(isOpen));
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    const setHeaderScrolled = () => {
+      header?.classList.toggle('scrolled', window.scrollY > 24 || isOpen);
+    };
 
-    bar1?.classList.toggle('rotate-45', isOpen);
-    bar1?.classList.toggle('translate-y-2', isOpen);
-    bar2?.classList.toggle('opacity-0', isOpen);
-    bar3?.classList.toggle('-rotate-45', isOpen);
-    bar3?.classList.toggle('-translate-y-2', isOpen);
-    bar3?.classList.toggle('w-5', isOpen);
+    const openMega = (name) => {
+      window.clearTimeout(closeTimer);
+      mega?.classList.add('is-active');
+      mega?.setAttribute('aria-hidden', 'false');
+      header?.classList.add('mega-open');
+      menuLinks.forEach((link) => link.classList.toggle('is-menu-active', link.dataset.menu === name));
+      panels.forEach((panel) => panel.classList.toggle('is-active', panel.dataset.panel === name));
+    };
+
+    const closeMega = () => {
+      menuLinks.forEach((link) => link.classList.remove('is-menu-active'));
+      panels.forEach((panel) => panel.classList.remove('is-active'));
+      mega?.classList.remove('is-active');
+      mega?.setAttribute('aria-hidden', 'true');
+      header?.classList.remove('mega-open');
+    };
+
+    menuLinks.forEach((link) => {
+      link.addEventListener('mouseenter', () => openMega(link.dataset.menu));
+      link.addEventListener('focus', () => openMega(link.dataset.menu));
+    });
+
+    header?.addEventListener('mouseleave', () => {
+      closeTimer = window.setTimeout(closeMega, 120);
+    });
+
+    mega?.addEventListener('mouseenter', () => window.clearTimeout(closeTimer));
+    mega?.addEventListener('mouseleave', closeMega);
+
+    const setMobile = (open) => {
+      isOpen = open;
+      toggle?.classList.toggle('is-open', open);
+      toggle?.setAttribute('aria-expanded', String(open));
+      mobileMenu?.classList.toggle('is-open', open);
+      mobileMenu?.setAttribute('aria-hidden', String(!open));
+      document.body.style.overflow = open ? 'hidden' : '';
+      setHeaderScrolled();
+    };
+
+    toggle?.addEventListener('click', () => setMobile(!isOpen));
+    mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMobile(false)));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMega();
+        if (isOpen) setMobile(false);
+      }
+    });
+
+    window.addEventListener('scroll', setHeaderScrolled, { passive: true });
+    setHeaderScrolled();
+  })();
+</script>
+
+<style>
+  #site-header {
+    transition: background-color 0.5s var(--ease-premium), color 0.5s var(--ease-premium), border-color 0.5s var(--ease-premium);
   }
 
-  toggle?.addEventListener('click', () => {
-    setMenuState(!isOpen);
-  });
+  #site-header.is-solid,
+  #site-header.scrolled,
+  #site-header.mega-open {
+    background: rgba(246, 243, 238, 0.96);
+    border-bottom: 1px solid rgba(28, 25, 23, 0.08);
+    color: #1C1917;
+    backdrop-filter: blur(18px);
+  }
 
-  menu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => setMenuState(false));
-  });
+  .brand-symbol {
+    transition: background-color 0.3s var(--ease-standard), color 0.3s var(--ease-standard), border-color 0.3s var(--ease-standard);
+  }
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && isOpen) {
-      setMenuState(false);
+  .brand-mark:hover .brand-symbol {
+    background: #2D6A4F;
+    border-color: #2D6A4F;
+    color: #FFFFFF;
+  }
+
+  .nav-link {
+    position: relative;
+    color: currentColor;
+    opacity: 0.68;
+    transition: opacity 0.3s var(--ease-standard), color 0.3s var(--ease-standard);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 22px;
+    left: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease-standard);
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible,
+  .nav-link.is-active,
+  .nav-link.is-menu-active {
+    opacity: 1;
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after,
+  .nav-link.is-active::after,
+  .nav-link.is-menu-active::after {
+    transform: scaleX(1);
+  }
+
+  .nav-caret {
+    transition: transform 0.5s var(--ease-premium);
+  }
+
+  .nav-link.is-menu-active .nav-caret {
+    transform: rotateX(180deg);
+  }
+
+  .menu-toggle {
+    position: relative;
+    display: grid;
+    height: 40px;
+    width: 40px;
+    place-items: center;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    background: transparent;
+  }
+
+  .menu-toggle span {
+    position: absolute;
+    height: 1.5px;
+    width: 18px;
+    background: currentColor;
+    transition: rotate 0.25s var(--ease-premium), translate 0.25s var(--ease-premium), background-color 0.5s var(--ease-premium);
+  }
+
+  .menu-toggle span:first-child {
+    translate: 0 -4px;
+  }
+
+  .menu-toggle span:last-child {
+    translate: 0 4px;
+  }
+
+  .menu-toggle.is-open span:first-child {
+    rotate: 45deg;
+    translate: 0;
+  }
+
+  .menu-toggle.is-open span:last-child {
+    rotate: -45deg;
+    translate: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .menu-toggle {
+      display: none;
     }
-  });
-</script>
+  }
+
+  .desktop-mega {
+    pointer-events: none;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s var(--ease-standard), visibility 0.3s step-end;
+  }
+
+  .desktop-mega.is-active {
+    pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s var(--ease-standard), visibility 0.3s step-start;
+  }
+
+  .mega-panel {
+    display: none;
+    width: min(840px, calc(100vw - 80px));
+    min-height: 312px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #0F0F0F;
+    color: #FFFFFF;
+    box-shadow: 0 134px 80px rgba(0, 0, 0, 0.05), 0 60px 60px rgba(0, 0, 0, 0.09), 0 15px 33px rgba(0, 0, 0, 0.1);
+    transform: translateY(16px) scale(0.98);
+    transition: transform 0.6s var(--ease-premium);
+  }
+
+  .mega-panel.is-active {
+    display: grid;
+    grid-template-columns: 1.5fr 1px 0.9fr;
+    transform: translateY(0) scale(1);
+  }
+
+  .mega-links,
+  .mega-spotlight {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s var(--ease-premium) 0.12s, transform 0.75s var(--ease-premium) 0.12s;
+  }
+
+  .mega-panel.is-active .mega-links,
+  .mega-panel.is-active .mega-spotlight {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mega-links {
+    padding: 32px;
+  }
+
+  .mega-eyebrow {
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+
+  .mega-grid {
+    display: grid;
+    gap: 8px;
+  }
+
+  .mega-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-radius: 6px;
+    padding: 12px;
+    transition: background-color 0.3s var(--ease-standard), color 0.3s var(--ease-standard);
+  }
+
+  .mega-link strong,
+  .mega-spotlight strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .mega-link small {
+    margin-top: 3px;
+    display: block;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .mega-arrow {
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.3s var(--ease-standard), transform 0.3s var(--ease-standard);
+  }
+
+  .mega-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .mega-link:hover .mega-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .mega-divider {
+    align-self: stretch;
+    background: rgba(255, 255, 255, 0.14);
+    transform: scaleY(0.8);
+    transform-origin: top;
+    transition: transform 0.75s var(--ease-premium) 0.22s;
+  }
+
+  .mega-panel.is-active .mega-divider {
+    transform: scaleY(1);
+  }
+
+  .mega-spotlight {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px;
+    background:
+      linear-gradient(135deg, rgba(45, 106, 79, 0.42), rgba(74, 222, 128, 0.08)),
+      #181818;
+  }
+
+  .mobile-menu {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: flex;
+    background: #0F0F0F;
+    padding: calc(var(--nav-height) + 32px) 24px 28px;
+    color: #FFFFFF;
+    visibility: hidden;
+    animation: clipMenuOut 0.6s var(--ease-premium) forwards;
+  }
+
+  .mobile-menu.is-open {
+    pointer-events: auto;
+    visibility: visible;
+    animation: clipMenuIn 0.6s var(--ease-premium) forwards;
+  }
+
+  .mobile-list {
+    display: grid;
+    gap: 0;
+  }
+
+  .mobile-list li {
+    opacity: 0;
+    transform: translateX(24px);
+    transition: opacity 0.55s var(--ease-premium), transform 0.65s var(--ease-premium);
+    transition-delay: calc(0.08s * var(--item-index));
+  }
+
+  .mobile-menu.is-open .mobile-list li {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .mobile-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 18px 0;
+    font-size: clamp(2rem, 10vw, 4rem);
+    font-weight: 600;
+    letter-spacing: -0.06em;
+    line-height: 1;
+  }
+
+  .mobile-contact {
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    padding-top: 24px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .desktop-mega,
+    .mega-panel,
+    .mega-links,
+    .mega-spotlight,
+    .mega-divider,
+    .mobile-menu,
+    .mobile-list li {
+      animation: none;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>

@@ -19,91 +19,226 @@ const companyLinks = [
 ];
 
 const socialLinks = [
-  {
-    label: 'Instagram',
-    href: 'https://www.instagram.com/witlabs',
-    icon: '<path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 6.2A3.8 3.8 0 1012 15.8a3.8 3.8 0 000-7.6zm6.2-.7a1 1 0 10-2 0 1 1 0 002 0z" />',
-  },
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/company/witlabs',
-    icon: '<path d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1A4.2 4.2 0 0117.7 8.6c4 0 4.8 2.6 4.8 6V21h-4v-5.7c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V21h-4V9z" />',
-  },
-  {
-    label: 'Twitter',
-    href: 'https://twitter.com/witlabs',
-    icon: '<path d="M18.2 2.8h3.4l-7.5 8.6L23 21.2h-7l-5.5-6.4-6.3 6.4H.8l8-9.1L.3 2.8h7.2l5 5.8 5.7-5.8zm-1.2 16.7h1.9L6.5 4.4h-2l12.5 15.1z" />',
-  },
+  { label: 'Instagram', href: 'https://www.instagram.com/witlabs' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/witlabs' },
+  { label: 'X', href: 'https://twitter.com/witlabs' },
 ];
 ---
 
-<footer class="bg-cream-dark pt-20 pb-8 text-ink-light">
-  <div class="container grid gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_0.8fr_1fr]">
-    <div class="space-y-5">
-      <a class="flex items-center gap-2.5 text-ink group" href="/" aria-label="WitLabs home">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-          <path d="M2 6L8 26L14 12L20 26L26 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        <span class="font-sans text-xl font-semibold tracking-tight transition-colors group-hover:text-green">WitLabs</span>
-      </a>
-      <p class="font-serif text-3xl leading-tight text-ink">Think smarter. Build better.</p>
-      <p class="max-w-sm text-body-sm">
-        Helping Indian businesses build, grow and scale with websites, SEO, digital marketing and smart automation.
-      </p>
-      <div class="flex items-center gap-3">
-        {socialLinks.map((social) => (
-          <a class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-cream text-ink transition-colors hover:bg-green hover:text-white" href={social.href} aria-label={social.label} target="_blank" rel="noreferrer">
-            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" set:html={social.icon} />
-          </a>
-        ))}
+<footer id="footer" class="footer bg-[#0F0F0F] px-4 pt-20 text-white sm:px-6 lg:px-8 lg:pt-28">
+  <div class="mx-auto max-w-[1440px]">
+    <div class="footer-top">
+      <div>
+        <a class="inline-flex items-center gap-3" href="/" aria-label="WitLabs home">
+          <span class="grid h-9 w-9 place-items-center border border-white/25 font-mono text-[11px] font-bold tracking-[-0.08em]">WL</span>
+          <span class="text-2xl font-semibold tracking-[-0.05em]">WitLabs</span>
+        </a>
+        <p class="mt-8 max-w-xl display-tight text-[clamp(3rem,7vw,7.5rem)] font-semibold">
+          Think smarter. Build better.
+        </p>
       </div>
-      <p class="text-caption text-muted">Built in India</p>
-    </div>
 
-    <div>
-      <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-ink">Services</h3>
-      <ul class="mt-5 grid gap-3 text-body-sm">
-        {services.map((service) => (
-          <li><a class="transition-colors hover:text-green" href={service.href}>{service.label}</a></li>
-        ))}
-      </ul>
-    </div>
-
-    <div>
-      <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-ink">Company</h3>
-      <ul class="mt-5 grid gap-3 text-body-sm">
-        {companyLinks.map((link) => (
-          <li><a class="transition-colors hover:text-green" href={link.href}>{link.label}</a></li>
-        ))}
-      </ul>
-    </div>
-
-    <div>
-      <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-ink">Let's Talk</h3>
-      <p class="mt-5 text-body-sm">Have a project in mind? Let's build something great.</p>
-      <div class="mt-5 grid gap-3 text-body-sm">
-        <a class="transition-colors hover:text-green" href="tel:+917984301015">+91 7984301015</a>
-        <a class="transition-colors hover:text-green" href="mailto:hello@witlabs.in">hello@witlabs.in</a>
+      <div class="footer-contact">
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-white/42">Let's Talk</p>
+        <a class="mt-5 block text-2xl font-semibold tracking-[-0.04em] text-white" href="mailto:hello@witlabs.in">hello@witlabs.in</a>
+        <a class="mt-2 block text-white/58 hover:text-white" href="tel:+917984301015">+91 79843 01015</a>
+        <a
+          class="premium-button premium-button-light mt-8 w-full"
+          href="https://wa.me/917984301015?text=Hi%20WitLabs%2C%20I%20visited%20your%20website%20and%20I%27d%20like%20to%20discuss%20a%20project."
+          target="_blank"
+          rel="noreferrer"
+        >
+          Message on WhatsApp
+        </a>
       </div>
-      <a
-        class="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-green px-5 py-3 text-body-sm font-semibold text-white transition-colors hover:bg-green-mid"
-        href="https://wa.me/917984301015?text=Hi%20WitLabs%2C%20I%20visited%20your%20website%20and%20I%27d%20like%20to%20discuss%20a%20project."
-        target="_blank"
-        rel="noreferrer"
-      >
-        Message on WhatsApp
-      </a>
     </div>
-  </div>
 
-  <div class="container mt-16 border-t border-border pt-8">
-    <div class="flex flex-col gap-4 text-body-sm md:flex-row md:items-center md:justify-between">
-      <p>© 2024 WitLabs. All rights reserved.</p>
-      <div class="flex gap-5">
-        <a class="transition-colors hover:text-green" href="/privacy-policy/">Privacy Policy</a>
-        <span aria-hidden="true">·</span>
-        <a class="transition-colors hover:text-green" href="/terms-and-conditions/">Terms & Conditions</a>
+    <div class="footer-links">
+      <div class="footer-group">
+        <button class="footer-group__button" type="button" aria-expanded="true">
+          <span>Services</span>
+          <span aria-hidden="true">↓</span>
+        </button>
+        <ul class="footer-group__list">
+          {services.map((service) => <li><a href={service.href}>{service.label}</a></li>)}
+        </ul>
+      </div>
+
+      <div class="footer-group">
+        <button class="footer-group__button" type="button" aria-expanded="true">
+          <span>Company</span>
+          <span aria-hidden="true">↓</span>
+        </button>
+        <ul class="footer-group__list">
+          {companyLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+        </ul>
+      </div>
+
+      <div class="footer-group">
+        <button class="footer-group__button" type="button" aria-expanded="true">
+          <span>Follow</span>
+          <span aria-hidden="true">↓</span>
+        </button>
+        <ul class="footer-group__list">
+          {socialLinks.map((social) => (
+            <li><a href={social.href} target="_blank" rel="noreferrer">{social.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Built in India / WitLabs 2024</p>
+      <div>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <span aria-hidden="true">/</span>
+        <a href="/terms-and-conditions/">Terms & Conditions</a>
       </div>
     </div>
   </div>
 </footer>
+
+<script is:inline>
+  (() => {
+    const groups = [...document.querySelectorAll('.footer-group')];
+    const isDesktop = () => window.matchMedia('(min-width: 900px)').matches;
+
+    groups.forEach((group) => {
+      const button = group.querySelector('.footer-group__button');
+      button?.addEventListener('click', () => {
+        if (isDesktop()) return;
+        const open = !group.classList.contains('is-open');
+        group.classList.toggle('is-open', open);
+        button.setAttribute('aria-expanded', String(open));
+      });
+      group.classList.add('is-open');
+    });
+  })();
+</script>
+
+<style>
+  .footer-top {
+    display: grid;
+    gap: 48px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    padding-bottom: 52px;
+  }
+
+  .footer-contact {
+    align-self: end;
+  }
+
+  .footer-links {
+    display: grid;
+    gap: 0;
+    padding: 24px 0;
+  }
+
+  .footer-group {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .footer-group__button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    color: #FFFFFF;
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .footer-group__button span:last-child {
+    transition: transform 0.3s var(--ease-standard);
+  }
+
+  .footer-group.is-open .footer-group__button span:last-child {
+    transform: rotate(180deg);
+  }
+
+  .footer-group__list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s var(--ease-premium), padding-bottom 0.35s var(--ease-premium);
+  }
+
+  .footer-group.is-open .footer-group__list {
+    max-height: 420px;
+    padding-bottom: 18px;
+  }
+
+  .footer-group__list a {
+    display: inline-block;
+    padding: 6px 0;
+    color: rgba(255, 255, 255, 0.52);
+    font-size: 14px;
+    transition: color 0.3s var(--ease-standard);
+  }
+
+  .footer-group__list a:hover {
+    color: #FFFFFF;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 0 32px;
+    color: rgba(255, 255, 255, 0.42);
+    font-size: 13px;
+  }
+
+  .footer-bottom div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .footer-bottom a:hover {
+    color: #FFFFFF;
+  }
+
+  @media (min-width: 900px) {
+    .footer-top {
+      grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.45fr);
+      padding-bottom: 72px;
+    }
+
+    .footer-links {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 48px 0;
+    }
+
+    .footer-group {
+      border-bottom: 0;
+    }
+
+    .footer-group__button {
+      pointer-events: none;
+      padding-top: 0;
+    }
+
+    .footer-group__button span:last-child {
+      display: none;
+    }
+
+    .footer-group__list,
+    .footer-group.is-open .footer-group__list {
+      display: block;
+      max-height: none;
+      overflow: visible;
+      padding-bottom: 0;
+    }
+
+    .footer-bottom {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+</style>

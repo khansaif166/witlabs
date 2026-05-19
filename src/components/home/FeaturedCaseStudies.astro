@@ -3,127 +3,239 @@ import { getCollection } from 'astro:content';
 
 const caseStudies = (await getCollection('case-studies', ({ data }) => !data.draft))
   .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || b.data.publishDate.getTime() - a.data.publishDate.getTime())
-  .slice(0, 3);
+  .slice(0, 6);
 ---
 
-<section class="bg-cream-dark py-24">
-  <div class="container">
-    <div class="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+<section id="selected-work" class="section-shell overflow-hidden bg-[#111111] text-white">
+  <div class="mx-auto max-w-[1440px]">
+    <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
       <div>
-        <p class="eyebrow reveal">Real Results</p>
-        <h2 class="reveal delay-1 mt-3 font-serif text-[clamp(2.2rem,4.5vw,4rem)] italic leading-[1.05] text-ink">
-          Work that actually<br />moved the needle.
+        <p class="section-kicker reveal text-green-bright">Websites Made Real</p>
+        <h2 class="reveal reveal-delay-1 mt-4 max-w-4xl display-tight text-[clamp(3.2rem,7vw,7.5rem)] font-semibold">
+          Work that actually moved the needle.
         </h2>
       </div>
-      <a class="reveal delay-2 text-sm font-medium text-green hover:text-ink" href="/case-studies/">View all case studies →</a>
+      <a class="arrow-link reveal reveal-delay-2 text-white/75 hover:text-white" href="/case-studies/">
+        View all case studies <span class="arrow">→</span>
+      </a>
     </div>
 
-    <div class="grid gap-4 lg:grid-cols-[1.4fr_1fr_1fr]">
-      {caseStudies.map((study, index) => (
-        <a class="case-card reveal block overflow-hidden rounded-[20px] border border-border bg-white" href={`/case-studies/${study.slug}/`}>
-          <div class:list={['relative overflow-hidden', index === 0 ? 'aspect-[4/3]' : 'aspect-video lg:aspect-[4/3]']}>
-            <img class="h-full w-full object-cover" src={study.data.heroImage} alt={study.data.heroImageAlt} loading={index === 0 ? 'eager' : 'lazy'} />
-            <div class="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent to-50%"></div>
-            <span class="absolute left-3 top-3 rounded-full border border-white/20 bg-white/15 px-3 py-1 font-mono text-[10px] text-white backdrop-blur">
-              {study.data.industry}
-            </span>
-          </div>
-          <div class="p-5">
-            <h3 class="font-serif text-2xl italic text-ink">{study.data.client}</h3>
-            <p class="mt-1 line-clamp-2 text-sm text-muted">{study.data.challenge}</p>
-            <div class="mt-4 border-t border-border pt-4">
-              <div class="flex gap-6">
+    <div class="work-carousel reveal reveal-delay-3 mt-12">
+      <div class="work-track" id="work-track" tabindex="0" aria-label="Featured case studies">
+        {caseStudies.map((study, index) => (
+          <a class="work-card media-lift" href={`/case-studies/${study.slug}/`}>
+            <div class="work-card__image">
+              <img src={study.data.heroImage} alt={study.data.heroImageAlt} loading={index === 0 ? 'eager' : 'lazy'} />
+              <div class="work-card__overlay"></div>
+              <span>{study.data.industry}</span>
+            </div>
+            <div class="work-card__body">
+              <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-white/42">{String(index + 1).padStart(2, '0')}</p>
+              <h3>{study.data.client}</h3>
+              <p>{study.data.challenge}</p>
+              <div class="work-results">
                 {study.data.results.slice(0, 2).map((result) => (
                   <div>
-                    <p class="font-mono text-xl font-bold text-green">{result.value}</p>
-                    <p class="mt-0.5 text-[11px] text-muted">{result.metric}</p>
+                    <strong>{result.value}</strong>
+                    <span>{result.metric}</span>
                   </div>
                 ))}
               </div>
-              <div class="mt-4 flex items-center justify-between">
-                <span class="text-sm font-medium text-ink">View Case Study</span>
-                <span class="case-arrow flex h-8 w-8 items-center justify-center rounded-full border border-border text-ink">→</span>
-              </div>
+              <span class="arrow-link text-white">View case study <span class="arrow">→</span></span>
             </div>
-          </div>
-        </a>
-      ))}
+          </a>
+        ))}
+      </div>
+
+      <div class="work-toolbar">
+        <span class="work-count"><span id="work-current">01</span> / {String(caseStudies.length).padStart(2, '0')}</span>
+        <div class="work-controls">
+          <button type="button" class="work-control" data-work-prev aria-label="Previous case study">←</button>
+          <button type="button" class="work-control" data-work-next aria-label="Next case study">→</button>
+        </div>
+      </div>
     </div>
   </div>
-  <div id="cursor" aria-hidden="true">VIEW →</div>
 </section>
 
 <script is:inline>
   (() => {
-    const cursor = document.getElementById('cursor');
-    if (!cursor || matchMedia('(pointer: coarse)').matches) return;
+    const track = document.getElementById('work-track');
+    const current = document.getElementById('work-current');
+    const prev = document.querySelector('[data-work-prev]');
+    const next = document.querySelector('[data-work-next]');
+    if (!track) return;
 
-    document.querySelectorAll('.case-card').forEach((card) => {
-      card.addEventListener('mouseenter', () => cursor.classList.add('active'));
-      card.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-      card.addEventListener('mousemove', (event) => {
-        cursor.style.left = `${event.clientX - 28}px`;
-        cursor.style.top = `${event.clientY - 28}px`;
-      });
-    });
+    const cards = [...track.querySelectorAll('.work-card')];
+
+    const updateCount = () => {
+      if (!current || cards.length === 0) return;
+      const left = track.scrollLeft;
+      const cardWidth = cards[0].getBoundingClientRect().width + 24;
+      const index = Math.min(cards.length - 1, Math.max(0, Math.round(left / cardWidth)));
+      current.textContent = String(index + 1).padStart(2, '0');
+    };
+
+    const scrollByCard = (direction) => {
+      const cardWidth = cards[0]?.getBoundingClientRect().width || 360;
+      track.scrollBy({ left: direction * (cardWidth + 24), behavior: 'smooth' });
+    };
+
+    prev?.addEventListener('click', () => scrollByCard(-1));
+    next?.addEventListener('click', () => scrollByCard(1));
+    track.addEventListener('scroll', updateCount, { passive: true });
+    updateCount();
   })();
 </script>
 
 <style>
-  .case-card {
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  .work-carousel {
+    position: relative;
   }
 
-  .case-card img {
-    transition: transform 0.5s ease;
+  .work-track {
+    display: grid;
+    grid-auto-columns: minmax(300px, 72vw);
+    grid-auto-flow: column;
+    gap: 24px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 0 0 28px;
+    scroll-padding-left: 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
   }
 
-  .case-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(28, 25, 23, 0.1);
-    cursor: none;
+  .work-track::-webkit-scrollbar {
+    display: none;
   }
 
-  .case-card:hover img {
-    transform: scale(1.04);
-  }
-
-  .case-card:hover .case-arrow {
-    border-color: #2D6A4F;
-    background: #2D6A4F;
+  .work-card {
+    min-height: 620px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #1A1A1A;
     color: #FFFFFF;
+    scroll-snap-align: start;
   }
 
-  #cursor {
-    pointer-events: none;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 80;
-    display: flex;
-    height: 56px;
-    width: 56px;
-    align-items: center;
-    justify-content: center;
-    border: 1.5px solid #1C1917;
+  .work-card__image {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .work-card__image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .work-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), transparent 62%);
+  }
+
+  .work-card__image span {
+    position: absolute;
+    left: 18px;
+    top: 18px;
     border-radius: 999px;
-    color: #1C1917;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.14);
+    padding: 7px 10px;
+    color: #FFFFFF;
     font-family: "DM Mono", monospace;
     font-size: 10px;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: left 0.08s ease, top 0.08s ease, opacity 0.15s ease, transform 0.15s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    backdrop-filter: blur(16px);
   }
 
-  #cursor.active {
-    opacity: 1;
-    transform: scale(1);
+  .work-card__body {
+    padding: clamp(22px, 4vw, 36px);
   }
 
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
+  .work-card__body h3 {
+    margin-top: 18px;
+    font-size: clamp(2.4rem, 5vw, 5rem);
+    font-weight: 600;
+    letter-spacing: -0.065em;
+    line-height: 0.95;
+  }
+
+  .work-card__body > p {
+    margin-top: 18px;
+    max-width: 620px;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .work-results {
+    margin: 28px 0;
+    display: grid;
+    gap: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    padding-top: 22px;
+  }
+
+  .work-results strong {
+    display: block;
+    color: #4ADE80;
+    font-family: "DM Mono", monospace;
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .work-results span {
+    margin-top: 6px;
+    display: block;
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 12px;
+  }
+
+  .work-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .work-count {
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.48);
+  }
+
+  .work-controls {
+    display: flex;
+    gap: 8px;
+  }
+
+  .work-control {
+    display: grid;
+    height: 38px;
+    width: 38px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    color: #FFFFFF;
+    transition: background-color 0.3s var(--ease-standard), border-color 0.3s var(--ease-standard);
+  }
+
+  .work-control:hover {
+    border-color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  @media (min-width: 1024px) {
+    .work-track {
+      grid-auto-columns: minmax(560px, 66vw);
+    }
+
+    .work-results {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 </style>

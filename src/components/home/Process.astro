@@ -1,34 +1,38 @@
 ---
 const steps = [
-  ['Discover', 'We spend time understanding your business, your competitors, and your goals before anything else. This call is free — no pressure, no pitch.'],
-  ['Strategize', 'We create a clear plan — what to build, what to prioritize, and what will get you results fastest. You see the plan before we start.'],
-  ['Design & Build', 'We design and develop with conversion and performance as the top priorities — not just how it looks, but how it performs.'],
-  ['Launch', 'We test everything. You approve everything. Nothing goes live without your sign-off.'],
-  ['Optimize', "We don't disappear after launch. We track performance, share reports, and keep improving."],
+  ['Discover', 'We study your business, customers, competitors, and current digital presence before proposing anything.'],
+  ['Strategize', 'You get a clear plan for what to build, what to prioritize, and what outcome each piece should support.'],
+  ['Design & Build', 'We create the website, content, campaigns, or systems with performance, trust, and conversion in mind.'],
+  ['Launch', 'We test across devices, review every important flow, and only publish after your approval.'],
+  ['Optimize', 'After launch, we track what happens and keep improving the parts that affect growth.'],
 ];
 ---
 
-<section class="bg-cream py-24">
-  <div class="container">
-    <div class="mb-12 max-w-3xl">
-      <p class="eyebrow reveal">How We Work</p>
-      <h2 class="reveal delay-1 mt-3 font-serif text-[clamp(2.2rem,4.5vw,4rem)] italic leading-[1.05] text-ink">
-        No surprises.<br />No ghosting. Ever.
+<section id="process" class="section-shell bg-[#F7F7F3] text-ink">
+  <div class="mx-auto grid max-w-[1440px] gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
+    <div class="lg:sticky lg:top-28 lg:self-start">
+      <p class="section-kicker reveal text-green">How It Works</p>
+      <h2 class="reveal reveal-delay-1 mt-4 display-tight text-[clamp(3.2rem,7vw,7rem)] font-semibold">
+        No surprises. No ghosting.
       </h2>
-      <p class="reveal delay-2 mt-5 text-[15px] leading-7 text-ink-light">
-        Here is exactly what happens when you start working with WitLabs.
+      <p class="reveal reveal-delay-2 mt-6 max-w-md text-lg leading-8 text-ink-light">
+        The process is intentionally simple. You always know what is happening, what is next, and why it matters.
       </p>
     </div>
 
-    <div class="process-list reveal delay-3">
+    <div class="process-list reveal reveal-delay-3">
       {steps.map(([title, description], index) => (
-        <button class:list={['process-step', index === 0 && 'expanded']} type="button">
-          <span class="process-head">
-            <span class="process-num">{String(index + 1).padStart(2, '0')}</span>
-            <span class="process-title">{title}</span>
-            <span class="process-plus">+</span>
+        <button
+          class:list={['process-step', index === 0 && 'is-open']}
+          type="button"
+          aria-expanded={index === 0 ? 'true' : 'false'}
+        >
+          <span class="process-step__head">
+            <span class="process-step__num">{String(index + 1).padStart(2, '0')}</span>
+            <span class="process-step__title">{title}</span>
+            <span class="process-step__icon" aria-hidden="true">+</span>
           </span>
-          <span class="process-panel">
+          <span class="process-step__body">
             <span>{description}</span>
           </span>
         </button>
@@ -39,91 +43,108 @@ const steps = [
 
 <script is:inline>
   (() => {
-    const steps = document.querySelectorAll('.process-step');
+    const steps = [...document.querySelectorAll('.process-step')];
     steps.forEach((step) => {
       step.addEventListener('click', () => {
-        steps.forEach((item) => item.classList.remove('expanded'));
-        step.classList.add('expanded');
+        const willOpen = !step.classList.contains('is-open');
+        steps.forEach((item) => {
+          item.classList.remove('is-open');
+          item.setAttribute('aria-expanded', 'false');
+        });
+        if (willOpen) {
+          step.classList.add('is-open');
+          step.setAttribute('aria-expanded', 'true');
+        }
       });
     });
   })();
 </script>
 
 <style>
+  .process-list {
+    border-top: 1px solid rgba(28, 25, 23, 0.12);
+  }
+
   .process-step {
     display: block;
     width: 100%;
-    border-bottom: 1px solid rgba(28, 25, 23, 0.08);
+    border-bottom: 1px solid rgba(28, 25, 23, 0.12);
+    background: transparent;
     text-align: left;
   }
 
-  .process-head {
-    display: flex;
-    min-height: 64px;
+  .process-step__head {
+    display: grid;
+    min-height: 92px;
+    grid-template-columns: 54px 1fr 40px;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
   }
 
-  .process-num {
-    display: flex;
-    height: 36px;
-    width: 36px;
-    flex: 0 0 36px;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(28, 25, 23, 0.08);
-    border-radius: 999px;
+  .process-step__num {
     color: #78716C;
     font-family: "DM Mono", monospace;
     font-size: 12px;
-    transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+    transition: color 0.3s var(--ease-standard);
   }
 
-  .process-title {
-    color: #1C1917;
-    font-size: 1.125rem;
-    font-weight: 500;
-    transition: color 0.35s ease;
+  .process-step__title {
+    font-size: clamp(2rem, 4.5vw, 4rem);
+    font-weight: 600;
+    letter-spacing: -0.06em;
+    line-height: 0.98;
+    transition: color 0.3s var(--ease-standard);
   }
 
-  .process-plus {
-    margin-left: auto;
+  .process-step__icon {
+    justify-self: end;
     color: #78716C;
-    font-size: 1.5rem;
+    font-size: 32px;
     line-height: 1;
-    transition: color 0.35s ease, transform 0.35s ease;
+    transition: color 0.3s var(--ease-standard), transform 0.5s var(--ease-premium);
   }
 
-  .process-panel {
-    display: block;
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 0 0 56px;
+  .process-step__body {
+    display: grid;
+    grid-template-rows: 0fr;
     color: #44403C;
-    font-size: 15px;
-    line-height: 1.7;
-    opacity: 0;
-    transition: max-height 0.35s ease, opacity 0.35s ease, padding-bottom 0.35s ease;
+    font-size: 17px;
+    line-height: 1.75;
+    padding-left: 70px;
+    padding-right: 52px;
+    transition: grid-template-rows 0.6s var(--ease-premium), padding-bottom 0.6s var(--ease-premium);
   }
 
-  .process-step.expanded .process-num {
-    border-color: #2D6A4F;
-    background: #2D6A4F;
-    color: #FFFFFF;
+  .process-step__body > span {
+    overflow: hidden;
   }
 
-  .process-step.expanded .process-title,
-  .process-step.expanded .process-plus {
+  .process-step:hover .process-step__title,
+  .process-step.is-open .process-step__title,
+  .process-step.is-open .process-step__num,
+  .process-step.is-open .process-step__icon {
     color: #2D6A4F;
   }
 
-  .process-step.expanded .process-plus {
+  .process-step.is-open .process-step__icon {
     transform: rotate(45deg);
   }
 
-  .process-step.expanded .process-panel {
-    max-height: 500px;
-    padding-bottom: 20px;
-    opacity: 1;
+  .process-step.is-open .process-step__body {
+    grid-template-rows: 1fr;
+    padding-bottom: 32px;
+  }
+
+  @media (max-width: 640px) {
+    .process-step__head {
+      grid-template-columns: 36px 1fr 28px;
+      min-height: 78px;
+    }
+
+    .process-step__body {
+      padding-left: 52px;
+      padding-right: 0;
+      font-size: 15px;
+    }
   }
 </style>

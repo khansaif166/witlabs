@@ -1,62 +1,142 @@
 ---
 const services = [
-  { name: 'Website Design & Development', href: '/services/#website-design', tags: ['Web', 'Design'], desc: 'Websites built to convert visitors into inquiries' },
-  { name: 'SEO & Organic Growth', href: '/services/#seo', tags: ['SEO', 'Growth'], desc: 'Rank above competitors on Google searches' },
-  { name: 'Digital Marketing', href: '/services/#digital-marketing', tags: ['Marketing', 'Ads'], desc: 'Campaigns that build brand and generate leads' },
-  { name: 'Performance Marketing', href: '/services/#performance', tags: ['Google Ads', 'Meta'], desc: 'ROI-focused Google & Meta ad management' },
-  { name: 'App Development', href: '/services/#app-development', tags: ['iOS', 'Android'], desc: 'Custom mobile apps built for your business' },
-  { name: 'Branding & Identity', href: '/services/#branding', tags: ['Brand', 'Logo'], desc: 'A brand that makes you instantly trustworthy' },
-  { name: 'Automation', href: '/services/#automation', tags: ['Workflow', 'AI'], desc: 'Save 10+ hours a week with smart systems' },
-  { name: 'AI Chatbots', href: '/services/#chatbots', tags: ['Chatbot', 'AI'], desc: "24/7 lead capture even when you're offline" },
+  {
+    name: 'Website Design',
+    href: '/services/#website-design',
+    tags: ['Websites', 'UX', 'Speed'],
+    desc: 'Premium websites that help visitors understand, trust, and contact your business faster.',
+    greatFor: 'Service businesses, local brands, consultants',
+    stat: '3 sec',
+    statLabel: 'clarity test',
+  },
+  {
+    name: 'SEO Growth',
+    href: '/services/#seo',
+    tags: ['Local SEO', 'Content', 'Search'],
+    desc: 'Search foundations, pages, and content systems built around what customers actually look for.',
+    greatFor: 'Clinics, institutes, home services, B2B',
+    stat: '90d',
+    statLabel: 'growth sprints',
+  },
+  {
+    name: 'Digital Marketing',
+    href: '/services/#digital-marketing',
+    tags: ['Funnels', 'Social', 'Email'],
+    desc: 'Campaigns that make your business visible, memorable, and easier to choose.',
+    greatFor: 'Founders who need consistent demand',
+    stat: '1',
+    statLabel: 'clear pipeline',
+  },
+  {
+    name: 'Performance Ads',
+    href: '/services/#performance',
+    tags: ['Google', 'Meta', 'Tracking'],
+    desc: 'Paid campaigns with cleaner landing pages, measurement, and conversion feedback loops.',
+    greatFor: 'Lead generation and offer testing',
+    stat: 'ROI',
+    statLabel: 'first thinking',
+  },
+  {
+    name: 'Apps & Systems',
+    href: '/services/#app-development',
+    tags: ['Apps', 'Dashboards', 'Tools'],
+    desc: 'Useful digital products for teams that need less manual work and better customer experiences.',
+    greatFor: 'Internal tools and customer portals',
+    stat: '0',
+    statLabel: 'busywork goal',
+  },
+  {
+    name: 'Automation & AI',
+    href: '/services/#automation',
+    tags: ['AI', 'Chatbots', 'Workflow'],
+    desc: 'Automation, chatbots, and AI workflows that capture leads and reduce repetitive operations.',
+    greatFor: 'Lean teams and growing founders',
+    stat: '24/7',
+    statLabel: 'lead capture',
+  },
 ];
 ---
 
-<section class="bg-cream py-24">
-  <div class="container">
-    <div class="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+<section id="what-we-build" class="section-shell bg-cream text-ink">
+  <div class="mx-auto max-w-[1440px]">
+    <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
       <div>
-        <p class="eyebrow reveal">What We Build</p>
-        <h2 class="reveal delay-1 mt-3 font-serif text-[clamp(2.2rem,4.5vw,4rem)] italic leading-[1.05] text-ink">
-          Everything your<br />business needs online.
+        <p class="section-kicker reveal text-green">Grow Your Business</p>
+        <h2 class="reveal reveal-delay-1 mt-4 display-tight text-[clamp(3.2rem,7vw,7.5rem)] font-semibold">
+          Everything your business needs online.
         </h2>
       </div>
-      <div class="reveal delay-2 font-mono text-[11px] text-muted md:text-right">
-        8 services available
-        <a class="ml-2 font-sans text-sm font-medium text-green hover:text-ink" href="/services/">View all →</a>
-      </div>
+      <p class="reveal reveal-delay-2 max-w-xl text-lg leading-8 text-ink-light lg:justify-self-end">
+        Squarespace sells the confidence of an all-in-one platform. WitLabs should do the same: show that your brand, website, traffic, leads, and systems can be handled as one connected growth engine.
+      </p>
     </div>
 
-    <div class="hidden md:block">
+    <div class="services-tabs reveal reveal-delay-3 mt-12" role="tablist" aria-label="WitLabs services">
       {services.map((service, index) => (
-        <a class="service-row group reveal" href={service.href}>
-          <span class="service-number">{String(index + 1).padStart(2, '0')}</span>
-          <span class="service-main">
-            <span class="block text-xl font-medium text-ink">{service.name}</span>
-            <span class="service-desc">{service.desc}</span>
-          </span>
-          <span class="flex flex-wrap justify-end gap-2">
-            {service.tags.map((tag) => <span class="service-tag">{tag}</span>)}
-          </span>
-          <span class="service-plus">+</span>
-        </a>
+        <button
+          class:list={['services-tab', index === 0 && 'is-active']}
+          type="button"
+          role="tab"
+          aria-selected={index === 0 ? 'true' : 'false'}
+          aria-controls={`service-panel-${index}`}
+          id={`service-tab-${index}`}
+          data-service-tab={index}
+        >
+          {service.name}
+        </button>
       ))}
     </div>
 
-    <div class="grid gap-4 md:hidden">
+    <div class="services-stage mt-8">
       {services.map((service, index) => (
-        <a class="rounded-2xl border border-border bg-white p-5 transition-colors active:border-green active:bg-green-light" href={service.href}>
-          <div class="flex items-start gap-4">
-            <span class="font-mono text-[12px] text-muted">{String(index + 1).padStart(2, '0')}</span>
-            <div class="flex-1">
-              <h3 class="text-xl font-medium text-ink">{service.name}</h3>
-              <p class="mt-3 text-sm leading-6 text-muted">{service.desc}</p>
-              <div class="mt-4 flex gap-2">
-                {service.tags.map((tag) => <span class="rounded bg-cream-dark px-2 py-1 font-mono text-[10px] text-muted">{tag}</span>)}
+        <article
+          id={`service-panel-${index}`}
+          class:list={['service-panel', index === 0 && 'is-active']}
+          role="tabpanel"
+          aria-labelledby={`service-tab-${index}`}
+          data-service-panel={index}
+        >
+          <div class="service-visual">
+            <div class="service-browser" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="service-mock">
+              <div class="service-mock__hero"></div>
+              <div class="service-mock__grid">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="service-mock__line"></div>
+              <div class="service-mock__line short"></div>
+            </div>
+          </div>
+
+          <div class="service-content">
+            <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-green">{String(index + 1).padStart(2, '0')}</p>
+            <h3 class="mt-4 text-[clamp(2.25rem,5vw,5rem)] font-semibold tracking-[-0.06em]">{service.name}</h3>
+            <p class="mt-5 max-w-2xl text-lg leading-8 text-ink-light">{service.desc}</p>
+
+            <div class="mt-8 flex flex-wrap gap-2">
+              {service.tags.map((tag) => <span class="service-tag">{tag}</span>)}
+            </div>
+
+            <div class="mt-10 grid gap-5 sm:grid-cols-[180px_1fr]">
+              <div class="service-stat">
+                <strong>{service.stat}</strong>
+                <span>{service.statLabel}</span>
+              </div>
+              <div class="service-fit">
+                <span>Great for</span>
+                <strong>{service.greatFor}</strong>
               </div>
             </div>
-            <span class="text-green">→</span>
+
+            <a class="arrow-link mt-10 text-green" href={service.href}>Explore this service <span class="arrow">→</span></a>
           </div>
-        </a>
+        </article>
       ))}
     </div>
   </div>
@@ -64,98 +144,233 @@ const services = [
 
 <script is:inline>
   (() => {
-    document.querySelectorAll('.service-row').forEach((row) => {
-      row.addEventListener('mouseenter', () => row.classList.add('expanded'));
-      row.addEventListener('mouseleave', () => row.classList.remove('expanded'));
+    const tabs = [...document.querySelectorAll('[data-service-tab]')];
+    const panels = [...document.querySelectorAll('[data-service-panel]')];
+
+    const setActive = (index) => {
+      tabs.forEach((tab, tabIndex) => {
+        const active = tabIndex === index;
+        tab.classList.toggle('is-active', active);
+        tab.setAttribute('aria-selected', String(active));
+      });
+
+      panels.forEach((panel, panelIndex) => {
+        panel.classList.toggle('is-active', panelIndex === index);
+      });
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => setActive(index));
+      tab.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+        event.preventDefault();
+        const next = event.key === 'ArrowRight'
+          ? (index + 1) % tabs.length
+          : (index - 1 + tabs.length) % tabs.length;
+        tabs[next]?.focus();
+        setActive(next);
+      });
     });
   })();
 </script>
 
 <style>
-  .service-row {
-    display: grid;
-    min-height: 72px;
-    grid-template-columns: 48px 1fr 200px 48px;
-    align-items: center;
-    border-bottom: 1px solid rgba(28, 25, 23, 0.08);
-    color: #1C1917;
-    transition: min-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.35s ease, padding 0.35s ease;
+  .services-tabs {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
   }
 
-  .service-row:first-child {
-    border-top: 1px solid rgba(28, 25, 23, 0.08);
+  .services-tabs::-webkit-scrollbar {
+    display: none;
   }
 
-  .service-row.expanded {
-    min-height: 120px;
-    border-color: rgba(45, 106, 79, 0.2);
-    background: #EEF4F1;
-    padding-bottom: 16px;
-  }
-
-  .service-number {
-    font-family: "DM Mono", monospace;
-    font-size: 12px;
-    color: #78716C;
-    transition: color 0.35s ease;
-  }
-
-  .service-row.expanded .service-number,
-  .service-row.expanded .service-plus {
-    color: #2D6A4F;
-  }
-
-  .service-main {
-    align-self: center;
-    transition: align-self 0.35s ease, padding-top 0.35s ease;
-  }
-
-  .service-row.expanded .service-main {
-    align-self: start;
-    padding-top: 28px;
-  }
-
-  .service-desc {
-    display: block;
-    margin-top: 0;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    color: #44403C;
+  .services-tab {
+    flex: 0 0 auto;
+    border: 1px solid rgba(28, 25, 23, 0.12);
+    border-radius: 999px;
+    background: transparent;
+    padding: 10px 16px;
+    color: rgba(28, 25, 23, 0.62);
     font-size: 14px;
-    transition: opacity 0.25s ease, max-height 0.35s ease, margin-top 0.35s ease;
+    font-weight: 600;
+    transition: background-color 0.3s var(--ease-standard), color 0.3s var(--ease-standard), border-color 0.3s var(--ease-standard);
   }
 
-  .service-row.expanded .service-desc {
-    margin-top: 8px;
-    max-height: 28px;
+  .services-tab:hover,
+  .services-tab.is-active {
+    border-color: #1C1917;
+    background: #1C1917;
+    color: #FFFFFF;
+  }
+
+  .services-stage {
+    position: relative;
+    min-height: 680px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #FFFFFF;
+    box-shadow: inset 0 0 0 1px rgba(28, 25, 23, 0.08);
+  }
+
+  .service-panel {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(24px, 4vw, 64px);
+    opacity: 0;
+    padding: clamp(24px, 5vw, 72px);
+    transform: translateY(24px);
+    transition: opacity 0.35s var(--ease-standard), transform 0.65s var(--ease-premium), visibility 0.35s step-end;
+    visibility: hidden;
+  }
+
+  .service-panel.is-active {
+    pointer-events: auto;
     opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.45s var(--ease-standard), transform 0.75s var(--ease-premium), visibility 0.35s step-start;
+    visibility: visible;
+  }
+
+  .service-visual {
+    position: relative;
+    min-height: 420px;
+    overflow: hidden;
+    border-radius: 8px;
+    background:
+      radial-gradient(circle at 25% 20%, rgba(74, 222, 128, 0.24), transparent 28%),
+      linear-gradient(135deg, #101010, #2D6A4F);
+  }
+
+  .service-browser {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .service-browser span {
+    height: 9px;
+    width: 9px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.42);
+  }
+
+  .service-mock {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    width: min(430px, 86%);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.94);
+    padding: 18px;
+    box-shadow: var(--shadow-lift);
+    transform: rotate(-2deg);
+  }
+
+  .service-mock__hero {
+    height: 160px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #0F0F0F, #52A67A);
+  }
+
+  .service-mock__grid {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .service-mock__grid span,
+  .service-mock__line {
+    display: block;
+    border-radius: 5px;
+    background: #EDE9E2;
+  }
+
+  .service-mock__grid span {
+    height: 62px;
+  }
+
+  .service-mock__line {
+    margin-top: 14px;
+    height: 12px;
+  }
+
+  .service-mock__line.short {
+    width: 62%;
   }
 
   .service-tag {
-    border-radius: 4px;
-    background: #EDE9E2;
-    padding: 0.25rem 0.5rem;
-    color: #78716C;
+    border-radius: 999px;
+    background: #EEF4F1;
+    padding: 8px 12px;
+    color: #2D6A4F;
     font-family: "DM Mono", monospace;
     font-size: 10px;
-    transition: background 0.35s ease, color 0.35s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
   }
 
-  .service-row.expanded .service-tag {
-    background: rgba(45, 106, 79, 0.1);
-    color: #2D6A4F;
+  .service-stat,
+  .service-fit {
+    border-top: 1px solid rgba(28, 25, 23, 0.1);
+    padding-top: 16px;
   }
 
-  .service-plus {
-    justify-self: end;
-    color: #78716C;
-    font-size: 1.5rem;
+  .service-stat strong {
+    display: block;
+    font-size: 48px;
     line-height: 1;
-    transition: color 0.35s ease, transform 0.35s ease;
+    letter-spacing: -0.06em;
   }
 
-  .service-row.expanded .service-plus {
-    transform: rotate(45deg);
+  .service-stat span,
+  .service-fit span {
+    margin-top: 6px;
+    display: block;
+    color: #78716C;
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .service-fit strong {
+    margin-top: 8px;
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .services-stage {
+      min-height: 920px;
+    }
+
+    .service-panel {
+      grid-template-columns: 1fr;
+      align-content: start;
+    }
+
+    .service-visual {
+      min-height: 320px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .services-stage {
+      min-height: 980px;
+    }
+
+    .service-panel {
+      padding: 20px;
+    }
   }
 </style>

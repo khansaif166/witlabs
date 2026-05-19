@@ -1,25 +1,42 @@
 ---
 ---
 
-<section class="bg-ink py-32 text-cream">
-  <div class="container mx-auto max-w-3xl text-center">
-    <p class="mb-8 font-mono text-[11px] uppercase tracking-[0.25em] text-green-bright">Ready To Grow?</p>
-    <h2 class="font-serif text-[clamp(2.5rem,6vw,5.5rem)] italic leading-none text-cream">
-      Let's build something<br />that actually works.
+<section id="conversion" class="conversion-section relative overflow-hidden bg-ink px-4 py-24 text-white sm:px-6 lg:px-8 lg:py-36">
+  <div class="conversion-bg" aria-hidden="true"></div>
+  <div class="relative z-10 mx-auto max-w-5xl text-center">
+    <p class="section-kicker reveal text-green-bright">Ready To Grow?</p>
+    <h2 class="reveal reveal-delay-1 mt-6 display-tight text-[clamp(3.6rem,9vw,9.5rem)] font-semibold">
+      Start with a clear digital plan.
     </h2>
-    <p class="mx-auto mb-12 mt-6 max-w-xl text-lg text-cream/55">
-      Book a free 20-minute strategy call. No pitch. Just honest advice.
+    <p class="reveal reveal-delay-2 mx-auto mt-7 max-w-2xl text-lg leading-8 text-white/62">
+      Book a free strategy call. We will review your current website, growth opportunities, and what would actually move the business forward.
     </p>
-    <div class="flex flex-col justify-center gap-4 sm:flex-row">
-      <a class="inline-flex items-center justify-center rounded-full bg-green px-8 py-4 text-[15px] font-medium text-white transition-colors hover:bg-green-mid" href="/contact/">
-        Book a Free Strategy Call →
-      </a>
-      <a class="inline-flex items-center justify-center rounded-full border border-cream/20 px-8 py-4 text-[15px] font-medium text-cream/70 transition-colors hover:border-cream/50 hover:text-cream" href="https://wa.me/917984301015?text=Hi%20WitLabs%2C%20I%20visited%20your%20website%20and%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noreferrer">
+    <div class="reveal reveal-delay-3 mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+      <a class="premium-button premium-button-light" href="/contact/">Book a Free Strategy Call</a>
+      <a class="premium-button premium-button-outline text-white" href="https://wa.me/917984301015?text=Hi%20WitLabs%2C%20I%20visited%20your%20website%20and%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noreferrer">
         WhatsApp Us
       </a>
     </div>
-    <p class="mt-10 font-mono text-[11px] text-cream/25">
-      Reply within 2 hours · No lock-in contracts · Based in India
+    <p class="reveal reveal-delay-4 mt-10 font-mono text-[11px] uppercase tracking-[0.18em] text-white/35">
+      Reply within 2 hours / No lock-in contracts / Based in India
     </p>
   </div>
 </section>
+
+<style>
+  .conversion-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.78)),
+      url('/images/mockup.png') center / cover no-repeat;
+    opacity: 0.62;
+  }
+
+  .conversion-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(74, 222, 128, 0.22), transparent 36%);
+  }
+</style>

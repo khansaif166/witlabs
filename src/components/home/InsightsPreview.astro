@@ -23,31 +23,33 @@ const cards = posts.length > 0
   : placeholders.map((post) => ({ ...post, date: 'Publishing soon', href: '/insights/', isPlaceholder: true }));
 ---
 
-<section class="bg-cream py-24">
-  <div class="container">
-    <div class="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+<section class="section-shell bg-white text-ink">
+  <div class="mx-auto max-w-[1440px]">
+    <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
       <div>
-        <p class="eyebrow reveal">From The Blog</p>
-        <h2 class="reveal delay-1 mt-3 font-serif text-[clamp(2.2rem,4.5vw,4rem)] italic leading-[1.05] text-ink">
-          Practical ideas for<br />growth-minded teams.
+        <p class="section-kicker reveal text-green">Resources</p>
+        <h2 class="reveal reveal-delay-1 mt-4 display-tight text-[clamp(3.2rem,7vw,7rem)] font-semibold">
+          Practical ideas for growth-minded teams.
         </h2>
       </div>
-      <a class="reveal delay-2 text-sm font-medium text-green hover:text-ink" href="/insights/">View all →</a>
+      <a class="arrow-link reveal reveal-delay-2 text-green" href="/insights/">View all <span class="arrow">→</span></a>
     </div>
 
-    <div class="grid gap-5 md:grid-cols-3">
+    <div class="insights-grid mt-12">
       {cards.map((post, index) => (
-        <article class:list={['reveal overflow-hidden rounded-2xl border border-border bg-white', index > 0 && `delay-${index}`]}>
-          <div class="flex items-center justify-between px-5 pt-5 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
-            <span class:list={[post.isPlaceholder && 'rounded-full bg-green-light px-3 py-1 text-green']}>{post.category}</span>
-            <span>{post.readTime}</span>
+        <article class:list={['insight-card reveal', index > 0 && `delay-${index}`]}>
+          <div class="insight-card__media" aria-hidden="true">
+            <span>{String(index + 1).padStart(2, '0')}</span>
           </div>
-          <div class="mx-5 mt-5 aspect-video bg-[linear-gradient(135deg,#EEF4F1_0%,#F6F3EE_55%,#EDE9E2_100%)]"></div>
-          <div class="p-5">
-            <h3 class="line-clamp-2 text-lg font-semibold text-ink">{post.title}</h3>
-            <p class="mt-2 font-mono text-[11px] text-muted">{post.date}</p>
-            <a class="mt-4 inline-flex text-sm font-medium text-green hover:text-ink" href={post.href}>
-              {post.isPlaceholder ? 'Coming Soon →' : 'Read more →'}
+          <div class="insight-card__body">
+            <div class="flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+              <span class:list={[post.isPlaceholder && 'rounded-full bg-green-light px-3 py-1 text-green']}>{post.category}</span>
+              <span>{post.readTime}</span>
+            </div>
+            <h3>{post.title}</h3>
+            <p>{post.date}</p>
+            <a class="arrow-link text-green" href={post.href}>
+              {post.isPlaceholder ? 'Coming soon' : 'Read more'} <span class="arrow">→</span>
             </a>
           </div>
         </article>
@@ -57,10 +59,68 @@ const cards = posts.length > 0
 </section>
 
 <style>
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+  .insights-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .insight-card {
     overflow: hidden;
+    border: 1px solid rgba(28, 25, 23, 0.08);
+    border-radius: 8px;
+    background: #F6F3EE;
+    transition: transform 0.35s var(--ease-premium), box-shadow 0.35s var(--ease-premium);
+  }
+
+  .insight-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .insight-card__media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(74, 222, 128, 0.28), transparent 28%),
+      linear-gradient(135deg, #111111, #2D6A4F 58%, #EDE9E2);
+  }
+
+  .insight-card__media span {
+    position: absolute;
+    bottom: -18px;
+    right: 18px;
+    color: rgba(255, 255, 255, 0.28);
+    font-size: 120px;
+    font-weight: 700;
+    letter-spacing: -0.08em;
+    line-height: 0.8;
+  }
+
+  .insight-card__body {
+    padding: 24px;
+  }
+
+  .insight-card h3 {
+    margin-top: 28px;
+    min-height: 96px;
+    color: #1C1917;
+    font-size: clamp(1.45rem, 2.5vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+  }
+
+  .insight-card p {
+    margin: 18px 0 24px;
+    color: #78716C;
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+  }
+
+  @media (min-width: 900px) {
+    .insights-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 </style>

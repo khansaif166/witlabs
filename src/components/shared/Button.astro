@@ -7,10 +7,10 @@ interface Props {
 const { href = '#', variant = 'primary' } = Astro.props;
 const classes =
   variant === 'primary'
-    ? 'bg-green text-white hover:bg-ink'
-    : 'border border-border text-ink hover:border-green hover:text-green';
+    ? 'premium-button premium-button-primary'
+    : 'premium-button premium-button-outline';
 ---
 
-<a class={`inline-flex items-center rounded-full px-5 py-3 text-sm font-semibold ${classes}`} href={href}>
+<a class={classes} href={href}>
   <slot />
 </a>
