@@ -1,100 +1,161 @@
 ---
 const services = [
-  {
-    title: 'Website Design & Development',
-    description: 'Websites that turn visitors into phone calls and form submissions',
-    href: '/services/#website-design',
-    icon: 'layout',
-  },
-  {
-    title: 'SEO & Organic Growth',
-    description: 'Rank higher on Google so customers find you before competitors',
-    href: '/services/#seo',
-    icon: 'search',
-  },
-  {
-    title: 'Digital Marketing',
-    description: 'Campaigns that build brand awareness and generate qualified leads',
-    href: '/services/#digital-marketing',
-    icon: 'megaphone',
-  },
-  {
-    title: 'Performance Marketing',
-    description: 'ROI-focused ads on Google and Meta that pay for themselves',
-    href: '/services/#performance',
-    icon: 'chart',
-  },
-  {
-    title: 'App Development',
-    description: 'Custom mobile apps that make your business easier to use',
-    href: '/services/#app-development',
-    icon: 'app',
-  },
-  {
-    title: 'Branding & Identity',
-    description: 'A brand that makes your business instantly recognisable and trusted',
-    href: '/services/#branding',
-    icon: 'spark',
-  },
-  {
-    title: 'Automation',
-    description: 'Save 10+ hours a week by automating repetitive business tasks',
-    href: '/services/#automation',
-    icon: 'bolt',
-  },
-  {
-    title: 'AI Chatbots',
-    description: "24/7 lead capture and customer support — even when you're offline",
-    href: '/services/#chatbots',
-    icon: 'bot',
-  },
+  { name: 'Website Design & Development', href: '/services/#website-design', tags: ['Web', 'Design'], desc: 'Websites built to convert visitors into inquiries' },
+  { name: 'SEO & Organic Growth', href: '/services/#seo', tags: ['SEO', 'Growth'], desc: 'Rank above competitors on Google searches' },
+  { name: 'Digital Marketing', href: '/services/#digital-marketing', tags: ['Marketing', 'Ads'], desc: 'Campaigns that build brand and generate leads' },
+  { name: 'Performance Marketing', href: '/services/#performance', tags: ['Google Ads', 'Meta'], desc: 'ROI-focused Google & Meta ad management' },
+  { name: 'App Development', href: '/services/#app-development', tags: ['iOS', 'Android'], desc: 'Custom mobile apps built for your business' },
+  { name: 'Branding & Identity', href: '/services/#branding', tags: ['Brand', 'Logo'], desc: 'A brand that makes you instantly trustworthy' },
+  { name: 'Automation', href: '/services/#automation', tags: ['Workflow', 'AI'], desc: 'Save 10+ hours a week with smart systems' },
+  { name: 'AI Chatbots', href: '/services/#chatbots', tags: ['Chatbot', 'AI'], desc: "24/7 lead capture even when you're offline" },
 ];
 ---
 
-<section aria-labelledby="services-heading" class="py-section bg-white">
+<section class="bg-cream py-24">
   <div class="container">
-    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+    <div class="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <div>
-        <p class="eyebrow reveal">WHAT WE DO</p>
-        <h2 id="services-heading" class="reveal reveal-delay-1 text-display-md text-balance mt-3">
-          End-to-end digital solutions<br />for modern Indian businesses.
+        <p class="eyebrow reveal">What We Build</p>
+        <h2 class="reveal delay-1 mt-3 font-serif text-[clamp(2.2rem,4.5vw,4rem)] italic leading-[1.05] text-ink">
+          Everything your<br />business needs online.
         </h2>
       </div>
-      <a class="reveal reveal-delay-2 text-green text-body-sm font-medium hover:text-ink" href="/services/">
-        View All Services →
-      </a>
+      <div class="reveal delay-2 font-mono text-[11px] text-muted md:text-right">
+        8 services available
+        <a class="ml-2 font-sans text-sm font-medium text-green hover:text-ink" href="/services/">View all →</a>
+      </div>
     </div>
 
-    <div class="mt-8 grid gap-8 md:grid-cols-[minmax(0,560px)_auto] md:items-end">
-      <p class="reveal text-body-md text-muted">
-        From your first website to complex automation systems — we cover every digital need your business has.
-      </p>
-    </div>
-
-    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+    <div class="hidden md:block">
       {services.map((service, index) => (
-        <article class:list={['card-base group p-6 reveal', index > 0 && `reveal-delay-${Math.min(index, 4)}`]}>
-          <div class="w-10 h-10 rounded-xl bg-green-light flex items-center justify-center text-green">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              {service.icon === 'layout' && <path d="M4 5h16v14H4V5zm0 5h16M9 10v9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />}
-              {service.icon === 'search' && <path d="M11 18a7 7 0 110-14 7 7 0 010 14zm5-2l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />}
-              {service.icon === 'megaphone' && <path d="M4 13h3l9 4V7l-9 4H4v2zm3 0v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />}
-              {service.icon === 'chart' && <path d="M4 19V5m0 14h16M8 15l3-4 3 2 5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />}
-              {service.icon === 'app' && <path d="M8 3h8a2 2 0 012 2v14a2 2 0 01-2 2H8a2 2 0 01-2-2V5a2 2 0 012-2zm3 15h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />}
-              {service.icon === 'spark' && <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3zm7 12l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />}
-              {service.icon === 'bolt' && <path d="M13 2L5 14h6l-1 8 8-12h-6l1-8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />}
-              {service.icon === 'bot' && <path d="M8 9h8a4 4 0 014 4v4H4v-4a4 4 0 014-4zm4 0V5m-3 9h.01M15 14h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />}
-            </svg>
+        <a class="service-row group reveal" href={service.href}>
+          <span class="service-number">{String(index + 1).padStart(2, '0')}</span>
+          <span class="service-main">
+            <span class="block text-xl font-medium text-ink">{service.name}</span>
+            <span class="service-desc">{service.desc}</span>
+          </span>
+          <span class="flex flex-wrap justify-end gap-2">
+            {service.tags.map((tag) => <span class="service-tag">{tag}</span>)}
+          </span>
+          <span class="service-plus">+</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="grid gap-4 md:hidden">
+      {services.map((service, index) => (
+        <a class="rounded-2xl border border-border bg-white p-5 transition-colors active:border-green active:bg-green-light" href={service.href}>
+          <div class="flex items-start gap-4">
+            <span class="font-mono text-[12px] text-muted">{String(index + 1).padStart(2, '0')}</span>
+            <div class="flex-1">
+              <h3 class="text-xl font-medium text-ink">{service.name}</h3>
+              <p class="mt-3 text-sm leading-6 text-muted">{service.desc}</p>
+              <div class="mt-4 flex gap-2">
+                {service.tags.map((tag) => <span class="rounded bg-cream-dark px-2 py-1 font-mono text-[10px] text-muted">{tag}</span>)}
+              </div>
+            </div>
+            <span class="text-green">→</span>
           </div>
-          <div class="mt-5 mb-3">
-            <h3 class="text-heading-md font-semibold text-ink">{service.title}</h3>
-          </div>
-          <p class="text-body-sm text-muted">{service.description}</p>
-          <a class="mt-6 inline-flex text-green text-caption font-semibold opacity-0 translate-y-1 transition-all group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0" href={service.href}>
-            Learn more →
-          </a>
-        </article>
+        </a>
       ))}
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (() => {
+    document.querySelectorAll('.service-row').forEach((row) => {
+      row.addEventListener('mouseenter', () => row.classList.add('expanded'));
+      row.addEventListener('mouseleave', () => row.classList.remove('expanded'));
+    });
+  })();
+</script>
+
+<style>
+  .service-row {
+    display: grid;
+    min-height: 72px;
+    grid-template-columns: 48px 1fr 200px 48px;
+    align-items: center;
+    border-bottom: 1px solid rgba(28, 25, 23, 0.08);
+    color: #1C1917;
+    transition: min-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.35s ease, padding 0.35s ease;
+  }
+
+  .service-row:first-child {
+    border-top: 1px solid rgba(28, 25, 23, 0.08);
+  }
+
+  .service-row.expanded {
+    min-height: 120px;
+    border-color: rgba(45, 106, 79, 0.2);
+    background: #EEF4F1;
+    padding-bottom: 16px;
+  }
+
+  .service-number {
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    color: #78716C;
+    transition: color 0.35s ease;
+  }
+
+  .service-row.expanded .service-number,
+  .service-row.expanded .service-plus {
+    color: #2D6A4F;
+  }
+
+  .service-main {
+    align-self: center;
+    transition: align-self 0.35s ease, padding-top 0.35s ease;
+  }
+
+  .service-row.expanded .service-main {
+    align-self: start;
+    padding-top: 28px;
+  }
+
+  .service-desc {
+    display: block;
+    margin-top: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    color: #44403C;
+    font-size: 14px;
+    transition: opacity 0.25s ease, max-height 0.35s ease, margin-top 0.35s ease;
+  }
+
+  .service-row.expanded .service-desc {
+    margin-top: 8px;
+    max-height: 28px;
+    opacity: 1;
+  }
+
+  .service-tag {
+    border-radius: 4px;
+    background: #EDE9E2;
+    padding: 0.25rem 0.5rem;
+    color: #78716C;
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    transition: background 0.35s ease, color 0.35s ease;
+  }
+
+  .service-row.expanded .service-tag {
+    background: rgba(45, 106, 79, 0.1);
+    color: #2D6A4F;
+  }
+
+  .service-plus {
+    justify-self: end;
+    color: #78716C;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: color 0.35s ease, transform 0.35s ease;
+  }
+
+  .service-row.expanded .service-plus {
+    transform: rotate(45deg);
+  }
+</style>

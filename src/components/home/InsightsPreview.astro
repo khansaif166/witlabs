@@ -6,70 +6,48 @@ const posts = (await getCollection('insights', ({ data }) => !data.draft))
   .slice(0, 3);
 
 const placeholders = [
-  {
-    category: 'Web Design',
-    title: 'How to know if your business website is silently losing leads',
-    description: 'A practical checklist for spotting trust, speed, and conversion issues before they cost you more inquiries.',
-    author: 'WitLabs',
-    readTime: 5,
-  },
-  {
-    category: 'SEO',
-    title: 'Local SEO basics every Indian business should get right',
-    description: 'The simple search foundations that help nearby customers find and trust your business faster.',
-    author: 'WitLabs',
-    readTime: 6,
-  },
-  {
-    category: 'Automation',
-    title: 'Where small teams should start with business automation',
-    description: 'A focused guide to automating repetitive work without overcomplicating your operations.',
-    author: 'WitLabs',
-    readTime: 4,
-  },
+  { category: 'COMING SOON', title: 'Website growth notes for Indian businesses', readTime: 'Soon' },
+  { category: 'COMING SOON', title: 'Local SEO lessons from real service companies', readTime: 'Soon' },
+  { category: 'COMING SOON', title: 'Automation ideas that save founders real hours', readTime: 'Soon' },
 ];
 
 const cards = posts.length > 0
   ? posts.map((post) => ({
     category: post.data.category,
     title: post.data.title,
-    description: post.data.description,
-    author: post.data.author,
-    readTime: post.data.readTime,
+    readTime: `${post.data.readTime} min`,
+    date: post.data.publishDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }),
     href: `/insights/${post.slug}/`,
     isPlaceholder: false,
   }))
-  : placeholders.map((post) => ({ ...post, href: '/insights/', isPlaceholder: true }));
+  : placeholders.map((post) => ({ ...post, date: 'Publishing soon', href: '/insights/', isPlaceholder: true }));
 ---
 
-<section class="py-section bg-white">
+<section class="bg-cream py-24">
   <div class="container">
-    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+    <div class="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <div>
-        <p class="eyebrow reveal">INSIGHTS & IDEAS</p>
-        <h2 class="reveal reveal-delay-1 mt-3 max-w-3xl text-display-md text-balance">
-          Knowledge that helps your business grow smarter.
+        <p class="eyebrow reveal">From The Blog</p>
+        <h2 class="reveal delay-1 mt-3 font-serif text-[clamp(2.2rem,4.5vw,4rem)] italic leading-[1.05] text-ink">
+          Practical ideas for<br />growth-minded teams.
         </h2>
       </div>
-      <a class="reveal reveal-delay-2 text-green text-body-sm font-medium hover:text-ink" href="/insights/">
-        View All Insights →
-      </a>
+      <a class="reveal delay-2 text-sm font-medium text-green hover:text-ink" href="/insights/">View all →</a>
     </div>
 
-    <div class="mt-12 grid gap-5 md:grid-cols-3">
+    <div class="grid gap-5 md:grid-cols-3">
       {cards.map((post, index) => (
-        <article class:list={['card-base p-6 reveal', index > 0 && `reveal-delay-${index}`]}>
-          <span class="inline-flex rounded-full bg-green-light px-3 py-1 text-caption font-semibold text-green">
-            {post.category}
-          </span>
-          <h3 class="mt-5 text-heading-md font-semibold text-ink line-clamp-2">{post.title}</h3>
-          <p class="mt-3 text-body-sm text-muted line-clamp-3">{post.description}</p>
-          <div class="mt-8 flex flex-wrap items-center gap-2 text-caption text-muted">
-            <span>{post.author}</span>
-            <span aria-hidden="true">·</span>
-            <span>{post.readTime} min read</span>
-            <a class="ml-auto font-semibold text-green hover:text-ink" href={post.href}>
-              {post.isPlaceholder ? 'Coming Soon →' : 'Read More →'}
+        <article class:list={['reveal overflow-hidden rounded-2xl border border-border bg-white', index > 0 && `delay-${index}`]}>
+          <div class="flex items-center justify-between px-5 pt-5 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+            <span class:list={[post.isPlaceholder && 'rounded-full bg-green-light px-3 py-1 text-green']}>{post.category}</span>
+            <span>{post.readTime}</span>
+          </div>
+          <div class="mx-5 mt-5 aspect-video bg-[linear-gradient(135deg,#EEF4F1_0%,#F6F3EE_55%,#EDE9E2_100%)]"></div>
+          <div class="p-5">
+            <h3 class="line-clamp-2 text-lg font-semibold text-ink">{post.title}</h3>
+            <p class="mt-2 font-mono text-[11px] text-muted">{post.date}</p>
+            <a class="mt-4 inline-flex text-sm font-medium text-green hover:text-ink" href={post.href}>
+              {post.isPlaceholder ? 'Coming Soon →' : 'Read more →'}
             </a>
           </div>
         </article>
@@ -79,18 +57,10 @@ const cards = posts.length > 0
 </section>
 
 <style>
-  .line-clamp-2,
-  .line-clamp-3 {
+  .line-clamp-2 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .line-clamp-2 {
     -webkit-line-clamp: 2;
-  }
-
-  .line-clamp-3 {
-    -webkit-line-clamp: 3;
+    overflow: hidden;
   }
 </style>

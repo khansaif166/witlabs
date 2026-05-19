@@ -1,76 +1,61 @@
 ---
 const stats = [
-  { value: '3+', target: '3', suffix: '+', label: 'Businesses Growing With Us' },
-  { value: '8', target: '8', suffix: '', label: 'Services We Offer' },
-  { value: '4.9/5', target: '4.9', suffix: '/5', label: 'Client Satisfaction Score' },
-  { value: '100%', target: '100', suffix: '%', label: 'Projects Delivered On Time' },
+  { value: '50+', target: '50', suffix: '+', label: 'Projects Delivered' },
+  { value: '3', target: '3', suffix: '', label: 'Clients Growing Now' },
+  { value: '100%', target: '100', suffix: '%', label: 'On-Time Delivery' },
+  { value: '4.9', target: '4.9', suffix: '', label: 'Client Satisfaction' },
 ];
 ---
 
-<section id="home-stats" class="py-section-sm bg-ink text-cream">
+<section id="home-stats" class="bg-green py-20 text-white">
   <div class="container">
-    <div class="grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
+    <div class="grid md:grid-cols-4">
       {stats.map((stat, index) => (
-        <div class:list={['px-6', index > 0 && 'lg:border-l lg:border-white/10']}>
-          <p
-            class="stat-number text-display-md font-bold text-cream"
-            data-target={stat.target}
-            data-suffix={stat.suffix}
-            data-value={stat.value}
-          >
-            0{stat.suffix}
-          </p>
-          <p class="text-body-sm text-cream/50 mt-2">{stat.label}</p>
+        <div class:list={['reveal py-8 text-center md:px-8', index < stats.length - 1 && 'border-b border-white/15 md:border-b-0 md:border-r']}>
+          <p class="stat-number font-mono text-6xl font-bold text-white" data-target={stat.target} data-suffix={stat.suffix} data-value={stat.value}>0{stat.suffix}</p>
+          <p class="mt-2 text-sm uppercase tracking-wider text-white/60">{stat.label}</p>
         </div>
       ))}
     </div>
-    <p class="mt-10 text-center text-caption text-cream/35">Numbers updated quarterly</p>
+    <p class="mt-12 border-t border-white/10 pt-8 text-center text-sm text-white/50">
+      Every number above is a real business we helped grow.
+    </p>
   </div>
 </section>
 
 <script is:inline>
-  const statsSection = document.getElementById('home-stats');
-  const statNumbers = statsSection?.querySelectorAll('.stat-number') ?? [];
-  let statsAnimated = false;
+  (() => {
+    const section = document.getElementById('home-stats');
+    const nums = [...(section?.querySelectorAll('.stat-number') ?? [])];
+    let done = false;
+    const easeOutQuart = (x) => 1 - Math.pow(1 - x, 4);
+    const run = (el) => {
+      const target = Number(el.dataset.target || 0);
+      const suffix = el.dataset.suffix || '';
+      const decimal = (el.dataset.target || '').includes('.');
+      const start = performance.now();
+      const duration = 1800;
+      const tick = (now) => {
+        const p = Math.min((now - start) / duration, 1);
+        const v = target * easeOutQuart(p);
+        el.textContent = `${decimal ? v.toFixed(1) : Math.round(v)}${suffix}`;
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = el.dataset.value || el.textContent;
+      };
+      requestAnimationFrame(tick);
+    };
 
-  function animateNumber(element) {
-    const target = Number(element.dataset.target || 0);
-    const suffix = element.dataset.suffix || '';
-    const isDecimal = String(element.dataset.target || '').includes('.');
-    const duration = 1500;
-    const start = performance.now();
-
-    function tick(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const value = target * eased;
-      element.textContent = `${isDecimal ? value.toFixed(1) : Math.round(value)}${suffix}`;
-
-      if (progress < 1) {
-        requestAnimationFrame(tick);
-      } else {
-        element.textContent = element.dataset.value || `${target}${suffix}`;
-      }
+    if (!section || !('IntersectionObserver' in window)) {
+      nums.forEach(run);
+      return;
     }
 
-    requestAnimationFrame(tick);
-  }
-
-  if (statsSection && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !statsAnimated) {
-          statsAnimated = true;
-          statNumbers.forEach(animateNumber);
-          observer.disconnect();
-        }
-      });
-    }, { threshold: 0.35 });
-
-    observer.observe(statsSection);
-  } else {
-    statNumbers.forEach((number) => {
-      number.textContent = number.dataset.value || number.textContent;
-    });
-  }
+    new IntersectionObserver((entries, obs) => {
+      if (entries[0]?.isIntersecting && !done) {
+        done = true;
+        nums.forEach(run);
+        obs.disconnect();
+      }
+    }, { threshold: 0.35 }).observe(section);
+  })();
 </script>

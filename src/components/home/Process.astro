@@ -1,63 +1,129 @@
 ---
 const steps = [
-  {
-    title: 'Discover',
-    description: 'We spend time understanding your business, competitors and goals before writing a single line of code.',
-  },
-  {
-    title: 'Strategize',
-    description: 'We create a clear digital plan — what to build, what to prioritise and what will get results fastest.',
-  },
-  {
-    title: 'Design & Build',
-    description: 'We design and develop your solution with performance and conversion as the top priorities.',
-  },
-  {
-    title: 'Launch',
-    description: 'We test everything thoroughly, then launch with zero drama. You approve before anything goes live.',
-  },
-  {
-    title: 'Optimise',
-    description: "We track performance, share reports and keep improving — we don't disappear after launch.",
-  },
+  ['Discover', 'We spend time understanding your business, your competitors, and your goals before anything else. This call is free — no pressure, no pitch.'],
+  ['Strategize', 'We create a clear plan — what to build, what to prioritize, and what will get you results fastest. You see the plan before we start.'],
+  ['Design & Build', 'We design and develop with conversion and performance as the top priorities — not just how it looks, but how it performs.'],
+  ['Launch', 'We test everything. You approve everything. Nothing goes live without your sign-off.'],
+  ['Optimize', "We don't disappear after launch. We track performance, share reports, and keep improving."],
 ];
-
-const whatsappHref = 'https://wa.me/917984301015?text=Hi%20WitLabs%2C%20I%20visited%20your%20website%20and%20I%27d%20like%20to%20discuss%20a%20project.';
 ---
 
-<section class="py-section bg-white">
+<section class="bg-cream py-24">
   <div class="container">
-    <div class="max-w-3xl">
-      <p class="eyebrow reveal">HOW WE WORK</p>
-      <h2 class="reveal reveal-delay-1 mt-3 text-display-md text-balance">A proven process. Predictable results.</h2>
-      <p class="reveal reveal-delay-2 mt-5 text-body-lg text-muted">
-        No surprises, no ghosting, no vague timelines. Here is exactly what happens when you work with WitLabs.
+    <div class="mb-12 max-w-3xl">
+      <p class="eyebrow reveal">How We Work</p>
+      <h2 class="reveal delay-1 mt-3 font-serif text-[clamp(2.2rem,4.5vw,4rem)] italic leading-[1.05] text-ink">
+        No surprises.<br />No ghosting. Ever.
+      </h2>
+      <p class="reveal delay-2 mt-5 text-[15px] leading-7 text-ink-light">
+        Here is exactly what happens when you start working with WitLabs.
       </p>
     </div>
 
-    <div class="relative mt-14 grid gap-8 md:grid-cols-5 md:gap-5">
-      <div class="absolute left-8 right-8 top-6 hidden border-t-2 border-dashed border-green/20 md:block" aria-hidden="true"></div>
-      {steps.map((step, index) => (
-        <article class:list={['relative reveal', index > 0 && `reveal-delay-${Math.min(index, 4)}`]}>
-          <div class="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-green bg-white text-green font-mono font-bold">
-            {index + 1}
-          </div>
-          <h3 class="mt-4 font-semibold text-heading-md text-ink">{step.title}</h3>
-          <p class="mt-3 text-body-sm text-muted">{step.description}</p>
-        </article>
+    <div class="process-list reveal delay-3">
+      {steps.map(([title, description], index) => (
+        <button class:list={['process-step', index === 0 && 'expanded']} type="button">
+          <span class="process-head">
+            <span class="process-num">{String(index + 1).padStart(2, '0')}</span>
+            <span class="process-title">{title}</span>
+            <span class="process-plus">+</span>
+          </span>
+          <span class="process-panel">
+            <span>{description}</span>
+          </span>
+        </button>
       ))}
-    </div>
-
-    <div class="reveal mt-16 bg-cream-dark rounded-3xl p-8 flex items-center justify-between flex-wrap gap-6">
-      <p class="text-heading-md font-semibold text-ink">Have a project in mind? We reply within 2 hours.</p>
-      <div class="flex flex-wrap gap-3">
-        <a class="inline-flex rounded-full bg-green px-5 py-3 text-body-sm font-medium text-white hover:bg-green-dark" href={whatsappHref} target="_blank" rel="noreferrer">
-          WhatsApp Now
-        </a>
-        <a class="inline-flex rounded-full border border-border px-5 py-3 text-body-sm font-medium text-ink hover:bg-white" href="/contact/">
-          Book a Call
-        </a>
-      </div>
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (() => {
+    const steps = document.querySelectorAll('.process-step');
+    steps.forEach((step) => {
+      step.addEventListener('click', () => {
+        steps.forEach((item) => item.classList.remove('expanded'));
+        step.classList.add('expanded');
+      });
+    });
+  })();
+</script>
+
+<style>
+  .process-step {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid rgba(28, 25, 23, 0.08);
+    text-align: left;
+  }
+
+  .process-head {
+    display: flex;
+    min-height: 64px;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .process-num {
+    display: flex;
+    height: 36px;
+    width: 36px;
+    flex: 0 0 36px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(28, 25, 23, 0.08);
+    border-radius: 999px;
+    color: #78716C;
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+  }
+
+  .process-title {
+    color: #1C1917;
+    font-size: 1.125rem;
+    font-weight: 500;
+    transition: color 0.35s ease;
+  }
+
+  .process-plus {
+    margin-left: auto;
+    color: #78716C;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: color 0.35s ease, transform 0.35s ease;
+  }
+
+  .process-panel {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 0 0 56px;
+    color: #44403C;
+    font-size: 15px;
+    line-height: 1.7;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.35s ease, padding-bottom 0.35s ease;
+  }
+
+  .process-step.expanded .process-num {
+    border-color: #2D6A4F;
+    background: #2D6A4F;
+    color: #FFFFFF;
+  }
+
+  .process-step.expanded .process-title,
+  .process-step.expanded .process-plus {
+    color: #2D6A4F;
+  }
+
+  .process-step.expanded .process-plus {
+    transform: rotate(45deg);
+  }
+
+  .process-step.expanded .process-panel {
+    max-height: 500px;
+    padding-bottom: 20px;
+    opacity: 1;
+  }
+</style>

@@ -12,6 +12,7 @@ const navLinks = [
   { label: 'Case Studies', href: '/case-studies/' },
   { label: 'About', href: '/about/' },
   { label: 'Insights', href: '/insights/' },
+  { label: 'Contact', href: '/contact/' },
 ];
 
 const serviceLinks = [
@@ -36,19 +37,19 @@ function isActive(href: string): boolean {
 <header
   id="site-header"
   class:list={[
-    'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+    'fixed top-0 left-0 right-0 z-50 transition-all duration-300 text-cream',
     transparent
-      ? 'bg-transparent border-b border-transparent [&.scrolled]:bg-cream/95 [&.scrolled]:shadow-sm [&.scrolled]:border-border [&.scrolled]:backdrop-blur'
-      : 'bg-cream border-b border-border shadow-sm',
+      ? 'bg-transparent border-b border-transparent [&.scrolled]:bg-cream/95 [&.scrolled]:text-ink [&.scrolled]:border-border [&.scrolled]:backdrop-blur'
+      : 'bg-cream/95 text-ink border-b border-border backdrop-blur',
   ]}
   aria-label="Site header"
 >
   <nav class="container h-16 md:h-[72px] flex items-center justify-between" aria-label="Main navigation">
     <a href="/" aria-label="WitLabs - Home" class="flex items-center gap-2.5 group shrink-0">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <path d="M2 6L8 26L14 12L20 26L26 6" stroke="#2d6a4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
-      <span class="font-sans font-semibold text-xl text-ink tracking-tight group-hover:text-green transition-colors">
+      <span class="flex h-7 w-7 items-center justify-center border border-current/25 font-mono text-[11px] font-bold tracking-[-0.08em] text-current">
+        WL
+      </span>
+      <span class="font-sans font-semibold text-xl text-current tracking-tight transition-colors group-hover:text-green">
         WitLabs
       </span>
     </a>
@@ -59,10 +60,10 @@ function isActive(href: string): boolean {
           <a
             href={link.href}
             class:list={[
-              'relative flex items-center gap-1 px-3 py-2 text-body-sm font-medium rounded-lg transition-colors after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-[1.5px] after:rounded-full after:bg-green after:transition-transform after:duration-200',
+              'relative flex items-center gap-1 px-3 py-2 text-body-sm font-medium rounded-lg transition-colors after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-[1.5px] after:rounded-full after:bg-green-bright after:transition-transform after:duration-200',
               isActive(link.href)
-                ? 'text-green after:scale-x-100'
-                : 'text-ink-light hover:text-ink hover:bg-cream-dark after:scale-x-0',
+                ? 'text-green-bright [&_span]:text-green after:scale-x-100'
+                : 'text-current/60 hover:text-current hover:bg-current/5 after:scale-x-0',
             ]}
             aria-current={isActive(link.href) ? 'page' : undefined}
           >
@@ -80,12 +81,12 @@ function isActive(href: string): boolean {
               role="menu"
               aria-label="Services submenu"
             >
-              <div class="bg-white border border-border rounded-2xl shadow-xl p-3 w-64">
+              <div class="w-64 rounded-2xl border border-border bg-cream p-3 text-ink shadow-xl">
                 <p class="text-label uppercase text-muted px-3 py-2 mb-1">Our Services</p>
                 {serviceLinks.map((service) => (
                   <a
                     href={service.href}
-                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-body-sm text-ink-light hover:bg-cream hover:text-green transition-colors"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-body-sm text-ink-light hover:bg-green-light hover:text-green transition-colors"
                     role="menuitem"
                   >
                     <span class="w-5 h-5 flex items-center justify-center text-green opacity-70" aria-hidden="true">→</span>
@@ -100,12 +101,12 @@ function isActive(href: string): boolean {
     </ul>
 
     <div class="hidden lg:flex items-center gap-3">
-      <a href="tel:+917984301015" class="text-body-sm text-muted hover:text-ink transition-colors font-medium">
+      <a href="tel:+917984301015" class="text-body-sm text-current/50 hover:text-current transition-colors font-mono">
         +91 79843 01015
       </a>
       <a
         href="/contact/"
-        class="inline-flex items-center gap-1.5 bg-ink text-cream text-body-sm font-medium px-5 py-2.5 rounded-full hover:bg-ink-light transition-colors"
+        class="inline-flex items-center gap-1.5 border border-current/30 text-current text-sm font-medium px-5 py-2 rounded-full hover:bg-green hover:border-green hover:text-white transition-colors"
       >
         Book a Strategy Call
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -116,31 +117,31 @@ function isActive(href: string): boolean {
 
     <button
       id="menu-toggle"
-      class="lg:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-cream-dark transition-colors"
+      class="lg:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-current/10 transition-colors"
       type="button"
       aria-label="Open navigation menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
     >
-      <span class="w-5 h-px bg-ink block transition-all" id="bar-1"></span>
-      <span class="w-5 h-px bg-ink block transition-all" id="bar-2"></span>
-      <span class="w-3 h-px bg-ink block transition-all" id="bar-3"></span>
+      <span class="w-5 h-px bg-current block transition-all" id="bar-1"></span>
+      <span class="w-5 h-px bg-current block transition-all" id="bar-2"></span>
+      <span class="w-3 h-px bg-current block transition-all" id="bar-3"></span>
     </button>
   </nav>
 </header>
 
 <div
   id="mobile-menu"
-  class="fixed inset-0 z-40 bg-ink flex flex-col pt-20 px-6 pb-8 translate-x-full transition-transform duration-300 lg:hidden"
+  class="fixed inset-0 z-40 bg-cream flex flex-col pt-20 px-6 pb-8 translate-x-full transition-transform duration-300 lg:hidden"
   aria-hidden="true"
 >
   <nav class="flex-1" aria-label="Mobile navigation">
     <ul class="space-y-1" role="list">
-      {[...navLinks, { label: 'Contact', href: '/contact/' }].map((link) => (
+      {navLinks.map((link) => (
         <li>
           <a
             href={link.href}
-            class="flex items-center justify-between py-4 text-3xl font-semibold text-cream/80 hover:text-cream border-b border-white/10 transition-colors"
+            class="flex items-center justify-between py-4 text-3xl font-semibold text-ink hover:text-green border-b border-border transition-colors"
           >
             {link.label}
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -153,8 +154,8 @@ function isActive(href: string): boolean {
   </nav>
 
   <div class="mt-8 space-y-3">
-    <p class="text-cream/40 text-caption">Get in touch</p>
-    <a href="tel:+917984301015" class="block text-cream text-body-lg font-medium">+91 79843 01015</a>
+    <p class="text-muted text-caption">Get in touch</p>
+    <a href="tel:+917984301015" class="block text-ink text-body-lg font-medium">+91 79843 01015</a>
     <a
       href="/contact/"
       class="block w-full text-center bg-green text-white font-medium py-4 rounded-2xl text-body-md"

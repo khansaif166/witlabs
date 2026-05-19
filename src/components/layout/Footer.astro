@@ -37,56 +37,56 @@ const socialLinks = [
 ];
 ---
 
-<footer class="bg-ink pt-20 pb-8 text-cream/60">
+<footer class="bg-cream-dark pt-20 pb-8 text-ink-light">
   <div class="container grid gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_0.8fr_1fr]">
     <div class="space-y-5">
-      <a class="flex items-center gap-2.5 text-cream group" href="/" aria-label="WitLabs home">
+      <a class="flex items-center gap-2.5 text-ink group" href="/" aria-label="WitLabs home">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
           <path d="M2 6L8 26L14 12L20 26L26 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
-        <span class="font-sans text-xl font-semibold tracking-tight transition-colors group-hover:text-white">WitLabs</span>
+        <span class="font-sans text-xl font-semibold tracking-tight transition-colors group-hover:text-green">WitLabs</span>
       </a>
-      <p class="font-serif text-3xl leading-tight text-cream">Think smarter. Build better.</p>
+      <p class="font-serif text-3xl leading-tight text-ink">Think smarter. Build better.</p>
       <p class="max-w-sm text-body-sm">
         Helping Indian businesses build, grow and scale with websites, SEO, digital marketing and smart automation.
       </p>
       <div class="flex items-center gap-3">
         {socialLinks.map((social) => (
-          <a class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-cream transition-colors hover:bg-white/20 hover:text-white" href={social.href} aria-label={social.label} target="_blank" rel="noreferrer">
+          <a class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-cream text-ink transition-colors hover:bg-green hover:text-white" href={social.href} aria-label={social.label} target="_blank" rel="noreferrer">
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" set:html={social.icon} />
           </a>
         ))}
       </div>
-      <p class="text-caption text-cream/30">Built with ❤️ in India</p>
+      <p class="text-caption text-muted">Built in India</p>
     </div>
 
     <div>
-      <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-cream">Services</h3>
+      <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-ink">Services</h3>
       <ul class="mt-5 grid gap-3 text-body-sm">
         {services.map((service) => (
-          <li><a class="transition-colors hover:text-cream" href={service.href}>{service.label}</a></li>
+          <li><a class="transition-colors hover:text-green" href={service.href}>{service.label}</a></li>
         ))}
       </ul>
     </div>
 
     <div>
-      <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-cream">Company</h3>
+      <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-ink">Company</h3>
       <ul class="mt-5 grid gap-3 text-body-sm">
         {companyLinks.map((link) => (
-          <li><a class="transition-colors hover:text-cream" href={link.href}>{link.label}</a></li>
+          <li><a class="transition-colors hover:text-green" href={link.href}>{link.label}</a></li>
         ))}
       </ul>
     </div>
 
     <div>
-      <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-cream">Let's Talk</h3>
+      <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-ink">Let's Talk</h3>
       <p class="mt-5 text-body-sm">Have a project in mind? Let's build something great.</p>
       <div class="mt-5 grid gap-3 text-body-sm">
-        <a class="transition-colors hover:text-cream" href="tel:+917984301015">+91 7984301015</a>
-        <a class="transition-colors hover:text-cream" href="mailto:hello@witlabs.in">hello@witlabs.in</a>
+        <a class="transition-colors hover:text-green" href="tel:+917984301015">+91 7984301015</a>
+        <a class="transition-colors hover:text-green" href="mailto:hello@witlabs.in">hello@witlabs.in</a>
       </div>
       <a
-        class="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-green px-5 py-3 text-body-sm font-semibold text-white transition-colors hover:bg-green-dark"
+        class="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-green px-5 py-3 text-body-sm font-semibold text-white transition-colors hover:bg-green-mid"
         href="https://wa.me/917984301015?text=Hi%20WitLabs%2C%20I%20visited%20your%20website%20and%20I%27d%20like%20to%20discuss%20a%20project."
         target="_blank"
         rel="noreferrer"
@@ -96,13 +96,13 @@ const socialLinks = [
     </div>
   </div>
 
-  <div class="container mt-16 border-t border-white/10 pt-8">
+  <div class="container mt-16 border-t border-border pt-8">
     <div class="flex flex-col gap-4 text-body-sm md:flex-row md:items-center md:justify-between">
       <p>© 2024 WitLabs. All rights reserved.</p>
       <div class="flex gap-5">
-        <a class="transition-colors hover:text-cream" href="/privacy-policy/">Privacy Policy</a>
+        <a class="transition-colors hover:text-green" href="/privacy-policy/">Privacy Policy</a>
         <span aria-hidden="true">·</span>
-        <a class="transition-colors hover:text-cream" href="/terms-and-conditions/">Terms & Conditions</a>
+        <a class="transition-colors hover:text-green" href="/terms-and-conditions/">Terms & Conditions</a>
       </div>
     </div>
   </div>

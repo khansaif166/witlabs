@@ -5,27 +5,23 @@ export default {
     extend: {
       colors: {
         cream: {
-          DEFAULT: '#f7f4ef',
-          dark: '#edeae4',
-          darker: '#e0dcd5',
+          DEFAULT: '#F6F3EE',
+          dark: '#EDE9E2',
         },
         ink: {
-          DEFAULT: '#1a1814',
-          light: '#3d3a35',
-          lighter: '#5c5954',
+          DEFAULT: '#1C1917',
+          light: '#44403C',
+          lighter: '#78716C',
         },
-        muted: '#6b6760',
+        muted: '#78716C',
         green: {
-          DEFAULT: '#2d6a4f',
-          light: '#eef4f1',
-          dark: '#1f4a37',
+          DEFAULT: '#2D6A4F',
+          light: '#EEF4F1',
+          mid: '#52A67A',
+          bright: '#4ADE80',
+          dark: '#1F4A37',
         },
-        warm: {
-          DEFAULT: '#b5451b',
-          light: '#fdf0eb',
-          dark: '#8a3314',
-        },
-        border: 'rgba(26, 24, 20, 0.10)',
+        border: 'rgba(28, 25, 23, 0.08)',
       },
       fontFamily: {
         sans: ['DM Sans', 'system-ui', 'sans-serif'],
