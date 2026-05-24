@@ -11,7 +11,7 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
-      customPages: ['https://witlabs.in/services/website-design'],
+      filter: (page) => !page.endsWith('/thank-you/'),
     }),
     icon(),
   ],

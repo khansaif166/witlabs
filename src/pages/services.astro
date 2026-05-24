@@ -1,6 +1,57 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { pageSEO } from '../lib/seo';
+
+const services = [
+  {
+    id: 'website-design',
+    label: 'Website Design',
+    summary: 'Conversion-first websites for service businesses, local brands, and growing teams.',
+    includes: ['Strategy and sitemap', 'Responsive UI design', 'Astro development', 'Analytics-ready launch'],
+  },
+  {
+    id: 'seo',
+    label: 'SEO & Organic Growth',
+    summary: 'Search foundations, local visibility, and content systems built around how customers actually search.',
+    includes: ['Technical SEO audit', 'Keyword and competitor research', 'On-page optimization', 'Local SEO improvements'],
+  },
+  {
+    id: 'digital-marketing',
+    label: 'Digital Marketing',
+    summary: 'Campaign planning and execution that turns attention into qualified conversations.',
+    includes: ['Channel strategy', 'Creative direction', 'Landing page alignment', 'Monthly reporting'],
+  },
+  {
+    id: 'performance',
+    label: 'Performance Marketing',
+    summary: 'Paid acquisition systems with cleaner tracking, sharper offers, and better budget control.',
+    includes: ['Campaign setup', 'Conversion tracking', 'Audience and offer testing', 'Optimization cycles'],
+  },
+  {
+    id: 'app-development',
+    label: 'App Development',
+    summary: 'Practical mobile and web apps for workflows, customer experiences, and internal tools.',
+    includes: ['Product scoping', 'UX flows', 'Frontend development', 'Launch support'],
+  },
+  {
+    id: 'branding',
+    label: 'Branding & Identity',
+    summary: 'Clear identity systems that make your business easier to recognize, trust, and remember.',
+    includes: ['Positioning basics', 'Logo and visual direction', 'Color and type system', 'Brand usage guidance'],
+  },
+  {
+    id: 'automation',
+    label: 'Automation',
+    summary: 'Lean systems that remove repetitive work from sales, operations, support, and reporting.',
+    includes: ['Workflow mapping', 'Tool integration', 'Lead routing', 'Process dashboards'],
+  },
+  {
+    id: 'chatbots',
+    label: 'AI Chatbots',
+    summary: 'Customer-facing and internal assistants trained around your offers, FAQs, and workflows.',
+    includes: ['Conversation design', 'Knowledge setup', 'Lead capture', 'Handoff rules'],
+  },
+];
 ---
 
 <PageLayout
@@ -8,10 +59,54 @@ import { pageSEO } from '../lib/seo';
   seoTitle={pageSEO.services.title}
   eyebrow="What we do"
   description={pageSEO.services.description}
-  canonical="https://witlabs.in/services"
+  canonical="https://witlabs.in/services/"
   keywords={pageSEO.services.keywords}
 >
   <section class="mx-auto max-w-6xl px-6 pb-20">
-    <p class="max-w-2xl leading-7 text-muted">Service details will live here.</p>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {services.map((service) => (
+        <a class="rounded-lg border border-border bg-white p-5 text-body-sm font-semibold text-ink hover:border-green hover:text-green" href={`#${service.id}`}>
+          {service.label}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-white py-20">
+    <div class="mx-auto grid max-w-6xl gap-8 px-6">
+      {services.map((service, index) => (
+        <article id={service.id} class="scroll-mt-28 rounded-lg border border-border bg-cream p-6 md:grid md:grid-cols-[0.85fr_1.15fr] md:gap-10 md:p-8">
+          <div>
+            <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
+              {String(index + 1).padStart(2, '0')}
+            </p>
+            <h2 class="mt-4 text-heading-xl font-semibold text-ink">{service.label}</h2>
+          </div>
+          <div class="mt-5 md:mt-0">
+            <p class="text-body-lg leading-8 text-muted">{service.summary}</p>
+            <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+              {service.includes.map((item) => (
+                <li class="flex gap-3 text-body-sm text-ink-light">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-green" aria-hidden="true"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-green py-16 text-white">
+    <div class="mx-auto flex max-w-6xl flex-col gap-6 px-6 md:flex-row md:items-center md:justify-between">
+      <div>
+        <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60">Not sure where to start?</p>
+        <h2 class="mt-3 text-heading-xl font-semibold text-white">We will map the fastest next move.</h2>
+      </div>
+      <a class="premium-button premium-button-light shrink-0" href="/contact/">
+        Book a Strategy Call
+      </a>
+    </div>
   </section>
 </PageLayout>

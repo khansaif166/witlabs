@@ -27,6 +27,7 @@ const siteUrl = 'https://witlabs.in';
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const formattedTitle = title.includes('WitLabs') ? title : `${title} | WitLabs`;
 ---
 
 <!-- Charset & Viewport (must be first) -->
@@ -34,7 +35,7 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- Primary SEO -->
-<title>{title} | WitLabs</title>
+<title>{formattedTitle}</title>
 <meta name="description" content={description} />
 {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
 <link rel="canonical" href={canonicalUrl} />
