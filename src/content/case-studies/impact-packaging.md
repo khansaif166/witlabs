@@ -1,12 +1,12 @@
 ---
-client: "Impact Packaging"
+client: "Impact Packaging Solutions"
 industry: "Manufacturing"
 industrySlug: "manufacturing"
 location: "India"
 services: ["Website Design", "SEO & Growth", "Digital Marketing"]
-heroImage: "/images/case-studies/impact-packaging-hero.jpg"
-heroImageAlt: "Impact Packaging B2B website designed by WitLabs — manufacturing company"
-challenge: "Impact Packaging needed a stronger digital presence to explain its manufacturing capabilities, build trust with B2B buyers, and generate more qualified inquiries beyond word-of-mouth referrals."
+heroImage: "/images/impact-packaging.png"
+heroImageAlt: "Impact Packaging Solutions website homepage designed by WitLabs"
+challenge: "Impact Packaging Solutions needed a stronger digital presence to explain its manufacturing capabilities, build trust with B2B buyers, and generate more qualified inquiries beyond word-of-mouth referrals."
 approach: "WitLabs structured a conversion-focused website, clarified service messaging, created SEO-ready pages for packaging solutions, and planned digital marketing assets for consistent lead generation."
 results:
   - metric: "Qualified Leads"
@@ -24,9 +24,9 @@ results:
 testimonial:
   quote: "Professional, reliable and focused on actual outcomes. WitLabs understood our B2B requirements without us having to explain everything ten times. Great team to work with."
   name: "[Client Name]"
-  role: "Director, Impact Packaging"
-seoTitle: "Impact Packaging — B2B Website Case Study"
-seoDescription: "See how WitLabs helped Impact Packaging improve its B2B digital presence with website design, SEO structure and digital marketing."
+  role: "Director, Impact Packaging Solutions"
+seoTitle: "Impact Packaging Solutions — B2B Case Study"
+seoDescription: "See how WitLabs helped Impact Packaging Solutions improve its B2B digital presence with website design, SEO structure and digital marketing."
 keywords: ["manufacturing digital agency India", "B2B website design India", "packaging company digital marketing"]
 publishDate: 2024-06-10
 featured: true
@@ -35,7 +35,7 @@ draft: false
 
 ## The Challenge
 
-Impact Packaging operated in a trust-heavy B2B category where buyers need clarity before they inquire. Their digital presence did not fully explain their manufacturing capabilities, product categories or value for business customers.
+Impact Packaging Solutions operated in a trust-heavy B2B category where buyers need clarity before they inquire. Their digital presence did not fully explain their manufacturing capabilities, product categories or value for business customers.
 
 This created friction in the sales process. Prospects needed more context before reaching out, and the team had to repeatedly explain the same fundamentals during early conversations.
 
@@ -51,6 +51,6 @@ Every page was designed to reduce buyer uncertainty and make the next step obvio
 
 ## The Results
 
-Impact Packaging now has a stronger digital sales asset that explains what they do, who they serve and why prospects should contact them. The improved structure supports organic discovery, sales enablement and paid campaign readiness.
+Impact Packaging Solutions now has a stronger digital sales asset that explains what they do, who they serve and why prospects should contact them. The improved structure supports organic discovery, sales enablement and paid campaign readiness.
 
 The result is a clearer B2B journey from first visit to inquiry.

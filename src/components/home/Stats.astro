@@ -1,20 +1,20 @@
 ---
 const stats = [
-  { value: '50+', target: '50', suffix: '+', label: 'Projects Delivered', note: 'Sites, campaigns, systems' },
-  { value: '3', target: '3', suffix: '', label: 'Active Growth Clients', note: 'Hands-on monthly work' },
+  { value: '2', target: '2', suffix: '', label: 'Projects Delivered', note: 'Impact Packaging Solutions and Aswad Global' },
+  { value: '4', target: '4', suffix: '', label: 'Active Growth Clients', note: 'Aswad, Sustainly, Kota and Impact' },
   { value: '100%', target: '100', suffix: '%', label: 'On-Time Delivery', note: 'QA before launch' },
-  { value: '4.9', target: '4.9', suffix: '', label: 'Client Satisfaction', note: 'Practical communication' },
+  { value: '10/10', target: '10', suffix: '/10', label: 'Client Satisfaction', note: 'Practical communication' },
 ];
 ---
 
 <section id="home-stats" class="stats-band bg-cream text-ink">
-  <div class="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+  <div class="mx-auto max-w-[1440px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
     <div class="reveal mb-10 flex flex-col gap-4 border-b border-border pb-8 md:flex-row md:items-end md:justify-between">
-      <h2 class="max-w-3xl text-[clamp(2rem,4vw,4.5rem)] font-semibold tracking-[-0.06em] leading-[0.98]">
-        Small numbers, real businesses, visible progress.
+      <h2 class="max-w-3xl text-[clamp(1.55rem,2.7vw,2.8rem)] font-semibold tracking-[-0.025em] leading-[1.08]">
+        Real work. Visible progress.
       </h2>
       <p class="max-w-md text-sm leading-6 text-muted">
-        The goal is not to look big. The goal is to make every project measurable, useful, and polished enough to trust.
+        Practical projects with clear outcomes.
       </p>
     </div>
 
@@ -80,24 +80,23 @@ const stats = [
   }
 
   .stat-card {
-    min-height: 250px;
+    min-height: 210px;
     border-bottom: 1px solid rgba(28, 25, 23, 0.08);
-    padding: 28px 0;
+    padding: 24px 0;
   }
 
   .stat-number {
-    font-family: "DM Mono", monospace;
-    font-size: clamp(4rem, 9vw, 8rem);
+    font-size: clamp(2.35rem, 4.3vw, 3.75rem);
     font-weight: 700;
-    line-height: 0.9;
-    letter-spacing: -0.08em;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
   }
 
   @media (min-width: 1024px) {
     .stat-card {
       border-bottom: 0;
       border-right: 1px solid rgba(28, 25, 23, 0.08);
-      padding: 36px 32px;
+      padding: 32px 32px;
     }
 
     .stat-card:first-child {

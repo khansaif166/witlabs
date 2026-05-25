@@ -11,7 +11,7 @@ export const pageSEO = {
   },
   caseStudies: {
     title: 'Case Studies — Real Results for Indian Businesses | WitLabs',
-    description: 'See how WitLabs helped Al Khair Interiors, Impact Packaging and Kota Experts grow online with website design, local SEO and digital marketing. Real results, real businesses.',
+    description: 'See how WitLabs helped Aswad Global, Impact Packaging Solutions and Kota Experts grow online with website design, SEO foundations and digital marketing.',
     keywords: ['digital agency case studies India', 'website design results', 'SEO results India', 'digital marketing results'],
   },
   about: {

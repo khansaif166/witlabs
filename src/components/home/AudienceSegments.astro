@@ -1,49 +1,34 @@
 ---
 const segments = [
   {
-    audience: 'Interior Designers & Construction Companies',
-    keyMessage: 'Show your projects better. Get more serious enquiries.',
-    problem: 'Strong project work can still lose high-value leads when the online portfolio, local visibility, and enquiry handling feel weak.',
-    solution: 'Portfolio-focused websites, Google visibility, Meta and Google campaigns, WhatsApp lead routing, and lead tracking systems.',
-    tools: ['Portfolio website', 'Local SEO', 'Ads', 'WhatsApp routing', 'Lead tracking'],
-    image: '/images/case-studies/al-khair-hero.jpg',
+    audience: 'Interior',
+    keyMessage: 'Win Projects',
+    image: '/images/card1.png',
   },
   {
-    audience: 'Clinics & Healthcare Providers',
-    keyMessage: 'Help patients find, trust, and contact your clinic faster.',
-    problem: 'Patients search before visiting, and weak websites, Google profiles, reviews, or appointment flows can reduce trust.',
-    solution: 'Clinic websites, local SEO, Google Business Profile support, appointment forms, WhatsApp enquiry flows, and treatment campaigns.',
-    tools: ['Clinic website', 'Google profile', 'Local SEO', 'Appointments', 'Treatment campaigns'],
-    image: '/images/mockup.png',
+    audience: 'Clinics',
+    keyMessage: 'Build Trust',
+    image: '/images/card2.png',
   },
   {
-    audience: 'Real Estate Agents & Developers',
-    keyMessage: 'Turn property interest into faster site visit enquiries.',
-    problem: 'Property leads go cold quickly when buyers do not get clear project details, fast WhatsApp response, or proper follow-up.',
-    solution: 'Project landing pages, Google and Meta ads, WhatsApp lead routing, enquiry tracking, and follow-up systems.',
-    tools: ['Landing pages', 'Meta ads', 'Google ads', 'WhatsApp routing', 'Follow-up'],
-    image: '/images/case-studies/impact-packaging-hero.jpg',
+    audience: 'Property',
+    keyMessage: 'Move Leads',
+    image: '/images/card3.png',
   },
   {
-    audience: 'Manufacturers & B2B Suppliers',
-    keyMessage: 'Make your manufacturing business easier for buyers to trust.',
-    problem: 'Serious B2B buyers may not enquire if products, capabilities, trust signals, and enquiry options are unclear.',
-    solution: 'Professional product and service websites, SEO-ready pages, catalogue sections, enquiry forms, and B2B lead systems.',
-    tools: ['Product pages', 'Catalogues', 'SEO pages', 'Enquiry forms', 'B2B leads'],
-    image: '/images/case-studies/impact-packaging.jpg',
+    audience: 'B2B',
+    keyMessage: 'Earn Buyers',
+    image: '/images/card4.png',
   },
   {
-    audience: 'Coaching Institutes & Training Centers',
-    keyMessage: 'Get more admission enquiries with a stronger digital presence.',
-    problem: 'Parents and students compare institutes online, so unclear course information and poor follow-up can reduce admissions.',
-    solution: 'Admission-focused websites, landing pages, Google and Meta campaigns, WhatsApp follow-up, enquiry forms, and student-friendly systems.',
-    tools: ['Admission pages', 'Course clarity', 'Campaigns', 'WhatsApp follow-up', 'Enquiry forms'],
-    image: '/images/case-studies/kota-experts-hero.jpg',
+    audience: 'Education',
+    keyMessage: 'More Admissions',
+    image: '/images/card5.png',
   },
 ];
 
-const cardPositions = [-700, -350, 0, 350, 700];
-const tabletPositions = [-520, -260, 0, 260, 520];
+const cardPositions = [-760, -380, 0, 380, 760];
+const tabletPositions = [-560, -280, 0, 280, 560];
 const closedPositions = [0, -18, 18, -32, 32];
 const rotations = [0, -3, 2, -4, 4];
 const spreadDelays = [0, 70, 140, 210, 280];
@@ -52,12 +37,12 @@ const spreadDelays = [0, 70, 140, 210, 280];
 <section id="audience-systems" class="audience-section bg-white text-ink" data-audience-section>
   <div class="audience-shell mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
     <div class="audience-intro">
-      <p class="section-kicker reveal text-green">Built For High-Intent Leads</p>
+      <p class="section-kicker reveal text-green">Built For Leads</p>
       <h2 class="reveal reveal-delay-1 mt-4 font-semibold text-ink">
-        Industries We Grow
+        Built for your market.
       </h2>
-      <p class="reveal reveal-delay-2 mx-auto mt-5 max-w-2xl text-base leading-7 text-ink-light sm:text-lg">
-        Websites, visibility, campaigns, and follow-up systems for businesses where every enquiry matters.
+      <p class="reveal reveal-delay-2 mx-auto mt-4 max-w-xl text-sm leading-6 text-ink-light sm:text-base">
+        Clear systems for enquiry-driven businesses.
       </p>
     </div>
 
@@ -75,18 +60,7 @@ const spreadDelays = [0, 70, 140, 210, 280];
             <div class="audience-card__shade"></div>
 
             <div class="audience-card__content">
-              <div class="audience-card__top">
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <p>{segment.audience}</p>
-              </div>
-
-              <h3>{segment.keyMessage}</h3>
-              <p class="audience-card__problem">{segment.problem}</p>
-              <p class="audience-card__solution">{segment.solution}</p>
-
-              <div class="audience-card__tools" aria-label={`Systems for ${segment.audience}`}>
-                {segment.tools.map((tool) => <span>{tool}</span>)}
-              </div>
+              <span>{segment.keyMessage}</span>
             </div>
           </article>
         ))}
@@ -94,12 +68,12 @@ const spreadDelays = [0, 70, 140, 210, 280];
 
       <div class="audience-deck-status">
         <span class="audience-dot" aria-hidden="true"></span>
-        <span id="audience-card-status">01 / Interior Designers & Construction Companies</span>
+        <span id="audience-card-status">01 / Interior</span>
       </div>
     </div>
 
     <div class="audience-cta reveal mt-10">
-      <p>Move across the gallery to explore the industries. Pick your market, and we will map the website, traffic, and follow-up system around how your customers decide.</p>
+      <p>Pick your market. We map the path to better enquiries.</p>
       <a class="premium-button premium-button-primary" href="/contact/">Plan My Lead System</a>
     </div>
   </div>
@@ -136,7 +110,10 @@ const spreadDelays = [0, 70, 140, 210, 280];
       driftFrame = window.requestAnimationFrame(tick);
     };
 
+    const canInteract = () => section.classList.contains('has-settled') || window.innerWidth < 900;
+
     const setActive = (card) => {
+      if (!canInteract()) return;
       cards.forEach((item) => item.classList.toggle('is-active', item === card));
       if (status && card.dataset.cardLabel) status.textContent = card.dataset.cardLabel;
     };
@@ -147,7 +124,7 @@ const spreadDelays = [0, 70, 140, 210, 280];
     });
 
     deck.addEventListener('pointermove', (event) => {
-      if (!section.classList.contains('is-spread') || window.innerWidth < 900) return;
+      if (!section.classList.contains('has-settled') || window.innerWidth < 900) return;
       const progress = (event.clientX / window.innerWidth - 0.5) * 2;
       const deadZone = Math.abs(progress) < 0.12 ? 0 : progress;
       setDrift(deadZone * -300);
@@ -229,9 +206,9 @@ const spreadDelays = [0, 70, 140, 210, 280];
   }
 
   .audience-intro h2 {
-    font-size: clamp(3rem, 7vw, 7.25rem);
-    letter-spacing: -0.065em;
-    line-height: 0.9;
+    font-size: clamp(2.15rem, 4.4vw, 4.3rem);
+    letter-spacing: -0.045em;
+    line-height: 0.96;
   }
 
   .audience-deck-wrap {
@@ -256,8 +233,8 @@ const spreadDelays = [0, 70, 140, 210, 280];
     left: 50%;
     z-index: var(--card-z);
     display: block;
-    height: 480px;
-    width: clamp(260px, 23vw, 330px);
+    aspect-ratio: 1086 / 1448;
+    width: clamp(285px, 22vw, 360px);
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
@@ -281,133 +258,58 @@ const spreadDelays = [0, 70, 140, 210, 280];
     transition-delay: 0ms;
   }
 
-  .audience-section.is-spread .audience-card:hover,
-  .audience-section.is-spread .audience-card:focus-visible,
-  .audience-section.is-spread .audience-card.is-active {
+  .audience-section.is-spread:not(.has-settled) .audience-card {
+    pointer-events: none;
+  }
+
+  .audience-section.has-settled .audience-card:hover,
+  .audience-section.has-settled .audience-card:focus-visible,
+  .audience-section.has-settled .audience-card.is-active {
     z-index: 30;
     box-shadow: var(--shadow-lift);
     transform: translate3d(calc(-50% + var(--open-x) + var(--deck-drift)), -18px, 0) rotate(0deg) scale(1.035);
   }
 
   .audience-card img {
+    display: block;
     height: 100%;
     width: 100%;
     object-fit: cover;
+    object-position: center;
     filter: saturate(0.92) contrast(1.04);
-    transform: scale(1.05);
+    transform: scale(1);
     transition: transform 0.8s var(--ease-out), filter 0.4s var(--ease-standard);
   }
 
-  .audience-section.is-spread .audience-card:hover img,
-  .audience-section.is-spread .audience-card:focus-visible img,
-  .audience-section.is-spread .audience-card.is-active img {
+  .audience-section.has-settled .audience-card:hover img,
+  .audience-section.has-settled .audience-card:focus-visible img,
+  .audience-section.has-settled .audience-card.is-active img {
     filter: saturate(1.04) contrast(1.06);
-    transform: scale(1.1);
+    transform: scale(1.015);
   }
 
   .audience-card__shade {
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.12) 34%, rgba(0, 0, 0, 0.9)),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.54), transparent 58%);
+    background: linear-gradient(180deg, transparent 58%, rgba(0, 0, 0, 0.32));
   }
 
   .audience-card__content {
     position: absolute;
     inset: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 22px;
+    align-items: flex-end;
+    padding: 24px;
   }
 
-  .audience-card__top {
-    position: absolute;
-    left: 22px;
-    right: 22px;
-    top: 20px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 18px;
-  }
-
-  .audience-card__top span {
-    color: #4ADE80;
-    font-family: "DM Mono", monospace;
-    font-size: 12px;
-  }
-
-  .audience-card__top p {
-    max-width: 210px;
-    color: rgba(255, 255, 255, 0.74);
-    font-family: "DM Mono", monospace;
-    font-size: 10px;
-    line-height: 1.45;
-    text-align: right;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-
-  .audience-card h3 {
-    font-size: clamp(1.8rem, 2.45vw, 2.85rem);
+  .audience-card__content span {
+    max-width: 7ch;
+    color: #ffffff;
+    font-size: clamp(1.65rem, 2.4vw, 2.6rem);
     font-weight: 600;
-    letter-spacing: -0.06em;
-    line-height: 0.96;
-  }
-
-  .audience-card__problem,
-  .audience-card__solution {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.55s var(--ease-premium), opacity 0.35s var(--ease-standard), margin-top 0.35s var(--ease-standard);
-  }
-
-  .audience-section.is-spread .audience-card:hover .audience-card__problem,
-  .audience-section.is-spread .audience-card:focus-visible .audience-card__problem,
-  .audience-section.is-spread .audience-card.is-active .audience-card__problem {
-    max-height: 130px;
-    margin-top: 16px;
-    opacity: 1;
-  }
-
-  .audience-section.is-spread .audience-card:hover .audience-card__solution,
-  .audience-section.is-spread .audience-card:focus-visible .audience-card__solution {
-    max-height: 140px;
-    margin-top: 10px;
-    opacity: 1;
-  }
-
-  .audience-card__problem {
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 14px;
-    line-height: 1.55;
-  }
-
-  .audience-card__solution {
-    color: rgba(255, 255, 255, 0.58);
-    font-size: 13px;
-    line-height: 1.55;
-  }
-
-  .audience-card__tools {
-    margin-top: 18px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-  }
-
-  .audience-card__tools span {
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 7px 9px;
-    color: rgba(255, 255, 255, 0.82);
-    font-size: 11px;
-    font-weight: 600;
-    backdrop-filter: blur(14px);
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    text-shadow: 0 12px 34px rgba(0, 0, 0, 0.42);
   }
 
   .audience-deck-status {
@@ -450,7 +352,7 @@ const spreadDelays = [0, 70, 140, 210, 280];
   .audience-cta p {
     max-width: 760px;
     color: #44403C;
-    font-size: 17px;
+    font-size: 15px;
     line-height: 1.7;
   }
 
@@ -479,9 +381,9 @@ const spreadDelays = [0, 70, 140, 210, 280];
       transform: translate3d(calc(-50% + var(--tablet-x) + var(--deck-drift)), 0, 0) rotate(0deg) scale(0.96);
     }
 
-    .audience-section.is-spread .audience-card:hover,
-    .audience-section.is-spread .audience-card:focus-visible,
-    .audience-section.is-spread .audience-card.is-active {
+    .audience-section.has-settled .audience-card:hover,
+    .audience-section.has-settled .audience-card:focus-visible,
+    .audience-section.has-settled .audience-card.is-active {
       transform: translate3d(calc(-50% + var(--tablet-x) + var(--deck-drift)), -12px, 0) rotate(0deg) scale(1);
     }
   }
@@ -515,48 +417,19 @@ const spreadDelays = [0, 70, 140, 210, 280];
       position: relative;
       top: auto;
       left: auto;
-      height: min(540px, 120vw);
       width: 100%;
       transform: none;
     }
 
-    .audience-card__problem,
-    .audience-card__solution,
-    .audience-card:hover .audience-card__problem,
-    .audience-card:focus-visible .audience-card__problem,
-    .audience-card.is-active .audience-card__problem,
-    .audience-card:hover .audience-card__solution,
-    .audience-card:focus-visible .audience-card__solution {
-      max-height: none;
-      opacity: 1;
-    }
-
-    .audience-card__problem {
-      margin-top: 16px;
-    }
-
-    .audience-card__solution {
-      margin-top: 10px;
-    }
   }
 
   @media (max-width: 520px) {
-    .audience-card__top {
-      display: grid;
-      justify-content: start;
-    }
-
-    .audience-card__top p {
-      max-width: none;
-      text-align: left;
-    }
-
     .audience-card__content {
       padding: 18px;
     }
 
-    .audience-card h3 {
-      font-size: clamp(2rem, 10vw, 3rem);
+    .audience-card__content span {
+      font-size: clamp(1.65rem, 8vw, 2.45rem);
     }
   }
 </style>

@@ -6,10 +6,37 @@ const caseStudies = (await getCollection('case-studies', ({ data }) => !data.dra
   .slice(0, 6);
 
 const supportingImages: Record<string, string> = {
-  'al-khair-interiors': '/images/case-studies/al-khair.jpg',
-  'impact-packaging': '/images/case-studies/impact-packaging.jpg',
+  'aswad-global': '/images/Aswad.png',
+  'impact-packaging': '/images/impact-packaging.png',
   'kota-experts': '/images/case-studies/kota-experts.jpg',
 };
+
+const displayLinks: Record<string, string> = {
+  'aswad-global': 'www.aswadglobal.com',
+  'impact-packaging': 'www.impactpackagingsolutions.com',
+  'kota-experts': 'www.kotaexperts.com',
+};
+
+const projects = [
+  ...caseStudies.map((study) => ({
+    slug: study.slug,
+    client: study.data.client,
+    industry: study.data.industry,
+    image: supportingImages[study.slug] ?? study.data.heroImage,
+    alt: study.data.heroImageAlt,
+    href: `/case-studies/${study.slug}/`,
+    displayLink: displayLinks[study.slug] ?? `www.${study.slug}.com`,
+  })),
+  {
+    slug: 'al-khair-interiors',
+    client: 'Al Khair Interiors',
+    industry: 'Interior Design',
+    image: '/images/al-khair-int.png',
+    alt: 'Al Khair Interiors website homepage designed by WitLabs',
+    href: '/case-studies/',
+    displayLink: 'Al Khair Interiors',
+  },
+];
 
 const wallSlots = [
   { row: -1, scale: 0.88 },
@@ -30,14 +57,10 @@ const wallSlots = [
 ];
 
 const wallItems = wallSlots.map((slot, index) => {
-  const study = caseStudies[index % caseStudies.length];
-  const useSupportingImage = index % 2 === 1 && supportingImages[study.slug];
-  const displayLink = `www.${study.slug}.com`;
+  const project = projects[index % projects.length];
 
   return {
-    study,
-    image: useSupportingImage ? supportingImages[study.slug] : study.data.heroImage,
-    displayLink,
+    ...project,
     ...slot,
   };
 });
@@ -65,19 +88,19 @@ const wallItems = wallSlots.map((slot, index) => {
             class="work-wall-panel"
             data-wall-panel
             data-wall-row={item.row}
-            href={`/case-studies/${item.study.slug}/`}
-            aria-label={`View ${item.study.data.client} case study`}
+            href={item.href}
+            aria-label={`View ${item.client} project`}
             style={`--panel-scale: ${item.scale};`}
           >
             <img
               src={item.image}
-              alt={item.study.data.heroImageAlt}
+              alt={item.alt}
               loading={index < 4 ? 'eager' : 'lazy'}
             />
             <span class="work-wall-panel__veil"></span>
             <span class="work-wall-panel__content">
-              <span class="work-wall-panel__meta">{item.study.data.industry}</span>
-              <span class="work-wall-panel__title">{item.study.data.client}</span>
+              <span class="work-wall-panel__meta">{item.industry}</span>
+              <span class="work-wall-panel__title">{item.client}</span>
               <span class="work-wall-panel__link">{item.displayLink}</span>
               <span class="work-wall-panel__cta">View project <span aria-hidden="true">→</span></span>
             </span>
@@ -96,8 +119,8 @@ const wallItems = wallSlots.map((slot, index) => {
         <a
           class="work-wall-hit"
           data-wall-hit
-          href={`/case-studies/${item.study.slug}/`}
-          aria-label={`View ${item.study.data.client} case study`}
+          href={item.href}
+          aria-label={`View ${item.client} project`}
           tabindex="-1"
         >
           <span class="work-wall-hit__badge">{item.displayLink}</span>
@@ -152,8 +175,8 @@ const wallItems = wallSlots.map((slot, index) => {
 
     const updatePanels = () => {
       const narrow = window.matchMedia('(max-width: 700px)').matches;
-      const columnGap = narrow ? 245 : 330;
-      const rowGap = narrow ? 138 : 176;
+      const columnGap = narrow ? 300 : 430;
+      const rowGap = narrow ? 132 : 188;
       const wrapWidth = panels.length * columnGap;
       const halfWidth = wrapWidth / 2;
 
@@ -360,7 +383,7 @@ const wallItems = wallSlots.map((slot, index) => {
     margin-top: 10px;
     max-width: 560px;
     color: #ffffff;
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 600;
     letter-spacing: 0;
     line-height: 1;
@@ -388,7 +411,7 @@ const wallItems = wallSlots.map((slot, index) => {
   }
 
   .work-wall {
-    --panel-width: 300px;
+    --panel-width: 380px;
     position: relative;
     height: clamp(620px, 72vh, 760px);
     cursor: grab;
@@ -433,7 +456,7 @@ const wallItems = wallSlots.map((slot, index) => {
     top: 50%;
     display: block;
     width: var(--panel-width);
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.16);
     background: #151515;
@@ -471,7 +494,7 @@ const wallItems = wallSlots.map((slot, index) => {
     top: 50%;
     display: block;
     width: var(--panel-width);
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     transform:
       translate(-50%, -50%)
       translate3d(var(--hit-x, 0px), var(--hit-y, 0px), 0)
@@ -520,7 +543,7 @@ const wallItems = wallSlots.map((slot, index) => {
     display: block;
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     filter: saturate(0.94) brightness(0.76);
     transition: filter 0.3s var(--ease-standard), transform 0.45s var(--ease-standard);
     -webkit-user-drag: none;
@@ -578,7 +601,7 @@ const wallItems = wallSlots.map((slot, index) => {
   .work-wall-panel__title {
     max-width: 18ch;
     color: #ffffff;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 700;
     line-height: 0.95;
   }
@@ -612,7 +635,7 @@ const wallItems = wallSlots.map((slot, index) => {
     display: grid;
     transform: translate(-50%, -50%);
     color: #ffffff;
-    font-size: 54px;
+    font-size: 44px;
     font-weight: 600;
     letter-spacing: 0;
     line-height: 0.9;
@@ -652,7 +675,7 @@ const wallItems = wallSlots.map((slot, index) => {
 
   @media (max-width: 900px) {
     .work-wall {
-      --panel-width: 250px;
+      --panel-width: 310px;
       height: 680px;
     }
 
@@ -662,7 +685,7 @@ const wallItems = wallSlots.map((slot, index) => {
     }
 
     .work-wall-header h2 {
-      font-size: 38px;
+      font-size: 32px;
     }
 
     .work-wall__stage {
@@ -671,18 +694,18 @@ const wallItems = wallSlots.map((slot, index) => {
 
     .work-wall__center {
       top: 55%;
-      font-size: 43px;
+      font-size: 36px;
     }
   }
 
   @media (max-width: 560px) {
     .work-wall {
-      --panel-width: 210px;
+      --panel-width: 250px;
       height: 620px;
     }
 
     .work-wall-header h2 {
-      font-size: 32px;
+      font-size: 28px;
     }
 
     .work-wall-panel__title {
@@ -690,7 +713,7 @@ const wallItems = wallSlots.map((slot, index) => {
     }
 
     .work-wall__center {
-      font-size: 36px;
+      font-size: 30px;
     }
   }
 </style>

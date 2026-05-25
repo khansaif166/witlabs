@@ -6,9 +6,9 @@ const posts = (await getCollection('insights', ({ data }) => !data.draft))
   .slice(0, 3);
 
 const placeholders = [
-  { category: 'COMING SOON', title: 'Website growth notes for Indian businesses', readTime: 'Soon' },
-  { category: 'COMING SOON', title: 'Local SEO lessons from real service companies', readTime: 'Soon' },
-  { category: 'COMING SOON', title: 'Automation ideas that save founders real hours', readTime: 'Soon' },
+  { category: 'COMING SOON', title: 'Website notes', readTime: 'Soon' },
+  { category: 'COMING SOON', title: 'Local SEO lessons', readTime: 'Soon' },
+  { category: 'COMING SOON', title: 'Automation ideas', readTime: 'Soon' },
 ];
 
 const cards = posts.length > 0
@@ -28,8 +28,8 @@ const cards = posts.length > 0
     <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
       <div>
         <p class="section-kicker reveal text-green">Resources</p>
-        <h2 class="reveal reveal-delay-1 mt-4 display-tight text-[clamp(3.2rem,7vw,7rem)] font-semibold">
-          Practical ideas for growth-minded teams.
+        <h2 class="reveal reveal-delay-1 mt-4 display-tight text-[clamp(2.15rem,4.4vw,4.2rem)] font-semibold">
+          Useful growth notes.
         </h2>
       </div>
       <a class="arrow-link reveal reveal-delay-2 text-green" href="/insights/">View all <span class="arrow">→</span></a>
@@ -91,7 +91,7 @@ const cards = posts.length > 0
     bottom: -18px;
     right: 18px;
     color: rgba(255, 255, 255, 0.28);
-    font-size: 120px;
+    font-size: 86px;
     font-weight: 700;
     letter-spacing: -0.08em;
     line-height: 0.8;
@@ -105,7 +105,7 @@ const cards = posts.length > 0
     margin-top: 28px;
     min-height: 96px;
     color: #1C1917;
-    font-size: clamp(1.45rem, 2.5vw, 2rem);
+    font-size: clamp(1.1rem, 1.8vw, 1.45rem);
     font-weight: 700;
     letter-spacing: -0.045em;
     line-height: 1.08;

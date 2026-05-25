@@ -13,6 +13,8 @@
 
   body {
     @apply bg-cream text-ink font-sans;
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 
   :root {
@@ -58,7 +60,7 @@
   }
 
   .section-shell {
-    @apply px-4 py-20 sm:px-6 lg:px-8 lg:py-28;
+    @apply px-4 py-16 sm:px-6 lg:px-8 lg:py-24;
   }
 
   .section-kicker {
@@ -66,8 +68,8 @@
   }
 
   .display-tight {
-    letter-spacing: -0.055em;
-    line-height: 0.96;
+    letter-spacing: -0.035em;
+    line-height: 1;
   }
 
   .grain::after {
@@ -142,7 +144,7 @@
   }
 
   .premium-button {
-    @apply relative inline-flex items-center justify-center overflow-hidden rounded-lg px-7 py-4 text-sm font-semibold uppercase tracking-[0.04em];
+    @apply relative inline-flex items-center justify-center overflow-hidden rounded-lg px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.04em];
     isolation: isolate;
     transition: color 0.3s var(--ease-standard), border-color 0.3s var(--ease-standard), opacity 0.3s var(--ease-standard);
   }
