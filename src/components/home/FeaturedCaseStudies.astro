@@ -32,10 +32,12 @@ const wallSlots = [
 const wallItems = wallSlots.map((slot, index) => {
   const study = caseStudies[index % caseStudies.length];
   const useSupportingImage = index % 2 === 1 && supportingImages[study.slug];
+  const displayLink = `www.${study.slug}.com`;
 
   return {
     study,
     image: useSupportingImage ? supportingImages[study.slug] : study.data.heroImage,
+    displayLink,
     ...slot,
   };
 });
@@ -76,6 +78,7 @@ const wallItems = wallSlots.map((slot, index) => {
             <span class="work-wall-panel__content">
               <span class="work-wall-panel__meta">{item.study.data.industry}</span>
               <span class="work-wall-panel__title">{item.study.data.client}</span>
+              <span class="work-wall-panel__link">{item.displayLink}</span>
               <span class="work-wall-panel__cta">View project <span aria-hidden="true">→</span></span>
             </span>
           </a>
@@ -86,6 +89,20 @@ const wallItems = wallSlots.map((slot, index) => {
     <div class="work-wall__center" aria-hidden="true">
       <span>Made with</span>
       <strong>WitLabs</strong>
+    </div>
+
+    <div class="work-wall__hit-layer" aria-hidden="true">
+      {wallItems.map((item) => (
+        <a
+          class="work-wall-hit"
+          data-wall-hit
+          href={`/case-studies/${item.study.slug}/`}
+          aria-label={`View ${item.study.data.client} case study`}
+          tabindex="-1"
+        >
+          <span class="work-wall-hit__badge">{item.displayLink}</span>
+        </a>
+      ))}
     </div>
   </div>
 </section>
@@ -99,15 +116,39 @@ const wallItems = wallSlots.map((slot, index) => {
     const section = wall.closest('#selected-work');
     const header = document.getElementById('site-header');
     const panels = [...wall.querySelectorAll('[data-wall-panel]')];
+    const hits = [...wall.querySelectorAll('[data-wall-hit]')];
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const dragThreshold = 8;
+    const perspective = 1800;
     let wallOffset = 0;
     let velocity = reducedMotion ? 0 : -0.22;
+    let suspendedVelocity = velocity;
     let isDragging = false;
     let dragStarted = false;
     let dragDistance = 0;
     let lastX = 0;
     let activePointerId = null;
+
+    const pauseMotion = () => {
+      suspendedVelocity = velocity;
+      velocity = 0;
+    };
+
+    const resumeMotion = () => {
+      if (!reducedMotion && !isDragging) {
+        velocity = suspendedVelocity || -0.22;
+      }
+    };
+
+    const startDrag = (event) => {
+      if (event.button !== 0) return false;
+      activePointerId = event.pointerId;
+      dragStarted = false;
+      dragDistance = 0;
+      lastX = event.clientX;
+      pauseMotion();
+      return true;
+    };
 
     const updatePanels = () => {
       const narrow = window.matchMedia('(max-width: 700px)').matches;
@@ -124,6 +165,9 @@ const wallItems = wallSlots.map((slot, index) => {
         const z = -Math.min(narrow ? 220 : 330, distance * 0.28);
         const rotateY = Math.max(-24, Math.min(24, x * -0.035));
         const edgeFade = Math.max(0.28, 1 - distance / halfWidth);
+        const projection = perspective / (perspective - z);
+        const hitScale = Number(panel.style.getPropertyValue('--panel-scale') || 1) * projection;
+        const hit = hits[index];
 
         panel.style.setProperty('--panel-x', `${x}px`);
         panel.style.setProperty('--panel-y', `${row * rowGap}px`);
@@ -132,6 +176,14 @@ const wallItems = wallSlots.map((slot, index) => {
         panel.style.setProperty('--panel-opacity', edgeFade.toFixed(2));
         panel.style.zIndex = String(1000 - Math.round(distance));
         panel.toggleAttribute('data-front', distance < columnGap * 0.8);
+
+        if (hit) {
+          hit.style.setProperty('--hit-x', `${x * projection}px`);
+          hit.style.setProperty('--hit-y', `${row * rowGap * projection}px`);
+          hit.style.setProperty('--hit-scale', String(hitScale));
+          hit.style.zIndex = String(1000 - Math.round(distance));
+          hit.toggleAttribute('data-front', distance < columnGap * 0.8);
+        }
       });
     };
 
@@ -152,11 +204,9 @@ const wallItems = wallSlots.map((slot, index) => {
     }, { passive: true });
 
     wall.addEventListener('pointerdown', (event) => {
-      if (event.button !== 0) return;
-      activePointerId = event.pointerId;
-      dragStarted = false;
-      dragDistance = 0;
-      lastX = event.clientX;
+      const hitPanel = event.target instanceof Element ? event.target.closest('[data-wall-panel], [data-wall-hit]') : null;
+      if (hitPanel) return;
+      startDrag(event);
     });
 
     wall.addEventListener('pointermove', (event) => {
@@ -186,26 +236,60 @@ const wallItems = wallSlots.map((slot, index) => {
 
     const stopDrag = (event) => {
       if (activePointerId !== event.pointerId) return;
+
       activePointerId = null;
       if (dragStarted) {
         isDragging = false;
         wall.classList.remove('is-dragging');
       }
       dragStarted = false;
+      dragDistance = 0;
       if (wall.hasPointerCapture(event.pointerId)) {
         wall.releasePointerCapture(event.pointerId);
       }
+
+      resumeMotion();
     };
 
     wall.addEventListener('pointerup', stopDrag);
     wall.addEventListener('pointercancel', stopDrag);
 
-    panels.forEach((panel) => {
-      panel.addEventListener('click', (event) => {
-        if (dragDistance >= dragThreshold) {
-          event.preventDefault();
-        }
+    panels.forEach((panel, index) => {
+      const hit = hits[index];
+
+      panel.addEventListener('pointerenter', () => {
+        pauseMotion();
+        panel.setAttribute('data-selected', '');
       });
+
+      panel.addEventListener('pointerleave', () => {
+        resumeMotion();
+        panel.removeAttribute('data-selected');
+      });
+
+      panel.addEventListener('pointerdown', (event) => {
+        pauseMotion();
+        event.stopPropagation();
+      });
+
+      if (!hit) return;
+
+      const selectPanel = () => {
+        pauseMotion();
+        panel.setAttribute('data-selected', '');
+        hit.setAttribute('data-selected', '');
+      };
+
+      const unselectPanel = () => {
+        resumeMotion();
+        panel.removeAttribute('data-selected');
+        hit.removeAttribute('data-selected');
+      };
+
+      hit.addEventListener('pointerenter', selectPanel);
+      hit.addEventListener('pointerleave', unselectPanel);
+      hit.addEventListener('focus', selectPanel);
+      hit.addEventListener('blur', unselectPanel);
     });
 
     if (section && header && 'IntersectionObserver' in window) {
@@ -304,6 +388,7 @@ const wallItems = wallSlots.map((slot, index) => {
   }
 
   .work-wall {
+    --panel-width: 300px;
     position: relative;
     height: clamp(620px, 72vh, 760px);
     cursor: grab;
@@ -333,7 +418,6 @@ const wallItems = wallSlots.map((slot, index) => {
   }
 
   .work-wall__ring {
-    --panel-width: 300px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -369,8 +453,54 @@ const wallItems = wallSlots.map((slot, index) => {
       border-color 0.3s var(--ease-standard),
       box-shadow 0.3s var(--ease-standard),
       opacity 0.3s var(--ease-standard);
+    touch-action: manipulation;
     user-select: none;
     -webkit-user-drag: none;
+  }
+
+  .work-wall__hit-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .work-wall-hit {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    width: var(--panel-width);
+    aspect-ratio: 16 / 10;
+    transform:
+      translate(-50%, -50%)
+      translate3d(var(--hit-x, 0px), var(--hit-y, 0px), 0)
+      scale(var(--hit-scale, 1));
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  .work-wall-hit__badge {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: rgba(0, 0, 0, 0.72);
+    color: #ffffff;
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.1;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.25s var(--ease-standard), transform 0.25s var(--ease-standard), border-color 0.25s var(--ease-standard), background-color 0.25s var(--ease-standard);
+    backdrop-filter: blur(14px);
   }
 
   .work-wall-panel[data-front] {
@@ -378,7 +508,8 @@ const wallItems = wallSlots.map((slot, index) => {
   }
 
   .work-wall-panel:hover,
-  .work-wall-panel:focus-visible {
+  .work-wall-panel:focus-visible,
+  .work-wall-panel[data-selected] {
     border-color: rgba(74, 222, 128, 0.82);
     box-shadow: 0 46px 120px rgba(0, 0, 0, 0.62), 0 0 0 1px rgba(74, 222, 128, 0.34);
     opacity: 1;
@@ -397,7 +528,8 @@ const wallItems = wallSlots.map((slot, index) => {
   }
 
   .work-wall-panel:hover img,
-  .work-wall-panel:focus-visible img {
+  .work-wall-panel:focus-visible img,
+  .work-wall-panel[data-selected] img {
     filter: saturate(1.05) brightness(0.5);
     transform: scale(1.04);
   }
@@ -411,7 +543,8 @@ const wallItems = wallSlots.map((slot, index) => {
   }
 
   .work-wall-panel:hover .work-wall-panel__veil,
-  .work-wall-panel:focus-visible .work-wall-panel__veil {
+  .work-wall-panel:focus-visible .work-wall-panel__veil,
+  .work-wall-panel[data-selected] .work-wall-panel__veil {
     opacity: 1;
   }
 
@@ -426,7 +559,8 @@ const wallItems = wallSlots.map((slot, index) => {
   }
 
   .work-wall-panel:hover .work-wall-panel__content,
-  .work-wall-panel:focus-visible .work-wall-panel__content {
+  .work-wall-panel:focus-visible .work-wall-panel__content,
+  .work-wall-panel[data-selected] .work-wall-panel__content {
     opacity: 1;
     transform: translateY(0);
   }
@@ -449,8 +583,25 @@ const wallItems = wallSlots.map((slot, index) => {
     line-height: 0.95;
   }
 
+  .work-wall-panel__link {
+    color: rgba(255, 255, 255, 0.82);
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
   .work-wall-panel__cta {
     color: #4ade80;
+  }
+
+  .work-wall-hit:hover .work-wall-hit__badge,
+  .work-wall-hit:focus-visible .work-wall-hit__badge,
+  .work-wall-hit[data-selected] .work-wall-hit__badge {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: rgba(74, 222, 128, 0.75);
+    background: rgba(8, 10, 8, 0.82);
   }
 
   .work-wall__center {
@@ -501,6 +652,7 @@ const wallItems = wallSlots.map((slot, index) => {
 
   @media (max-width: 900px) {
     .work-wall {
+      --panel-width: 250px;
       height: 680px;
     }
 
@@ -517,10 +669,6 @@ const wallItems = wallSlots.map((slot, index) => {
       inset: 0 -28%;
     }
 
-    .work-wall__ring {
-      --panel-width: 250px;
-    }
-
     .work-wall__center {
       top: 55%;
       font-size: 43px;
@@ -529,15 +677,12 @@ const wallItems = wallSlots.map((slot, index) => {
 
   @media (max-width: 560px) {
     .work-wall {
+      --panel-width: 210px;
       height: 620px;
     }
 
     .work-wall-header h2 {
       font-size: 32px;
-    }
-
-    .work-wall__ring {
-      --panel-width: 210px;
     }
 
     .work-wall-panel__title {

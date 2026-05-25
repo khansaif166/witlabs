@@ -1,74 +1,83 @@
 ---
 const heroFrames = [
   {
-    src: '/images/case-studies/al-khair-hero.jpg',
-    alt: 'Interior design website project by WitLabs',
+    src: '/images/Design-1.png',
+    alt: 'WitLabs website design concept with editorial layout and product storytelling.',
     label: 'Brand website',
   },
   {
-    src: '/images/case-studies/impact-packaging-hero.jpg',
-    alt: 'Manufacturing website project by WitLabs',
+    src: '/images/Design-2.png',
+    alt: 'WitLabs landing page concept with a clean conversion-focused structure.',
     label: 'B2B growth',
   },
   {
-    src: '/images/case-studies/kota-experts-hero.jpg',
-    alt: 'Education website project by WitLabs',
+    src: '/images/Design-3.png',
+    alt: 'WitLabs premium website interface design shown in a browser mockup.',
+    label: 'Growth systems',
+  },
+  {
+    src: '/images/Design-4.png',
+    alt: 'WitLabs website mockup with layered imagery and bold typography.',
+    label: 'Visual identity',
+  },
+  {
+    src: '/images/Design-5.png',
+    alt: 'WitLabs service business website concept built for digital growth.',
     label: 'Local SEO',
+  },
+  {
+    src: '/images/Design-6.png',
+    alt: 'WitLabs website design preview showing another polished digital growth concept.',
+    label: 'Launch ready',
   },
 ];
 ---
 
 <section id="homepage-hero" class="homepage-hero relative min-h-[100svh] overflow-hidden bg-ink text-white">
-  <div class="hero-media" aria-hidden="true">
-    {heroFrames.map((frame, index) => (
-      <div class:list={['hero-media__item', index === 0 && 'is-active']}>
-        <img src={frame.src} alt="" loading={index === 0 ? 'eager' : 'lazy'} />
-      </div>
-    ))}
-    <div class="hero-media__shade"></div>
-    <div class="hero-media__wash"></div>
+  <div class="hero-bg" aria-hidden="true">
+    <img src="/images/Design-3.png" alt="" loading="eager" />
   </div>
 
-  <div class="container relative z-10 flex min-h-[100svh] flex-col justify-between pb-8 pt-[calc(var(--nav-height)+56px)] lg:pb-10 lg:pt-[calc(var(--nav-height)+96px)]">
-    <div class="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.55fr)] lg:items-end">
-      <div class="min-w-0">
-        <div class="reveal flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-white/58">
-          <span>Digital Growth Agency</span>
-          <span class="h-px w-8 bg-white/30" aria-hidden="true"></span>
-          <span>India</span>
-        </div>
-
-        <h1 id="hero-heading" class="mt-8 max-w-[980px] display-tight text-[clamp(4.8rem,13vw,12.5rem)] font-semibold text-white">
-          <span class="hero-line block">Build</span>
-          <span class="hero-line block">systems</span>
-          <span class="hero-line block text-white/45">that sell.</span>
-        </h1>
-
-        <div class="reveal reveal-delay-3 mt-8 w-full max-w-[calc(100vw-32px)] sm:max-w-2xl">
-          <p class="text-[clamp(1.1rem,2.2vw,1.55rem)] leading-[1.35] text-white/72">
-            WitLabs creates websites, SEO engines, marketing funnels, and automation systems for businesses that need more than a pretty homepage.
-          </p>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a class="premium-button premium-button-light" href="/contact/">Start a Project</a>
-            <a class="premium-button premium-button-outline text-white" href="/case-studies/">See Our Work <span class="ml-2">→</span></a>
-          </div>
-        </div>
+  <div class="container relative z-10 flex min-h-[100svh] flex-col items-center pb-8 pt-[calc(var(--nav-height)+34px)] text-center lg:pt-[calc(var(--nav-height)+38px)]">
+    <div class="hero-copy reveal">
+      <div class="mx-auto flex w-fit flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-white/70">
+        <span>Digital Growth Agency</span>
+        <span class="h-px w-8 bg-white/35" aria-hidden="true"></span>
+        <span>India</span>
       </div>
 
-      <aside class="hero-panel reveal reveal-delay-2 min-w-0 w-full max-w-[calc(100vw-32px)] lg:max-w-none">
-        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-white/45">Live signal</p>
-        <div class="mt-8 grid gap-6">
-          <div>
-            <p class="text-5xl font-semibold tracking-[-0.06em]">50+</p>
-            <p class="mt-2 text-sm text-white/55">projects delivered across websites, campaigns, and systems.</p>
-          </div>
-          <div class="h-px bg-white/15"></div>
-          <div>
-            <p class="text-5xl font-semibold tracking-[-0.06em]">100%</p>
-            <p class="mt-2 text-sm text-white/55">launch discipline, with QA and client approval before release.</p>
-          </div>
-        </div>
-      </aside>
+      <h1 id="hero-heading" class="mx-auto mt-5 max-w-5xl display-tight text-[clamp(4.2rem,7.6vw,8.8rem)] font-semibold text-white">
+        <span class="hero-line block">Build systems</span>
+        <span class="hero-line block text-white/72">that sell.</span>
+      </h1>
+
+      <div class="reveal reveal-delay-3 mt-6">
+        <a class="premium-button premium-button-light" href="/contact/">Start a Project</a>
+        <p class="mx-auto mt-4 max-w-2xl text-[clamp(1rem,1.35vw,1.2rem)] leading-[1.45] text-white/76">
+          Websites, SEO engines, marketing funnels, and automation systems for businesses that need more than a pretty homepage.
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-showcase reveal reveal-delay-2" aria-label="WitLabs website design previews">
+      <div class="hero-showcase__track" data-hero-carousel>
+        {heroFrames.map((frame, index) => (
+          <article
+            class="hero-preview-card"
+            data-hero-card
+            data-hero-index={index}
+            data-position={index}
+            tabindex={index === 0 ? '0' : '-1'}
+            aria-label={`Show ${frame.label} preview`}
+          >
+            <div class="hero-preview-card__top">
+              <span>{frame.label}</span>
+              <span>WitLabs / {String(index + 1).padStart(2, '0')}</span>
+            </div>
+            <img src={frame.src} alt={frame.alt} loading={index < 2 ? 'eager' : 'lazy'} />
+          </article>
+        ))}
+      </div>
     </div>
 
     <div class="hero-bottom reveal reveal-delay-4">
@@ -76,10 +85,9 @@ const heroFrames = [
         <span class="hero-frame-dot"></span>
         <span id="hero-frame-label">{heroFrames[0].label}</span>
       </div>
-      <div class="hidden items-center gap-3 text-white/45 md:flex" aria-hidden="true">
-        <span class="hero-scroll-line"><span></span></span>
-        <span class="font-mono text-[10px] uppercase tracking-[0.26em]">Scroll</span>
-      </div>
+      <a class="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white md:inline-flex" href="/case-studies/">
+        See our work <span class="ml-2">→</span>
+      </a>
     </div>
   </div>
 </section>
@@ -88,72 +96,120 @@ const heroFrames = [
   (() => {
     const heading = document.getElementById('hero-heading');
     const lines = heading ? [...heading.querySelectorAll('.hero-line')] : [];
-    const mediaItems = [...document.querySelectorAll('.hero-media__item')];
+    const cards = [...document.querySelectorAll('[data-hero-card]')];
     const label = document.getElementById('hero-frame-label');
-    const labels = ['Brand website', 'B2B growth', 'Local SEO'];
+    const labels = ['Brand website', 'B2B growth', 'Growth systems', 'Visual identity', 'Local SEO', 'Launch ready'];
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let current = 0;
+    const AUTO_ADVANCE_MS = 4000;
+    let active = 0;
+    let autoplay;
 
     lines.forEach((line, index) => {
       line.style.transitionDelay = `${index * 0.09 + 0.08}s`;
       requestAnimationFrame(() => line.classList.add('is-visible'));
     });
 
-    if (reduced || mediaItems.length < 2) return;
+    const syncCards = () => {
+      cards.forEach((card, index) => {
+        const offset = (index - active + cards.length) % cards.length;
+        const position = offset > cards.length / 2 ? offset - cards.length : offset;
+        card.setAttribute('data-position', String(position));
+        card.setAttribute('tabindex', Math.abs(position) <= 1 ? '0' : '-1');
+        card.setAttribute('aria-current', position === 0 ? 'true' : 'false');
+      });
 
-    window.setInterval(() => {
-      current = (current + 1) % mediaItems.length;
-      mediaItems.forEach((item, index) => item.classList.toggle('is-active', index === current));
-      if (label) label.textContent = labels[current] || labels[0];
-    }, 4200);
+      if (label) label.textContent = labels[active] || labels[0];
+    };
+
+    const setActive = (index) => {
+      active = (index + cards.length) % cards.length;
+      syncCards();
+    };
+
+    const startAutoplay = () => {
+      if (reduced || cards.length < 2) return;
+      window.clearInterval(autoplay);
+      autoplay = window.setInterval(() => {
+        setActive(active + 1);
+      }, AUTO_ADVANCE_MS);
+    };
+
+    const restartAutoplay = () => {
+      window.clearInterval(autoplay);
+      startAutoplay();
+    };
+
+    cards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        if (index === active) return;
+        setActive(index);
+        restartAutoplay();
+      });
+
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          setActive(active + 1);
+          restartAutoplay();
+        }
+
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          setActive(active - 1);
+          restartAutoplay();
+        }
+
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        if (index === active) return;
+        event.preventDefault();
+        setActive(index);
+        restartAutoplay();
+      });
+
+      card.addEventListener('mouseenter', () => window.clearInterval(autoplay));
+      card.addEventListener('mouseleave', startAutoplay);
+      card.addEventListener('focus', () => window.clearInterval(autoplay));
+      card.addEventListener('blur', startAutoplay);
+    });
+
+    syncCards();
+    startAutoplay();
   })();
 </script>
 
 <style>
-  .hero-media,
-  .hero-media__item,
-  .hero-media__shade,
-  .hero-media__wash {
+  .hero-bg {
     position: absolute;
     inset: 0;
-  }
-
-  .hero-media {
     overflow: hidden;
   }
 
-  .hero-media__item {
-    opacity: 0;
-    transition: opacity 1s var(--ease-out);
-  }
-
-  .hero-media__item.is-active {
-    opacity: 1;
-  }
-
-  .hero-media__item img {
-    width: 100%;
+  .hero-bg img {
     height: 100%;
+    width: 100%;
     object-fit: cover;
-    filter: saturate(0.9) contrast(1.04);
-    transform: scale(1.04);
+    filter: blur(18px) saturate(0.8) brightness(0.7);
+    transform: scale(1.1);
   }
 
-  .hero-media__shade {
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
     background:
-      linear-gradient(90deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.52) 48%, rgba(0, 0, 0, 0.28) 100%),
-      linear-gradient(0deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0) 36%);
-    z-index: 1;
+      linear-gradient(180deg, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.52) 34%, #000 85%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.08) 48%, rgba(0, 0, 0, 0.56));
   }
 
-  .hero-media__wash {
-    z-index: 2;
-    background: radial-gradient(circle at 85% 18%, rgba(74, 222, 128, 0.18), transparent 34%);
+  .hero-copy {
+    position: relative;
+    z-index: 5;
+    width: 100%;
   }
 
   .hero-line {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translateY(28px);
     transition: opacity 0.75s var(--ease-premium), transform 0.95s var(--ease-premium);
   }
 
@@ -162,21 +218,140 @@ const heroFrames = [
     transform: translateY(0);
   }
 
-  .hero-panel {
-    border: 1px solid rgba(255, 255, 255, 0.18);
+  .hero-showcase {
+    position: relative;
+    z-index: 3;
+    margin-top: clamp(1.4rem, 3vh, 3rem);
+    min-height: min(45vw, 510px);
+    width: 100vw;
+    flex: 1 1 auto;
+  }
+
+  .hero-showcase__track {
+    position: absolute;
+    inset: 0;
+    left: 50%;
+    width: min(1520px, 100vw);
+    transform: translateX(-50%);
+  }
+
+  .hero-preview-card {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: min(46vw, 760px);
+    overflow: hidden;
     border-radius: 8px;
-    background: rgba(10, 10, 10, 0.48);
-    padding: 28px;
-    backdrop-filter: blur(18px);
+    background: #111;
+    box-shadow: 0 34px 90px rgba(0, 0, 0, 0.48);
+    opacity: 0;
+    transform: translateX(-50%) scale(0.74);
+    transition:
+      opacity 0.9s var(--ease-premium),
+      transform 1.1s var(--ease-premium),
+      filter 0.9s var(--ease-premium),
+      box-shadow 0.35s var(--ease-standard);
+    will-change: transform, opacity;
+    cursor: pointer;
+  }
+
+  .hero-preview-card[data-position='0'] {
+    z-index: 5;
+    opacity: 1;
+    filter: brightness(1);
+    transform: translateX(-50%) translateY(0) rotate(0deg) scale(1);
+    cursor: default;
+  }
+
+  .hero-preview-card:focus-visible {
+    outline: 2px solid rgba(74, 222, 128, 0.9);
+    outline-offset: 4px;
+  }
+
+  .hero-preview-card:not([data-position='0']):hover,
+  .hero-preview-card:not([data-position='0']):focus-visible {
+    opacity: 0.92;
+    filter: brightness(0.92) saturate(1.05);
+    box-shadow: 0 42px 110px rgba(0, 0, 0, 0.58), 0 0 0 1px rgba(74, 222, 128, 0.34);
+  }
+
+  .hero-preview-card[data-position='1'] {
+    z-index: 4;
+    opacity: 0.78;
+    filter: brightness(0.78);
+    transform: translateX(calc(-50% + min(46vw, 610px))) translateY(42px) rotate(3deg) scale(0.82);
+  }
+
+  .hero-preview-card[data-position='1']:hover,
+  .hero-preview-card[data-position='1']:focus-visible {
+    transform: translateX(calc(-50% + min(46vw, 610px))) translateY(30px) rotate(2deg) scale(0.86);
+  }
+
+  .hero-preview-card[data-position='2'] {
+    z-index: 2;
+    opacity: 0.34;
+    filter: brightness(0.62);
+    transform: translateX(calc(-50% + min(82vw, 1080px))) translateY(118px) rotate(6deg) scale(0.68);
+  }
+
+  .hero-preview-card[data-position='3'] {
+    z-index: 1;
+    opacity: 0;
+    filter: brightness(0.54);
+    transform: translateX(calc(-50% + min(112vw, 1400px))) translateY(150px) rotate(8deg) scale(0.58);
+  }
+
+  .hero-preview-card[data-position='-1'] {
+    z-index: 4;
+    opacity: 0.72;
+    filter: brightness(0.7);
+    transform: translateX(calc(-50% - min(48vw, 650px))) translateY(62px) rotate(-8deg) scale(0.78);
+  }
+
+  .hero-preview-card[data-position='-1']:hover,
+  .hero-preview-card[data-position='-1']:focus-visible {
+    transform: translateX(calc(-50% - min(48vw, 650px))) translateY(48px) rotate(-6deg) scale(0.82);
+  }
+
+  .hero-preview-card[data-position='-2'] {
+    z-index: 2;
+    opacity: 0.34;
+    filter: brightness(0.58);
+    transform: translateX(calc(-50% - min(84vw, 1120px))) translateY(130px) rotate(-11deg) scale(0.64);
+  }
+
+  .hero-preview-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    min-height: 36px;
+    padding: 10px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .hero-preview-card img {
+    display: block;
+    aspect-ratio: 1586 / 992;
+    width: 100%;
+    object-fit: cover;
   }
 
   .hero-bottom {
+    position: relative;
+    z-index: 6;
     display: flex;
+    width: 100%;
     align-items: end;
     justify-content: space-between;
     gap: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    padding-top: 18px;
   }
 
   .hero-frame-label {
@@ -187,47 +362,42 @@ const heroFrames = [
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.62);
   }
 
   .hero-frame-dot {
     height: 8px;
     width: 8px;
     border-radius: 999px;
-    background: #4ADE80;
+    background: #4ade80;
     box-shadow: 0 0 0 6px rgba(74, 222, 128, 0.14);
   }
 
-  .hero-scroll-line {
-    position: relative;
-    display: block;
-    height: 44px;
-    width: 1px;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.18);
-  }
-
-  .hero-scroll-line span {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 12px;
-    width: 1px;
-    background: #4ADE80;
-    animation: heroScroll 1.8s var(--ease-standard) infinite;
-  }
-
-  @keyframes heroScroll {
-    0% {
-      transform: translateY(-12px);
-      opacity: 0;
+  @media (max-width: 1023px) {
+    .hero-showcase {
+      min-height: 430px;
     }
-    20% {
-      opacity: 1;
+
+    .hero-preview-card {
+      width: min(68vw, 560px);
     }
-    100% {
-      transform: translateY(44px);
-      opacity: 0;
+
+    .hero-preview-card[data-position='1'] {
+      transform: translateX(calc(-50% + min(54vw, 470px))) translateY(42px) rotate(4deg) scale(0.78);
+    }
+
+    .hero-preview-card[data-position='1']:hover,
+    .hero-preview-card[data-position='1']:focus-visible {
+      transform: translateX(calc(-50% + min(54vw, 470px))) translateY(30px) rotate(3deg) scale(0.82);
+    }
+
+    .hero-preview-card[data-position='-1'] {
+      transform: translateX(calc(-50% - min(55vw, 490px))) translateY(58px) rotate(-8deg) scale(0.76);
+    }
+
+    .hero-preview-card[data-position='-1']:hover,
+    .hero-preview-card[data-position='-1']:focus-visible {
+      transform: translateX(calc(-50% - min(55vw, 490px))) translateY(44px) rotate(-6deg) scale(0.8);
     }
   }
 
@@ -235,26 +405,67 @@ const heroFrames = [
     .homepage-hero .container {
       width: 100%;
       max-width: 100vw;
-    }
-
-    .homepage-hero h1,
-    .homepage-hero p,
-    .hero-panel {
-      max-width: calc(100vw - 32px);
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-top: calc(var(--nav-height) + 22px);
     }
 
     .homepage-hero h1 {
-      font-size: clamp(4rem, 18vw, 5.1rem);
+      font-size: clamp(3.9rem, 17vw, 5.3rem);
     }
 
-    .homepage-hero p,
-    .hero-panel p {
+    .homepage-hero p {
+      max-width: calc(100vw - 32px);
       overflow-wrap: anywhere;
     }
 
-    .hero-panel {
-      width: 100%;
-      padding: 22px;
+    .hero-showcase {
+      margin-top: 1.5rem;
+      min-height: 360px;
+    }
+
+    .hero-preview-card {
+      top: 0;
+      width: min(84vw, 340px);
+    }
+
+    .hero-preview-card[data-position='1'] {
+      opacity: 0.72;
+      transform: translateX(calc(-50% + 74vw)) translateY(34px) rotate(5deg) scale(0.78);
+    }
+
+    .hero-preview-card[data-position='1']:hover,
+    .hero-preview-card[data-position='1']:focus-visible {
+      opacity: 0.88;
+      transform: translateX(calc(-50% + 74vw)) translateY(24px) rotate(4deg) scale(0.81);
+    }
+
+    .hero-preview-card[data-position='2'] {
+      opacity: 0;
+      transform: translateX(calc(-50% + 118vw)) translateY(90px) rotate(8deg) scale(0.62);
+    }
+
+    .hero-preview-card[data-position='-1'] {
+      opacity: 0.66;
+      transform: translateX(calc(-50% - 76vw)) translateY(44px) rotate(-8deg) scale(0.76);
+    }
+
+    .hero-preview-card[data-position='-1']:hover,
+    .hero-preview-card[data-position='-1']:focus-visible {
+      opacity: 0.86;
+      transform: translateX(calc(-50% - 76vw)) translateY(32px) rotate(-6deg) scale(0.8);
+    }
+
+    .hero-preview-card[data-position='-2'] {
+      opacity: 0;
+      transform: translateX(calc(-50% - 118vw)) translateY(96px) rotate(-10deg) scale(0.62);
+    }
+
+    .hero-preview-card__top {
+      min-height: 30px;
+      padding: 8px 11px;
+      font-size: 8px;
+      letter-spacing: 0.13em;
     }
   }
 </style>
