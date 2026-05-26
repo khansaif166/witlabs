@@ -68,8 +68,8 @@
   }
 
   .display-tight {
-    letter-spacing: -0.035em;
-    line-height: 1;
+    letter-spacing: 0;
+    line-height: 1.06;
   }
 
   .grain::after {

@@ -9,13 +9,13 @@ const pathname = Astro.url.pathname;
 interface NavLink {
   label: string;
   href: string;
-  menu?: 'services' | 'work';
+  menu?: 'services' | 'pricing';
 }
 
 const navLinks: NavLink[] = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services/', menu: 'services' },
-  { label: 'Work', href: '/case-studies/', menu: 'work' },
+  { label: 'Pricing', href: '/pricing/', menu: 'pricing' },
   { label: 'About', href: '/about/' },
   { label: 'Insights', href: '/insights/' },
   { label: 'Contact', href: '/contact/' },
@@ -29,10 +29,11 @@ const serviceLinks = [
   { label: 'Automation & AI', href: '/services/#automation', desc: 'Systems that save founder hours' },
 ];
 
-const workLinks = [
-  { label: 'Aswad Global', href: '/case-studies/aswad-global/', desc: 'Professional website and ongoing growth support' },
-  { label: 'Impact Packaging Solutions', href: '/case-studies/impact-packaging/', desc: 'B2B manufacturing presence and lead flow' },
-  { label: 'Kota Experts', href: '/case-studies/kota-experts/', desc: 'Education website and inquiry growth' },
+const pricingLinks = [
+  { label: 'Website Pricing', href: '/pricing/#website-pricing', desc: 'Starter, Standard, and Premium website plans' },
+  { label: 'Digital Marketing Plans', href: '/pricing/#marketing-pricing', desc: 'Ad management plans for leads and visibility' },
+  { label: 'App Development Pricing', href: '/pricing/#app-pricing', desc: 'Dashboards, CRM, booking systems, and LMS builds' },
+  { label: 'Digital Launch Package', href: '/pricing/#launch-package', desc: 'Website, setup, SEO, and marketing launch path' },
 ];
 
 function isActive(href: string): boolean {
@@ -52,11 +53,8 @@ function isActive(href: string): boolean {
   aria-label="Site header"
 >
   <nav class="site-nav mx-auto flex h-[var(--nav-height)] max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10" aria-label="Main navigation">
-    <a href="/" aria-label="WitLabs - Home" class="brand-mark group flex items-center gap-3">
-      <span class="brand-symbol grid h-8 w-8 place-items-center border border-current/30 font-mono text-[11px] font-bold tracking-[-0.08em]">
-        WL
-      </span>
-      <span class="text-xl font-semibold tracking-[-0.04em] text-current">WitLabs</span>
+    <a href="/" aria-label="WitLabs - Home" class="brand-mark group inline-flex items-center">
+      <img class="brand-logo" src="/images/logo.png" alt="WitLabs" width="1916" height="821" loading="eager" decoding="async" />
     </a>
 
     <ul class="hidden h-full items-center gap-8 lg:flex" role="list">
@@ -128,15 +126,15 @@ function isActive(href: string): boolean {
       </a>
     </div>
 
-    <div class="mega-panel" data-panel="work">
+    <div class="mega-panel" data-panel="pricing">
       <div class="mega-links">
-        <p class="mega-eyebrow">Selected Work</p>
+        <p class="mega-eyebrow">Transparent Packages</p>
         <div class="mega-grid">
-          {workLinks.map((work) => (
-            <a href={work.href} class="mega-link">
+          {pricingLinks.map((pricing) => (
+            <a href={pricing.href} class="mega-link">
               <span>
-                <strong>{work.label}</strong>
-                <small>{work.desc}</small>
+                <strong>{pricing.label}</strong>
+                <small>{pricing.desc}</small>
               </span>
               <span class="mega-arrow">→</span>
             </a>
@@ -144,10 +142,10 @@ function isActive(href: string): boolean {
         </div>
       </div>
       <div class="mega-divider"></div>
-      <a href="/case-studies/" class="mega-spotlight">
-        <span class="mega-eyebrow">Proof Over Promises</span>
-        <strong>See how practical design, SEO, and systems changed real businesses.</strong>
-        <span class="arrow-link">View case studies <span class="arrow">→</span></span>
+      <a href="/pricing/" class="mega-spotlight">
+        <span class="mega-eyebrow">Plan With Clarity</span>
+        <strong>Compare website, marketing, app, and launch packages before we scope the work.</strong>
+        <span class="arrow-link">View pricing <span class="arrow">→</span></span>
       </a>
     </div>
   </div>
@@ -187,7 +185,8 @@ function isActive(href: string): boolean {
     let isOpen = false;
 
     const setHeaderScrolled = () => {
-      header?.classList.toggle('scrolled', window.scrollY > 24 || isOpen);
+      const scrollThreshold = header?.classList.contains('is-transparent') ? 96 : 24;
+      header?.classList.toggle('scrolled', window.scrollY > scrollThreshold || isOpen);
     };
 
     const openMega = (name) => {
@@ -265,15 +264,22 @@ function isActive(href: string): boolean {
     transition: background-color 0.5s var(--ease-premium), color 0.5s var(--ease-premium), border-color 0.5s var(--ease-premium);
   }
 
-  #site-header.is-solid,
-  #site-header.scrolled,
-  #site-header.mega-open {
-    background: rgba(246, 243, 238, 0.96);
-    border-bottom: 1px solid rgba(28, 25, 23, 0.08);
-    color: #1C1917;
+  #site-header.is-transparent:not(.scrolled):not(.mega-open) {
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    color: #FFFFFF;
+    backdrop-filter: none;
+  }
+
+  #site-header.is-solid {
+    background: rgba(0, 0, 0, 0.94);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
     backdrop-filter: blur(18px);
   }
 
+  #site-header.is-transparent.scrolled,
+  #site-header.is-transparent.mega-open,
   #site-header.work-wall-active:not(.mega-open) {
     background: rgba(0, 0, 0, 0.94);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -281,14 +287,27 @@ function isActive(href: string): boolean {
     backdrop-filter: blur(18px);
   }
 
-  .brand-symbol {
-    transition: background-color 0.3s var(--ease-standard), color 0.3s var(--ease-standard), border-color 0.3s var(--ease-standard);
+  .brand-logo {
+    display: block;
+    height: 76px;
+    width: auto;
+    transition: filter 0.5s var(--ease-premium), opacity 0.3s var(--ease-standard);
   }
 
-  .brand-mark:hover .brand-symbol {
-    background: #2D6A4F;
-    border-color: #2D6A4F;
-    color: #FFFFFF;
+  .brand-mark:hover .brand-logo {
+    opacity: 0.82;
+  }
+
+  #site-header.is-solid.scrolled .brand-logo,
+  #site-header.is-solid.mega-open .brand-logo,
+  #site-header.is-transparent .brand-logo {
+    filter: none;
+  }
+
+  @media (max-width: 767px) {
+    .brand-logo {
+      height: 62px;
+    }
   }
 
   .nav-link {
@@ -550,10 +569,10 @@ function isActive(href: string): boolean {
     justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.18);
     padding: 18px 0;
-    font-size: clamp(2rem, 10vw, 4rem);
+    font-size: clamp(1.65rem, 8vw, 3rem);
     font-weight: 600;
-    letter-spacing: -0.06em;
-    line-height: 1;
+    letter-spacing: 0;
+    line-height: 1.08;
   }
 
   .mobile-contact {

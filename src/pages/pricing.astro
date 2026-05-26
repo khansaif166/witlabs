@@ -1,0 +1,1014 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { appPlans, launchPackage, marketingPlans, websitePlans } from '../data/pricing';
+
+const pricingGroups = [
+  {
+    id: 'website-pricing',
+    eyebrow: 'Website Pricing',
+    title: 'Simple, transparent website pricing',
+    description: 'No hidden charges. No fake promises. Just honest work with clear deliverables.',
+    plans: websitePlans,
+    footnote: 'All website plans include 1 year domain and hosting free. Free changes/support apply after going live as per plan; later changes are charged according to scope.',
+  },
+  {
+    id: 'marketing-pricing',
+    eyebrow: 'Digital Marketing',
+    title: 'Marketing plans for visibility and leads',
+    description: 'Ad budget is paid separately. Setup fee can be waived on a 3-month commitment.',
+    plans: marketingPlans,
+    footnote: 'Transparent reporting, weekly optimization, and campaign execution handled by WitLabs.',
+  },
+];
+
+const customSolutions = ['Inventory & Operations Systems', 'Custom Web & Mobile Apps', 'Startup MVPs', 'Automation Workflows'];
+---
+
+<BaseLayout
+  title="Pricing — Website, Marketing & App Packages | WitLabs"
+  description="Explore WitLabs pricing for websites, digital marketing, app development, and digital launch packages."
+  canonical="https://witlabs.in/pricing/"
+  keywords={['WitLabs pricing', 'website pricing India', 'digital marketing pricing India', 'app development pricing India']}
+>
+  <section class="pricing-hero px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-[1240px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <div class="pricing-hero__copy reveal">
+        <p class="section-kicker text-green-bright">Clear Packages</p>
+        <h1>Choose the right digital launch path.</h1>
+        <p>
+          Website, marketing, app, and launch packages with transparent scope, free first-year domain and hosting for website plans, and support windows after going live.
+        </p>
+        <div class="pricing-hero__actions">
+          <a class="premium-button premium-button-light" href="/contact/">Book a Strategy Call</a>
+          <a class="pricing-hero__link" href="#website-pricing">View website plans <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div class="pricing-hero__stage reveal reveal-delay-2" aria-label="Pricing package highlights">
+        <a class="pricing-hero-card pricing-hero-card--main" href="#website-pricing">
+          <span>Website Plans</span>
+          <strong>{websitePlans[0].price}</strong>
+          <small>Domain + hosting included for year one</small>
+        </a>
+        <a class="pricing-hero-card" href="#marketing-pricing">
+          <span>Marketing</span>
+          <strong>{marketingPlans[0].price}</strong>
+          <small>Campaign setup and weekly optimization</small>
+        </a>
+        <a class="pricing-hero-card" href="#app-pricing">
+          <span>Apps</span>
+          <strong>{appPlans[0].price}</strong>
+          <small>Dashboards, CRM, booking, and LMS builds</small>
+        </a>
+        <a class="pricing-hero-card" href="#launch-package">
+          <span>Launch Package</span>
+          <strong>{launchPackage[0].price}</strong>
+          <small>Website, setup, SEO, and marketing path</small>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {pricingGroups.map((group) => (
+    <section id={group.id} class="pricing-section bg-cream px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+      <div class="mx-auto max-w-[1240px]">
+        <div class="pricing-section__intro reveal">
+          <p class="section-kicker text-green">{group.eyebrow}</p>
+          <h2 class="mt-4 font-serif text-[clamp(2.2rem,5vw,4.8rem)] leading-none text-ink">{group.title}</h2>
+          <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted">{group.description}</p>
+        </div>
+
+        <div class="mt-12 grid gap-5 lg:grid-cols-3">
+          {group.plans.map((plan, index) => (
+            <article
+              class:list={['pricing-card reveal', `reveal-delay-${index + 1}`, `pricing-card--${plan.tone}`, plan.featured && 'is-featured']}
+              data-pricing-full-card
+              style="--tilt-x:0deg; --tilt-y:0deg;"
+            >
+              <span class="pricing-card__shine" aria-hidden="true"></span>
+              {plan.featured && <span class="pricing-card__popular">Most Popular</span>}
+              <div class="pricing-card__icon" aria-hidden="true">
+                <span>{plan.name.charAt(0)}</span>
+              </div>
+              <div class="pricing-card__visual" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <p class="pricing-card__name">{plan.name}</p>
+              {'label' in plan && <h3 class="pricing-card__title">{plan.label}</h3>}
+              <div class="pricing-card__price">
+                <strong>{plan.price}</strong>
+                {'suffix' in plan && plan.suffix && <span>{plan.suffix}</span>}
+              </div>
+              {'badge' in plan && plan.badge && <p class="pricing-card__badge">{plan.badge}</p>}
+              <ul class="pricing-card__list">
+                {plan.items.map((item) => (
+                  <li>
+                    <span aria-hidden="true">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              {'delivery' in plan && plan.delivery && <p class="pricing-card__delivery">{plan.delivery}</p>}
+            </article>
+          ))}
+        </div>
+
+        <div class="pricing-note reveal">
+          <span aria-hidden="true">✓</span>
+          <p>{group.footnote}</p>
+          <a class="arrow-link text-green" href="/contact/">Discuss this <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section id="app-pricing" class="pricing-section bg-white px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+    <div class="mx-auto max-w-[1240px]">
+      <div class="pricing-section__intro reveal">
+        <p class="section-kicker text-green">Full Stack App Development</p>
+        <h2 class="mt-4 font-serif text-[clamp(2.2rem,5vw,4.6rem)] leading-none text-ink">Custom apps that simplify your business.</h2>
+        <p class="mx-auto mt-5 max-w-3xl text-base leading-7 text-muted">
+          Pricing depends on features, complexity, integrations, platforms, and support needs.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 text-center sm:grid-cols-2 lg:grid-cols-4">
+        {['Reduce Manual Work', 'Centralize Operations', 'Automate Workflows', 'Scalable & Secure'].map((benefit, index) => (
+          <div class:list={['pricing-benefit reveal', `reveal-delay-${index + 1}`]}>
+            <span aria-hidden="true">◇</span>
+            <p>{benefit}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-2">
+        {appPlans.map((plan, index) => (
+          <article class:list={['app-price-card reveal', `reveal-delay-${(index % 2) + 1}`]} data-pricing-full-card style="--tilt-x:0deg; --tilt-y:0deg;">
+            <span class="pricing-card__shine" aria-hidden="true"></span>
+            <div class="app-price-card__top">
+              <span class="app-price-card__icon" aria-hidden="true">▥</span>
+              <div>
+                <h3 class="font-serif text-3xl leading-tight text-ink">{plan.name}</h3>
+                <p class="mt-3 text-muted">Starts from <strong>{plan.price}</strong></p>
+              </div>
+            </div>
+            <ul class="mt-7 grid gap-3">
+              {plan.items.map((item) => (
+                <li class="flex gap-3 text-ink-light">
+                  <span class="pricing-check" aria-hidden="true">✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+
+      <div class="custom-solutions reveal">
+        <h3>Other Custom Solutions</h3>
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {customSolutions.map((solution) => <p>{solution}</p>)}
+        </div>
+        <strong>Custom Quote Based on Business Use Case</strong>
+        <span>Final cost depends on features, user roles, integrations, dashboard requirements, mobile app scope, and long-term support.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="launch-package" class="pricing-section bg-cream px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+    <div class="mx-auto max-w-[1240px]">
+      <div class="pricing-section__intro reveal">
+        <p class="section-kicker text-green">Digital Launch Package</p>
+        <h2 class="mt-4 font-serif text-[clamp(2.2rem,5vw,4.6rem)] leading-none text-ink">A complete digital start for new businesses.</h2>
+        <p class="mx-auto mt-5 max-w-3xl text-base leading-7 text-muted">
+          Website, post-launch setup, organic growth, and paid marketing foundation in one clear launch path.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        {launchPackage.map((plan, index) => (
+          <article class:list={['launch-card reveal', `reveal-delay-${index + 1}`]} data-pricing-full-card style="--tilt-x:0deg; --tilt-y:0deg;">
+            <span class="pricing-card__shine" aria-hidden="true"></span>
+            <p class="pricing-card__name">{plan.name}</p>
+            <div class="pricing-card__price">
+              <strong>{plan.price}</strong>
+              {plan.suffix && <span>{plan.suffix}</span>}
+            </div>
+            <p class="pricing-card__badge">{plan.note}</p>
+            <ul class="pricing-card__list">
+              {plan.items.map((item) => (
+                <li>
+                  <span aria-hidden="true">✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+
+      <div class="launch-path reveal">
+        {['Website Launch', 'Business Profiles & Tracking Setup', 'One Month Organic SEO + Social Media', 'Paid Digital Marketing Starts Next Month'].map((step, index) => (
+          <div>
+            <span>{index + 1}</span>
+            <p>{step}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-green px-4 py-16 text-white sm:px-6 lg:px-8">
+    <div class="mx-auto flex max-w-[1240px] flex-col gap-6 md:flex-row md:items-center md:justify-between">
+      <div>
+        <p class="section-kicker text-white/62">Need the right fit?</p>
+        <h2 class="mt-3 text-heading-xl font-semibold">We will suggest the right package before quoting.</h2>
+      </div>
+      <a class="premium-button premium-button-light shrink-0" href="/contact/">Book a Strategy Call</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  (() => {
+    const cards = [...document.querySelectorAll('[data-pricing-full-card]')];
+    if (!cards.length) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let activeIndex = 0;
+    let autoplay;
+
+    const setActive = (index) => {
+      activeIndex = index;
+      cards.forEach((card, cardIndex) => {
+        card.classList.toggle('is-active', cardIndex === index);
+      });
+    };
+
+    const start = () => {
+      if (reducedMotion) return;
+      window.clearInterval(autoplay);
+      autoplay = window.setInterval(() => {
+        setActive((activeIndex + 1) % cards.length);
+      }, 2600);
+    };
+
+    cards.forEach((card, index) => {
+      card.addEventListener('pointerenter', () => {
+        window.clearInterval(autoplay);
+        setActive(index);
+      });
+
+      card.addEventListener('pointermove', (event) => {
+        if (reducedMotion || !(card instanceof HTMLElement)) return;
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.setProperty('--tilt-x', `${y * -4}deg`);
+        card.style.setProperty('--tilt-y', `${x * 5}deg`);
+      });
+
+      card.addEventListener('pointerleave', () => {
+        if (card instanceof HTMLElement) {
+          card.style.setProperty('--tilt-x', '0deg');
+          card.style.setProperty('--tilt-y', '0deg');
+        }
+        start();
+      });
+
+      card.addEventListener('focusin', () => {
+        window.clearInterval(autoplay);
+        setActive(index);
+      });
+
+      card.addEventListener('focusout', start);
+    });
+
+    setActive(1);
+    start();
+  })();
+</script>
+
+<style>
+  :global(body:has(.pricing-section)) {
+    background:
+      radial-gradient(circle at 82% 14%, rgba(45, 106, 79, 0.13), transparent 26%),
+      radial-gradient(circle at 16% 34%, rgba(154, 86, 15, 0.1), transparent 24%),
+      #F8F4EC;
+  }
+
+  .pricing-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding-bottom: clamp(64px, 8vw, 96px);
+    padding-top: calc(var(--nav-height) + clamp(42px, 7vw, 86px));
+    background: #050505;
+    color: #FFFFFF;
+  }
+
+  .pricing-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 72% 24%, rgba(74, 222, 128, 0.18), transparent 30%),
+      radial-gradient(circle at 14% 18%, rgba(154, 86, 15, 0.16), transparent 26%),
+      linear-gradient(180deg, #050505, #10100f 62%, #F8F4EC 100%);
+  }
+
+  .pricing-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 82px 82px;
+    mask-image: radial-gradient(circle at 62% 28%, #000000, transparent 66%);
+    opacity: 0.42;
+  }
+
+  .pricing-hero__copy h1 {
+    margin-top: 16px;
+    max-width: 720px;
+    font-size: clamp(2.55rem, 4.2vw, 4.55rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  .pricing-hero__copy p:last-of-type {
+    margin-top: 22px;
+    max-width: 620px;
+    color: rgba(255, 255, 255, 0.64);
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    line-height: 1.75;
+  }
+
+  .pricing-hero__actions {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .pricing-hero__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.95rem;
+    font-weight: 800;
+  }
+
+  .pricing-hero__link span {
+    transition: transform 0.35s var(--ease-premium);
+  }
+
+  .pricing-hero__link:hover span,
+  .pricing-hero__link:focus-visible span {
+    transform: translateX(4px);
+  }
+
+  .pricing-hero__stage {
+    display: grid;
+    gap: 14px;
+    perspective: 1400px;
+  }
+
+  .pricing-hero-card {
+    position: relative;
+    display: grid;
+    min-height: 156px;
+    overflow: hidden;
+    align-content: end;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+      #070707;
+    padding: 22px;
+    color: #FFFFFF;
+    box-shadow: 0 28px 84px rgba(0, 0, 0, 0.32);
+    transition: transform 0.55s var(--ease-premium), border-color 0.35s var(--ease-standard), box-shadow 0.55s var(--ease-premium);
+  }
+
+  .pricing-hero-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 82% 18%, rgba(74, 222, 128, 0.18), transparent 25%),
+      linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.1), transparent);
+    opacity: 0.68;
+    pointer-events: none;
+  }
+
+  .pricing-hero-card:hover,
+  .pricing-hero-card:focus-visible {
+    border-color: rgba(74, 222, 128, 0.58);
+    box-shadow: 0 36px 96px rgba(0, 0, 0, 0.52), 0 0 0 1px rgba(74, 222, 128, 0.16);
+    outline: none;
+    transform: translateY(-5px);
+  }
+
+  .pricing-hero-card span,
+  .pricing-hero-card strong,
+  .pricing-hero-card small {
+    position: relative;
+    z-index: 1;
+  }
+
+  .pricing-hero-card span {
+    color: #4ADE80;
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pricing-hero-card strong {
+    margin-top: 8px;
+    font-size: clamp(2rem, 3.1vw, 3.05rem);
+    line-height: 1;
+  }
+
+  .pricing-hero-card small {
+    margin-top: 10px;
+    max-width: 330px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .pricing-hero-card--main {
+    min-height: 220px;
+    background:
+      radial-gradient(circle at 22% 18%, rgba(74, 222, 128, 0.24), transparent 30%),
+      linear-gradient(135deg, rgba(45, 106, 79, 0.72), #070707 64%);
+  }
+
+  .pricing-section__intro {
+    text-align: center;
+  }
+
+  .pricing-section__intro h2 {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: inherit;
+    font-size: clamp(1.95rem, 3.2vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.08;
+  }
+
+  .pricing-section__intro p:last-child {
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    line-height: 1.75;
+  }
+
+  .pricing-section {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .pricing-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(45, 106, 79, 0.06) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(45, 106, 79, 0.05) 1px, transparent 1px);
+    background-size: 74px 74px;
+    mask-image: radial-gradient(circle at 50% 22%, #000000, transparent 68%);
+    opacity: 0.7;
+  }
+
+  .pricing-card,
+  .launch-card,
+  .app-price-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(45, 106, 79, 0.22);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.72)),
+      radial-gradient(circle at 24% 0%, rgba(74, 222, 128, 0.14), transparent 34%);
+    padding: 30px;
+    box-shadow: 0 24px 80px rgba(28, 25, 23, 0.04);
+    transform:
+      rotateX(var(--tilt-x))
+      rotateY(var(--tilt-y))
+      translateY(var(--card-lift, 0));
+    transform-style: preserve-3d;
+    transition:
+      transform 0.65s var(--ease-premium),
+      border-color 0.35s var(--ease-standard),
+      box-shadow 0.65s var(--ease-premium),
+      background 0.35s var(--ease-standard);
+    will-change: transform;
+  }
+
+  .pricing-card::after,
+  .launch-card::after,
+  .app-price-card::after {
+    content: '';
+    position: absolute;
+    inset: auto 22px 0;
+    height: 4px;
+    border-radius: 999px 999px 0 0;
+    background: linear-gradient(90deg, transparent, #2D6A4F, transparent);
+    opacity: 0;
+    transform: scaleX(0.72);
+    transition: opacity 0.35s var(--ease-standard), transform 0.45s var(--ease-premium);
+  }
+
+  .pricing-card.is-featured {
+    border-color: rgba(45, 106, 79, 0.62);
+    --card-lift: -10px;
+    box-shadow: 0 34px 110px rgba(45, 106, 79, 0.18);
+  }
+
+  .pricing-card:hover,
+  .pricing-card:focus-within,
+  .pricing-card.is-active,
+  .launch-card:hover,
+  .launch-card:focus-within,
+  .launch-card.is-active,
+  .app-price-card:hover,
+  .app-price-card:focus-within,
+  .app-price-card.is-active {
+    --card-lift: -8px;
+    border-color: rgba(45, 106, 79, 0.58);
+    box-shadow: 0 44px 120px rgba(28, 25, 23, 0.14), 0 0 0 1px rgba(74, 222, 128, 0.12);
+  }
+
+  .pricing-card:hover::after,
+  .pricing-card:focus-within::after,
+  .pricing-card.is-active::after,
+  .launch-card:hover::after,
+  .launch-card:focus-within::after,
+  .launch-card.is-active::after,
+  .app-price-card:hover::after,
+  .app-price-card:focus-within::after,
+  .app-price-card.is-active::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .pricing-card--blue {
+    border-color: rgba(17, 84, 143, 0.42);
+  }
+
+  .pricing-card--warm {
+    border-color: rgba(166, 90, 16, 0.42);
+  }
+
+  .pricing-card__shine {
+    position: absolute;
+    top: 0;
+    left: -72%;
+    z-index: 4;
+    width: 44%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.72), transparent);
+    opacity: 0;
+    pointer-events: none;
+    transform: skewX(-18deg);
+  }
+
+  .pricing-card:hover .pricing-card__shine,
+  .pricing-card:focus-within .pricing-card__shine,
+  .pricing-card.is-active .pricing-card__shine,
+  .launch-card:hover .pricing-card__shine,
+  .launch-card:focus-within .pricing-card__shine,
+  .launch-card.is-active .pricing-card__shine,
+  .app-price-card:hover .pricing-card__shine,
+  .app-price-card:focus-within .pricing-card__shine,
+  .app-price-card.is-active .pricing-card__shine {
+    animation: pricingCardShine 1.1s var(--ease-premium);
+  }
+
+  .pricing-card__popular {
+    position: absolute;
+    left: 50%;
+    top: 14px;
+    z-index: 6;
+    translate: -50% 0;
+    border-radius: 6px;
+    background: #006B3F;
+    padding: 9px 22px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .pricing-card__icon {
+    display: grid;
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 22px;
+    place-items: center;
+    border-radius: 999px;
+    background: rgba(45, 106, 79, 0.1);
+    color: #2D6A4F;
+    font-family: "DM Mono", monospace;
+    font-size: 26px;
+  }
+
+  .pricing-card__visual {
+    position: relative;
+    height: 56px;
+    margin: -4px auto 18px;
+    max-width: 210px;
+  }
+
+  .pricing-card__visual span {
+    position: absolute;
+    display: block;
+    border-radius: 8px;
+    background: rgba(45, 106, 79, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(45, 106, 79, 0.12);
+    transform-origin: bottom;
+    animation: pricingPulse 3.2s var(--ease-premium) infinite;
+  }
+
+  .pricing-card__visual span:nth-child(1) {
+    left: 0;
+    bottom: 8px;
+    width: 45%;
+    height: 30px;
+  }
+
+  .pricing-card__visual span:nth-child(2) {
+    left: 32%;
+    bottom: 0;
+    width: 38%;
+    height: 52px;
+    background: rgba(45, 106, 79, 0.18);
+    animation-delay: 0.22s;
+  }
+
+  .pricing-card__visual span:nth-child(3) {
+    right: 0;
+    bottom: 12px;
+    width: 28%;
+    height: 24px;
+    background: rgba(154, 86, 15, 0.12);
+    animation-delay: 0.44s;
+  }
+
+  .pricing-card__name {
+    color: #2D6A4F;
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .pricing-card__title {
+    margin-top: 12px;
+    color: #1C1917;
+    font-size: clamp(1.35rem, 1.8vw, 1.85rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.12;
+    text-align: center;
+  }
+
+  .pricing-card__price {
+    margin-top: 22px;
+    border-top: 1px solid rgba(28, 25, 23, 0.1);
+    padding-top: 22px;
+    color: #2D6A4F;
+  }
+
+  .pricing-card__price strong {
+    font-size: clamp(2rem, 3.1vw, 3.05rem);
+    line-height: 1;
+    font-weight: 700;
+  }
+
+  .pricing-card__price span {
+    margin-left: 6px;
+    color: #1C1917;
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pricing-card__badge {
+    margin-top: 20px;
+    border-radius: 6px;
+    background: rgba(45, 106, 79, 0.1);
+    padding: 9px 12px;
+    text-align: center;
+    color: #1F4A37;
+    font-weight: 700;
+  }
+
+  .pricing-card__list {
+    margin-top: 28px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .pricing-card__list li {
+    display: flex;
+    gap: 12px;
+    color: #44403C;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .pricing-card__list li span:first-child,
+  .pricing-check {
+    display: grid;
+    width: 21px;
+    height: 21px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    color: #2D6A4F;
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  .pricing-card__delivery {
+    margin-top: 30px;
+    border-top: 1px solid rgba(45, 106, 79, 0.22);
+    padding-top: 18px;
+    color: #2D6A4F;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .pricing-note {
+    margin-top: 40px;
+    display: grid;
+    gap: 18px;
+    align-items: center;
+    border: 1px solid rgba(28, 25, 23, 0.1);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.58);
+    padding: 24px;
+    backdrop-filter: blur(14px);
+  }
+
+  .pricing-note > span {
+    display: grid;
+    width: 54px;
+    height: 54px;
+    place-items: center;
+    border-radius: 999px;
+    background: rgba(45, 106, 79, 0.1);
+    color: #2D6A4F;
+    font-size: 24px;
+  }
+
+  .pricing-benefit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-right: 1px solid rgba(28, 25, 23, 0.12);
+    color: #1C1917;
+    font-weight: 600;
+    min-height: 76px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.62);
+    transition: transform 0.35s var(--ease-premium), box-shadow 0.35s var(--ease-premium);
+  }
+
+  .pricing-benefit:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 60px rgba(28, 25, 23, 0.08);
+  }
+
+  .pricing-benefit span,
+  .app-price-card__icon {
+    display: grid;
+    width: 54px;
+    height: 54px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 999px;
+    background: rgba(45, 106, 79, 0.1);
+    color: #2D6A4F;
+  }
+
+  .app-price-card__top {
+    display: flex;
+    gap: 22px;
+  }
+
+  .app-price-card__top h3 {
+    font-family: inherit;
+    font-size: clamp(1.35rem, 2vw, 2rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.12;
+  }
+
+  .app-price-card strong {
+    color: #2D6A4F;
+    font-size: clamp(1.8rem, 2.8vw, 2.65rem);
+  }
+
+  .custom-solutions,
+  .launch-path {
+    margin-top: 36px;
+    border: 1px solid rgba(166, 90, 16, 0.45);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.58);
+    padding: 28px;
+    text-align: center;
+    backdrop-filter: blur(14px);
+  }
+
+  .custom-solutions h3 {
+    margin-bottom: 24px;
+    color: #9A560F;
+    font-size: clamp(1.35rem, 2vw, 2rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.12;
+  }
+
+  .custom-solutions p {
+    border-radius: 6px;
+    background: rgba(154, 86, 15, 0.08);
+    padding: 14px;
+    color: #1C1917;
+  }
+
+  .custom-solutions strong {
+    margin-top: 24px;
+    display: block;
+    color: #9A560F;
+    font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+    line-height: 1.2;
+  }
+
+  .custom-solutions span {
+    margin: 10px auto 0;
+    display: block;
+    max-width: 760px;
+    color: #78716C;
+  }
+
+  .launch-path {
+    display: grid;
+    gap: 18px;
+    border-color: rgba(45, 106, 79, 0.32);
+  }
+
+  .launch-path span {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 10px;
+    place-items: center;
+    border-radius: 999px;
+    background: #006B3F;
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+
+  .launch-path p {
+    font-weight: 700;
+  }
+
+  .launch-path > div {
+    position: relative;
+  }
+
+  .launch-path > div::after {
+    content: '';
+    position: absolute;
+    left: calc(50% + 23px);
+    top: 19px;
+    width: calc(100% - 46px);
+    height: 1px;
+    background: linear-gradient(90deg, rgba(45, 106, 79, 0.35), transparent);
+  }
+
+  .launch-path > div:last-child::after {
+    display: none;
+  }
+
+  @keyframes pricingCardShine {
+    0% {
+      left: -72%;
+      opacity: 0;
+    }
+
+    22% {
+      opacity: 0.72;
+    }
+
+    100% {
+      left: 128%;
+      opacity: 0;
+    }
+  }
+
+  @keyframes pricingPulse {
+    0%,
+    100% {
+      transform: scaleY(0.88);
+      opacity: 0.7;
+    }
+
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .pricing-note {
+      grid-template-columns: auto 1fr auto;
+    }
+
+    .launch-path {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .pricing-hero__stage {
+      grid-template-columns: 1fr;
+    }
+
+    .pricing-section__intro {
+      text-align: left;
+    }
+
+    .pricing-card,
+    .launch-card,
+    .app-price-card {
+      padding: 24px;
+    }
+
+    .pricing-benefit {
+      justify-content: flex-start;
+      padding: 16px;
+      border-right: 0;
+    }
+
+    .launch-path > div::after {
+      display: none;
+    }
+  }
+
+  @media (min-width: 720px) {
+    .pricing-hero__stage {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pricing-hero-card--main {
+      grid-row: span 2;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pricing-card,
+    .launch-card,
+    .app-price-card,
+    .pricing-benefit {
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .pricing-card__visual span,
+    .pricing-card:hover .pricing-card__shine,
+    .pricing-card:focus-within .pricing-card__shine,
+    .pricing-card.is-active .pricing-card__shine,
+    .launch-card:hover .pricing-card__shine,
+    .launch-card:focus-within .pricing-card__shine,
+    .launch-card.is-active .pricing-card__shine,
+    .app-price-card:hover .pricing-card__shine,
+    .app-price-card:focus-within .pricing-card__shine,
+    .app-price-card.is-active .pricing-card__shine {
+      animation: none;
+    }
+  }
+</style>

@@ -1,13 +1,18 @@
 export const pageSEO = {
   home: {
-    title: 'WitLabs — Digital Growth Agency for Indian Businesses',
-    description: 'WitLabs helps Indian businesses build websites that rank on Google, run digital marketing campaigns that generate leads, and create automation systems that save time. Book a free strategy call.',
+    title: 'WitLabs — Be Found. Be Chosen. Digital Growth Agency',
+    description: 'Be Found. Be Chosen. WitLabs helps Indian businesses build websites that rank on Google, generate qualified inquiries, and turn online visitors into customers.',
     keywords: ['digital agency India', 'website design India', 'SEO agency India', 'digital marketing agency India', 'web development company India'],
   },
   services: {
     title: 'Digital Services — Website Design, SEO & Marketing | WitLabs',
     description: 'From website design and SEO to digital marketing, app development and AI chatbots — WitLabs offers end-to-end digital services for Indian businesses. View our service packages.',
     keywords: ['digital services India', 'website design agency', 'SEO services India', 'digital marketing services', 'app development India'],
+  },
+  pricing: {
+    title: 'Pricing — Website, Marketing & App Packages | WitLabs',
+    description: 'View transparent WitLabs pricing for websites, digital marketing, app development, and digital launch packages for Indian businesses.',
+    keywords: ['WitLabs pricing', 'website pricing India', 'digital marketing pricing India', 'app development pricing India'],
   },
   caseStudies: {
     title: 'Case Studies — Real Results for Indian Businesses | WitLabs',

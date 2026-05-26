@@ -130,15 +130,47 @@ const getServicePosition = (index: number) => {
     const tabs = [...document.querySelectorAll('[data-service-tab]')];
     const panels = [...document.querySelectorAll('[data-service-panel]')];
     const carousel = document.querySelector('[data-services-carousel]');
+    const tabsContainer = document.querySelector('.services-tabs');
     const indicator = document.querySelector('.services-tabs__indicator');
     const AUTO_ADVANCE_MS = 4000;
     let activeIndex = 0;
     let autoplay;
+    let tabScrollFrame = 0;
 
     const moveIndicator = (tab) => {
       if (!(indicator instanceof HTMLElement) || !(tab instanceof HTMLElement)) return;
       indicator.style.width = `${tab.offsetWidth}px`;
       indicator.style.transform = `translate3d(${tab.offsetLeft}px, 0, 0)`;
+    };
+
+    const scrollActiveTabIntoView = (tab) => {
+      if (!(tabsContainer instanceof HTMLElement) || !(tab instanceof HTMLElement)) return;
+      const targetLeft = tab.offsetLeft - (tabsContainer.clientWidth - tab.offsetWidth) / 2;
+      const startLeft = tabsContainer.scrollLeft;
+      const maxLeft = tabsContainer.scrollWidth - tabsContainer.clientWidth;
+      const endLeft = Math.min(Math.max(0, targetLeft), Math.max(0, maxLeft));
+      const distance = endLeft - startLeft;
+
+      window.cancelAnimationFrame(tabScrollFrame);
+      if (Math.abs(distance) < 1) return;
+
+      const duration = 900;
+      const startTime = performance.now();
+      const ease = (progress) => 1 - Math.pow(1 - progress, 3);
+
+      const tick = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        tabsContainer.scrollLeft = startLeft + distance * ease(progress);
+
+        if (progress < 1) {
+          tabScrollFrame = window.requestAnimationFrame(tick);
+          return;
+        }
+
+        tabScrollFrame = 0;
+      };
+
+      tabScrollFrame = window.requestAnimationFrame(tick);
     };
 
     const setActive = (index) => {
@@ -161,6 +193,7 @@ const getServicePosition = (index: number) => {
       });
 
       moveIndicator(tabs[index]);
+      scrollActiveTabIntoView(tabs[index]);
     };
 
     const startAutoplay = () => {
@@ -231,10 +264,10 @@ const getServicePosition = (index: number) => {
   }
 
   .services-intro h2 {
-    max-width: 880px;
-    font-size: clamp(2.15rem, 4.3vw, 4.25rem);
+    max-width: 760px;
+    font-size: clamp(1.95rem, 3.2vw, 3.25rem);
     letter-spacing: 0;
-    line-height: 0.96;
+    line-height: 1.08;
   }
 
   .services-intro p:last-child {
@@ -254,7 +287,7 @@ const getServicePosition = (index: number) => {
     margin-inline: calc(50% - 50vw);
     padding: 0 max(18px, calc((100vw - 1440px) / 2)) 4px;
     scrollbar-width: none;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
 
   .services-tabs__indicator {
@@ -268,8 +301,8 @@ const getServicePosition = (index: number) => {
     opacity: 0;
     transform: translate3d(0, 0, 0);
     transition:
-      transform 2s var(--ease-premium),
-      width 2s var(--ease-premium),
+      transform 0.9s var(--ease-premium),
+      width 0.9s var(--ease-premium),
       opacity 0.25s var(--ease-standard);
     pointer-events: none;
     will-change: transform, width;
@@ -293,10 +326,10 @@ const getServicePosition = (index: number) => {
     line-height: 1;
     white-space: nowrap;
     transition:
-      background-color 2s var(--ease-premium),
-      color 2s var(--ease-premium),
+      background-color 0.45s var(--ease-premium),
+      color 0.45s var(--ease-premium),
       border-color 0.3s var(--ease-standard),
-      transform 2s var(--ease-premium);
+      transform 0.45s var(--ease-premium);
   }
 
   .services-tabs:has(.services-tab.is-active) .services-tabs__indicator {
@@ -548,7 +581,7 @@ const getServicePosition = (index: number) => {
     }
 
     .services-intro h2 {
-      font-size: clamp(2.1rem, 12vw, 3.2rem);
+      font-size: clamp(1.85rem, 9vw, 2.65rem);
     }
 
     .services-track {
@@ -566,7 +599,7 @@ const getServicePosition = (index: number) => {
 
     .service-card__content h3 {
       margin-top: 170px;
-      font-size: clamp(1.85rem, 8vw, 2.45rem);
+      font-size: clamp(1.65rem, 7vw, 2.15rem);
     }
 
     .service-card__meta {

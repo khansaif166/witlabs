@@ -21,7 +21,7 @@ const marqueeLogos = [...logos, ...logos];
     {marqueeLogos.map((logo) => (
       logo.href ? (
         <a
-          class="whitespace-nowrap text-base font-semibold tracking-[-0.02em] text-white/28 transition-colors hover:text-white/75"
+          class="whitespace-nowrap text-base font-semibold text-white/28 transition-colors hover:text-white/75"
           href={logo.href}
           target="_blank"
           rel="noreferrer"
@@ -29,7 +29,7 @@ const marqueeLogos = [...logos, ...logos];
           {logo.label}
         </a>
       ) : (
-        <span class="whitespace-nowrap text-base font-semibold tracking-[-0.02em] text-white/28 transition-colors hover:text-white/75">
+        <span class="whitespace-nowrap text-base font-semibold text-white/28 transition-colors hover:text-white/75">
           {logo.label}
         </span>
       )

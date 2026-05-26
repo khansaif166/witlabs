@@ -32,35 +32,52 @@ const heroFrames = [
   },
 ];
 
+const heroBackgroundVideos = [
+  '/videos/8033501-uhd_3840_2160_25fps.mp4',
+  '/videos/15439592_1920_1080_25fps.mp4',
+  '/videos/7287767-uhd_3840_2160_25fps.mp4',
+];
+
 const getHeroPosition = (index: number) => {
   const offset = index % heroFrames.length;
   return offset > heroFrames.length / 2 ? offset - heroFrames.length : offset;
 };
 ---
 
-<section id="homepage-hero" class="homepage-hero relative min-h-[100svh] overflow-hidden bg-ink text-white">
+<section id="homepage-hero" class="homepage-hero relative min-h-[100svh] overflow-hidden bg-ink text-white md:min-h-[112svh] lg:min-h-[118svh]">
   <div class="hero-bg" aria-hidden="true">
-    <img src="/images/Design-3.png" alt="" loading="eager" />
+    <div class="hero-bg__videos">
+      {heroBackgroundVideos.map((src, index) => (
+        <video
+          class="hero-bg__video"
+          data-video-index={index}
+          autoplay
+          muted
+          loop
+          playsinline
+          preload={index === 0 ? 'auto' : 'metadata'}
+        >
+          <source src={src} type="video/mp4" />
+        </video>
+      ))}
+    </div>
   </div>
 
-  <div class="container relative z-10 flex min-h-[100svh] flex-col items-center pb-8 pt-[calc(var(--nav-height)+34px)] text-center lg:pt-[calc(var(--nav-height)+38px)]">
+  <div class="container relative z-10 flex min-h-[100svh] flex-col items-center pb-8 pt-[calc(var(--nav-height)+34px)] text-center md:min-h-[112svh] lg:min-h-[118svh] lg:pt-[calc(var(--nav-height)+38px)]">
     <div class="hero-copy reveal">
-      <div class="mx-auto flex w-fit flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-white/70">
+      <div class="hero-eyebrow mx-auto flex w-fit flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-white/70">
         <span>Digital Growth Agency</span>
         <span class="h-px w-8 bg-white/35" aria-hidden="true"></span>
         <span>India</span>
       </div>
 
-      <h1 id="hero-heading" class="mx-auto mt-5 max-w-3xl display-tight text-[clamp(2.55rem,4.5vw,4.9rem)] font-semibold text-white">
-        <span class="hero-line block">Build less.</span>
-        <span class="hero-line block text-white/72">Sell more.</span>
+      <h1 id="hero-heading" class="hero-heading mx-auto mt-5 max-w-4xl font-semibold text-white">
+        <span class="hero-line block">Be Found.</span>
+        <span class="hero-line block text-white/72">Be Chosen.</span>
       </h1>
 
       <div class="reveal reveal-delay-3 mt-6">
-        <a class="premium-button premium-button-light" href="/contact/">Start a Project</a>
-        <p class="mx-auto mt-4 max-w-xl text-[clamp(0.95rem,1.15vw,1.05rem)] leading-[1.5] text-white/76">
-          Clear websites, sharper growth, smarter systems.
-        </p>
+        <a class="premium-button premium-button-light" href="/contact/">Book a Free Strategy Call</a>
       </div>
     </div>
 
@@ -189,12 +206,32 @@ const getHeroPosition = (index: number) => {
     overflow: hidden;
   }
 
-  .hero-bg img {
+  .hero-bg__videos,
+  .hero-bg__video {
+    position: absolute;
+    inset: 0;
     height: 100%;
     width: 100%;
-    object-fit: cover;
-    filter: blur(18px) saturate(0.8) brightness(0.7);
-    transform: scale(1.1);
+  }
+
+  .hero-bg__video {
+    object-fit: contain;
+    object-position: center top;
+    opacity: 0;
+    animation: heroVideoCycle 24s linear infinite;
+    height: 100%;
+    width: 100%;
+    filter: saturate(0.86) brightness(0.58);
+    transform: none;
+    background: #0b0f0d;
+  }
+
+  .hero-bg__video[data-video-index='1'] {
+    animation-delay: 8s;
+  }
+
+  .hero-bg__video[data-video-index='2'] {
+    animation-delay: 16s;
   }
 
   .hero-bg::after {
@@ -202,14 +239,60 @@ const getHeroPosition = (index: number) => {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.52) 34%, #000 85%),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.08) 48%, rgba(0, 0, 0, 0.56));
+      radial-gradient(circle at 50% 36%, rgba(45, 106, 79, 0.2), transparent 42%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.46) 0%, rgba(0, 0, 0, 0.5) 46%, rgba(0, 0, 0, 0.84) 100%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.64), rgba(0, 0, 0, 0.2) 48%, rgba(0, 0, 0, 0.64));
+  }
+
+  @keyframes heroVideoCycle {
+    0% {
+      opacity: 0;
+    }
+
+    4%,
+    29% {
+      opacity: 1;
+    }
+
+    33%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg__video {
+      animation: none;
+    }
+
+    .hero-bg__video:first-child {
+      opacity: 1;
+    }
+  }
+
+  .homepage-hero .container {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    padding-bottom: clamp(21rem, 34vh, 26rem);
   }
 
   .hero-copy {
     position: relative;
     z-index: 5;
     width: 100%;
+    transform: translateY(clamp(0px, 1vh, 16px));
+  }
+
+  .hero-heading {
+    font-size: clamp(2.55rem, 4.2vw, 4.55rem);
+    line-height: 1.04;
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
+
+  .hero-eyebrow {
+    max-width: 100%;
   }
 
   .hero-line {
@@ -224,12 +307,16 @@ const getHeroPosition = (index: number) => {
   }
 
   .hero-showcase {
-    position: relative;
+    position: absolute;
+    left: 50%;
+    bottom: clamp(3rem, 5.5vh, 5rem);
     z-index: 3;
-    margin-top: clamp(1.4rem, 3vh, 3rem);
-    min-height: min(45vw, 510px);
+    height: min(32vw, 430px);
+    min-height: 330px;
     width: 100vw;
-    flex: 1 1 auto;
+    flex: none;
+    margin-top: 0;
+    transform: translateX(-50%);
   }
 
   .hero-showcase__track {
@@ -243,8 +330,9 @@ const getHeroPosition = (index: number) => {
   .hero-preview-card {
     position: absolute;
     left: 50%;
-    top: 0;
-    width: min(46vw, 760px);
+    top: auto;
+    bottom: 0;
+    width: min(38vw, 650px);
     overflow: hidden;
     border-radius: 8px;
     background: #111;
@@ -339,15 +427,18 @@ const getHeroPosition = (index: number) => {
   }
 
   .hero-bottom {
-    position: relative;
+    position: absolute;
+    left: max(1rem, calc((100vw - min(1280px, calc(100vw - 2rem))) / 2));
+    right: max(1rem, calc((100vw - min(1280px, calc(100vw - 2rem))) / 2));
+    bottom: 22px;
     z-index: 6;
     display: flex;
-    width: 100%;
+    width: auto;
     align-items: end;
     justify-content: space-between;
     gap: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.16);
-    padding-top: 18px;
+    border-top: 0;
+    padding-top: 0;
   }
 
   .hero-frame-label {
@@ -370,12 +461,18 @@ const getHeroPosition = (index: number) => {
   }
 
   @media (max-width: 1023px) {
+    .homepage-hero .container {
+      padding-bottom: clamp(18rem, 32vh, 21rem);
+    }
+
     .hero-showcase {
-      min-height: 430px;
+      bottom: 2.75rem;
+      height: 340px;
+      min-height: 340px;
     }
 
     .hero-preview-card {
-      width: min(68vw, 560px);
+      width: min(62vw, 500px);
     }
 
     .hero-preview-card[data-position='1'] {
@@ -389,16 +486,38 @@ const getHeroPosition = (index: number) => {
   }
 
   @media (max-width: 767px) {
+    .hero-bg__video {
+      object-fit: cover;
+      object-position: center top;
+    }
+
     .homepage-hero .container {
       width: 100%;
       max-width: 100vw;
       padding-left: 16px;
       padding-right: 16px;
       padding-top: calc(var(--nav-height) + 22px);
+      padding-bottom: 260px;
     }
 
-    .homepage-hero h1 {
-      font-size: clamp(2.65rem, 12vw, 3.7rem);
+    .hero-copy {
+      transform: translateY(-18px);
+    }
+
+    .hero-eyebrow {
+      gap: 8px 12px;
+      width: min(100%, 330px);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+    }
+
+    .hero-eyebrow .h-px {
+      width: 22px;
+    }
+
+    .hero-heading {
+      font-size: clamp(2.45rem, 11vw, 3.6rem);
+      line-height: 1.04;
     }
 
     .homepage-hero p {
@@ -407,13 +526,13 @@ const getHeroPosition = (index: number) => {
     }
 
     .hero-showcase {
-      margin-top: 1.5rem;
-      min-height: 360px;
+      bottom: 26px;
+      height: 250px;
+      min-height: 250px;
     }
 
     .hero-preview-card {
-      top: 0;
-      width: min(84vw, 340px);
+      width: min(78vw, 320px);
     }
 
     .hero-preview-card[data-position='1'] {

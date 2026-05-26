@@ -70,7 +70,6 @@ const wallItems = wallSlots.map((slot, index) => {
   <div class="work-wall-header reveal">
     <div>
       <p class="work-wall-eyebrow">Websites made real</p>
-      <h2>Made with WitLabs</h2>
     </div>
     <a class="work-wall-header__link" href="/case-studies/">
       View all case studies <span aria-hidden="true">→</span>
@@ -349,8 +348,7 @@ const wallItems = wallSlots.map((slot, index) => {
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    margin-top: calc(var(--nav-height) * -1);
-    padding-top: var(--nav-height);
+    padding-top: clamp(32px, 5vw, 72px);
     padding-bottom: clamp(64px, 8vw, 112px);
     background: #000000;
     min-height: 0;
@@ -381,12 +379,12 @@ const wallItems = wallSlots.map((slot, index) => {
 
   .work-wall-header h2 {
     margin-top: 10px;
-    max-width: 560px;
+    max-width: 520px;
     color: #ffffff;
-    font-size: 40px;
+    font-size: clamp(1.85rem, 2.8vw, 2.55rem);
     font-weight: 600;
     letter-spacing: 0;
-    line-height: 1;
+    line-height: 1.08;
   }
 
   .work-wall-header__link {
@@ -635,10 +633,10 @@ const wallItems = wallSlots.map((slot, index) => {
     display: grid;
     transform: translate(-50%, -50%);
     color: #ffffff;
-    font-size: 44px;
+    font-size: clamp(2rem, 3vw, 3rem);
     font-weight: 600;
     letter-spacing: 0;
-    line-height: 0.9;
+    line-height: 1;
     text-align: center;
     text-shadow: 0 18px 50px rgba(0, 0, 0, 0.84);
     pointer-events: none;
