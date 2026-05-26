@@ -44,7 +44,7 @@ const getHeroPosition = (index: number) => {
 };
 ---
 
-<section id="homepage-hero" class="homepage-hero relative min-h-[100svh] overflow-hidden bg-ink text-white md:min-h-[112svh] lg:min-h-[118svh]">
+<section id="homepage-hero" class="homepage-hero relative min-h-[100svh] overflow-hidden bg-ink text-white">
   <div class="hero-bg" aria-hidden="true">
     <div class="hero-bg__videos">
       {heroBackgroundVideos.map((src, index) => (
@@ -63,7 +63,7 @@ const getHeroPosition = (index: number) => {
     </div>
   </div>
 
-  <div class="container relative z-10 flex min-h-[100svh] flex-col items-center pb-8 pt-[calc(var(--nav-height)+34px)] text-center md:min-h-[112svh] lg:min-h-[118svh] lg:pt-[calc(var(--nav-height)+38px)]">
+  <div class="container relative z-10 flex min-h-[100svh] flex-col items-center pb-8 pt-[calc(var(--nav-height)+34px)] text-center lg:pt-[calc(var(--nav-height)+38px)]">
     <div class="hero-copy reveal">
       <div class="hero-eyebrow mx-auto flex w-fit flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-white/70">
         <span>Digital Growth Agency</span>
@@ -212,7 +212,7 @@ const getHeroPosition = (index: number) => {
   }
 
   .hero-bg__video {
-    object-fit: contain;
+    object-fit: cover;
     object-position: center top;
     opacity: 0;
     animation: heroVideoCycle 24s linear infinite;
@@ -271,17 +271,26 @@ const getHeroPosition = (index: number) => {
     display: grid;
     align-content: center;
     justify-items: center;
-    padding-bottom: clamp(21rem, 34vh, 26rem);
+    gap: clamp(2.75rem, 5vh, 4.25rem);
+    width: 100%;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: clamp(3rem, 6vh, 5rem);
   }
 
   .hero-copy {
     position: relative;
     z-index: 5;
-    width: 100%;
-    transform: translateY(clamp(0px, 1vh, 16px));
+    justify-self: center;
+    width: min(760px, calc(100vw - 32px));
+    margin-inline: auto;
+    text-align: center;
+    transform: none;
   }
 
   .hero-heading {
+    margin-inline: auto;
     font-size: clamp(2.55rem, 4.2vw, 4.55rem);
     line-height: 1.04;
     letter-spacing: 0;
@@ -304,23 +313,23 @@ const getHeroPosition = (index: number) => {
   }
 
   .hero-showcase {
-    position: absolute;
-    left: 50%;
-    bottom: clamp(3rem, 5.5vh, 5rem);
+    position: relative;
+    left: auto;
+    bottom: auto;
     z-index: 3;
-    height: min(32vw, 430px);
-    min-height: 330px;
-    width: 100vw;
+    height: clamp(340px, 33vw, 450px);
+    min-height: 0;
+    width: 100%;
     flex: none;
     margin-top: 0;
-    transform: translateX(-50%);
+    transform: none;
   }
 
   .hero-showcase__track {
     position: absolute;
     inset: 0;
     left: 50%;
-    width: min(1520px, 100vw);
+    width: min(1400px, 100vw);
     transform: translateX(-50%);
   }
 
@@ -329,7 +338,7 @@ const getHeroPosition = (index: number) => {
     left: 50%;
     top: auto;
     bottom: 0;
-    width: min(38vw, 650px);
+    width: min(38vw, 660px);
     overflow: hidden;
     border-radius: 8px;
     background: #111;
@@ -370,7 +379,7 @@ const getHeroPosition = (index: number) => {
     z-index: 4;
     opacity: 0.78;
     filter: brightness(0.78);
-    transform: translateX(calc(-50% + min(46vw, 610px))) translateY(42px) rotate(3deg) scale(0.82);
+    transform: translateX(calc(-50% + min(42vw, 610px))) translateY(34px) rotate(3deg) scale(0.8);
   }
 
   .hero-preview-card[data-position='2'] {
@@ -391,7 +400,7 @@ const getHeroPosition = (index: number) => {
     z-index: 4;
     opacity: 0.72;
     filter: brightness(0.7);
-    transform: translateX(calc(-50% - min(48vw, 650px))) translateY(62px) rotate(-8deg) scale(0.78);
+    transform: translateX(calc(-50% - min(43vw, 630px))) translateY(44px) rotate(-7deg) scale(0.78);
   }
 
   .hero-preview-card[data-position='-2'] {
@@ -424,13 +433,13 @@ const getHeroPosition = (index: number) => {
   }
 
   .hero-bottom {
-    position: absolute;
-    left: max(1rem, calc((100vw - min(1280px, calc(100vw - 2rem))) / 2));
-    right: max(1rem, calc((100vw - min(1280px, calc(100vw - 2rem))) / 2));
-    bottom: 22px;
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
     z-index: 6;
     display: flex;
-    width: auto;
+    width: min(1280px, calc(100vw - 2rem));
     align-items: end;
     justify-content: space-between;
     gap: 24px;
@@ -459,17 +468,17 @@ const getHeroPosition = (index: number) => {
 
   @media (max-width: 1023px) {
     .homepage-hero .container {
-      padding-bottom: clamp(18rem, 32vh, 21rem);
+      gap: clamp(2rem, 4vh, 3rem);
+      padding-bottom: clamp(2rem, 5vh, 3rem);
     }
 
     .hero-showcase {
-      bottom: 2.75rem;
       height: 340px;
-      min-height: 340px;
+      min-height: 0;
     }
 
     .hero-preview-card {
-      width: min(62vw, 500px);
+      width: min(66vw, 540px);
     }
 
     .hero-preview-card[data-position='1'] {
@@ -494,7 +503,8 @@ const getHeroPosition = (index: number) => {
       padding-left: 16px;
       padding-right: 16px;
       padding-top: calc(var(--nav-height) + 22px);
-      padding-bottom: 260px;
+      gap: 24px;
+      padding-bottom: 34px;
     }
 
     .hero-copy {
@@ -523,9 +533,8 @@ const getHeroPosition = (index: number) => {
     }
 
     .hero-showcase {
-      bottom: 26px;
       height: 250px;
-      min-height: 250px;
+      min-height: 0;
     }
 
     .hero-preview-card {
