@@ -1,106 +1,407 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { pageSEO } from '../lib/seo';
 
 const services = [
   {
     id: 'website-design',
     label: 'Website Design',
+    number: '01',
     summary: 'Conversion-first websites for service businesses, local brands, and growing teams.',
-    includes: ['Strategy and sitemap', 'Responsive UI design', 'Astro development', 'Analytics-ready launch'],
+    includes: ['Clear page strategy and conversion flow', 'Mobile-first UI built for trust', 'Fast, SEO-ready Astro development', 'Contact forms, WhatsApp, and analytics setup'],
   },
   {
     id: 'seo',
     label: 'SEO & Organic Growth',
+    number: '02',
     summary: 'Search foundations, local visibility, and content systems built around how customers actually search.',
-    includes: ['Technical SEO audit', 'Keyword and competitor research', 'On-page optimization', 'Local SEO improvements'],
+    includes: ['Technical audit with priority fixes', 'Keyword research around buyer intent', 'Optimized titles, pages, and internal links', 'Google Business Profile and local SEO improvements'],
   },
   {
     id: 'digital-marketing',
     label: 'Digital Marketing',
+    number: '03',
     summary: 'Campaign planning and execution that turns attention into qualified conversations.',
-    includes: ['Channel strategy', 'Creative direction', 'Landing page alignment', 'Monthly reporting'],
+    includes: ['Campaign strategy for leads and visibility', 'Ad copy, creatives, and offer positioning', 'Landing page alignment for better conversions', 'Weekly optimization and clear performance reports'],
   },
   {
     id: 'app-development',
     label: 'App Development',
+    number: '04',
     summary: 'Practical mobile and web apps for workflows, customer experiences, and internal tools.',
-    includes: ['Product scoping', 'UX flows', 'Frontend development', 'Launch support'],
-  },
-  {
-    id: 'branding',
-    label: 'Branding & Identity',
-    summary: 'Clear identity systems that make your business easier to recognize, trust, and remember.',
-    includes: ['Positioning basics', 'Logo and visual direction', 'Color and type system', 'Brand usage guidance'],
+    includes: ['Feature planning based on real workflows', 'Clean UX flows for users and admins', 'Secure frontend and backend development', 'Testing, deployment, and launch support'],
   },
   {
     id: 'automation',
-    label: 'Automation',
+    label: 'Automation & AI',
+    number: '05',
     summary: 'Lean systems that remove repetitive work from sales, operations, support, and reporting.',
-    includes: ['Workflow mapping', 'Tool integration', 'Lead routing', 'Process dashboards'],
-  },
-  {
-    id: 'chatbots',
-    label: 'AI Chatbots',
-    summary: 'Customer-facing and internal assistants trained around your offers, FAQs, and workflows.',
-    includes: ['Conversation design', 'Knowledge setup', 'Lead capture', 'Handoff rules'],
+    includes: ['Workflow mapping to find manual bottlenecks', 'CRM, forms, sheets, and tool integrations', 'Lead routing, auto-replies, and follow-up systems', 'Dashboards for tracking tasks, leads, and reports'],
   },
 ];
+
+const serviceListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  '@id': 'https://witlabs.in/services/#services',
+  name: 'WitLabs Digital Services',
+  itemListElement: services.map((service, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'Service',
+      '@id': `https://witlabs.in/services/#${service.id}`,
+      name: service.label,
+      description: service.summary,
+      provider: { '@id': 'https://witlabs.in/#business' },
+      areaServed: { '@type': 'Country', name: 'India' },
+      url: `https://witlabs.in/services/#${service.id}`,
+    },
+  })),
+};
 ---
 
-<PageLayout
-  title="Services"
-  seoTitle={pageSEO.services.title}
-  eyebrow="What we do"
+<BaseLayout
+  title={pageSEO.services.title}
   description={pageSEO.services.description}
   canonical="https://witlabs.in/services/"
   keywords={pageSEO.services.keywords}
 >
-  <section class="mx-auto max-w-6xl px-6 pb-20">
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(serviceListSchema)} />
+
+  <section class="services-hero px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-[1240px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <div class="services-hero__copy reveal">
+        <p class="section-kicker text-green-bright">What We Build</p>
+        <h1>Digital systems that make your business easier to choose.</h1>
+        <p>
+          Websites, SEO, marketing, apps, and automation shaped around real customer journeys, not random deliverables.
+        </p>
+        <div class="services-hero__actions">
+          <a class="premium-button premium-button-light" href="/contact/">Start a Project</a>
+          <a class="services-hero__link" href="#website-design">Explore services <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div class="services-hero__stage reveal reveal-delay-2" aria-label="WitLabs service areas">
+        {services.slice(0, 4).map((service, index) => (
+          <a class:list={['services-hero-card', index === 0 && 'services-hero-card--main']} href={`#${service.id}`}>
+            <span>{service.number}</span>
+            <strong>{service.label}</strong>
+            <small>{service.summary}</small>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="services-nav-section px-4 py-10 sm:px-6 lg:px-8">
+    <div class="mx-auto flex max-w-[1240px] flex-wrap justify-center gap-2">
       {services.map((service) => (
-        <a class="rounded-lg border border-border bg-white p-5 text-body-sm font-semibold text-ink hover:border-green hover:text-green" href={`#${service.id}`}>
-          {service.label}
-        </a>
+        <a class="services-chip" href={`#${service.id}`}>{service.label}</a>
       ))}
     </div>
   </section>
 
-  <section class="bg-white py-20">
-    <div class="mx-auto grid max-w-6xl gap-8 px-6">
+  <section class="services-list px-4 pb-20 sm:px-6 lg:px-8 lg:pb-24">
+    <div class="mx-auto grid max-w-[1240px] gap-5 md:grid-cols-2">
       {services.map((service, index) => (
-        <article id={service.id} class="scroll-mt-28 rounded-lg border border-border bg-cream p-6 md:grid md:grid-cols-[0.85fr_1.15fr] md:gap-10 md:p-8">
-          <div>
-            <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-              {String(index + 1).padStart(2, '0')}
-            </p>
-            <h2 class="mt-4 text-heading-xl font-semibold text-ink">{service.label}</h2>
-          </div>
-          <div class="mt-5 md:mt-0">
-            <p class="text-body-lg leading-8 text-muted">{service.summary}</p>
-            <ul class="mt-6 grid gap-3 sm:grid-cols-2">
-              {service.includes.map((item) => (
-                <li class="flex gap-3 text-body-sm text-ink-light">
-                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-green" aria-hidden="true"></span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <article id={service.id} class:list={['service-detail-card reveal', `reveal-delay-${(index % 3) + 1}`]}>
+          <span class="service-detail-card__shine" aria-hidden="true"></span>
+          <p>{service.number}</p>
+          <h2>{service.label}</h2>
+          <span>{service.summary}</span>
+          <ul>
+            {service.includes.map((item) => (
+              <li>
+                <i aria-hidden="true">✓</i>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </article>
       ))}
     </div>
   </section>
 
-  <section class="bg-green py-16 text-white">
-    <div class="mx-auto flex max-w-6xl flex-col gap-6 px-6 md:flex-row md:items-center md:justify-between">
+  <section class="services-cta px-4 py-16 text-white sm:px-6 lg:px-8">
+    <div class="mx-auto flex max-w-[1240px] flex-col gap-6 md:flex-row md:items-center md:justify-between">
       <div>
-        <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60">Not sure where to start?</p>
-        <h2 class="mt-3 text-heading-xl font-semibold text-white">We will map the fastest next move.</h2>
+        <p class="section-kicker text-white/62">Not sure where to start?</p>
+        <h2>We will map the fastest next move.</h2>
       </div>
-      <a class="premium-button premium-button-light shrink-0" href="/contact/">
-        Book a Strategy Call
-      </a>
+      <a class="premium-button premium-button-light shrink-0" href="/contact/">Book a Strategy Call</a>
     </div>
   </section>
-</PageLayout>
+</BaseLayout>
+
+<style>
+  .services-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding-bottom: clamp(64px, 8vw, 96px);
+    padding-top: calc(var(--nav-height) + clamp(42px, 7vw, 86px));
+    background: #050505;
+    color: #FFFFFF;
+  }
+
+  .services-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 76% 18%, rgba(74, 222, 128, 0.18), transparent 30%),
+      radial-gradient(circle at 14% 22%, rgba(154, 86, 15, 0.14), transparent 26%),
+      linear-gradient(180deg, #050505, #10100f 62%, #F8F4EC 100%);
+  }
+
+  .services-hero__copy h1 {
+    margin-top: 16px;
+    max-width: 760px;
+    font-size: clamp(2.55rem, 4.2vw, 4.55rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  .services-hero__copy p:last-of-type {
+    margin-top: 22px;
+    max-width: 620px;
+    color: rgba(255, 255, 255, 0.64);
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    line-height: 1.75;
+  }
+
+  .services-hero__actions {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .services-hero__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.95rem;
+    font-weight: 800;
+  }
+
+  .services-hero__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    height: 2px;
+    width: 100%;
+    background: #4ADE80;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.28s var(--ease-standard);
+  }
+
+  .services-hero__link:hover::after,
+  .services-hero__link:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .services-hero__stage {
+    display: grid;
+    gap: 14px;
+  }
+
+  .services-hero-card {
+    position: relative;
+    display: grid;
+    min-height: 150px;
+    overflow: hidden;
+    align-content: end;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)), #070707;
+    padding: 22px;
+    color: #FFFFFF;
+    box-shadow: 0 28px 84px rgba(0, 0, 0, 0.32);
+    transition: transform 0.55s var(--ease-premium), border-color 0.35s var(--ease-standard), box-shadow 0.55s var(--ease-premium);
+  }
+
+  .services-hero-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 82% 18%, rgba(74, 222, 128, 0.18), transparent 25%);
+    pointer-events: none;
+  }
+
+  .services-hero-card:hover,
+  .services-hero-card:focus-visible {
+    border-color: rgba(74, 222, 128, 0.58);
+    box-shadow: 0 36px 96px rgba(0, 0, 0, 0.52), 0 0 0 1px rgba(74, 222, 128, 0.16);
+    outline: none;
+    transform: translateY(-5px);
+  }
+
+  .services-hero-card span,
+  .services-hero-card strong,
+  .services-hero-card small {
+    position: relative;
+    z-index: 1;
+  }
+
+  .services-hero-card span,
+  .services-chip,
+  .service-detail-card > p {
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .services-hero-card span {
+    color: #4ADE80;
+  }
+
+  .services-hero-card strong {
+    margin-top: 8px;
+    font-size: clamp(1.35rem, 2vw, 2rem);
+    line-height: 1.1;
+  }
+
+  .services-hero-card small {
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .services-hero-card--main {
+    min-height: 216px;
+    background:
+      radial-gradient(circle at 22% 18%, rgba(74, 222, 128, 0.24), transparent 30%),
+      linear-gradient(135deg, rgba(45, 106, 79, 0.72), #070707 64%);
+  }
+
+  .services-nav-section,
+  .services-list {
+    background: #F8F4EC;
+  }
+
+  .services-chip {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(45, 106, 79, 0.18);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.68);
+    padding: 11px 15px;
+    color: #2D6A4F;
+    box-shadow: 0 10px 26px rgba(28, 25, 23, 0);
+    transition: background 0.25s var(--ease-standard), border-color 0.25s var(--ease-standard), box-shadow 0.25s var(--ease-standard), color 0.25s var(--ease-standard), transform 0.25s var(--ease-standard);
+  }
+
+  .services-chip:hover,
+  .services-chip:focus-visible {
+    border-color: #2D6A4F;
+    background: #2D6A4F;
+    color: #FFFFFF;
+    box-shadow: 0 16px 34px rgba(45, 106, 79, 0.18);
+    transform: translateY(-2px);
+  }
+
+  .service-detail-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(45, 106, 79, 0.22);
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.72));
+    padding: 28px;
+    box-shadow: 0 24px 80px rgba(28, 25, 23, 0.04);
+    scroll-margin-top: calc(var(--nav-height) + 24px);
+    transition: transform 0.55s var(--ease-premium), box-shadow 0.55s var(--ease-premium), border-color 0.35s var(--ease-standard);
+  }
+
+  .service-detail-card:hover {
+    border-color: rgba(45, 106, 79, 0.58);
+    box-shadow: 0 44px 120px rgba(28, 25, 23, 0.12);
+    transform: translateY(-6px);
+  }
+
+  .service-detail-card > p {
+    color: #2D6A4F;
+  }
+
+  .service-detail-card h2 {
+    margin-top: 12px;
+    color: #1C1917;
+    font-size: clamp(1.55rem, 2.2vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+
+  .service-detail-card > span {
+    margin-top: 14px;
+    display: block;
+    color: #78716C;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .service-detail-card ul {
+    margin-top: 24px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .service-detail-card li {
+    display: flex;
+    gap: 12px;
+    color: #44403C;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .service-detail-card i {
+    display: grid;
+    width: 21px;
+    height: 21px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    color: #2D6A4F;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 1;
+  }
+
+  .services-cta {
+    background: #2D6A4F;
+  }
+
+  .services-cta h2 {
+    margin-top: 12px;
+    font-size: clamp(1.55rem, 2.2vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+
+  @media (min-width: 720px) {
+    .services-hero__stage {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .services-hero-card--main {
+      grid-row: span 2;
+    }
+  }
+</style>

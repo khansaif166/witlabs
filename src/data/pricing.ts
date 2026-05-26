@@ -60,35 +60,35 @@ export const marketingPlans = [
 
 export const appPlans = [
   {
-    name: 'Business Dashboard',
-    price: '₹49,999',
+    name: 'E-commerce',
+    price: '₹34,999',
     tone: 'green',
-    items: ['Leads, sales, and reports', 'Centralized visibility', 'Real-time insights'],
+    items: ['Clean product catalog with categories', 'Cart, checkout, and payment-ready flow', 'Order dashboard for daily operations'],
   },
   {
     name: 'Booking / Appointment System',
     price: '₹59,999',
     tone: 'green',
-    items: ['Online booking flow', 'Admin panel', 'Notifications & reminders'],
+    items: ['Customer-friendly booking experience', 'Admin calendar to manage slots', 'Automated confirmations and reminders'],
   },
   {
     name: 'CRM & Lead System',
     price: '₹74,999',
     tone: 'green',
-    items: ['Lead tracking', 'Follow-up reminders', 'Team assignment'],
+    items: ['Centralized lead pipeline', 'Follow-up reminders for faster conversion', 'Team assignment and status tracking'],
   },
   {
     name: 'LMS / Education Platform',
     price: '₹1,49,999',
     tone: 'green',
-    items: ['Students & courses', 'Tests and attendance', 'Admin management'],
+    items: ['Student and course management', 'Tests, attendance, and progress tracking', 'Admin tools for institute operations'],
   },
 ];
 
 export const launchPackage = [
   {
     name: 'Website Development',
-    price: '₹11,999',
+    price: '₹9,999',
     suffix: 'Only',
     note: 'One-Time',
     items: ['5 Page Professional Website', 'Mobile Responsive Design', 'WhatsApp Button', 'Contact Form', 'Basic SEO Setup', '1 Year Domain + Hosting Included', 'Delivery in 3 Days'],

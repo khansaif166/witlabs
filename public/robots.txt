@@ -1,7 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /thank-you/
-Disallow: /404/
 
 # Main sitemap
 Sitemap: https://witlabs.in/sitemap-index.xml

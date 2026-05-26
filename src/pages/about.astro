@@ -1,17 +1,550 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { pageSEO } from '../lib/seo';
+
+const principles = [
+  'Clear strategy before design',
+  'Fast websites built for search',
+  'Honest scope and transparent pricing',
+  'Systems that help teams follow up faster',
+];
+
+const numbers = [
+  { value: '3d', label: 'starter launch path' },
+  { value: '1yr', label: 'domain + hosting on web plans' },
+  { value: '45d', label: 'premium support window' },
+];
+
+const direction = [
+  {
+    label: 'Mission',
+    title: 'Make digital growth clear for serious businesses.',
+    text: 'We help founders and teams move from scattered online presence to focused websites, campaigns, apps, and systems that customers can trust.',
+  },
+  {
+    label: 'Vision',
+    title: 'Build a premium digital partner Indian businesses can rely on.',
+    text: 'Our goal is to become the studio businesses call when they want practical strategy, polished execution, and long-term digital confidence.',
+  },
+];
+
+const waysOfWorking = [
+  {
+    number: '01',
+    title: 'Transparency first',
+    text: 'You see the scope, timeline, inclusions, pricing logic, and next steps before work begins. No confusing promises or hidden surprises.',
+  },
+  {
+    number: '02',
+    title: 'Customer satisfaction',
+    text: 'We review the work with you, listen carefully, and refine the important details so the final output feels right for your business.',
+  },
+  {
+    number: '03',
+    title: 'Premium feel',
+    text: 'Every page, flow, and visual choice is shaped to make your brand feel credible, modern, and easier for customers to choose.',
+  },
+  {
+    number: '04',
+    title: 'Performance mindset',
+    text: 'Launch is only the start. We care about speed, search foundations, lead paths, reporting, and improvements that make the work useful.',
+  },
+];
+
+const guarantees = [
+  'Clear deliverables before kickoff',
+  'Mobile-first premium presentation',
+  'Launch testing for key customer flows',
+  'Support window after going live',
+];
 ---
 
-<PageLayout
-  title="About WitLabs"
-  seoTitle={pageSEO.about.title}
-  eyebrow="Studio"
+<BaseLayout
+  title={pageSEO.about.title}
   description={pageSEO.about.description}
   canonical="https://witlabs.in/about/"
   keywords={pageSEO.about.keywords}
 >
-  <section class="mx-auto max-w-6xl px-6 pb-20">
-    <p class="max-w-2xl leading-7 text-muted">About page content will live here.</p>
+  <section class="about-hero px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-[1240px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <div class="about-hero__copy reveal">
+        <p class="section-kicker text-green-bright">Studio</p>
+        <h1>Built for businesses that need clarity, not noise.</h1>
+        <p>
+          WitLabs helps Indian businesses launch sharper websites, improve visibility, and turn online interest into real conversations.
+        </p>
+        <a class="premium-button premium-button-light mt-7" href="/contact/">Work With WitLabs</a>
+      </div>
+
+      <div class="about-board reveal reveal-delay-2" aria-label="WitLabs principles">
+        <div class="about-board__top">
+          <span>WitLabs Operating System</span>
+          <span>Digital Growth</span>
+        </div>
+        <div class="about-board__grid">
+          {principles.map((principle, index) => (
+            <div>
+              <strong>{String(index + 1).padStart(2, '0')}</strong>
+              <p>{principle}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   </section>
-</PageLayout>
+
+  <section class="about-content px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+    <div class="mx-auto grid max-w-[1240px] gap-8 lg:grid-cols-[0.82fr_1.18fr]">
+      <div class="reveal">
+        <p class="section-kicker text-green">Why WitLabs</p>
+        <h2>Digital work should feel practical, measurable, and easy to trust.</h2>
+      </div>
+      <div class="about-story reveal reveal-delay-2">
+        <p>
+          We focus on the parts that actually move a business forward: clear positioning, clean pages, lead paths, search foundations, reporting, and follow-up systems.
+        </p>
+        <p>
+          The goal is simple: help your business look credible online, get found by the right people, and respond faster when leads arrive.
+        </p>
+      </div>
+    </div>
+
+    <div class="mx-auto mt-12 grid max-w-[1240px] gap-5 md:grid-cols-3">
+      {numbers.map((item, index) => (
+        <div class:list={['about-stat reveal', `reveal-delay-${index + 1}`]}>
+          <strong>{item.value}</strong>
+          <span>{item.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="about-direction px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+    <div class="mx-auto max-w-[1240px]">
+      <div class="about-section-head reveal">
+        <p class="section-kicker text-green">Mission & Vision</p>
+        <h2>Focused direction. Premium execution.</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 lg:grid-cols-2">
+        {direction.map((item, index) => (
+          <article class:list={['direction-card reveal', `reveal-delay-${index + 1}`]}>
+            <span>{item.label}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="about-working px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+    <div class="mx-auto grid max-w-[1240px] gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
+      <div class="about-working__intro reveal">
+        <p class="section-kicker text-green-bright">Ways of Working</p>
+        <h2>Built around transparency, satisfaction, and premium brand value.</h2>
+        <p>
+          Our process is designed to make the work feel calm, visible, and accountable from the first conversation to post-launch support.
+        </p>
+      </div>
+
+      <div class="working-grid">
+        {waysOfWorking.map((item, index) => (
+          <article class:list={['working-card reveal', `reveal-delay-${(index % 4) + 1}`]}>
+            <strong>{item.number}</strong>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="about-guarantee px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+    <div class="mx-auto grid max-w-[1240px] gap-10 lg:grid-cols-[1fr_0.95fr] lg:items-center">
+      <div class="reveal">
+        <p class="section-kicker text-green">WitLabs Guarantee</p>
+        <h2>Premium feel, clear communication, and work you can confidently launch.</h2>
+        <p>
+          We cannot promise fake rankings or overnight growth. We can promise thoughtful strategy, polished execution, transparent communication, and a launch process that respects your time and customers.
+        </p>
+      </div>
+
+      <div class="guarantee-panel reveal reveal-delay-2">
+        <div class="guarantee-panel__top">
+          <span>Included Standards</span>
+          <span>Quality Promise</span>
+        </div>
+        <ul>
+          {guarantees.map((item) => (
+            <li>
+              <i aria-hidden="true">✓</i>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding-bottom: clamp(64px, 8vw, 96px);
+    padding-top: calc(var(--nav-height) + clamp(42px, 7vw, 86px));
+    background: #050505;
+    color: #FFFFFF;
+  }
+
+  .about-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 76% 18%, rgba(74, 222, 128, 0.18), transparent 30%),
+      radial-gradient(circle at 14% 22%, rgba(154, 86, 15, 0.14), transparent 26%),
+      linear-gradient(180deg, #050505, #10100f 62%, #F8F4EC 100%);
+  }
+
+  .about-hero__copy h1 {
+    margin-top: 16px;
+    max-width: 760px;
+    font-size: clamp(2.55rem, 4.2vw, 4.55rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  .about-hero__copy p {
+    margin-top: 22px;
+    max-width: 620px;
+    color: rgba(255, 255, 255, 0.64);
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    line-height: 1.75;
+  }
+
+  .about-board {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background:
+      radial-gradient(circle at 24% 18%, rgba(74, 222, 128, 0.2), transparent 32%),
+      linear-gradient(135deg, rgba(45, 106, 79, 0.58), #070707 62%);
+    box-shadow: 0 36px 96px rgba(0, 0, 0, 0.52);
+  }
+
+  .about-board__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 18px;
+    color: rgba(255, 255, 255, 0.58);
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .about-board__grid {
+    display: grid;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .about-board__grid div {
+    min-height: 132px;
+    background: rgba(5, 5, 5, 0.76);
+    padding: 22px;
+  }
+
+  .about-board__grid strong {
+    color: #4ADE80;
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+  }
+
+  .about-board__grid p {
+    margin-top: 12px;
+    color: #FFFFFF;
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .about-content {
+    background: #F8F4EC;
+  }
+
+  .about-content h2 {
+    margin-top: 16px;
+    max-width: 560px;
+    color: #1C1917;
+    font-size: clamp(1.95rem, 3.2vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.08;
+  }
+
+  .about-story {
+    display: grid;
+    gap: 18px;
+    color: #57534E;
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    line-height: 1.75;
+  }
+
+  .about-stat {
+    border: 1px solid rgba(45, 106, 79, 0.22);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.72);
+    padding: 28px;
+    box-shadow: 0 24px 80px rgba(28, 25, 23, 0.04);
+  }
+
+  .about-stat strong {
+    display: block;
+    color: #2D6A4F;
+    font-size: clamp(2rem, 3.1vw, 3.05rem);
+    line-height: 1;
+  }
+
+  .about-stat span {
+    margin-top: 10px;
+    display: block;
+    color: #57534E;
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .about-direction {
+    background: #FFFFFF;
+  }
+
+  .about-section-head {
+    max-width: 760px;
+  }
+
+  .about-section-head h2,
+  .about-working__intro h2,
+  .about-guarantee h2 {
+    margin-top: 16px;
+    color: #1C1917;
+    font-size: clamp(1.95rem, 3.2vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .direction-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 330px;
+    border: 1px solid rgba(28, 25, 23, 0.1);
+    border-radius: 8px;
+    background:
+      radial-gradient(circle at 84% 16%, rgba(74, 222, 128, 0.14), transparent 28%),
+      linear-gradient(135deg, #FFFFFF, #F8F4EC);
+    padding: clamp(28px, 4vw, 44px);
+    box-shadow: 0 24px 80px rgba(28, 25, 23, 0.05);
+  }
+
+  .direction-card::after {
+    content: '';
+    position: absolute;
+    inset-inline: clamp(28px, 4vw, 44px);
+    bottom: 0;
+    height: 4px;
+    background: #2D6A4F;
+  }
+
+  .direction-card span,
+  .guarantee-panel__top,
+  .working-card strong {
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .direction-card span,
+  .working-card strong {
+    color: #2D6A4F;
+  }
+
+  .direction-card h3 {
+    margin-top: 48px;
+    max-width: 560px;
+    color: #1C1917;
+    font-size: clamp(1.65rem, 2.7vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.08;
+  }
+
+  .direction-card p {
+    margin-top: 18px;
+    max-width: 620px;
+    color: #57534E;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .about-working {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: #070707;
+    color: #FFFFFF;
+  }
+
+  .about-working::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 86% 14%, rgba(74, 222, 128, 0.16), transparent 30%),
+      radial-gradient(circle at 16% 86%, rgba(154, 86, 15, 0.13), transparent 28%);
+  }
+
+  .about-working__intro {
+    align-self: start;
+  }
+
+  .about-working__intro h2 {
+    color: #FFFFFF;
+  }
+
+  .about-working__intro p {
+    margin-top: 22px;
+    max-width: 440px;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .working-grid {
+    display: grid;
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .working-card {
+    min-height: 245px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+      #090909;
+    padding: clamp(24px, 3vw, 34px);
+  }
+
+  .working-card h3 {
+    margin-top: 38px;
+    color: #FFFFFF;
+    font-size: clamp(1.25rem, 1.9vw, 1.85rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.12;
+  }
+
+  .working-card p {
+    margin-top: 14px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .about-guarantee {
+    background: #F8F4EC;
+  }
+
+  .about-guarantee p:not(.section-kicker) {
+    margin-top: 20px;
+    max-width: 720px;
+    color: #57534E;
+    font-size: clamp(1rem, 1.2vw, 1.12rem);
+    line-height: 1.75;
+  }
+
+  .guarantee-panel {
+    overflow: hidden;
+    border: 1px solid rgba(45, 106, 79, 0.2);
+    border-radius: 8px;
+    background: #FFFFFF;
+    box-shadow: 0 28px 80px rgba(28, 25, 23, 0.08);
+  }
+
+  .guarantee-panel__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid rgba(28, 25, 23, 0.08);
+    padding: 16px 18px;
+    color: #78716C;
+  }
+
+  .guarantee-panel ul {
+    display: grid;
+    gap: 0;
+  }
+
+  .guarantee-panel li {
+    display: flex;
+    gap: 14px;
+    border-bottom: 1px solid rgba(28, 25, 23, 0.08);
+    padding: 20px 22px;
+    color: #1C1917;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .guarantee-panel li:last-child {
+    border-bottom: 0;
+  }
+
+  .guarantee-panel i {
+    color: #2D6A4F;
+    font-style: normal;
+  }
+
+  @media (min-width: 720px) {
+    .about-board__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .working-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .direction-card {
+      min-height: 280px;
+    }
+
+    .direction-card h3,
+    .working-card h3 {
+      margin-top: 30px;
+    }
+
+    .guarantee-panel__top {
+      flex-direction: column;
+      gap: 6px;
+    }
+  }
+</style>

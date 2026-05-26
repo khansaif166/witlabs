@@ -54,7 +54,7 @@ function isActive(href: string): boolean {
 >
   <nav class="site-nav mx-auto flex h-[var(--nav-height)] max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10" aria-label="Main navigation">
     <a href="/" aria-label="WitLabs - Home" class="brand-mark group inline-flex items-center">
-      <img class="brand-logo" src="/images/logo.png" alt="WitLabs" width="1916" height="821" loading="eager" decoding="async" />
+      <img class="brand-logo" src="/images/logo.png" alt="WitLabs" width="958" height="411" loading="eager" decoding="async" />
     </a>
 
     <ul class="hidden h-full items-center gap-8 lg:flex" role="list">
@@ -279,8 +279,7 @@ function isActive(href: string): boolean {
   }
 
   #site-header.is-transparent.scrolled,
-  #site-header.is-transparent.mega-open,
-  #site-header.work-wall-active:not(.mega-open) {
+  #site-header.is-transparent.mega-open {
     background: rgba(0, 0, 0, 0.94);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     color: #FFFFFF;

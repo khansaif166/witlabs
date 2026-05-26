@@ -5,7 +5,6 @@ const homepagePlans = [
     name: 'Professional website',
     price: '₹11,999',
     suffix: 'one-time',
-    href: '/pricing/#launch-package',
     cta: 'Start website package',
     note: '5 pages, mobile responsive, WhatsApp button, contact form, basic SEO, domain + hosting for year one.',
     visual: 'website',
@@ -16,13 +15,26 @@ const homepagePlans = [
     name: 'Starter growth system',
     price: '₹17,999',
     suffix: '/month',
-    href: '/pricing/#marketing-pricing',
     cta: 'Start marketing package',
     note: 'Campaign setup, audience research, ad copywriting, weekly optimization, reports, and WhatsApp leads.',
     visual: 'marketing',
     video: '/videos/Black dashboard-like environment with floating ad campaign cards, audience targeting panels, social media post previews, keyword bubbles, lead notifications, and upward growth chart. Campaign elements activate one by one_ audience segments .mp4',
   },
 ];
+
+function getHomepagePlanContactHref(plan: (typeof homepagePlans)[number]) {
+  const params = new URLSearchParams();
+  const priceLabel = `${plan.price} ${plan.suffix}`;
+  const service = plan.service === 'Website Launch' ? 'Website Design' : 'Digital Marketing';
+  const budget = plan.service === 'Website Launch' ? 'Under ₹15,000' : '₹15,000–₹30,000';
+
+  params.set('plan', plan.name);
+  params.set('service_interested_in', service);
+  params.set('budget_range', budget);
+  params.set('message', `I am interested in the ${plan.name} package (${priceLabel}) from the WitLabs home page. ${plan.note} Please share the next steps.`);
+
+  return `/contact/?${params.toString()}`;
+}
 ---
 
 <section id="pricing-preview" class="pricing-preview bg-black px-4 pb-14 pt-6 text-white sm:px-6 lg:px-8 lg:pb-20 lg:pt-10">
@@ -37,9 +49,10 @@ const homepagePlans = [
       {homepagePlans.map((plan, index) => (
         <a
           class:list={['pricing-choice-card', index === 0 && 'is-active']}
-          href={plan.href}
+          href={getHomepagePlanContactHref(plan)}
           data-pricing-card={index}
           style="--tilt-x:0deg; --tilt-y:0deg;"
+          aria-label={`Contact WitLabs about the ${plan.name} package`}
         >
           <span class="pricing-choice-card__shine" aria-hidden="true"></span>
 
@@ -74,6 +87,12 @@ const homepagePlans = [
       <span>Transparent scope</span>
       <span>Fast launch path</span>
       <span>No hidden charges</span>
+    </div>
+
+    <div class="pricing-preview__actions reveal reveal-delay-3">
+      <a class="pricing-preview__button" href="/pricing/">
+        View other packages <span aria-hidden="true">→</span>
+      </a>
     </div>
   </div>
 </section>
@@ -567,6 +586,47 @@ const homepagePlans = [
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+  }
+
+  .pricing-preview__actions {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .pricing-preview__button {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: #FFFFFF;
+    padding: 13px 20px;
+    color: #111111;
+    font-size: 0.78rem;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    transition: border-color 0.25s var(--ease-standard), background 0.25s var(--ease-standard), color 0.25s var(--ease-standard), transform 0.25s var(--ease-standard);
+  }
+
+  .pricing-preview__button span {
+    transition: transform 0.25s var(--ease-standard);
+  }
+
+  .pricing-preview__button:hover,
+  .pricing-preview__button:focus-visible {
+    border-color: rgba(82, 183, 136, 0.45);
+    background: #2D6A4F;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+  }
+
+  .pricing-preview__button:hover span,
+  .pricing-preview__button:focus-visible span {
+    transform: translateX(3px);
   }
 
   @keyframes cardShine {

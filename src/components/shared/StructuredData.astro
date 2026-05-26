@@ -16,8 +16,8 @@ const organization = {
   logo: {
     '@type': 'ImageObject',
     url: 'https://witlabs.in/images/logo.png',
-    width: 1916,
-    height: 821,
+    width: 958,
+    height: 411,
   },
   description: 'Be Found. Be Chosen. WitLabs is a digital growth agency helping Indian businesses build websites, rank on Google and grow with digital marketing and automation.',
   foundingDate: '2024',
@@ -36,7 +36,6 @@ const organization = {
     telephone: '+91-7984301015',
     contactType: 'sales',
     availableLanguage: ['English', 'Hindi'],
-    contactOption: 'TollFree',
   }],
   sameAs: [
     'https://www.instagram.com/witlabs',
@@ -62,25 +61,29 @@ const localBusiness = {
   '@id': 'https://witlabs.in/#business',
   name: 'WitLabs',
   image: 'https://witlabs.in/og/default.jpg',
+  logo: 'https://witlabs.in/images/logo.png',
   url: 'https://witlabs.in',
   telephone: '+91-7984301015',
-  email: 'hello@witlabs.in',
+  email: 'connect@witlabs.in',
   priceRange: '₹₹',
   currenciesAccepted: 'INR',
   paymentAccepted: 'Cash, Bank Transfer, UPI',
+  sameAs: organization.sameAs,
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'IN',
+    addressRegion: 'India',
+  },
   areaServed: {
     '@type': 'Country',
     name: 'India',
   },
-  serviceArea: {
-    '@type': 'GeoCircle',
-    geoMidpoint: {
-      '@type': 'GeoCoordinates',
-      latitude: 20.5937,
-      longitude: 78.9629,
-    },
-    geoRadius: '3000000',
-  },
+  openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    opens: '09:00',
+    closes: '19:00',
+  }],
 };
 
 const schemas = {

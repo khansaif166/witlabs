@@ -31,8 +31,21 @@ const {
   noindex = false,
   type = 'website',
   keywords = [],
-  transparentHeader = false,
+  transparentHeader = true,
 } = Astro.props;
+
+const siteUrl = 'https://witlabs.in';
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const breadcrumbItems = [
+  { name: 'Home', url: `${siteUrl}/` },
+  ...pathSegments.map((segment, index) => ({
+    name: segment
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' '),
+    url: `${siteUrl}/${pathSegments.slice(0, index + 1).join('/')}/`,
+  })),
+];
 ---
 
 <!DOCTYPE html>
@@ -51,6 +64,7 @@ const {
     />
     <StructuredData type="organization" />
     <StructuredData type="localBusiness" />
+    {breadcrumbItems.length > 1 && <StructuredData type="breadcrumb" items={breadcrumbItems} />}
   </head>
   <body class="min-h-screen flex flex-col bg-cream text-ink antialiased">
     <Header transparent={transparentHeader} />

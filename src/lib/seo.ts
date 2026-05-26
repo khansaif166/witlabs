@@ -6,7 +6,7 @@ export const pageSEO = {
   },
   services: {
     title: 'Digital Services — Website Design, SEO & Marketing | WitLabs',
-    description: 'From website design and SEO to digital marketing, app development and AI chatbots — WitLabs offers end-to-end digital services for Indian businesses. View our service packages.',
+    description: 'Website design, SEO, digital marketing, app development, and AI automation services for Indian businesses that want more qualified leads.',
     keywords: ['digital services India', 'website design agency', 'SEO services India', 'digital marketing services', 'app development India'],
   },
   pricing: {
@@ -14,19 +14,14 @@ export const pageSEO = {
     description: 'View transparent WitLabs pricing for websites, digital marketing, app development, and digital launch packages for Indian businesses.',
     keywords: ['WitLabs pricing', 'website pricing India', 'digital marketing pricing India', 'app development pricing India'],
   },
-  caseStudies: {
-    title: 'Case Studies — Real Results for Indian Businesses | WitLabs',
-    description: 'See how WitLabs helped Aswad Global, Impact Packaging Solutions and Kota Experts grow online with website design, SEO foundations and digital marketing.',
-    keywords: ['digital agency case studies India', 'website design results', 'SEO results India', 'digital marketing results'],
-  },
   about: {
     title: 'About WitLabs — Digital Growth Agency Founded by Saif Ali Khan',
-    description: 'WitLabs was built to give Indian businesses honest, effective digital growth. Founded by Saif Ali Khan, we combine strategy, design and technology to help businesses grow online.',
+    description: 'Meet WitLabs, a digital growth agency helping Indian businesses improve websites, search visibility, marketing, and online lead generation.',
     keywords: ['about WitLabs', 'Saif Ali Khan digital agency', 'Indian digital agency', 'WitLabs founder'],
   },
   contact: {
     title: 'Contact WitLabs — Book a Free Digital Strategy Call',
-    description: "Get in touch with WitLabs for a free 20-minute strategy call. We'll review your current digital presence and tell you exactly what will work for your business. Call +91 7984301015.",
+    description: 'Contact WitLabs for a free 20-minute strategy call. Get website, SEO, marketing, app, or automation guidance for your business.',
     keywords: ['contact WitLabs', 'book strategy call', 'hire digital agency India', 'digital agency consultation'],
   },
 };

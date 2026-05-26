@@ -5,21 +5,24 @@ const testimonials = [
     name: 'Founder',
     role: 'ASWAD GLOBAL',
     company: 'Business Consulting',
-    quote: 'Clean, professional, and easier to present to prospects.',
+    location: 'Bhopal, Madhya Pradesh',
+    quote: 'WitLabs gave us a clean, professional website that explains our services clearly and makes Aswad Global easier to present to serious prospects.',
   },
   {
     initials: 'IP',
     name: 'Director',
     role: 'IMPACT PACKAGING',
     company: 'Manufacturing',
-    quote: 'Clear process. Strong B2B understanding.',
+    location: 'Vapi, Gujarat',
+    quote: 'Professional, reliable, and focused on actual outcomes. They understood our B2B requirements quickly and kept the entire process clear.',
   },
   {
     initials: 'KE',
     name: 'Founder',
     role: 'KOTA EXPERTS',
     company: 'Education',
-    quote: 'Better website. Better student enquiries.',
+    location: 'Bangalore, Karnataka',
+    quote: 'After the redesign and Google presence setup, student inquiries improved. It became one of the best digital investments for our institute.',
   },
 ];
 ---
@@ -50,6 +53,7 @@ const testimonials = [
             <div>
               <p>{item.name}</p>
               <small>{item.role} / {item.company}</small>
+              <small>{item.location}</small>
             </div>
           </figcaption>
         </figure>

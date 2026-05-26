@@ -1,12 +1,191 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const topics = [
+  'Website strategy',
+  'Local SEO',
+  'Lead generation',
+  'Automation',
+];
 ---
 
-<PageLayout title="Insights" eyebrow="Journal" description="Ideas on websites, products, content, and growth systems.">
-  <section class="mx-auto max-w-6xl px-6 pb-20">
-    <div class="rounded-3xl border border-border bg-white/40 p-8">
-      <h2 class="font-serif text-3xl text-ink">Insights are coming soon.</h2>
-      <p class="mt-4 leading-7 text-muted">We are preparing practical notes on SEO, websites, automation, and growth for Indian businesses.</p>
+<BaseLayout
+  title="Insights — Website, SEO & Growth Notes | WitLabs"
+  description="Practical notes from WitLabs on websites, SEO, automation, content, and digital growth systems for Indian businesses."
+  canonical="https://witlabs.in/insights/"
+  keywords={['WitLabs insights', 'website strategy India', 'SEO tips India', 'digital growth notes']}
+  noindex={true}
+>
+  <section class="insights-hero px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-[1240px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <div class="insights-hero__copy reveal">
+        <p class="section-kicker text-green-bright">Journal</p>
+        <h1>Practical notes for building a stronger digital presence.</h1>
+        <p>
+          We are preparing clear, useful guides on websites, SEO, content, automation, and growth systems for Indian businesses.
+        </p>
+        <a class="premium-button premium-button-light mt-7" href="/contact/">Ask for a Strategy Call</a>
+      </div>
+
+      <div class="insights-board reveal reveal-delay-2" aria-label="Upcoming insight topics">
+        <div class="insights-board__top">
+          <span>Coming Soon</span>
+          <span>WitLabs Notes</span>
+        </div>
+        <div class="insights-board__list">
+          {topics.map((topic, index) => (
+            <div>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <strong>{topic}</strong>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
-</PageLayout>
+
+  <section class="insights-content px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+    <div class="mx-auto max-w-[1240px]">
+      <div class="insights-note reveal">
+        <p class="section-kicker text-green">Publishing Soon</p>
+        <h2>Useful, direct, and made for business owners.</h2>
+        <p>
+          Until the first articles go live, you can talk to us directly about your website, SEO, or marketing plan and we will point you toward the highest-impact next step.
+        </p>
+        <a class="arrow-link text-green" href="/contact/">Talk to WitLabs <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .insights-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding-bottom: clamp(64px, 8vw, 96px);
+    padding-top: calc(var(--nav-height) + clamp(42px, 7vw, 86px));
+    background: #050505;
+    color: #FFFFFF;
+  }
+
+  .insights-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 76% 18%, rgba(74, 222, 128, 0.18), transparent 30%),
+      radial-gradient(circle at 14% 22%, rgba(154, 86, 15, 0.14), transparent 26%),
+      linear-gradient(180deg, #050505, #10100f 62%, #F8F4EC 100%);
+  }
+
+  .insights-hero__copy h1 {
+    margin-top: 16px;
+    max-width: 760px;
+    font-size: clamp(2.55rem, 4.2vw, 4.55rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  .insights-hero__copy p {
+    margin-top: 22px;
+    max-width: 620px;
+    color: rgba(255, 255, 255, 0.64);
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    line-height: 1.75;
+  }
+
+  .insights-board {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background:
+      radial-gradient(circle at 24% 18%, rgba(74, 222, 128, 0.2), transparent 32%),
+      linear-gradient(135deg, rgba(45, 106, 79, 0.58), #070707 62%);
+    box-shadow: 0 36px 96px rgba(0, 0, 0, 0.52);
+  }
+
+  .insights-board__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 18px;
+    color: rgba(255, 255, 255, 0.58);
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .insights-board__list {
+    display: grid;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .insights-board__list div {
+    min-height: 104px;
+    background: rgba(5, 5, 5, 0.76);
+    padding: 22px;
+  }
+
+  .insights-board__list span {
+    color: #4ADE80;
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .insights-board__list strong {
+    margin-top: 10px;
+    display: block;
+    color: #FFFFFF;
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+    line-height: 1.2;
+  }
+
+  .insights-content {
+    background: #F8F4EC;
+  }
+
+  .insights-note {
+    border: 1px solid rgba(45, 106, 79, 0.22);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.72);
+    padding: clamp(28px, 5vw, 48px);
+    box-shadow: 0 24px 80px rgba(28, 25, 23, 0.04);
+  }
+
+  .insights-note h2 {
+    margin-top: 14px;
+    max-width: 680px;
+    color: #1C1917;
+    font-size: clamp(1.95rem, 3.2vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.08;
+  }
+
+  .insights-note p:not(.section-kicker) {
+    margin-top: 18px;
+    max-width: 720px;
+    color: #57534E;
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    line-height: 1.75;
+  }
+
+  .insights-note a {
+    margin-top: 24px;
+  }
+
+  @media (min-width: 720px) {
+    .insights-board__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -3,207 +3,585 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const web3FormsKey = import.meta.env.WEB3FORMS_KEY;
 const isFormConfigured = Boolean(web3FormsKey);
+const formAction = isFormConfigured ? 'https://api.web3forms.com/submit' : 'mailto:connect@witlabs.in';
+const formMethod = isFormConfigured ? 'POST' : 'POST';
+const formEncoding = isFormConfigured ? undefined : 'text/plain';
 const whatsappHref = 'https://wa.me/917984301015?text=Hi%20WitLabs%2C%20I%20visited%20your%20website%20and%20I%27d%20like%20to%20discuss%20a%20project.';
-const fieldClass = 'w-full border border-border rounded-xl px-4 py-3 text-body-sm bg-white focus:outline-none focus:border-green focus:ring-1 focus:ring-green transition-colors';
+const fieldClass = 'w-full border border-border rounded-lg px-4 py-3 text-body-sm bg-white focus:outline-none focus:border-green focus:ring-1 focus:ring-green transition-colors';
 const services = [
+  'Make Your Business Completely Online Package',
   'Website Design',
   'SEO & Growth',
   'Digital Marketing',
   'App Development',
-  'Branding & Identity',
   'Automation',
   'AI Chatbot',
   "Not sure yet — let's discuss",
 ];
 const budgets = ['Under ₹15,000', '₹15,000–₹30,000', '₹30,000–₹60,000', '₹60,000+', "Let's discuss"];
 
-const localBusinessContactSchema = {
+const contactMethods = [
+  {
+    label: 'Call or WhatsApp',
+    value: '+91 7984301015',
+    note: 'Mon-Sat, 9am-7pm IST',
+    href: 'tel:+917984301015',
+    icon: 'phone',
+  },
+  {
+    label: 'Email Us',
+    value: 'connect@witlabs.in',
+    note: 'Replies within 2 working hours',
+    href: 'mailto:connect@witlabs.in',
+    icon: 'mail',
+  },
+];
+
+const responseSteps = [
+  'We review your business and current digital presence',
+  'We schedule a focused 20-minute call',
+  'We share honest recommendations without pressure',
+  'If it fits, you receive a clear proposal within 24 hours',
+];
+
+const contactHighlights = [
+  { value: '20m', label: 'strategy call' },
+  { value: '2hr', label: 'working day reply' },
+  { value: '24hr', label: 'proposal path' },
+];
+
+const selectedPlan = Astro.url.searchParams.get('plan') ?? '';
+const requestedService = Astro.url.searchParams.get('service_interested_in') ?? '';
+const requestedBudget = Astro.url.searchParams.get('budget_range') ?? '';
+const selectedService = services.includes(requestedService) ? requestedService : '';
+const selectedBudget = budgets.includes(requestedBudget) ? requestedBudget : '';
+const prefilledMessage =
+  Astro.url.searchParams.get('message') ??
+  (selectedPlan ? `I am interested in the ${selectedPlan} plan from the WitLabs pricing page. Please share the next steps.` : '');
+
+const contactPageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  '@id': 'https://witlabs.in/#business',
-  name: 'WitLabs',
+  '@type': 'ContactPage',
+  '@id': 'https://witlabs.in/contact/#contactpage',
   url: 'https://witlabs.in/contact/',
-  telephone: '+91-7984301015',
-  email: 'hello@witlabs.in',
-  areaServed: { '@type': 'Country', name: 'India' },
-  contactPoint: [
-    {
-      '@type': 'ContactPoint',
-      telephone: '+91-7984301015',
-      contactType: 'sales',
-      availableLanguage: ['English', 'Hindi'],
-      hoursAvailable: {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        opens: '09:00',
-        closes: '19:00',
-      },
-    },
-  ],
+  name: 'Contact WitLabs',
+  description: 'Book a free digital strategy call with WitLabs.',
+  mainEntity: { '@id': 'https://witlabs.in/#business' },
 };
 ---
 
 <BaseLayout
   title="Contact WitLabs — Book a Free Digital Strategy Call"
-  description="Book a free 20-minute strategy call with WitLabs. We'll audit your current digital presence and tell you exactly what will work. Call +91 7984301015 or WhatsApp us now."
+  description="Contact WitLabs for a free 20-minute strategy call. Get website, SEO, marketing, app, or automation guidance for your business."
   canonical="https://witlabs.in/contact/"
   keywords={['contact WitLabs', 'book digital strategy call', 'digital agency India contact']}
 >
-  <script type="application/ld+json" is:inline set:html={JSON.stringify(localBusinessContactSchema)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(contactPageSchema)} />
 
-  <section class="bg-cream pt-28">
-    <div class="container py-20">
-      <div class="max-w-3xl">
-        <p class="eyebrow">GET IN TOUCH</p>
-        <h1 class="mt-4 text-display-md text-ink text-balance">Let's talk about your business.</h1>
-        <p class="mt-6 text-body-lg text-muted">
-          Book a free 20-minute strategy call. No pitch — just honest advice about what will work for your business online.
+  <section class="contact-hero px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-[1240px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <div class="contact-hero__copy reveal">
+        <p class="section-kicker text-green-bright">Start The Conversation</p>
+        <h1>Tell us what you want to build next.</h1>
+        <p>
+          Book a free 20-minute strategy call with WitLabs. We will understand your business, review your current digital presence, and suggest the clearest next move.
         </p>
+        <div class="contact-hero__actions">
+          <a class="premium-button premium-button-light" href={whatsappHref} target="_blank" rel="noreferrer">Chat on WhatsApp</a>
+          <a class="contact-hero__link" href="#contact-form">Send project details <span aria-hidden="true">→</span></a>
+        </div>
       </div>
 
-      <div class="mt-16 grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div>
-          <div class="space-y-4">
-            <a class="flex gap-4 rounded-2xl border border-border bg-white p-5 transition hover:border-green hover:shadow-lg hover:shadow-ink/5" href="tel:+917984301015">
-              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-light text-green" aria-hidden="true">
-                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none">
-                  <path d="M6.5 3.5l2 3-1.6 1.7c.7 1.4 1.7 2.4 3.1 3.1l1.7-1.6 3 2v3.1c0 .9-.7 1.6-1.6 1.6C7.8 16.4 3.6 12.2 3.6 6.9c0-.9.7-1.6 1.6-1.6h1.3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
-                </svg>
+      <div class="contact-board reveal reveal-delay-2" aria-label="WitLabs contact response standards">
+        <div class="contact-board__top">
+          <span>WitLabs Response Desk</span>
+          <span>India</span>
+        </div>
+        <div class="contact-board__grid">
+          {contactHighlights.map((item) => (
+            <div>
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </div>
+        <a class="contact-board__whatsapp" href={whatsappHref} target="_blank" rel="noreferrer">
+          <span>Fastest route</span>
+          <strong>Chat on WhatsApp now</strong>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-main px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+    <div class="mx-auto grid max-w-[1240px] gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+      <aside class="contact-side reveal">
+        <p class="section-kicker text-green">Contact Details</p>
+        <h2>Simple, direct, and easy to follow up.</h2>
+
+        <div class="contact-card-list">
+          {contactMethods.map((method) => (
+            <a class="contact-card" href={method.href}>
+              <span class="contact-card__icon" aria-hidden="true">
+                {method.icon === 'phone' ? (
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M6.5 3.5l2 3-1.6 1.7c.7 1.4 1.7 2.4 3.1 3.1l1.7-1.6 3 2v3.1c0 .9-.7 1.6-1.6 1.6C7.8 16.4 3.6 12.2 3.6 6.9c0-.9.7-1.6 1.6-1.6h1.3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M3 5h14v10H3V5zm1 1l6 5 6-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                )}
               </span>
               <span>
-                <span class="block text-caption font-semibold uppercase tracking-widest text-muted">Call or WhatsApp</span>
-                <span class="mt-1 block text-body-md font-semibold text-ink">+91 7984301015</span>
-                <span class="mt-1 block text-body-sm text-muted">Mon–Sat, 9am–7pm IST</span>
+                <span>{method.label}</span>
+                <strong>{method.value}</strong>
+                <small>{method.note}</small>
               </span>
             </a>
-
-            <a class="flex gap-4 rounded-2xl border border-border bg-white p-5 transition hover:border-green hover:shadow-lg hover:shadow-ink/5" href="mailto:hello@witlabs.in">
-              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-light text-green" aria-hidden="true">
-                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none">
-                  <path d="M3 5h14v10H3V5zm1 1l6 5 6-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </span>
-              <span>
-                <span class="block text-caption font-semibold uppercase tracking-widest text-muted">Email Us</span>
-                <span class="mt-1 block text-body-md font-semibold text-ink">hello@witlabs.in</span>
-                <span class="mt-1 block text-body-sm text-muted">We reply within 2 hours on working days</span>
-              </span>
-            </a>
-
-            <a class="flex gap-4 rounded-2xl bg-[#25D366] p-5 text-white transition hover:brightness-95" href={whatsappHref} target="_blank" rel="noreferrer">
-              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15" aria-hidden="true">
-                <svg class="h-6 w-6" viewBox="0 0 32 32" fill="currentColor">
-                  <path d="M16.02 3.2A12.66 12.66 0 005.04 22.16L3.2 28.8l6.8-1.78A12.66 12.66 0 1016.02 3.2zm0 22.98c-2.1 0-4.04-.63-5.67-1.72l-.4-.26-4.03 1.06 1.08-3.9-.27-.41a10.3 10.3 0 1119.6-4.43 10.31 10.31 0 01-10.31 9.66zm5.65-7.72c-.31-.16-1.84-.91-2.13-1.01-.28-.11-.49-.16-.7.16-.2.31-.8 1-.98 1.2-.18.22-.36.24-.67.08-.31-.16-1.31-.48-2.5-1.54a9.32 9.32 0 01-1.72-2.14c-.18-.31-.02-.48.14-.64.14-.14.31-.36.47-.54.16-.18.2-.31.31-.52.1-.2.05-.39-.03-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.59c-.2 0-.54.08-.83.39-.28.31-1.08 1.06-1.08 2.58 0 1.52 1.11 2.99 1.27 3.2.16.2 2.18 3.32 5.28 4.66.74.32 1.31.51 1.76.65.74.23 1.41.2 1.94.12.59-.09 1.84-.75 2.1-1.48.26-.72.26-1.34.18-1.48-.08-.13-.28-.2-.59-.36z" />
-                </svg>
-              </span>
-              <span>
-                <span class="block text-body-md font-semibold">Chat on WhatsApp Now</span>
-                <span class="mt-1 block text-body-sm text-white/80">Usually replies in under 10 minutes</span>
-              </span>
-            </a>
-          </div>
-
-          <div class="mt-10 rounded-2xl bg-cream-dark p-6">
-            <h3 class="text-heading-md font-semibold text-ink">What happens after you reach out?</h3>
-            <ol class="mt-5 space-y-4">
-              {[
-                'We review your business and current digital presence',
-                'We schedule a 20-minute call at your convenience',
-                'We share honest recommendations — no pressure, no pitch',
-                "If it's a fit, we send a clear proposal within 24 hours",
-              ].map((item, index) => (
-                <li class="flex gap-3 text-body-sm text-muted">
-                  <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-green text-caption font-semibold text-white">{index + 1}</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
+          ))}
         </div>
 
-        <div class="rounded-3xl border border-border bg-white p-6 shadow-xl shadow-ink/5 md:p-8">
-          <h2 class="text-heading-lg font-semibold text-ink">Send us a message</h2>
+        <div class="contact-steps">
+          <h3>What happens next?</h3>
+          <ol>
+            {responseSteps.map((item, index) => (
+              <li>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <p>{item}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </aside>
 
-          {isFormConfigured ? (
-            <form class="mt-6" action="https://api.web3forms.com/submit" method="POST">
-              <input type="hidden" name="access_key" value={web3FormsKey} />
-              <input type="hidden" name="subject" value="New Project Inquiry — WitLabs Website" />
-              <input type="hidden" name="from_name" value="WitLabs Contact Form" />
-              <input type="hidden" name="redirect" value="https://witlabs.in/thank-you/" />
-              <input class="hidden" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+      <div id="contact-form" class="contact-form-panel reveal reveal-delay-2">
+        <div class="contact-form-panel__head">
+          <p class="section-kicker text-green">Project Inquiry</p>
+          <h2>Send us a message</h2>
+          <p>Share a few details and we will reply with the best next step.</p>
+        </div>
 
-              <div class="grid gap-5 md:grid-cols-2">
-                <div class="form-group">
-                  <label class="mb-2 block text-body-sm font-medium text-ink" for="name">Full Name</label>
-                  <input id="name" class={fieldClass} type="text" name="name" autocomplete="name" required />
-                </div>
-                <div class="form-group">
-                  <label class="mb-2 block text-body-sm font-medium text-ink" for="business_name">Business Name</label>
-                  <input id="business_name" class={fieldClass} type="text" name="business_name" required />
-                </div>
-                <div class="form-group">
-                  <label class="mb-2 block text-body-sm font-medium text-ink" for="phone">Phone Number</label>
-                  <input id="phone" class={fieldClass} type="tel" name="phone" autocomplete="tel" required />
-                </div>
-                <div class="form-group">
-                  <label class="mb-2 block text-body-sm font-medium text-ink" for="email">Email Address</label>
-                  <input id="email" class={fieldClass} type="email" name="email" autocomplete="email" />
-                </div>
+          <form class="mt-6" action={formAction} method={formMethod} enctype={formEncoding}>
+            {isFormConfigured && <input type="hidden" name="access_key" value={web3FormsKey} />}
+            <input type="hidden" name="subject" value="New Project Inquiry — WitLabs Website" />
+            <input type="hidden" name="from_name" value="WitLabs Contact Form" />
+            {isFormConfigured && <input type="hidden" name="redirect" value="https://witlabs.in/thank-you/" />}
+            <input id="selected_plan" type="hidden" name="selected_plan" value={selectedPlan} />
+            <input class="hidden" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+
+            <div class="grid gap-5 md:grid-cols-2">
+              <div class="form-group">
+                <label class="mb-2 block text-body-sm font-medium text-ink" for="name">Full Name</label>
+                <input id="name" class={fieldClass} type="text" name="name" autocomplete="name" required />
               </div>
-
-              <div class="form-group mt-5">
-                <label class="mb-2 block text-body-sm font-medium text-ink" for="service_interested_in">Service Interested In</label>
-                <select id="service_interested_in" class={fieldClass} name="service_interested_in" required>
-                  <option value="" disabled selected>Select a service</option>
-                  {services.map((service) => <option value={service}>{service}</option>)}
-                </select>
+              <div class="form-group">
+                <label class="mb-2 block text-body-sm font-medium text-ink" for="business_name">Business Name</label>
+                <input id="business_name" class={fieldClass} type="text" name="business_name" required />
               </div>
-
-              <div class="form-group mt-5">
-                <label class="mb-2 block text-body-sm font-medium text-ink" for="message">Tell us about your project</label>
-                <textarea
-                  id="message"
-                  class={fieldClass}
-                  name="message"
-                  rows="4"
-                  placeholder="Tell us about your business, what you need, and any specific goals or timeline you have in mind..."
-                ></textarea>
+              <div class="form-group">
+                <label class="mb-2 block text-body-sm font-medium text-ink" for="phone">Phone Number</label>
+                <input id="phone" class={fieldClass} type="tel" name="phone" autocomplete="tel" required />
               </div>
-
-              <div class="form-group mt-5">
-                <label class="mb-2 block text-body-sm font-medium text-ink" for="budget_range">Budget Range</label>
-                <select id="budget_range" class={fieldClass} name="budget_range">
-                  <option value="" disabled selected>Select a budget range</option>
-                  {budgets.map((budget) => <option value={budget}>{budget}</option>)}
-                </select>
-              </div>
-
-              <button class="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-ink py-4 text-body-md font-medium text-cream transition-colors hover:bg-ink-light" type="submit">
-                Send Message →
-              </button>
-            </form>
-          ) : (
-            <div class="mt-6 rounded-2xl border border-border bg-cream p-6">
-              <p class="text-body-md font-semibold text-ink">Message form is being configured.</p>
-              <p class="mt-3 text-body-sm leading-6 text-muted">
-                For now, reach us directly and we will reply within working hours.
-              </p>
-              <div class="mt-5 grid gap-3 sm:grid-cols-2">
-                <a class="rounded-xl bg-ink px-5 py-3 text-center text-body-sm font-medium text-cream hover:bg-ink-light" href="mailto:hello@witlabs.in">
-                  Email WitLabs
-                </a>
-                <a class="rounded-xl bg-[#25D366] px-5 py-3 text-center text-body-sm font-medium text-white hover:brightness-95" href={whatsappHref} target="_blank" rel="noreferrer">
-                  WhatsApp Us
-                </a>
+              <div class="form-group">
+                <label class="mb-2 block text-body-sm font-medium text-ink" for="email">Email Address</label>
+                <input id="email" class={fieldClass} type="email" name="email" autocomplete="email" />
               </div>
             </div>
-          )}
+
+            <div class="form-group mt-5">
+              <label class="mb-2 block text-body-sm font-medium text-ink" for="service_interested_in">Service Interested In</label>
+              <select id="service_interested_in" class={fieldClass} name="service_interested_in" required>
+                <option value="" disabled selected={!selectedService}>Select a service</option>
+                {services.map((service) => <option value={service} selected={service === selectedService}>{service}</option>)}
+              </select>
+            </div>
+
+            <div class="form-group mt-5">
+              <label class="mb-2 block text-body-sm font-medium text-ink" for="message">Tell us about your project</label>
+              <textarea
+                id="message"
+                class={fieldClass}
+                name="message"
+                rows="4"
+                placeholder="Tell us about your business, what you need, and any specific goals or timeline you have in mind..."
+              >{prefilledMessage}</textarea>
+            </div>
+
+            <div class="form-group mt-5">
+              <label class="mb-2 block text-body-sm font-medium text-ink" for="budget_range">Budget Range</label>
+              <select id="budget_range" class={fieldClass} name="budget_range">
+                <option value="" disabled selected={!selectedBudget}>Select a budget range</option>
+                {budgets.map((budget) => <option value={budget} selected={budget === selectedBudget}>{budget}</option>)}
+              </select>
+            </div>
+
+            <button class="premium-button premium-button-primary mt-6 w-full py-4 text-[13px]" type="submit">
+              Send Message →
+            </button>
+          </form>
 
           <p class="mt-4 text-center text-caption text-muted">
             Your information is private and will never be shared with third parties.
           </p>
-        </div>
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    (() => {
+      const params = new URLSearchParams(window.location.search);
+      const selectedPlan = params.get('plan') || '';
+      const selectedService = params.get('service_interested_in') || '';
+      const selectedBudget = params.get('budget_range') || '';
+      const message =
+        params.get('message') ||
+        (selectedPlan ? `I am interested in the ${selectedPlan} plan from the WitLabs pricing page. Please share the next steps.` : '');
+
+      const planInput = document.getElementById('selected_plan');
+      const serviceSelect = document.getElementById('service_interested_in');
+      const budgetSelect = document.getElementById('budget_range');
+      const messageField = document.getElementById('message');
+
+      if (planInput instanceof HTMLInputElement) planInput.value = selectedPlan;
+      if (serviceSelect instanceof HTMLSelectElement && selectedService) serviceSelect.value = selectedService;
+      if (budgetSelect instanceof HTMLSelectElement && selectedBudget) budgetSelect.value = selectedBudget;
+      if (messageField instanceof HTMLTextAreaElement && message) messageField.value = message;
+    })();
+  </script>
 </BaseLayout>
+
+<style>
+  .contact-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding-bottom: clamp(64px, 8vw, 96px);
+    padding-top: calc(var(--nav-height) + clamp(42px, 7vw, 86px));
+    background: #050505;
+    color: #FFFFFF;
+  }
+
+  .contact-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 76% 18%, rgba(74, 222, 128, 0.18), transparent 30%),
+      radial-gradient(circle at 14% 22%, rgba(154, 86, 15, 0.14), transparent 26%),
+      linear-gradient(180deg, #050505, #10100f 62%, #F8F4EC 100%);
+  }
+
+  .contact-hero__copy h1 {
+    margin-top: 16px;
+    max-width: 760px;
+    font-size: clamp(2.55rem, 4.2vw, 4.55rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  .contact-hero__copy p:last-of-type {
+    margin-top: 22px;
+    max-width: 640px;
+    color: rgba(255, 255, 255, 0.64);
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    line-height: 1.75;
+  }
+
+  .contact-hero__actions {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .contact-hero__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.95rem;
+    font-weight: 800;
+  }
+
+  .contact-hero__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    height: 2px;
+    width: 100%;
+    background: #4ADE80;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.28s var(--ease-standard);
+  }
+
+  .contact-hero__link:hover::after,
+  .contact-hero__link:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .contact-board {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background:
+      radial-gradient(circle at 24% 18%, rgba(74, 222, 128, 0.2), transparent 32%),
+      linear-gradient(135deg, rgba(45, 106, 79, 0.58), #070707 62%);
+    box-shadow: 0 36px 96px rgba(0, 0, 0, 0.52);
+  }
+
+  .contact-board__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 18px;
+    color: rgba(255, 255, 255, 0.58);
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .contact-board__grid {
+    display: grid;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .contact-board__grid div {
+    min-height: 150px;
+    background: rgba(5, 5, 5, 0.76);
+    padding: 24px;
+  }
+
+  .contact-board__grid strong {
+    display: block;
+    color: #4ADE80;
+    font-size: clamp(2.25rem, 4vw, 4rem);
+    line-height: 1;
+  }
+
+  .contact-board__grid span,
+  .contact-board__whatsapp span,
+  .contact-card span span,
+  .contact-steps li span {
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .contact-board__grid span {
+    margin-top: 10px;
+    display: block;
+    color: rgba(255, 255, 255, 0.58);
+  }
+
+  .contact-board__whatsapp {
+    display: grid;
+    gap: 8px;
+    padding: 24px;
+    color: #FFFFFF;
+    transition: background 0.3s var(--ease-standard);
+  }
+
+  .contact-board__whatsapp:hover,
+  .contact-board__whatsapp:focus-visible {
+    background: rgba(74, 222, 128, 0.1);
+    outline: none;
+  }
+
+  .contact-board__whatsapp span {
+    color: #4ADE80;
+  }
+
+  .contact-board__whatsapp strong {
+    font-size: clamp(1.3rem, 2.2vw, 2.1rem);
+    line-height: 1.1;
+  }
+
+  .contact-main {
+    background: #F8F4EC;
+  }
+
+  .contact-side {
+    align-self: start;
+  }
+
+  .contact-side h2,
+  .contact-form-panel__head h2 {
+    margin-top: 16px;
+    color: #1C1917;
+    font-size: clamp(1.8rem, 2.9vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .contact-card-list {
+    margin-top: 32px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .contact-card,
+  .contact-steps,
+  .contact-form-panel {
+    border: 1px solid rgba(45, 106, 79, 0.18);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.74);
+    box-shadow: 0 24px 80px rgba(28, 25, 23, 0.04);
+    backdrop-filter: blur(14px);
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    color: #1C1917;
+    transition: transform 0.35s var(--ease-premium), border-color 0.35s var(--ease-standard), box-shadow 0.35s var(--ease-premium);
+  }
+
+  .contact-card:hover,
+  .contact-card:focus-visible {
+    border-color: rgba(45, 106, 79, 0.58);
+    box-shadow: 0 34px 92px rgba(28, 25, 23, 0.1);
+    outline: none;
+    transform: translateY(-4px);
+  }
+
+  .contact-card__icon {
+    display: flex;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(45, 106, 79, 0.1);
+    color: #2D6A4F;
+  }
+
+  .contact-card__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact-card span span {
+    display: block;
+    color: #78716C;
+  }
+
+  .contact-card strong {
+    margin-top: 4px;
+    display: block;
+    color: #1C1917;
+    font-size: 1.08rem;
+    line-height: 1.25;
+  }
+
+  .contact-card small {
+    margin-top: 5px;
+    display: block;
+    color: #57534E;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  .contact-steps {
+    margin-top: 28px;
+    padding: 24px;
+  }
+
+  .contact-steps h3 {
+    color: #1C1917;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  .contact-steps ol {
+    margin-top: 20px;
+    display: grid;
+    gap: 16px;
+  }
+
+  .contact-steps li {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+
+  .contact-steps li span {
+    color: #2D6A4F;
+    line-height: 1.7;
+  }
+
+  .contact-steps p {
+    color: #57534E;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .contact-form-panel {
+    padding: clamp(24px, 4vw, 40px);
+  }
+
+  .contact-form-panel__head p:last-child {
+    margin-top: 14px;
+    max-width: 560px;
+    color: #57534E;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .contact-form-panel label {
+    color: #1C1917;
+    font-weight: 700;
+  }
+
+  .contact-form-panel input,
+  .contact-form-panel select,
+  .contact-form-panel textarea {
+    min-height: 50px;
+  }
+
+  .contact-form-panel textarea {
+    min-height: 128px;
+    resize: vertical;
+  }
+
+  @media (min-width: 720px) {
+    .contact-board__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .contact-board__top {
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .contact-board__grid div {
+      min-height: 120px;
+    }
+
+    .contact-card {
+      padding: 18px;
+    }
+  }
+</style>
