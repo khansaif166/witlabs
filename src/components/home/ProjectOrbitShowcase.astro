@@ -2,71 +2,55 @@
 const projects = [
   {
     title: 'Impact Packaging Solutions',
-    type: 'Manufacturing Website',
-    url: 'https://impactpackaging.in',
+    type: 'Business Website',
+    url: 'https://impactpackagingsolutions.com',
+    domain: 'impactpackagingsolutions.com',
     image: '/images/Design-2.jpg',
-    eyebrow: 'Show your projects better.',
-    description: 'Interior designers and construction companies need a site that explains capability clearly and earns trust fast.',
+    eyebrow: 'Packaging company presence',
+    description: 'A business website built to present packaging capabilities clearly and turn first impressions into trust.',
     theme: 'sand',
-    layout: 'tall',
   },
   {
-    title: 'Creative Fashion Label',
-    type: 'Ecommerce Landing',
-    url: 'https://witlabs.in/services/',
-    image: '/images/card1.jpg',
-    eyebrow: 'Turn interest into site visits.',
-    description: 'Fast-loading campaign pages turn paid clicks, social discovery, and search traffic into focused actions.',
-    theme: 'ember',
-    layout: 'medium',
-  },
-  {
-    title: 'Performance Dashboard',
-    type: 'Digital Product UI',
-    url: 'https://witlabs.in/services/',
-    image: '/images/mockup.png',
-    eyebrow: 'Digital product UI',
-    description: 'Dashboards and internal tools need clarity, hierarchy, and data that feels immediately usable.',
-    theme: 'green',
-    layout: 'medium',
-    stats: [
-      { label: 'Sessions', value: '12.4K' },
-      { label: 'Bounce', value: '24%' },
-    ],
-  },
-  {
-    title: 'Beauty Brand Launch',
+    title: 'The Daffodil Group',
     type: 'Corporate Website',
-    url: 'https://aswadglobal.com',
-    image: '/images/Design-1.jpg',
-    eyebrow: 'Corporate website',
-    description: 'Brand-first websites balance polish, confidence, and conversion without feeling generic.',
-    theme: 'violet',
-    layout: 'short',
+    url: 'https://thedaffodilgroup.com',
+    domain: 'thedaffodilgroup.com',
+    image: '/images/card1.jpg',
+    eyebrow: 'Editorial company website',
+    description: 'A polished digital presence for a group brand, shaped to feel premium, structured, and credible.',
+    theme: 'ember',
   },
   {
-    title: 'Brand Visibility System',
-    type: 'SEO + Website Strategy',
-    url: 'https://witlabs.in/about/',
+    title: 'Dream NEET Academy',
+    type: 'Full LMS Platform',
+    url: 'https://dreamneetacademy.com',
+    domain: 'dreamneetacademy.com',
+    image: '/images/mockup.png',
+    eyebrow: 'Website plus LMS',
+    description: 'Not just a website, but a complete LMS experience with learning flows, structure, and student-facing product depth.',
+    theme: 'green',
+  },
+  {
+    title: 'Aswad Global',
+    type: 'Business Website',
+    url: 'https://aswadglobal.com',
+    domain: 'aswadglobal.com',
+    image: '/images/Design-1.jpg',
+    eyebrow: 'Global business presence',
+    description: 'A brand-led website designed to communicate credibility, intent, and a sharper international-facing identity.',
+    theme: 'violet',
+  },
+  {
+    title: 'WitLabs',
+    type: 'Agency Website',
+    url: 'https://witlabs.in',
+    domain: 'witlabs.in',
     image: '/images/Design-4.jpg',
-    eyebrow: 'Your brand, beautifully found.',
-    description: 'Positioning, search structure, and conversion design work together when the system is intentional.',
+    eyebrow: 'Our own digital presence',
+    description: 'The WitLabs website itself, built to showcase positioning, service clarity, and conversion-focused storytelling.',
     theme: 'olive',
-    layout: 'short',
   },
 ];
-
-const previewBars = [42, 56, 68, 50, 38, 62, 53];
-
-const getVisitLabel = (url: string) => {
-  if (url.startsWith('#')) return 'Coming soon';
-
-  try {
-    return new URL(url).hostname.replace(/^www\./, '');
-  } catch {
-    return 'Coming soon';
-  }
-};
 ---
 
 <section class="project-showcase" id="digitized-with-witlabs" aria-labelledby="digitized-with-witlabs-title">
@@ -78,14 +62,14 @@ const getVisitLabel = (url: string) => {
         Digitized with <span>WitLabs</span>
       </h2>
       <p class="showcase-intro">
-        A curated wall of websites, funnels, and interfaces shaped to help businesses look sharper, load faster, and convert better.
+        A selection of real work across business websites and one full LMS platform, designed to help brands look sharper, build trust faster, and perform better online.
       </p>
     </div>
 
     <div class="showcase-grid reveal reveal-delay-1">
       {projects.map((project) => (
         <a
-          class={`showcase-card showcase-card--${project.layout} showcase-card--${project.theme}`}
+          class={`showcase-card showcase-card--${project.theme}`}
           href={project.url}
           target="_blank"
           rel="noopener noreferrer"
@@ -104,32 +88,13 @@ const getVisitLabel = (url: string) => {
               </div>
 
               <div class="showcase-card__mock">
+                <span class="showcase-card__domain">{project.domain}</span>
                 <p>{project.eyebrow}</p>
-
-                {project.stats ? (
-                  <>
-                    <div class="showcase-card__stats" aria-hidden="true">
-                      {project.stats.map((stat) => (
-                        <div class="showcase-card__stat">
-                          <span>{stat.label}</span>
-                          <strong>{stat.value}</strong>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div class="showcase-card__chart" aria-hidden="true">
-                      {previewBars.map((height) => (
-                        <span style={`height:${height}%`}></span>
-                      ))}
-                    </div>
-                  </>
-                ) : (
-                  <div class="showcase-card__blocks" aria-hidden="true">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                )}
+                <div class="showcase-card__blocks" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
               </div>
             </div>
           </div>
@@ -138,7 +103,7 @@ const getVisitLabel = (url: string) => {
             <span class="showcase-card__type">{project.type}</span>
             <h3>{project.title}</h3>
             <p>{project.description}</p>
-            <strong>{getVisitLabel(project.url)} <span aria-hidden="true">↗</span></strong>
+            <strong>{project.domain} <span aria-hidden="true">↗</span></strong>
           </div>
         </a>
       ))}
@@ -245,24 +210,13 @@ const getVisitLabel = (url: string) => {
     box-shadow: 0 32px 80px rgba(0, 0, 0, 0.42);
     text-decoration: none;
     transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+    min-height: 34rem;
   }
 
   .showcase-card:hover {
     transform: translateY(-8px);
     border-color: rgba(255, 255, 255, 0.16);
     box-shadow: 0 40px 90px rgba(0, 0, 0, 0.5);
-  }
-
-  .showcase-card--tall {
-    grid-row: span 2;
-  }
-
-  .showcase-card--medium {
-    min-height: 39rem;
-  }
-
-  .showcase-card--short {
-    min-height: 30rem;
   }
 
   .showcase-card__frame {
@@ -338,20 +292,34 @@ const getVisitLabel = (url: string) => {
     padding: 4.5rem 1.55rem 1.55rem;
   }
 
+  .showcase-card__domain {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(10, 10, 10, 0.38);
+    padding: 0.45rem 0.8rem;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    backdrop-filter: blur(12px);
+  }
+
   .showcase-card__mock p {
     margin: 0;
-    max-width: 11ch;
+    max-width: 14ch;
     color: #f5efe6;
-    font-size: clamp(1.85rem, 3vw, 3.4rem);
+    font-size: clamp(1.7rem, 2.6vw, 2.75rem);
     font-weight: 650;
-    line-height: 0.98;
+    line-height: 1.02;
     letter-spacing: -0.07em;
     text-wrap: balance;
   }
 
-  .showcase-card--green .showcase-card__mock p,
-  .showcase-card--olive .showcase-card__mock p {
-    max-width: 12ch;
+  .showcase-card--green .showcase-card__mock p {
+    color: #dff5dd;
   }
 
   .showcase-card__blocks {
@@ -366,52 +334,6 @@ const getVisitLabel = (url: string) => {
     aspect-ratio: 1.2;
     border-radius: 1rem;
     background: rgba(255, 255, 255, 0.06);
-  }
-
-  .showcase-card__stats {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.85rem;
-  }
-
-  .showcase-card__stat,
-  .showcase-card__chart {
-    border-radius: 1rem;
-    background: rgba(53, 124, 61, 0.18);
-    border: 1px solid rgba(115, 198, 123, 0.08);
-  }
-
-  .showcase-card__stat {
-    padding: 1rem;
-  }
-
-  .showcase-card__stat span {
-    display: block;
-    color: rgba(197, 233, 195, 0.68);
-    font-size: 0.92rem;
-  }
-
-  .showcase-card__stat strong {
-    display: block;
-    margin-top: 0.45rem;
-    color: #b5f1b1;
-    font-size: clamp(1.6rem, 2.4vw, 2.3rem);
-    letter-spacing: -0.06em;
-  }
-
-  .showcase-card__chart {
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-    align-items: end;
-    gap: 0.6rem;
-    min-height: 6.25rem;
-    padding: 1rem;
-  }
-
-  .showcase-card__chart span {
-    display: block;
-    border-radius: 0.5rem 0.5rem 0.3rem 0.3rem;
-    background: linear-gradient(180deg, #57b648 0%, #3f9340 100%);
   }
 
   .showcase-card__body {
@@ -478,14 +400,6 @@ const getVisitLabel = (url: string) => {
     background: #071008;
   }
 
-  .showcase-card--green .showcase-card__mock p {
-    color: rgba(183, 220, 178, 0.34);
-    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
-    line-height: 1.3;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-
   .showcase-card--violet {
     background: #101014;
   }
@@ -508,24 +422,11 @@ const getVisitLabel = (url: string) => {
 
   .showcase-card--olive .showcase-card__mock p {
     color: #eef4e1;
-    font-style: italic;
-    font-family: 'Georgia', 'Times New Roman', serif;
-    font-weight: 600;
-    letter-spacing: -0.05em;
   }
 
   @media (max-width: 1100px) {
     .showcase-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .showcase-card--tall {
-      grid-row: auto;
-    }
-
-    .showcase-card--medium,
-    .showcase-card--short {
-      min-height: 34rem;
     }
   }
 
@@ -553,8 +454,7 @@ const getVisitLabel = (url: string) => {
     }
 
     .showcase-card,
-    .showcase-card--medium,
-    .showcase-card--short {
+    .showcase-card {
       min-height: auto;
     }
 
@@ -579,8 +479,8 @@ const getVisitLabel = (url: string) => {
     }
 
     .showcase-card__mock p {
-      max-width: 12ch;
-      font-size: clamp(1.8rem, 9vw, 2.7rem);
+      max-width: 13ch;
+      font-size: clamp(1.65rem, 9vw, 2.45rem);
     }
 
     .showcase-card__body {
