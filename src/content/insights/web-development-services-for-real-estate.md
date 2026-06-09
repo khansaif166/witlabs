@@ -1,15 +1,15 @@
 ---
-title: "Web Development Services for Real Estate"
-description: "Web development services help real estate teams turn property inquiries into site visits with better pages and faster follow-up."
+title: Web Development Services for Real Estate
+description: Web development services help real estate teams turn property inquiries into site visits with better pages and faster follow-up....
 publishDate: 2026-06-09
-author: "WitLabs"
-category: "Web Design"
+author: WitLabs
+category: Web Design
 readTime: 7
 featured: true
 draft: false
-seo_title: "Web Development Services for Real Estate | WitLabs"
-seo_description: "Web development services help real estate teams turn property inquiries into site visits with better pages and faster follow-up."
-ogImage: "/images/insights/real-estate-web-development-1.jpg"
+seo_title: Web Development Services for Real Estate | WitLabs
+seo_description: Web development services help real estate teams turn property inquiries into site visits with better pages and faster follow-up.
+ogImage: /images/insights/real-estate-web-development-1.jpg
 keywords:
   - web development services
 ---
