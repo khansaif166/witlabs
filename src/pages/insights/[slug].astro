@@ -1,13 +1,382 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-  return [];
+  const posts = await getCollection('insights', ({ data }) => !data.draft);
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
 }
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const seoTitle = post.data.seo_title ?? post.data.seoTitle;
+const seoDescription = post.data.seo_description ?? post.data.seoDescription ?? post.data.description;
+const publishDate = post.data.publishDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+const updatedDate = post.data.updatedDate?.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 ---
 
-<PageLayout title="Insight" eyebrow="Journal" description="This insight is not available yet." noindex={true}>
-  <section class="mx-auto max-w-3xl px-6 pb-20">
-    <p class="leading-7 text-muted">Insights will appear here once blog content is added.</p>
+<BaseLayout
+  title={seoTitle ?? post.data.title}
+  description={seoDescription}
+  canonical={`https://witlabs.in/insights/${post.slug}/`}
+  ogImage={post.data.ogImage}
+  ogType="article"
+  publishDate={post.data.publishDate.toISOString()}
+  modifiedDate={post.data.updatedDate?.toISOString()}
+  keywords={post.data.keywords}
+  noindex={false}
+  transparentHeader={true}
+>
+  <section class="insight-hero">
+    <div class="insight-hero__shell">
+      <a class="insight-back-link" href="/insights/">← Back to Insights</a>
+
+      <div class="insight-hero__copy">
+        <div class="insight-hero__meta">
+          <span>{post.data.category}</span>
+          <span>{post.data.author}</span>
+          <span>{publishDate}</span>
+          <span>{post.data.readTime} min read</span>
+          {updatedDate && <span>Updated {updatedDate}</span>}
+        </div>
+
+        <h1>{post.data.title}</h1>
+        <p>{post.data.description}</p>
+      </div>
+
+      {post.data.ogImage && (
+        <div class="insight-hero__media">
+          <img src={post.data.ogImage} alt={post.data.title} />
+        </div>
+      )}
+    </div>
   </section>
-</PageLayout>
+
+  <section class="insight-body">
+    <div class="insight-body__shell">
+      <aside class="insight-rail">
+        <div class="insight-rail__card">
+          <span class="insight-rail__label">Article Focus</span>
+          <strong>{post.data.category}</strong>
+          <p>
+            Practical guidance from WitLabs for business owners who want clearer websites, stronger visibility, and better conversion paths.
+          </p>
+        </div>
+        <div class="insight-rail__card">
+          <span class="insight-rail__label">Need Help?</span>
+          <strong>Build it with WitLabs</strong>
+          <p>
+            If this article reflects the kind of system your business needs, we can help design the website, landing pages, and lead flow around it.
+          </p>
+          <a href="/contact/">Talk to WitLabs</a>
+        </div>
+      </aside>
+
+      <article class="prose-shell">
+        <Content />
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .insight-hero {
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--nav-height) + clamp(2.5rem, 5vw, 4rem)) 0 clamp(3rem, 6vw, 5rem);
+    background:
+      radial-gradient(circle at 18% 16%, rgba(74, 222, 128, 0.16), transparent 24%),
+      radial-gradient(circle at 84% 20%, rgba(163, 111, 37, 0.18), transparent 22%),
+      linear-gradient(180deg, #050505 0%, #0d100d 62%, #f8f4ec 100%);
+    color: #fff;
+  }
+
+  .insight-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.15), transparent 22%, transparent 80%, rgba(0, 0, 0, 0.12)),
+      radial-gradient(circle at center, transparent 24%, rgba(0, 0, 0, 0.22) 100%);
+  }
+
+  .insight-hero__shell,
+  .insight-body__shell {
+    width: min(1180px, calc(100% - 1.5rem));
+    margin: 0 auto;
+  }
+
+  .insight-back-link {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.72);
+    font-family: "DM Mono", monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+  }
+
+  .insight-back-link:hover,
+  .insight-back-link:focus-visible {
+    color: #fff;
+  }
+
+  .insight-hero__copy {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin-top: 1.4rem;
+  }
+
+  .insight-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .insight-hero__meta span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.76);
+    font-family: "DM Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .insight-hero h1 {
+    margin: 0;
+    max-width: 12ch;
+    font-size: clamp(2.7rem, 6.3vw, 5.8rem);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.065em;
+    text-wrap: balance;
+  }
+
+  .insight-hero p {
+    margin: 1.35rem 0 0;
+    max-width: 760px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: clamp(1rem, 1.4vw, 1.18rem);
+    line-height: 1.8;
+  }
+
+  .insight-hero__media {
+    position: relative;
+    z-index: 1;
+    margin-top: 2.2rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    box-shadow: 0 36px 90px rgba(0, 0, 0, 0.38);
+  }
+
+  .insight-hero__media img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 8.5;
+    object-fit: cover;
+  }
+
+  .insight-body {
+    background: #f8f4ec;
+    padding: clamp(2rem, 4vw, 3rem) 0 5.5rem;
+  }
+
+  .insight-body__shell {
+    display: grid;
+    grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .insight-rail {
+    position: sticky;
+    top: calc(var(--nav-height) + 1.5rem);
+    display: grid;
+    gap: 1rem;
+  }
+
+  .insight-rail__card {
+    padding: 1.35rem;
+    border: 1px solid rgba(28, 25, 23, 0.08);
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 22px 50px rgba(28, 25, 23, 0.06);
+  }
+
+  .insight-rail__label {
+    display: block;
+    color: #2d6a4f;
+    font-family: "DM Mono", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .insight-rail__card strong {
+    display: block;
+    margin-top: 0.7rem;
+    color: #1c1917;
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+
+  .insight-rail__card p {
+    margin: 0.8rem 0 0;
+    color: #57534e;
+    font-size: 0.96rem;
+    line-height: 1.7;
+  }
+
+  .insight-rail__card a {
+    display: inline-flex;
+    margin-top: 1rem;
+    color: #2d6a4f;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .prose-shell {
+    padding: clamp(1.4rem, 2vw, 2rem);
+    border: 1px solid rgba(28, 25, 23, 0.08);
+    border-radius: 2rem;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 26px 70px rgba(28, 25, 23, 0.08);
+    color: #44403c;
+    font-size: 1.08rem;
+    line-height: 1.95;
+  }
+
+  .prose-shell :global(h1) {
+    display: none;
+  }
+
+  .prose-shell :global(h2) {
+    margin: 3.4rem 0 1rem;
+    color: #1c1917;
+    font-size: clamp(1.7rem, 2.5vw, 2.45rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .prose-shell :global(h3) {
+    margin: 2rem 0 0.8rem;
+    color: #1c1917;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.22;
+  }
+
+  .prose-shell :global(p) {
+    margin: 1.1rem 0;
+  }
+
+  .prose-shell :global(ul),
+  .prose-shell :global(ol) {
+    margin: 1.2rem 0;
+    padding-left: 1.3rem;
+  }
+
+  .prose-shell :global(li) {
+    margin: 0.7rem 0;
+    padding-left: 0.2rem;
+  }
+
+  .prose-shell :global(strong) {
+    color: #1c1917;
+  }
+
+  .prose-shell :global(blockquote) {
+    margin: 2rem 0;
+    padding: 1rem 1.2rem;
+    border-left: 3px solid #2d6a4f;
+    border-radius: 0 1rem 1rem 0;
+    background: rgba(45, 106, 79, 0.06);
+    color: #292524;
+  }
+
+  .prose-shell :global(img) {
+    display: block;
+    width: 100%;
+    margin: 2rem 0;
+    border: 1px solid rgba(45, 106, 79, 0.12);
+    border-radius: 1.4rem;
+    background: #fff;
+    box-shadow: 0 20px 54px rgba(28, 25, 23, 0.08);
+  }
+
+  .prose-shell :global(a) {
+    color: #2d6a4f;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.18em;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  }
+
+  .prose-shell :global(a:hover),
+  .prose-shell :global(a:focus-visible) {
+    color: #1f4c39;
+    text-decoration-color: currentColor;
+  }
+
+  @media (max-width: 920px) {
+    .insight-body__shell {
+      grid-template-columns: 1fr;
+    }
+
+    .insight-rail {
+      position: static;
+      order: 2;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .insight-hero__shell,
+    .insight-body__shell {
+      width: min(100% - 1rem, 44rem);
+    }
+
+    .insight-hero h1 {
+      max-width: none;
+    }
+
+    .insight-hero p {
+      font-size: 0.98rem;
+      line-height: 1.75;
+    }
+
+    .insight-hero__media {
+      border-radius: 1.4rem;
+    }
+
+    .insight-hero__media img {
+      aspect-ratio: 16 / 10;
+    }
+
+    .prose-shell {
+      padding: 1.15rem;
+      border-radius: 1.35rem;
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+  }
+</style>

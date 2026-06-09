@@ -1,0 +1,98 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.framework.id": "astro",
+  "frontMatter.preview.host": "http://localhost:4321",
+  "frontMatter.content.publicFolder": "public",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "insights",
+      "path": "[[workspace]]/src/content/insights",
+      "contentTypes": [
+        "insights"
+      ]
+    }
+  ],
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "insights",
+      "previewPath": "'insights'",
+      "pageBundle": false,
+      "clearEmpty": true,
+      "fields": [
+        {
+          "name": "title",
+          "type": "string",
+          "single": true,
+          "required": true
+        },
+        {
+          "name": "publishDate",
+          "type": "datetime",
+          "default": "{{now}}",
+          "required": true
+        },
+        {
+          "name": "updatedDate",
+          "type": "datetime",
+          "default": "{{now}}"
+        },
+        {
+          "name": "author",
+          "type": "string",
+          "single": true,
+          "default": "Saif Ali Khan"
+        },
+        {
+          "name": "category",
+          "type": "choice",
+          "choices": [
+            "SEO",
+            "Digital Marketing",
+            "Web Design",
+            "Business Growth",
+            "Automation",
+            "Case Study"
+          ],
+          "required": true
+        },
+        {
+          "name": "readTime",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "featured",
+          "type": "boolean"
+        },
+        {
+          "name": "draft",
+          "type": "draft"
+        },
+        {
+          "name": "keywords",
+          "type": "list"
+        },
+        {
+          "name": "ogImage",
+          "type": "image",
+          "isPreviewImage": true
+        },
+        {
+          "title": "description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "seo_title",
+          "name": "seo_title",
+          "type": "string"
+        },
+        {
+          "title": "seo_description",
+          "name": "seo_description",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}

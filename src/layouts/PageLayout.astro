@@ -14,9 +14,10 @@ interface Props {
   noindex?: boolean;
   type?: 'website' | 'article';
   keywords?: string[];
+  transparentHeader?: boolean;
 }
 
-const { title, seoTitle, eyebrow, description, canonical, ogImage, ogType, publishDate, modifiedDate, noindex, type, keywords } = Astro.props;
+const { title, seoTitle, eyebrow, description, canonical, ogImage, ogType, publishDate, modifiedDate, noindex, type, keywords, transparentHeader = false } = Astro.props;
 const metaDescription = description ?? 'Digital growth agency helping Indian businesses build websites, rank on Google and grow online.';
 ---
 
@@ -31,6 +32,7 @@ const metaDescription = description ?? 'Digital growth agency helping Indian bus
   noindex={noindex}
   type={type}
   keywords={keywords}
+  transparentHeader={transparentHeader}
 >
   <section class="mx-auto max-w-6xl px-6 py-20">
     {eyebrow && <p class="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-warm">{eyebrow}</p>}

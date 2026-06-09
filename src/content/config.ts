@@ -17,6 +17,8 @@ const insights = defineCollection({
     draft: z.boolean().default(false),
     seoTitle: z.string().max(60).optional(),
     seoDescription: z.string().max(160).optional(),
+    seo_title: z.string().max(60).optional(),
+    seo_description: z.string().max(160).optional(),
     keywords: z.array(z.string()).optional(),
     ogImage: z.string().optional(),
   }),

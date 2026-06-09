@@ -1,0 +1,640 @@
+---
+const projects = [
+  {
+    title: 'Aswad Global',
+    category: 'Corporate Website',
+    image: '/images/Design-1.jpg',
+    url: 'https://aswadglobal.com',
+    domain: 'aswadglobal.com',
+    description: 'Modern digital presence for a global materials and infrastructure business.',
+    x: '8%',
+    y: '27%',
+    z: '-180px',
+    rotate: '-12deg',
+    width: '12.9rem',
+    opacity: 0.34,
+  },
+  {
+    title: 'Impact Packaging Solutions',
+    category: 'Manufacturing Website',
+    image: '/images/Design-2.jpg',
+    url: 'https://impactpackaging.in',
+    domain: 'impactpackaging.in',
+    description: 'Clear product storytelling and inquiry-focused structure for industrial buyers.',
+    x: '22%',
+    y: '21%',
+    z: '65px',
+    rotate: '-6deg',
+    width: '14.6rem',
+    opacity: 0.72,
+  },
+  {
+    title: 'Daffodil Group',
+    category: 'Business Group Website',
+    image: '/images/Design-3.jpg',
+    url: 'https://thedaffodilgroup.com',
+    domain: 'thedaffodilgroup.com',
+    description: 'Editorial holding-group presentation with a premium corporate tone.',
+    x: '78%',
+    y: '21%',
+    z: '45px',
+    rotate: '8deg',
+    width: '14.7rem',
+    opacity: 0.74,
+  },
+  {
+    title: 'Pragya Academy',
+    category: 'Education Website',
+    image: '/images/card5.jpg',
+    url: 'https://witlabs.in/contact/',
+    domain: 'education launch',
+    description: 'Admissions-focused landing flow built for trust, clarity, and action.',
+    x: '92%',
+    y: '28%',
+    z: '-170px',
+    rotate: '11deg',
+    width: '13rem',
+    opacity: 0.34,
+  },
+  {
+    title: 'Creative Fashion Label',
+    category: 'Ecommerce Landing',
+    image: '/images/card1.jpg',
+    url: 'https://witlabs.in/services/',
+    domain: 'fashion concept',
+    description: 'Bold product-led storytelling for lifestyle and fashion-first launches.',
+    x: '7%',
+    y: '69%',
+    z: '30px',
+    rotate: '-9deg',
+    width: '13.3rem',
+    opacity: 0.4,
+  },
+  {
+    title: 'Campaign Microsite',
+    category: 'Launch Experience',
+    image: '/images/card2.jpg',
+    url: 'https://witlabs.in/insights/',
+    domain: 'campaign launch',
+    description: 'Fast-turn campaign landing page designed to hold attention and convert.',
+    x: '28%',
+    y: '72%',
+    z: '-70px',
+    rotate: '-4deg',
+    width: '13.9rem',
+    opacity: 0.56,
+  },
+  {
+    title: 'Performance Dashboard',
+    category: 'Digital Product UI',
+    image: '/images/mockup.png',
+    url: 'https://witlabs.in/services/',
+    domain: 'dashboard system',
+    description: 'Data-led interface concepts for tools, reports, and internal systems.',
+    x: '78%',
+    y: '64%',
+    z: '115px',
+    rotate: '2deg',
+    width: '15rem',
+    opacity: 0.76,
+  },
+  {
+    title: 'Product Showcase',
+    category: 'Brand Website',
+    image: '/images/Design-4.jpg',
+    url: 'https://witlabs.in/about/',
+    domain: 'product showcase',
+    description: 'Minimal product presentation with high-contrast visuals and narrative pacing.',
+    x: '94%',
+    y: '60%',
+    z: '25px',
+    rotate: '7deg',
+    width: '13.3rem',
+    opacity: 0.54,
+  },
+];
+---
+
+<section class="portfolio-galaxy text-white" data-portfolio-galaxy>
+  <div class="portfolio-galaxy__shell">
+    <div class="portfolio-galaxy__copy reveal">
+      <p class="section-kicker text-green-bright">Selected Work</p>
+      <h2>Projects Built by WitLabs</h2>
+      <p>
+        Explore the websites and digital experiences we have created for our clients across corporate,
+        manufacturing, education, and launch-focused brands.
+      </p>
+    </div>
+
+    <div class="portfolio-galaxy__desktop" aria-hidden="true">
+      <div class="portfolio-galaxy__orbit" data-portfolio-orbit>
+        {projects.map((project, index) => (
+          <a
+            class="portfolio-card"
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View ${project.title} project`}
+            style={`--card-x:${project.x}; --card-y:${project.y}; --card-z:${project.z}; --card-rotate:${project.rotate}; --card-width:${project.width}; --card-opacity:${project.opacity}; --card-order:${index};`}
+          >
+            <div class="portfolio-card__frame">
+              <div class="portfolio-card__chrome">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <img src={project.image} alt={`${project.title} project preview`} loading={index < 4 ? 'eager' : 'lazy'} />
+              <div class="portfolio-card__shade"></div>
+              <div class="portfolio-card__meta">
+                <p>{project.category}</p>
+                <strong>{project.title}</strong>
+              </div>
+              <span class="portfolio-card__pill">{project.domain} <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="portfolio-galaxy__mobile reveal reveal-delay-2">
+      {projects.slice(0, 6).map((project) => (
+        <a
+          class="portfolio-mobile-card"
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`View ${project.title} project`}
+        >
+          <img src={project.image} alt={`${project.title} website preview`} loading="lazy" />
+          <div class="portfolio-mobile-card__body">
+            <p>{project.category}</p>
+            <h3>{project.title}</h3>
+            <span>{project.description}</span>
+            <strong>View Project <span aria-hidden="true">↗</span></strong>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const section = document.querySelector('[data-portfolio-galaxy]');
+    const orbit = document.querySelector('[data-portfolio-orbit]');
+    if (!section || !orbit) return;
+
+    const cards = [...orbit.querySelectorAll('.portfolio-card')];
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let paused = false;
+    let rafId = 0;
+
+    const setPaused = (value) => {
+      paused = value;
+      section.classList.toggle('is-paused', value);
+    };
+
+    const animate = () => {
+      currentX += (targetX - currentX) * 0.06;
+      currentY += (targetY - currentY) * 0.06;
+
+      orbit.style.setProperty('--parallax-x', `${currentX.toFixed(2)}px`);
+      orbit.style.setProperty('--parallax-y', `${currentY.toFixed(2)}px`);
+      orbit.style.setProperty('--orbit-scale', paused ? '0.995' : '1');
+
+      rafId = window.requestAnimationFrame(animate);
+    };
+
+    section.addEventListener('pointermove', (event) => {
+      if (window.innerWidth < 768) return;
+      const rect = section.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      targetX = x * 34;
+      targetY = y * 20;
+    });
+
+    section.addEventListener('pointerleave', () => {
+      targetX = 0;
+      targetY = 0;
+      setPaused(false);
+    });
+
+    cards.forEach((card) => {
+      card.addEventListener('pointerenter', () => setPaused(true));
+      card.addEventListener('pointerleave', () => setPaused(false));
+      card.addEventListener('focus', () => setPaused(true));
+      card.addEventListener('blur', () => setPaused(false));
+    });
+
+    if (reducedMotion) {
+      orbit.style.setProperty('--parallax-x', '0px');
+      orbit.style.setProperty('--parallax-y', '0px');
+      return;
+    }
+
+    rafId = window.requestAnimationFrame(animate);
+
+    window.addEventListener('beforeunload', () => {
+      if (rafId) window.cancelAnimationFrame(rafId);
+    });
+  })();
+</script>
+
+<style>
+  .portfolio-galaxy {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(74, 222, 128, 0.12), transparent 18%),
+      radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.08), transparent 20%),
+      #020202;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    isolation: isolate;
+  }
+
+  .portfolio-galaxy::before,
+  .portfolio-galaxy::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .portfolio-galaxy::before {
+    background:
+      linear-gradient(180deg, rgba(2, 2, 2, 0) 0%, rgba(2, 2, 2, 0.82) 86%, #020202 100%),
+      radial-gradient(circle at center, transparent 0 20%, rgba(0, 0, 0, 0.26) 60%, rgba(0, 0, 0, 0.7) 100%);
+    z-index: 1;
+  }
+
+  .portfolio-galaxy::after {
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.26) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 78% 32%, rgba(255, 255, 255, 0.2) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 62% 78%, rgba(255, 255, 255, 0.16) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 28% 68%, rgba(255, 255, 255, 0.15) 0 1px, transparent 1.5px);
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    z-index: 0;
+  }
+
+  .portfolio-galaxy__shell {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    padding: clamp(4.5rem, 10vw, 7rem) 1rem clamp(4rem, 8vw, 6rem);
+  }
+
+  .portfolio-galaxy__copy {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    z-index: 5;
+    width: min(92vw, 33rem);
+    text-align: center;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .portfolio-galaxy__copy::before {
+    content: '';
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: min(86vw, 46rem);
+    height: min(66vw, 28rem);
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+    background:
+      radial-gradient(circle, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.72) 42%, rgba(0, 0, 0, 0.22) 72%, transparent 100%);
+    filter: blur(18px);
+    z-index: -1;
+  }
+
+  .portfolio-galaxy__copy .section-kicker {
+    justify-content: center;
+  }
+
+  .portfolio-galaxy__copy h2 {
+    margin-top: 1rem;
+    font-size: clamp(2.4rem, 5vw, 4.8rem);
+    font-weight: 600;
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+
+  .portfolio-galaxy__copy p:last-child {
+    margin: 1.15rem auto 0;
+    max-width: 31rem;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.98rem;
+    line-height: 1.8;
+  }
+
+  .portfolio-galaxy__desktop {
+    position: relative;
+    min-height: calc(100vh - 8rem);
+    perspective: 2200px;
+  }
+
+  .portfolio-galaxy__orbit {
+    --parallax-x: 0px;
+    --parallax-y: 0px;
+    --orbit-scale: 1;
+    position: relative;
+    min-height: calc(100vh - 8rem);
+    transform-style: preserve-3d;
+    transform:
+      perspective(2200px)
+      rotateX(6deg)
+      translate3d(var(--parallax-x), var(--parallax-y), 0)
+      scale(var(--orbit-scale));
+    transition: transform 0.2s linear;
+    will-change: transform;
+  }
+
+  .portfolio-card {
+    position: absolute;
+    left: var(--card-x);
+    top: var(--card-y);
+    z-index: calc(20 + var(--card-order));
+    display: block;
+    width: clamp(12.5rem, var(--card-width), 17rem);
+    transform:
+      translate3d(-50%, -50%, var(--card-z))
+      rotateY(calc(var(--card-rotate) * -0.38))
+      rotateZ(var(--card-rotate));
+    opacity: var(--card-opacity);
+    transition:
+      transform 0.55s var(--ease-premium),
+      opacity 0.32s var(--ease-standard),
+      filter 0.32s var(--ease-standard),
+      z-index 0s linear 0.2s;
+    filter: brightness(0.82) saturate(0.86);
+    will-change: transform, opacity, filter;
+  }
+
+  .portfolio-card__frame {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow:
+      0 42px 90px rgba(0, 0, 0, 0.54),
+      0 10px 30px rgba(0, 0, 0, 0.38);
+    backdrop-filter: blur(10px);
+    animation: portfolioFloat 14s ease-in-out infinite;
+    animation-delay: calc(var(--card-order) * -1.15s);
+  }
+
+  .portfolio-card__chrome {
+    position: absolute;
+    inset: 0.8rem auto auto 0.8rem;
+    z-index: 2;
+    display: inline-flex;
+    gap: 0.28rem;
+  }
+
+  .portfolio-card__chrome span {
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .portfolio-card img {
+    aspect-ratio: 16 / 10.2;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .portfolio-card__shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.45) 74%, rgba(0, 0, 0, 0.9)),
+      linear-gradient(135deg, rgba(74, 222, 128, 0.12), transparent 46%);
+    pointer-events: none;
+  }
+
+  .portfolio-card__meta {
+    position: absolute;
+    inset: auto 1rem 1rem 1rem;
+    z-index: 2;
+  }
+
+  .portfolio-card__meta p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.54);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .portfolio-card__meta strong {
+    display: block;
+    margin-top: 0.45rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .portfolio-card__pill {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.42rem 0.78rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #050505;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    opacity: 0;
+    transform: translateY(0.45rem);
+    transition: opacity 0.28s var(--ease-standard), transform 0.35s var(--ease-premium);
+  }
+
+  .portfolio-card:hover,
+  .portfolio-card:focus-visible {
+    z-index: 50;
+    opacity: 1;
+    filter: brightness(1.08) saturate(1.02);
+    transform:
+      translate3d(-50%, calc(-50% - 0.6rem), calc(var(--card-z) + 120px))
+      rotateY(calc(var(--card-rotate) * -0.14))
+      rotateZ(calc(var(--card-rotate) * 0.45))
+      scale(1.05);
+    outline: none;
+  }
+
+  .portfolio-card:hover .portfolio-card__frame,
+  .portfolio-card:focus-visible .portfolio-card__frame {
+    border-color: rgba(255, 255, 255, 0.26);
+    box-shadow:
+      0 48px 110px rgba(0, 0, 0, 0.72),
+      0 0 0 1px rgba(74, 222, 128, 0.18),
+      0 0 48px rgba(74, 222, 128, 0.12);
+  }
+
+  .portfolio-galaxy.is-paused .portfolio-card__frame {
+    animation-play-state: paused;
+  }
+
+  .portfolio-card:hover .portfolio-card__pill,
+  .portfolio-card:focus-visible .portfolio-card__pill {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .portfolio-galaxy__mobile {
+    display: none;
+  }
+
+  .portfolio-mobile-card {
+    display: block;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.32);
+    scroll-snap-align: center;
+  }
+
+  .portfolio-mobile-card img {
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
+    display: block;
+  }
+
+  .portfolio-mobile-card__body {
+    padding: 1rem 1rem 1.1rem;
+  }
+
+  .portfolio-mobile-card__body p,
+  .portfolio-mobile-card__body span {
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .portfolio-mobile-card__body p {
+    margin: 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .portfolio-mobile-card__body h3 {
+    margin-top: 0.6rem;
+    font-size: 1.18rem;
+    font-weight: 600;
+  }
+
+  .portfolio-mobile-card__body span {
+    display: block;
+    margin-top: 0.45rem;
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  .portfolio-mobile-card__body strong {
+    display: inline-flex;
+    margin-top: 0.9rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  @media (max-width: 767px) {
+    .portfolio-galaxy__shell {
+      min-height: auto;
+      padding: 4.25rem 1rem 4rem;
+    }
+
+    .portfolio-galaxy__copy {
+      position: relative;
+      inset: auto;
+      width: auto;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    .portfolio-galaxy__copy h2 {
+      font-size: clamp(2rem, 10vw, 2.8rem);
+    }
+
+    .portfolio-galaxy__copy p:last-child {
+      font-size: 0.94rem;
+      line-height: 1.72;
+    }
+
+    .portfolio-galaxy__desktop {
+      display: none;
+    }
+
+    .portfolio-galaxy__mobile {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(84%, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+      overflow-x: auto;
+      padding-bottom: 0.2rem;
+      scroll-snap-type: x proximity;
+    }
+
+    .portfolio-galaxy__mobile::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1180px) {
+    .portfolio-galaxy__copy {
+      width: min(78vw, 28rem);
+    }
+
+    .portfolio-card {
+      width: clamp(11rem, var(--card-width), 14rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .portfolio-galaxy__orbit,
+    .portfolio-card,
+    .portfolio-card__pill,
+    .portfolio-card__frame {
+      transition: none;
+      animation: none;
+    }
+
+    .portfolio-card:hover,
+    .portfolio-card:focus-visible {
+      transform:
+        translate3d(-50%, -50%, var(--card-z))
+        rotateY(calc(var(--card-rotate) * -0.24))
+        rotateZ(var(--card-rotate))
+        scale(1.02);
+    }
+  }
+
+  @keyframes portfolioFloat {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotateZ(0deg);
+    }
+
+    50% {
+      transform: translate3d(0, -0.85rem, 0) rotateZ(0.9deg);
+    }
+  }
+</style>
