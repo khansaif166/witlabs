@@ -10,7 +10,7 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
-      filter: (page) => !page.endsWith('/thank-you/') && !page.endsWith('/insights/'),
+      filter: (page) => !page.endsWith('/thank-you/'),
     }),
     icon(),
   ],
