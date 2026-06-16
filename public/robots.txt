@@ -1,6 +1,28 @@
 User-agent: *
 Allow: /
 
+# Explicit allow rules for major AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 # Main sitemap
 Sitemap: https://witlabs.in/sitemap-index.xml
 
