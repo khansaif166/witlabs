@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { pageSEO } from '../lib/seo';
 import Hero from '../components/home/Hero.astro';
 import LogoStrip from '../components/home/LogoStrip.astro';
 import Services from '../components/home/Services.astro';
@@ -12,10 +13,10 @@ import HomeCTA from '../components/home/HomeCTA.astro';
 ---
 
 <BaseLayout
-  title="WitLabs — Be Found. Be Chosen. Digital Growth Agency"
-  description="Be Found. Be Chosen. WitLabs helps Indian businesses build websites that rank on Google, generate qualified inquiries, and turn online visitors into customers."
+  title={pageSEO.home.title}
+  description={pageSEO.home.description}
   canonical="https://witlabs.in/"
-  keywords={['digital agency India', 'website design India', 'SEO agency India', 'digital marketing India']}
+  keywords={pageSEO.home.keywords}
   transparentHeader={true}
 >
   <Hero />

@@ -1,8 +1,8 @@
 export const pageSEO = {
   home: {
-    title: 'WitLabs — Be Found. Be Chosen. Digital Growth Agency',
-    description: 'Be Found. Be Chosen. WitLabs helps Indian businesses build websites that rank on Google, generate qualified inquiries, and turn online visitors into customers.',
-    keywords: ['digital agency India', 'website design India', 'SEO agency India', 'digital marketing agency India', 'web development company India'],
+    title: 'WitLabs — Website Design, SEO & Lead Generation Agency in India',
+    description: 'WitLabs is a website design, SEO, and lead generation agency in India helping businesses improve visibility, trust, and qualified enquiries.',
+    keywords: ['website design agency in India', 'SEO agency in India', 'lead generation agency in India', 'digital growth agency in India', 'digital marketing agency in India'],
   },
   services: {
     title: 'Digital Services — Website Design, SEO & Marketing | WitLabs',

@@ -76,7 +76,19 @@ const getHeroPosition = (index: number) => {
         <span class="hero-line block text-white/72">Be Chosen.</span>
       </h1>
 
-      <div class="reveal reveal-delay-3 mt-6">
+      <p class="hero-summary reveal reveal-delay-2 mx-auto mt-6 max-w-3xl text-balance text-base leading-7 text-white/74 sm:text-lg">
+        WitLabs helps clinics, builders, real-estate teams, manufacturers, and coaching brands build clearer
+        websites, stronger Google visibility, and better lead follow-up systems.
+      </p>
+
+      <div class="hero-pill-row reveal reveal-delay-3 mt-6">
+        <span>Websites</span>
+        <span>SEO visibility</span>
+        <span>Lead systems</span>
+        <span>Automation support</span>
+      </div>
+
+      <div class="reveal reveal-delay-4 mt-6">
         <a class="premium-button premium-button-light" href="/contact/">Book a Free Strategy Call</a>
       </div>
     </div>
@@ -239,6 +251,32 @@ const getHeroPosition = (index: number) => {
       radial-gradient(circle at 50% 36%, rgba(45, 106, 79, 0.2), transparent 42%),
       linear-gradient(180deg, rgba(0, 0, 0, 0.46) 0%, rgba(0, 0, 0, 0.5) 46%, rgba(0, 0, 0, 0.84) 100%),
       linear-gradient(90deg, rgba(0, 0, 0, 0.64), rgba(0, 0, 0, 0.2) 48%, rgba(0, 0, 0, 0.64));
+  }
+
+  .hero-summary {
+    text-wrap: pretty;
+  }
+
+  .hero-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem;
+  }
+
+  .hero-pill-row span {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.6rem 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: "DM Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    backdrop-filter: blur(12px);
   }
 
   @keyframes heroVideoCycle {

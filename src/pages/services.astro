@@ -4,39 +4,32 @@ import { pageSEO } from '../lib/seo';
 
 const services = [
   {
-    id: 'website-design',
-    label: 'Website Design',
+    id: 'website-systems',
+    label: 'Website Systems',
     number: '01',
-    summary: 'Conversion-first websites for service businesses, local brands, and growing teams.',
-    includes: ['Clear page strategy and conversion flow', 'Mobile-first UI built for trust', 'Fast, SEO-ready Astro development', 'Contact forms, WhatsApp, and analytics setup'],
+    summary: 'Conversion-first websites and landing pages for service businesses, local brands, and founder-led teams that need a clearer buyer journey.',
+    includes: ['Offer positioning and page strategy before design', 'Mobile-first UI built around trust and action', 'Fast Astro builds with SEO-ready foundations', 'Contact forms, WhatsApp, analytics, and clear CTA architecture'],
   },
   {
     id: 'seo',
-    label: 'SEO & Organic Growth',
+    label: 'SEO & Content Growth',
     number: '02',
-    summary: 'Search foundations, local visibility, and content systems built around how customers actually search.',
-    includes: ['Technical audit with priority fixes', 'Keyword research around buyer intent', 'Optimized titles, pages, and internal links', 'Google Business Profile and local SEO improvements'],
+    summary: 'Search foundations, local visibility, and sector-specific content built around how your buyers actually search.',
+    includes: ['Technical audit with priority fixes', 'Keyword research around service and comparison intent', 'Optimized titles, service pages, and internal links', 'Google Business Profile, local SEO, and insight content planning'],
   },
   {
-    id: 'digital-marketing',
-    label: 'Digital Marketing',
+    id: 'lead-systems',
+    label: 'Lead Capture & Follow-up Systems',
     number: '03',
-    summary: 'Campaign planning and execution that turns attention into qualified conversations.',
-    includes: ['Campaign strategy for leads and visibility', 'Ad copy, creatives, and offer positioning', 'Landing page alignment for better conversions', 'Weekly optimization and clear performance reports'],
-  },
-  {
-    id: 'app-development',
-    label: 'App Development',
-    number: '04',
-    summary: 'Practical mobile and web apps for workflows, customer experiences, and internal tools.',
-    includes: ['Feature planning based on real workflows', 'Clean UX flows for users and admins', 'Secure frontend and backend development', 'Testing, deployment, and launch support'],
+    summary: 'The layer between traffic and sales: enquiry capture, routing, WhatsApp flow, and a better handoff after the click.',
+    includes: ['Shorter forms and cleaner enquiry paths', 'WhatsApp, callbacks, and follow-up journey planning', 'Landing page structure aligned with intent', 'Lead routing logic and practical response system suggestions'],
   },
   {
     id: 'automation',
-    label: 'Automation & AI',
-    number: '05',
-    summary: 'Lean systems that remove repetitive work from sales, operations, support, and reporting.',
-    includes: ['Workflow mapping to find manual bottlenecks', 'CRM, forms, sheets, and tool integrations', 'Lead routing, auto-replies, and follow-up systems', 'Dashboards for tracking tasks, leads, and reports'],
+    label: 'Automation & Internal Tools',
+    number: '04',
+    summary: 'Lean internal systems for reporting, operations, dashboards, and repetitive workflows that do not need enterprise bloat.',
+    includes: ['Workflow mapping to find manual bottlenecks', 'CRM, forms, sheets, and tool integrations', 'Dashboards for tracking tasks, leads, and reporting', 'Automation support for sales, service, and internal operations'],
   },
 ];
 
@@ -73,18 +66,18 @@ const serviceListSchema = {
     <div class="mx-auto grid max-w-[1240px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
       <div class="services-hero__copy reveal">
         <p class="section-kicker text-green-bright">What We Build</p>
-        <h1>Digital systems that make your business easier to choose.</h1>
+        <h1>Websites, visibility, and lead systems with a clearer center of gravity.</h1>
         <p>
-          Websites, SEO, marketing, apps, and automation shaped around real customer journeys, not random deliverables.
+          WitLabs is strongest when the website, search visibility, and enquiry flow need to work together. That is the core. Automation and internal tools support it when they genuinely help the business run better.
         </p>
         <div class="services-hero__actions">
           <a class="premium-button premium-button-light" href="/contact/">Start a Project</a>
-          <a class="services-hero__link" href="#website-design">Explore services <span aria-hidden="true">→</span></a>
+          <a class="services-hero__link" href="#website-systems">Explore services <span aria-hidden="true">→</span></a>
         </div>
       </div>
 
       <div class="services-hero__stage reveal reveal-delay-2" aria-label="WitLabs service areas">
-        {services.slice(0, 4).map((service, index) => (
+        {services.map((service, index) => (
           <a class:list={['services-hero-card', index === 0 && 'services-hero-card--main']} href={`#${service.id}`}>
             <span>{service.number}</span>
             <strong>{service.label}</strong>

@@ -23,6 +23,13 @@ const cards = posts.length > 0
     isPlaceholder: false,
   }))
   : placeholders.map((post) => ({ ...post, description: 'Fresh practical notes will appear here soon.', date: 'Publishing soon', href: '/insights/', image: undefined, isPlaceholder: true }));
+
+const topicTracks = [
+  'Real estate websites',
+  'Local SEO for clinics',
+  'Manufacturing websites',
+  'Lead systems for coaching institutes',
+];
 ---
 
 <section class="section-shell bg-white text-ink">
@@ -31,10 +38,15 @@ const cards = posts.length > 0
       <div>
         <p class="section-kicker reveal text-green">Resources</p>
         <h2 class="reveal reveal-delay-1 mt-4 display-tight text-[clamp(1.95rem,3.2vw,3.25rem)] font-semibold">
-          Useful growth notes.
+          Playbooks that support ranking and sales.
         </h2>
+        <div class="insights-topics reveal reveal-delay-2 mt-5">
+          {topicTracks.map((topic) => (
+            <span>{topic}</span>
+          ))}
+        </div>
       </div>
-      <a class="arrow-link reveal reveal-delay-2 text-green" href="/insights/">View all <span class="arrow">→</span></a>
+      <a class="arrow-link reveal reveal-delay-3 text-green" href="/insights/">View all <span class="arrow">→</span></a>
     </div>
 
     <div class="insights-grid mt-12">
@@ -66,6 +78,26 @@ const cards = posts.length > 0
   .insights-grid {
     display: grid;
     gap: 16px;
+  }
+
+  .insights-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .insights-topics span {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(45, 106, 79, 0.12);
+    border-radius: 999px;
+    background: #F6F3EE;
+    padding: 0.5rem 0.8rem;
+    color: #57534E;
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .insight-card {

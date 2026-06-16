@@ -7,6 +7,7 @@ const testimonials = [
     company: 'Business Consulting',
     location: 'Bhopal, Madhya Pradesh',
     quote: 'WitLabs gave us a clean, professional website that explains our services clearly and makes Aswad Global easier to present to serious prospects.',
+    evidence: ['Clearer service explanation', 'Stronger prospect presentation'],
   },
   {
     initials: 'IP',
@@ -15,6 +16,7 @@ const testimonials = [
     company: 'Manufacturing',
     location: 'Vapi, Gujarat',
     quote: 'Professional, reliable, and focused on actual outcomes. They understood our B2B requirements quickly and kept the entire process clear.',
+    evidence: ['B2B requirement clarity', 'Process confidence'],
   },
   {
     initials: 'KE',
@@ -23,6 +25,7 @@ const testimonials = [
     company: 'Education',
     location: 'Bangalore, Karnataka',
     quote: 'After the redesign and Google presence setup, student inquiries improved. It became one of the best digital investments for our institute.',
+    evidence: ['Google presence setup', 'Higher inquiry quality'],
   },
 ];
 ---
@@ -33,11 +36,11 @@ const testimonials = [
       <div>
         <p class="section-kicker reveal text-green">Trusted By Founders</p>
         <h2 class="reveal reveal-delay-1 mt-4 display-tight text-[clamp(1.95rem,3.2vw,3.25rem)] font-semibold">
-          Proof from real work.
+          Proof that points to outcomes.
         </h2>
       </div>
       <p class="reveal reveal-delay-2 max-w-md text-base leading-7 text-ink-light lg:justify-self-end">
-        Short notes from clients who trusted the work.
+        Short founder notes, plus the kind of change each project was meant to create.
       </p>
     </div>
 
@@ -56,6 +59,11 @@ const testimonials = [
               <small>{item.location}</small>
             </div>
           </figcaption>
+          <div class="testimonial-evidence">
+            {item.evidence.map((entry) => (
+              <span>{entry}</span>
+            ))}
+          </div>
         </figure>
       ))}
     </div>
@@ -130,6 +138,26 @@ const testimonials = [
     font-family: "DM Mono", monospace;
     font-size: 10px;
     letter-spacing: 0.08em;
+  }
+
+  .testimonial-evidence {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .testimonial-evidence span {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    background: #F0ECE4;
+    padding: 0.5rem 0.75rem;
+    color: #57534E;
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   @media (min-width: 900px) {
