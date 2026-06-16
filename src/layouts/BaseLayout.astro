@@ -18,6 +18,7 @@ interface Props {
   type?: 'website' | 'article';
   keywords?: string[];
   transparentHeader?: boolean;
+  articleSchema?: Record<string, unknown>;
 }
 
 const {
@@ -32,6 +33,7 @@ const {
   type = 'website',
   keywords = [],
   transparentHeader = true,
+  articleSchema,
 } = Astro.props;
 
 const siteUrl = 'https://witlabs.in';
@@ -64,6 +66,7 @@ const breadcrumbItems = [
     />
     <StructuredData type="organization" />
     <StructuredData type="localBusiness" />
+    {articleSchema && <StructuredData type="article" data={articleSchema} />}
     {breadcrumbItems.length > 1 && <StructuredData type="breadcrumb" items={breadcrumbItems} />}
   </head>
   <body class="min-h-screen flex flex-col bg-cream text-ink antialiased">

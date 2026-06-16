@@ -15,14 +15,40 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const seoTitle = post.data.seo_title ?? post.data.seoTitle;
 const seoDescription = post.data.seo_description ?? post.data.seoDescription ?? post.data.description;
+const canonicalUrl = `https://witlabs.in/insights/${post.slug}/`;
+const ogImageUrl = post.data.ogImage ? `https://witlabs.in${post.data.ogImage}` : 'https://witlabs.in/og/default.jpg';
 const publishDate = post.data.publishDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 const updatedDate = post.data.updatedDate?.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+const articleSchema = {
+  '@id': `${canonicalUrl}#article`,
+  headline: post.data.title,
+  description: seoDescription,
+  image: [ogImageUrl],
+  datePublished: post.data.publishDate.toISOString(),
+  ...(post.data.updatedDate ? { dateModified: post.data.updatedDate.toISOString() } : {}),
+  author: {
+    '@type': 'Person',
+    name: post.data.author,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'WitLabs',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://witlabs.in/images/logo.png',
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
+};
 ---
 
 <BaseLayout
   title={seoTitle ?? post.data.title}
   description={seoDescription}
-  canonical={`https://witlabs.in/insights/${post.slug}/`}
+  canonical={canonicalUrl}
   ogImage={post.data.ogImage}
   ogType="article"
   publishDate={post.data.publishDate.toISOString()}
@@ -30,6 +56,7 @@ const updatedDate = post.data.updatedDate?.toLocaleDateString('en-IN', { day: 'n
   keywords={post.data.keywords}
   noindex={false}
   transparentHeader={true}
+  articleSchema={articleSchema}
 >
   <section class="insight-hero">
     <div class="insight-hero__shell">
