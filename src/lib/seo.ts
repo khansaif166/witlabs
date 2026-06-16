@@ -15,9 +15,9 @@ export const pageSEO = {
     keywords: ['WitLabs pricing', 'website pricing India', 'digital marketing pricing India', 'app development pricing India'],
   },
   about: {
-    title: 'About WitLabs — Digital Growth Agency Founded by Saif Ali Khan',
-    description: 'Meet WitLabs, a digital growth agency helping Indian businesses improve websites, search visibility, marketing, and online lead generation.',
-    keywords: ['about WitLabs', 'Saif Ali Khan digital agency', 'Indian digital agency', 'WitLabs founder'],
+    title: 'About WitLabs — Digital Growth Agency Founded in Bangalore, India',
+    description: 'Meet WitLabs, a digital growth agency founded in Bangalore, India and helping businesses improve websites, search visibility, marketing, and online lead generation.',
+    keywords: ['about WitLabs', 'digital growth agency Bangalore India', 'Indian digital agency', 'website and SEO agency India'],
   },
   contact: {
     title: 'Contact WitLabs — Book a Free Digital Strategy Call',

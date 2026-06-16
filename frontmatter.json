@@ -40,7 +40,7 @@
           "name": "author",
           "type": "string",
           "single": true,
-          "default": "Saif Ali Khan"
+          "default": "WitLabs Team"
         },
         {
           "name": "category",

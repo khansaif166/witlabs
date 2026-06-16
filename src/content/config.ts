@@ -7,7 +7,7 @@ const insights = defineCollection({
     description: z.string().max(160),
     publishDate: z.date(),
     updatedDate: z.date().optional(),
-    author: z.string().default('Saif Ali Khan'),
+    author: z.string().default('WitLabs Team'),
     category: z.enum([
       'SEO', 'Digital Marketing', 'Web Design',
       'Business Growth', 'Automation', 'Case Study',
