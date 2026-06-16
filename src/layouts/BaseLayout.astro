@@ -11,6 +11,8 @@ interface Props {
   description: string;
   canonical?: string;
   ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
   ogType?: 'website' | 'article';
   publishDate?: string;
   modifiedDate?: string;
@@ -26,6 +28,8 @@ const {
   description,
   canonical,
   ogImage = '/og/default.jpg',
+  ogImageWidth,
+  ogImageHeight,
   ogType,
   publishDate,
   modifiedDate,
@@ -58,6 +62,8 @@ const breadcrumbItems = [
       description={description}
       canonical={canonical}
       ogImage={ogImage}
+      ogImageWidth={ogImageWidth}
+      ogImageHeight={ogImageHeight}
       ogType={ogType ?? type}
       publishDate={publishDate}
       modifiedDate={modifiedDate}

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { appPlans, launchPackage, marketingPlans, websitePlans } from '../data/pricing';
+import { pageSEO } from '../lib/seo';
 
 const pricingGroups = [
   {
@@ -115,10 +116,10 @@ const pricingOfferCatalogSchema = {
 ---
 
 <BaseLayout
-  title="Pricing — Website, Marketing & App Packages | WitLabs"
-  description="Explore WitLabs pricing for websites, digital marketing, app development, and digital launch packages."
+  title={pageSEO.pricing.title}
+  description={pageSEO.pricing.description}
   canonical="https://witlabs.in/pricing/"
-  keywords={['WitLabs pricing', 'website pricing India', 'digital marketing pricing India', 'app development pricing India']}
+  keywords={pageSEO.pricing.keywords}
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(pricingOfferCatalogSchema)} />
 

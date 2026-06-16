@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { pageSEO } from '../lib/seo';
 
 const web3FormsKey = import.meta.env.WEB3FORMS_KEY;
 const isFormConfigured = Boolean(web3FormsKey);
@@ -71,10 +72,10 @@ const contactPageSchema = {
 ---
 
 <BaseLayout
-  title="Contact WitLabs — Book a Free Digital Strategy Call"
-  description="Contact WitLabs for a free 20-minute strategy call. Get website, SEO, marketing, app, or automation guidance for your business."
+  title={pageSEO.contact.title}
+  description={pageSEO.contact.description}
   canonical="https://witlabs.in/contact/"
-  keywords={['contact WitLabs', 'book digital strategy call', 'digital agency India contact']}
+  keywords={pageSEO.contact.keywords}
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(contactPageSchema)} />
 

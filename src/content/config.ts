@@ -21,6 +21,8 @@ const insights = defineCollection({
     seo_description: z.string().max(160).optional(),
     keywords: z.array(z.string()).optional(),
     ogImage: z.string().optional(),
+    ogImageWidth: z.number().optional(),
+    ogImageHeight: z.number().optional(),
   }),
 });
 

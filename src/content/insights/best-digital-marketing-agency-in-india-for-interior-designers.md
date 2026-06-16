@@ -10,44 +10,10 @@ draft: false
 seo_title: Digital Marketing for Interior Designers | WitLabs
 seo_description: The best digital marketing agency in India helps interior designers improve visibility, trust, and more serious enquiries online.
 ogImage: /images/insights/interior-designers-digital-marketing-1.jpg
+ogImageWidth: 1400
+ogImageHeight: 788
 keywords:
   - best digital marketing agency in india
-tags:
-  - branding
-  - client engagement
-  - client testimonials
-  - content marketing
-  - design trends
-  - Digital marketing
-  - Google Business Profile
-  - home renovation.
-  - India
-  - interior design
-  - lead generation
-  - local search
-  - online presence
-  - paid advertising
-  - portfolio development
-  - SEO
-  - social media marketing
-  - trust-building
-  - visibility
-  - website optimization
-categories:
-  - Brand Trust
-  - Client Engagement.
-  - Content Marketing
-  - Digital Marketing
-  - Google Business Profile
-  - Home Renovation
-  - India
-  - Interior Design
-  - Lead Generation
-  - Modular Kitchen Design
-  - Online Visibility
-  - Paid Advertising
-  - SEO
-  - Social Media Marketing
 ---
 
 # Digital Marketing Agency in India for Interior Designers

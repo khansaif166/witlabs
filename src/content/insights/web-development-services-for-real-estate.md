@@ -10,6 +10,8 @@ draft: false
 seo_title: Web Development Services for Real Estate | WitLabs
 seo_description: Web development services help real estate teams turn property inquiries into site visits with better pages and faster follow-up.
 ogImage: /images/insights/real-estate-web-development-1.jpg
+ogImageWidth: 1280
+ogImageHeight: 720
 keywords:
   - web development services
 ---

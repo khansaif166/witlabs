@@ -24,4 +24,9 @@ export const pageSEO = {
     description: 'Contact WitLabs for a free 20-minute strategy call. Get website, SEO, marketing, app, or automation guidance for your business.',
     keywords: ['contact WitLabs', 'book strategy call', 'hire digital agency India', 'digital agency consultation'],
   },
+  insights: {
+    title: 'Insights — Website, SEO & Growth Notes | WitLabs',
+    description: 'Practical notes from WitLabs on websites, SEO, automation, content, and digital growth systems for Indian businesses.',
+    keywords: ['WitLabs insights', 'website strategy India', 'SEO tips India', 'digital growth notes'],
+  },
 };
