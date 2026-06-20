@@ -57,6 +57,8 @@ const guarantees = [
   'Launch testing for key customer flows',
   'Support window after going live',
 ];
+
+const linkedInHref = 'https://www.linkedin.com/company/wit-labs-india';
 ---
 
 <BaseLayout
@@ -105,6 +107,9 @@ const guarantees = [
         </p>
         <p>
           The goal is simple: help your business look credible online, get found by the right people, and respond faster when leads arrive.
+        </p>
+        <p>
+          <a class="about-text-link" href={linkedInHref} target="_blank" rel="noreferrer">WitLabs India on LinkedIn</a>
         </p>
       </div>
     </div>
@@ -298,6 +303,21 @@ const guarantees = [
     color: #57534E;
     font-size: clamp(1rem, 1.25vw, 1.18rem);
     line-height: 1.75;
+  }
+
+  .about-text-link {
+    color: #0A8F3D;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: rgba(10, 143, 61, 0.4);
+    text-underline-offset: 0.22em;
+    transition: color 0.3s var(--ease-standard), text-decoration-color 0.3s var(--ease-standard);
+  }
+
+  .about-text-link:hover,
+  .about-text-link:focus-visible {
+    color: #076C2F;
+    text-decoration-color: currentColor;
   }
 
   .about-stat {

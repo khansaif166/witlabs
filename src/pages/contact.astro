@@ -59,6 +59,7 @@ const selectedBudget = budgets.includes(requestedBudget) ? requestedBudget : '';
 const prefilledMessage =
   Astro.url.searchParams.get('message') ??
   (selectedPlan ? `I am interested in the ${selectedPlan} plan from the WitLabs pricing page. Please share the next steps.` : '');
+const linkedInHref = 'https://www.linkedin.com/company/wit-labs-india';
 
 const contactPageSchema = {
   '@context': 'https://schema.org',
@@ -142,6 +143,10 @@ const contactPageSchema = {
             </a>
           ))}
         </div>
+
+        <p class="contact-linkout">
+          <a href={linkedInHref} target="_blank" rel="noreferrer">WitLabs India on LinkedIn</a>
+        </p>
 
         <div class="contact-steps">
           <h3>What happens next?</h3>
@@ -434,6 +439,26 @@ const contactPageSchema = {
     margin-top: 32px;
     display: grid;
     gap: 14px;
+  }
+
+  .contact-linkout {
+    margin-top: 20px;
+  }
+
+  .contact-linkout a {
+    color: #0A8F3D;
+    font-size: 0.98rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: rgba(10, 143, 61, 0.4);
+    text-underline-offset: 0.22em;
+    transition: color 0.3s var(--ease-standard), text-decoration-color 0.3s var(--ease-standard);
+  }
+
+  .contact-linkout a:hover,
+  .contact-linkout a:focus-visible {
+    color: #076C2F;
+    text-decoration-color: currentColor;
   }
 
   .contact-card,
