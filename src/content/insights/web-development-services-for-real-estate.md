@@ -208,7 +208,7 @@ The goal is simple: the buyer should be able to understand the project and conta
 
 ## How WitLabs Supports Real Estate Agents and Developers
 
-WitLabs builds professional websites for companies that want stronger branding, better online visibility, and more qualified business inquiries.
+WitLabs builds professional websites for companies that want stronger branding, better online visibility, and more qualified business inquiries. Our [website and digital marketing services](/services/) are built around the same idea: a website should generate real business, not just look good.
 
 You can also explore a few relevant [website and product examples in our Digitized with WitLabs showcase](/#digitized-with-witlabs) to see how focused digital experiences can support stronger business outcomes.
 
@@ -223,7 +223,7 @@ For real estate agents and developers, that can include:
 
 The goal is to build a practical system that helps turn online interest into site visits and sales conversations.
 
-That is why good web development services should support both marketing performance and day-to-day sales follow-up.
+That is why good web development services should support both marketing performance and day-to-day sales follow-up. If you would like to talk through what this could look like for your projects, [get in touch with WitLabs](/contact/).
 
 ## Simple Ways to Improve Your Existing Website
 
@@ -254,6 +254,8 @@ Do not let leads sit only in your inbox. Connect them to WhatsApp, a CRM, a spre
 ### Show Real Visuals
 
 Real project photos and actual location visuals usually build more trust than generic stock images.
+
+These same fundamentals apply beyond real estate too. If you run a smaller business, our guide on [digital marketing services for small business](/insights/digital-marketing-services-for-small-business/) covers how the same website, lead-tracking, and follow-up principles apply at a smaller scale.
 
 ## Conclusion
 

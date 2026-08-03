@@ -170,7 +170,7 @@ A better ad message could be:
 
 This feels more helpful and less pushy.
 
-For businesses that also need stronger landing pages behind those campaigns, our article on [web development services for real estate](/insights/web-development-services-for-real-estate/) shows the same principle of matching traffic with a clearer conversion path.
+For businesses that also need stronger landing pages behind those campaigns, our article on [web development services for real estate](/insights/web-development-services-for-real-estate/) shows the same principle of matching traffic with a clearer conversion path. If you run a smaller studio or business rather than a large firm, our guide on [digital marketing services for small business](/insights/digital-marketing-services-for-small-business/) breaks down the same fundamentals at a smaller scale.
 
 ## Create a Simple Lead Handling System
 
