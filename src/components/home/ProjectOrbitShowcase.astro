@@ -57,32 +57,18 @@ const projects = [
     theme: 'violet',
   },
   {
-    title: 'Sustainly Green',
-    type: 'Corporate Website',
-    url: 'https://sustainlygreen.com',
-    domain: 'sustainlygreen.com',
-    image: '/images/Design-3.jpg',
-    eyebrow: 'Sustainability-focused brand',
-    description: 'A sustainable lifestyle brand website that communicates eco-conscious values with clear product positioning and environmental impact transparency.',
-    proof: [
-      'What changed: strengthened messaging around sustainability commitments and product sourcing',
-      'Scope: brand storytelling, impact metrics integration, sustainable e-commerce framework',
-    ],
-    theme: 'green',
-  },
-  {
     title: 'Wasat Constructions',
-    type: 'Business Website',
-    url: 'https://wasatconstructions.com',
+    type: 'Turnkey Construction Platform',
+    url: 'https://www.wasatconstructions.com',
     domain: 'wasatconstructions.com',
     image: '/images/Design-5.jpg',
-    eyebrow: 'Construction company presence',
-    description: 'A construction services website designed to build trust through portfolio showcases, project timelines, and clear service offerings for corporate and residential projects.',
-    proof: [
-      'What changed: elevated project presentation and streamlined inquiry process for enterprise clients',
-      'Scope: portfolio architecture, capability showcase, project lifecycle visualization',
-    ],
     theme: 'sand',
+    eyebrow: 'Turnkey builder presence',
+    description: 'A transparent construction platform built to showcase turnkey residential projects, transparent package pricing, and structured site consultation bookings across Bangalore.',
+    proof: [
+      'What changed: shifted from offline contractor presence to transparent per-sq-ft cost breakdowns and neighbourhood case studies',
+      'Scope: information architecture, transparent pricing guides, project portfolio, and WhatsApp lead flow',
+    ],
   },
   {
     title: 'WitLabs',
@@ -97,6 +83,20 @@ const projects = [
       'Scope: positioning, proof hierarchy, and CTA architecture',
     ],
     theme: 'olive',
+  },
+  {
+    title: 'Sustainly Green',
+    type: 'B2B Marketplace & Directory',
+    url: 'https://www.sustainlygreen.com',
+    domain: 'sustainlygreen.com',
+    image: '/images/Design-3.jpg',
+    theme: 'green',
+    eyebrow: 'Sustainable procurement directory',
+    description: 'A structured B2B sustainability directory and marketplace designed to connect Indian enterprises directly with verified eco-friendly suppliers and green manufacturers.',
+    proof: [
+      'What changed: organized fragmented green suppliers into a searchable category-based directory with zero-commission vendor inquiry paths',
+      'Scope: B2B directory architecture, category filtering, supplier profile layouts, and direct lead capture',
+    ],
   },
 ];
 ---
@@ -114,14 +114,15 @@ const projects = [
       </p>
     </div>
 
-    <div class="showcase-grid reveal reveal-delay-1">
-      {projects.map((project) => (
+    <div class="showcase-grid reveal reveal-delay-1" id="project-showcase-grid">
+      {projects.map((project, index) => (
         <a
-          class={`showcase-card showcase-card--${project.theme}`}
+          class={`showcase-card showcase-card--${project.theme} ${index >= 6 ? 'is-hidden' : ''}`}
           href={project.url}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`View ${project.title} project`}
+          data-hidden={index >= 6 ? 'true' : 'false'}
         >
           <div class="showcase-card__frame">
             <div class="browser-dots" aria-hidden="true">
@@ -160,6 +161,18 @@ const projects = [
           </div>
         </a>
       ))}
+    </div>
+
+    <div class="showcase-toggle">
+      <button
+        id="toggle-projects"
+        class="showcase-toggle__button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="project-showcase-grid"
+      >
+        View More Projects
+      </button>
     </div>
   </div>
 </section>
@@ -264,6 +277,10 @@ const projects = [
     text-decoration: none;
     transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
     min-height: 34rem;
+  }
+
+  .showcase-card.is-hidden {
+    display: none;
   }
 
   .showcase-card:hover {
@@ -504,6 +521,40 @@ const projects = [
     color: #eef4e1;
   }
 
+  .showcase-toggle {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .showcase-toggle__button {
+    appearance: none;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.02);
+    color: #f5f5f4;
+    border-radius: 999px;
+    padding: 0.9rem 1.55rem;
+    font-size: 0.86rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
+  }
+
+  .showcase-toggle__button:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .showcase-toggle__button:focus-visible {
+    outline: 2px solid rgba(203, 255, 220, 0.8);
+    outline-offset: 3px;
+  }
+
   @media (max-width: 1100px) {
     .showcase-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -572,3 +623,21 @@ const projects = [
     }
   }
 </style>
+
+<script>
+  const toggleButton = document.querySelector('#toggle-projects');
+  const hiddenCards = Array.from(document.querySelectorAll('.showcase-card.is-hidden'));
+
+  if (toggleButton) {
+    toggleButton.addEventListener('click', () => {
+      const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+      toggleButton.setAttribute('aria-expanded', String(!isExpanded));
+
+      hiddenCards.forEach((card) => {
+        card.classList.toggle('is-hidden', isExpanded);
+      });
+
+      toggleButton.textContent = isExpanded ? 'View More Projects' : 'Show Less';
+    });
+  }
+</script>
