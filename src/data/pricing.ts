@@ -3,7 +3,7 @@ export const websitePlans = [
     name: 'Starter',
     label: 'Basic Website',
     price: '₹11,999',
-    tone: 'blue',
+    tone: 'blue' ,
     delivery: '3 Day Delivery',
     featured: false,
     items: ['5 Page Website', '1 Year Domain Free', '1 Year Hosting Free', 'Mobile Responsive Design', 'WhatsApp Button', 'Contact Form', 'Basic SEO Setup', 'SSL Setup Support', 'Basic Speed Optimization', 'Social Media Links', '15 Days Free Changes After Going Live', 'Future changes charged as per scope'],
