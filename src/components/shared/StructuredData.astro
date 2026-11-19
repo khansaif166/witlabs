@@ -1,4 +1,6 @@
 ---
+import { business } from '../../lib/business';
+
 interface Props {
   type: 'organization' | 'localBusiness' | 'article' | 'breadcrumb';
   data?: Record<string, unknown>;
@@ -6,6 +8,18 @@ interface Props {
 }
 
 const { type, data = {}, items = [] } = Astro.props;
+
+const postalAddress = {
+  '@type': 'PostalAddress',
+  addressLocality: business.city,
+  addressRegion: business.region,
+  addressCountry: business.country,
+};
+
+const areaServed = [
+  ...business.serviceAreas.map((name) => ({ '@type': name === business.city ? 'City' : 'Place', name })),
+  { '@type': 'Country', name: 'India' },
+];
 
 const organization = {
   '@context': 'https://schema.org',
@@ -23,13 +37,10 @@ const organization = {
   foundingDate: '2024',
   foundingLocation: {
     '@type': 'Place',
-    name: 'Bangalore , India',
+    name: 'Bengaluru, Karnataka, India',
   },
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'IN',
-    addressRegion: 'India',
-  },
+  address: postalAddress,
+  areaServed,
   contactPoint: [{
     '@type': 'ContactPoint',
     telephone: '+91-9157241575',
@@ -37,9 +48,10 @@ const organization = {
     availableLanguage: ['English', 'Hindi'],
   }],
   sameAs: [
-    'https://www.instagram.com/witlabs',
+    'https://www.instagram.com/witlabs.in/',
     'https://www.linkedin.com/company/117754070',
     'https://twitter.com/witlabs',
+    ...(business.googleBusinessProfileUrl ? [business.googleBusinessProfileUrl] : []),
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -68,15 +80,8 @@ const localBusiness = {
   currenciesAccepted: 'INR',
   paymentAccepted: 'Cash, Bank Transfer, UPI',
   sameAs: organization.sameAs,
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'IN',
-    addressRegion: 'India',
-  },
-  areaServed: {
-    '@type': 'Country',
-    name: 'India',
-  },
+  address: postalAddress,
+  areaServed,
   openingHoursSpecification: [{
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],

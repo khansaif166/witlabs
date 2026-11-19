@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { pageSEO } from '../lib/seo';
+import { business } from '../lib/business';
 
 const web3FormsKey = import.meta.env.WEB3FORMS_KEY;
 const isFormConfigured = Boolean(web3FormsKey);
@@ -97,7 +98,7 @@ const contactPageSchema = {
       <div class="contact-board reveal reveal-delay-2" aria-label="WitLabs contact response standards">
         <div class="contact-board__top">
           <span>WitLabs Response Desk</span>
-          <span>India</span>
+          <span>Bengaluru, India</span>
         </div>
         <div class="contact-board__grid">
           {contactHighlights.map((item) => (
@@ -144,8 +145,21 @@ const contactPageSchema = {
           ))}
         </div>
 
+        <div class="contact-location">
+          <strong>{business.locationLabel}</strong>
+          <p>
+            We work remotely and meet clients at their office or on Google Meet. Serving {business.serviceAreas.slice(1).join(', ')} and clients across India.
+          </p>
+        </div>
+
         <p class="contact-linkout">
           <a href={linkedInHref} target="_blank" rel="noreferrer">WitLabs India on LinkedIn</a>
+          {business.googleBusinessProfileUrl && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <a href={business.googleBusinessProfileUrl} target="_blank" rel="noreferrer">See our reviews on Google</a>
+            </>
+          )}
         </p>
 
         <div class="contact-steps">
@@ -439,6 +453,24 @@ const contactPageSchema = {
     margin-top: 32px;
     display: grid;
     gap: 14px;
+  }
+
+  .contact-location {
+    margin-top: 20px;
+    border-left: 2px solid rgba(10, 143, 61, 0.45);
+    padding-left: 14px;
+  }
+
+  .contact-location strong {
+    display: block;
+    font-size: 0.98rem;
+  }
+
+  .contact-location p {
+    margin-top: 4px;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    opacity: 0.72;
   }
 
   .contact-linkout {

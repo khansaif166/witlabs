@@ -137,7 +137,7 @@ This matters most for clinics, coaching institutes and other businesses that get
 
 WitLabs is a [website design company in Bangalore](/) that builds websites to bring enquiries, not just to look good. Every site starts with one question: where should your next customer come from, and what should they do when they land?
 
-We are based in Williams Town and take on projects across Bangalore, including Whitefield, Koramangala, HSR Layout, Indiranagar, Jayanagar and Electronic City. You can read more [about WitLabs](/about/) and how we work.
+We are based in Bengaluru and take on projects across the city, including Whitefield, Koramangala, HSR Layout, Indiranagar, Jayanagar and Electronic City. We meet clients at their office or on Google Meet, whichever suits them. You can read more [about WitLabs](/about/) and how we work.
 
 A few examples from our work in Bangalore:
 

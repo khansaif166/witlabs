@@ -1,4 +1,6 @@
 ---
+import { business } from '../../lib/business';
+
 const services = [
   { label: 'Website Design', href: '/services/#website-design' },
   { label: 'App Development', href: '/services/#app-development' },
@@ -15,7 +17,7 @@ const companyLinks = [
 ];
 
 const socialLinks = [
-  { label: 'Instagram', href: 'https://www.instagram.com/witlabs' },
+  { label: 'Instagram', href: 'https://www.instagram.com/witlabs.in/' },
   { label: 'WitLabs India on LinkedIn', href: 'https://www.linkedin.com/company/wit-labs-india' },
   { label: 'X', href: 'https://twitter.com/witlabs' },
 ];
@@ -34,6 +36,15 @@ const socialLinks = [
         <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-white/42">Let's Talk</p>
         <a class="mt-5 block text-2xl font-semibold text-white" href="mailto:connect@witlabs.in">connect@witlabs.in</a>
         <a class="mt-2 block text-white/58 hover:text-white" href="tel:+919157241575">+91 91572 41575</a>
+        <p class="mt-4 text-sm leading-6 text-white/58">
+          {business.locationLabel}<br />
+          {business.servingLabel}
+        </p>
+        {business.googleBusinessProfileUrl && (
+          <a class="mt-2 inline-block text-sm text-white/58 underline-offset-4 hover:text-white hover:underline" href={business.googleBusinessProfileUrl} target="_blank" rel="noreferrer">
+            See our reviews on Google ↗
+          </a>
+        )}
         <a
           class="premium-button premium-button-light mt-8 w-full"
           href="https://wa.me/919157241575?text=Hi%20WitLabs%2C%20I%20visited%20your%20website%20and%20I%27d%20like%20to%20discuss%20a%20project."
@@ -80,7 +91,7 @@ const socialLinks = [
     </div>
 
     <div class="footer-bottom">
-      <p>Built in India / WitLabs 2024</p>
+      <p>Built in Bengaluru, India / WitLabs {new Date().getFullYear()}</p>
       <div>
         <a href="/privacy-policy/">Privacy Policy</a>
         <span aria-hidden="true">/</span>

@@ -1,8 +1,8 @@
 export const pageSEO = {
   home: {
-    title: 'WitLabs — Website Design, SEO & Lead Generation Agency in India',
-    description: 'WitLabs is a website design, SEO, and lead generation agency in India helping businesses improve visibility, trust, and qualified enquiries.',
-    keywords: ['website design agency in India', 'SEO agency in India', 'lead generation agency in India', 'digital growth agency in India', 'digital marketing agency in India'],
+    title: 'Website Design & SEO Company in Bangalore | WitLabs',
+    description: 'WitLabs is a website design, SEO and lead generation company in Bangalore helping businesses across India get found on Google and win more enquiries.',
+    keywords: ['website design company in Bangalore', 'SEO company in Bangalore', 'web development company in Bangalore', 'digital marketing agency in Bangalore', 'website design agency in India'],
   },
   services: {
     title: 'Digital Services — Website Design, SEO & Marketing | WitLabs',
