@@ -23,6 +23,7 @@ const insights = defineCollection({
     ogImage: z.string().optional(),
     ogImageWidth: z.number().optional(),
     ogImageHeight: z.number().optional(),
+    faqs: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
   }),
 });
 

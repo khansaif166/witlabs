@@ -74,6 +74,7 @@ const breadcrumbItems = [
     <StructuredData type="localBusiness" />
     {articleSchema && <StructuredData type="article" data={articleSchema} />}
     {breadcrumbItems.length > 1 && <StructuredData type="breadcrumb" items={breadcrumbItems} />}
+    <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col bg-cream text-ink antialiased">
     <Header transparent={transparentHeader} />

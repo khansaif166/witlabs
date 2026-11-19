@@ -103,7 +103,7 @@ For example, if someone searches "home interior designer in Bangalore" or "modul
 
 Your website should not be overloaded with too much text. Interior design is visual, so your images, layout, and trust signals matter a lot.
 
-If you want that website to work as a real lead-generation system instead of a brochure, our [website and growth services](/services/) should connect portfolio pages, enquiry flows, and follow-up actions clearly.
+If you want that website to work as a real lead-generation system instead of a brochure, our [website and growth services](/services/) should connect portfolio pages, enquiry flows, and follow-up actions clearly. If you are comparing agencies, read our guide on [how to choose a website design company in Bangalore](/insights/website-design-company-bangalore-guide/) before you sign anything.
 
 ## Improve Local Visibility with Google Business Profile
 

@@ -81,7 +81,7 @@ It should also be mobile-friendly, fast, SEO-friendly, and connected with WhatsA
 
 If your website only looks good but does not generate inquiries, then it is not doing its full job. A business website should support marketing, not just act like a digital brochure.
 
-If you need that foundation, our [website development services](https://witlabs.in/services/) can help connect design, SEO, and lead capture more clearly.
+If you need that foundation, our [website development services](https://witlabs.in/services/) can help connect design, SEO, and lead capture more clearly. Before you hire anyone, our guide on [choosing a website design company in Bangalore](/insights/website-design-company-bangalore-guide/) covers costs, the questions to ask and the red flags to avoid.
 
 ![Lead-generation website for a small business with clear messaging, contact form, mobile experience, and conversion-focused layout.](/images/insights/small-business-digital-marketing-3.jpg)
 

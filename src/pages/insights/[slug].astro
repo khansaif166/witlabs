@@ -19,6 +19,18 @@ const canonicalUrl = `https://witlabs.in/insights/${post.slug}/`;
 const ogImageUrl = post.data.ogImage ? `https://witlabs.in${post.data.ogImage}` : 'https://witlabs.in/og/default.jpg';
 const publishDate = post.data.publishDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 const updatedDate = post.data.updatedDate?.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+const faqSchema = post.data.faqs?.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      '@id': `${canonicalUrl}#faq`,
+      mainEntity: post.data.faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    }
+  : null;
 const articleSchema = {
   '@id': `${canonicalUrl}#article`,
   headline: post.data.title,
@@ -60,6 +72,9 @@ const articleSchema = {
   transparentHeader={true}
   articleSchema={articleSchema}
 >
+  {faqSchema && (
+    <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  )}
   <section class="insight-hero">
     <div class="insight-hero__shell">
       <a class="insight-back-link" href="/insights/">← Back to Insights</a>
